@@ -15,3 +15,7 @@
 #pragma comment(lib, "stdio_fw.lib")
 
 #include "STDIO_FW\stdio_fw.h"
+
+#ifdef USE_VLD
+#pragma comment(lib, "vld.lib")
+#endif
