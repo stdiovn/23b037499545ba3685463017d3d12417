@@ -109,18 +109,18 @@ namespace stdio_fw
 	void Graphics::setColor(unsigned int color)
 	{
 		// [0000 0000] [0000 0000] [0000 0000] [0000 0000]
-		m_drawColor[0] = ((color >> 24) & 0xFF000000) / 255.0f;
-		m_drawColor[1] = ((color >> 16) & 0x00FF0000) / 255.0f;
-		m_drawColor[2] = ((color >> 8) & 0x0000FF00) / 255.0f;
-		m_drawColor[3] = (color & 0x000000FF) / 255.0f;
+		m_drawColor[0] = ((color >> 24) & 0xFF) / 255.0f;
+		m_drawColor[1] = ((color >> 16) & 0xFF) / 255.0f;
+		m_drawColor[2] = ((color >> 8) & 0xFF) / 255.0f;
+		m_drawColor[3] = (color & 0xFF) / 255.0f;
 		
 	}
 	void Graphics::setClearColor(unsigned int color)
 	{
 		// [0000 0000] [0000 0000] [0000 0000] [0000 0000]
-		m_clearColor[0] = ((color >> 24) & 0xFF000000) / 255.0f;
-		m_clearColor[1] = ((color >> 16) & 0x00FF0000) / 255.0f;
-		m_clearColor[2] = ((color >> 8) & 0x0000FF00) / 255.0f;
+		m_clearColor[0] = ((color >> 24) & 0xFF) / 255.0f;
+		m_clearColor[1] = ((color >> 16) & 0xFF) / 255.0f;
+		m_clearColor[2] = ((color >> 8) & 0xFF) / 255.0f;
 		m_clearColor[3] = 1.0f;
 	}
 	void Graphics::cleanScreen()
