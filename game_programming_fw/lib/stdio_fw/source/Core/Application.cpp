@@ -15,7 +15,7 @@ namespace stdio_fw
 
 	Application::~Application()
 	{
-
+		SAFE_DEL(m_pGraphics);
 	}
 
 	ErrorCode Application::Init(int screenW, int screenH, const char* title)
