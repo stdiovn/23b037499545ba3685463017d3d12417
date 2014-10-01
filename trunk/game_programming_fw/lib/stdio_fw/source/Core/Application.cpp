@@ -55,6 +55,11 @@ namespace stdio_fw
 		return ErrorCode::ERR_NO_ERROR;
 	}
 
+	KeyState Application::getKeyState(KeyCode key)
+	{
+		return glfwGetKey(m_pWindow, key) == GLFW_PRESS ? KeyState::KEY_PRESSED : KeyState::KEY_RELEASED;
+	}
+
 	void Application::Run()
 	{
 		DWORD lastTime = GetTickCount();

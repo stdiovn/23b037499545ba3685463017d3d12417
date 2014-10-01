@@ -46,7 +46,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\include\STDIO_FW\;$(ProjectDir)..\..\glew\include\;$(ProjectDir)..\..\glfw3\include\;$(ProjectDir)..\..\vld\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\include\STDIO_FW\;$(ProjectDir)..\..\glew\include\;$(ProjectDir)..\..\glfw3\include\;$(ProjectDir)..\..\vld\include\;$(ProjectDir)..\..\FreeImage\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,14 +68,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\include\STDIO_FW\Core\Application.h" />
-    <ClInclude Include="..\include\STDIO_FW\error_code.h" />
+    <ClInclude Include="..\include\STDIO_FW\defined.h" />
     <ClInclude Include="..\include\STDIO_FW\stdio_fw.h" />
     <ClInclude Include="..\include\STDIO_FW\macros.h" />
     <ClInclude Include="..\include\STDIO_FW\Video\Graphics.h" />
+    <ClInclude Include="..\include\STDIO_FW\Video\Image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Core\Application.cpp" />
     <ClCompile Include="..\source\Video\Graphics.cpp" />
+    <ClCompile Include="..\source\Video\Image.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

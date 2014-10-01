@@ -2,6 +2,7 @@
 
 #include "stdio_fw.h"
 #include "Video\Graphics.h"
+#include "Video\Image.h"
 
 namespace stdio_fw
 {
@@ -33,7 +34,6 @@ namespace stdio_fw
 
 		const char* solid_obj_fragment_shader_src = 
 			"#version 120\n"
-			"precision mediump float;\n"
 			"uniform vec4 u_color;\n"
 			"void main()\n"
 			"{\n"
@@ -42,8 +42,35 @@ namespace stdio_fw
 
 		m_aPrograms[0] = createProgram(solid_obj_vertex_shader_src, solid_obj_fragment_shader_src);
 
-		m_cachedLocs[CACHED_LOC::ATRIB_POSITION] = glGetAttribLocation(m_aPrograms[0], "a_pos");
+		m_cachedLocs[CACHED_LOC::ATRIB_POSITION0] = glGetAttribLocation(m_aPrograms[0], "a_pos");
 		m_cachedLocs[CACHED_LOC::UNIFO_COLOR] = glGetUniformLocation(m_aPrograms[0], "u_color");
+
+		// For image
+		const char* img_vertex_shader_src =
+			"#version 120\n"
+			"attribute vec2 a_pos;\n"
+			"attribute vec2 a_uv;\n"
+			"varying vec2 v_uv;\n"
+			"void main()\n"
+			"{\n"
+			"gl_Position = vec4(a_pos, 1.0, 1.0);\n"
+			"v_uv = a_uv;\n"
+			"}\n";
+
+		const char* img_fragment_shader_src =
+			"#version 120\n"
+			"uniform sampler2D u_tex;\n"
+			"varying vec2 v_uv;\n"
+			"void main()\n"
+			"{\n"
+			"gl_FragColor = texture2D(u_tex, v_uv);\n"
+			"}\n";
+
+		m_aPrograms[1] = createProgram(img_vertex_shader_src, img_fragment_shader_src);
+		
+		m_cachedLocs[CACHED_LOC::ATRIB_POSITION1] = glGetAttribLocation(m_aPrograms[1], "a_pos");
+		m_cachedLocs[CACHED_LOC::ATRIB_TEXCOORD] = glGetAttribLocation(m_aPrograms[1], "a_uv");
+		m_cachedLocs[CACHED_LOC::UNIFO_TEXTURE] = glGetUniformLocation(m_aPrograms[1], "u_tex");
 
 		return ErrorCode::ERR_NO_ERROR;
 	}
@@ -52,6 +79,7 @@ namespace stdio_fw
 	{
 		draw(x, y, width, height);
 	}
+
 	void Graphics::drawRect(int x, int y, int width, int height, int weight)
 	{
 		//Top
@@ -64,9 +92,36 @@ namespace stdio_fw
 		fillRect(x + width - weight, y + weight, weight, height - (weight << 1));
 	}
 
+	void Graphics::drawImage(Image* img, int x, int y)
+	{
+		draw(x, y, img->getWidth(), img->getHeight(), img->m_texID);
+	}
+
 	void Graphics::drawLine(float x1, float y1, float x2, float y2)
 	{
+		// Compute vertices array
+		float vertices[] = {
+			XSCREEN2GL(x1, m_iScreenW), YSCREEN2GL(y1, m_iScreenH),
+			XSCREEN2GL(x2, m_iScreenW), YSCREEN2GL(y2, m_iScreenH)
+		};
 		
+		glUseProgram(m_aPrograms[0]);
+
+		// Transfer data to verties
+		GLint posLoc = m_cachedLocs[CACHED_LOC::ATRIB_POSITION0];
+		if (posLoc != -1)
+		{
+			glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+			glEnableVertexAttribArray(posLoc);
+		}
+
+		GLint colorUniLoc = m_cachedLocs[CACHED_LOC::UNIFO_COLOR];
+		if (colorUniLoc != -1)
+		{
+			glUniform4fv(colorUniLoc, 1, &m_drawColor[0]);
+		}
+
+		glDrawArrays(GL_LINES, 0, 2);
 	}
 
 	void Graphics::draw(int x, int y, int width, int height, unsigned int texture_id)
@@ -82,26 +137,50 @@ namespace stdio_fw
 		};
 
 		GLint activeProgram = 0;
-		if (texture_id == 0)	// We draw solid object
+		if (texture_id <= 0)	// We draw solid object
 			activeProgram = m_aPrograms[0];
 		else
+		{
 			activeProgram = m_aPrograms[1];
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, texture_id);
+			glUniform1i(m_cachedLocs[CACHED_LOC::UNIFO_TEXTURE], 0);
+		}
+		
 		glUseProgram(activeProgram);
 
 		// Transfer data to verties
-		GLint posLoc = m_cachedLocs[CACHED_LOC::ATRIB_POSITION];
+		GLint posLoc = texture_id == 0 ? m_cachedLocs[CACHED_LOC::ATRIB_POSITION0] : m_cachedLocs[CACHED_LOC::ATRIB_POSITION1];
 		if (posLoc != -1)
 		{
 			glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 			glEnableVertexAttribArray(posLoc);
 		}
 
+		GLint uvLoc = m_cachedLocs[CACHED_LOC::ATRIB_TEXCOORD];
+		if (uvLoc != -1)
+		{
+			float uv[] = {
+				0.0f, 1.0f,
+				0.0f, 0.0f,
+				1.0f, 0.0f,
+				0.0f, 1.0f,
+				1.0f, 0.0f,
+				1.0f, 1.0f
+			};
+			glVertexAttribPointer(uvLoc, 2, GL_FLOAT, GL_FALSE, 0, uv);
+			glEnableVertexAttribArray(uvLoc);
+		}
 
+		// Transfer uniform
 		GLint colorUniLoc = m_cachedLocs[CACHED_LOC::UNIFO_COLOR];
 		if (colorUniLoc != -1)
 		{
 			glUniform4fv(colorUniLoc, 1, &m_drawColor[0]);
 		}
+
+		
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
