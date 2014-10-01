@@ -9,7 +9,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\STDIO_FW\error_code.h" />
     <ClInclude Include="..\include\STDIO_FW\stdio_fw.h" />
     <ClInclude Include="..\include\STDIO_FW\macros.h" />
     <ClInclude Include="..\include\STDIO_FW\Core\Application.h">
@@ -18,12 +17,19 @@
     <ClInclude Include="..\include\STDIO_FW\Video\Graphics.h">
       <Filter>Video</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\STDIO_FW\Video\Image.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STDIO_FW\defined.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Core\Application.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Video\Graphics.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Video\Image.cpp">
       <Filter>Video</Filter>
     </ClCompile>
   </ItemGroup>

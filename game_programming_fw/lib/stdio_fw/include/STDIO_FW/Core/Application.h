@@ -33,6 +33,11 @@ namespace stdio_fw
 		virtual void		Render(Graphics* g) = 0;
 		virtual void		Exit() = 0;
 
+		// Get key state
+		// [in] Key code
+		// [out] State of key
+		KeyState			getKeyState(KeyCode key);
+
 		void				Run();
 	};
 }
