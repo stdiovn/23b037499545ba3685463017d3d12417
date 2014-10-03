@@ -47,6 +47,7 @@ public:
 	virtual void		Render(Graphics* g);
 	virtual void		Exit();
 
+	virtual bool		IsCollided();
 	virtual bool		IsCollidedLeft();
 	virtual bool		IsCollidedRight();
 	virtual bool		IsCollidedTop();
