@@ -75,12 +75,29 @@ void Game::Update(float deltaTime)
 	}
 
 	//Collision with Bar detected
-	if((m_object.x + m_object.width >= m_bar.x && m_object.x <= m_bar.x + m_bar.width && m_object.y + m_object.height >= m_bar.y && m_object.y <= m_bar.y + m_bar.height))
+	if(IsCollided())
 	{
-		if(IsCollidedLeft() || IsCollidedRight())
+		if(IsCollidedLeft())
+		{
+			m_object.x = m_bar.x - m_object.width;
 			m_velocity.x = -m_velocity.x;
-		if(IsCollidedTop() || IsCollidedBottom())
+		}
+		else if(IsCollidedRight())
+		{
+			m_object.x = m_bar.x + m_bar.width;
+			m_velocity.x = -m_velocity.x;
+		}
+
+		if(IsCollidedTop())
+		{
+			m_object.y = m_bar.y - m_object.height;
 			m_velocity.y = -m_velocity.y;
+		}
+		else if(IsCollidedBottom())
+		{
+			m_object.y = m_bar.y + m_bar.height;
+			m_velocity.y = -m_velocity.y;
+		}
 	}
 	else	//Move bar when not collided with Object	
 	{
@@ -125,28 +142,34 @@ void Game::Exit()
 /////////////////////////////////////
 //Support Function
 /////////////////////////////////////
+bool Game::IsCollided()
+{
+	return m_object.x + m_object.width >= m_bar.x && m_object.x <= m_bar.x + m_bar.width
+										&& m_object.y + m_object.height >= m_bar.y && m_object.y <= m_bar.y + m_bar.height;
+}
+
 bool Game::IsCollidedLeft()
 {
-	return m_object.x + m_object.width - m_velocity.x < m_bar.x && m_object.x + m_object.width >= m_bar.x 
-										&& m_object.y + m_object.height > m_bar.y && m_object.y < m_bar.y + m_bar.height;
+	return m_object.x + m_object.width - m_velocity.x < m_bar.x + m_bar_velocity && m_object.x + m_object.width >= m_bar.x
+										&& m_object.y + m_object.height >= m_bar.y && m_object.y <= m_bar.y + m_bar.height;
 }
 
 bool Game::IsCollidedRight()
 {
-	return m_object.x - m_velocity.x > m_bar.x + m_bar.width && m_object.x <= m_bar.x + m_bar.width
-										&& m_object.y + m_object.height > m_bar.y && m_object.y < m_bar.y + m_bar.height;
+	return m_object.x - m_velocity.x > m_bar.x + m_bar.width - m_bar_velocity && m_object.x <= m_bar.x + m_bar.width + m_bar_velocity
+										&& m_object.y + m_object.height >= m_bar.y && m_object.y <= m_bar.y + m_bar.height;
 }
 
 bool Game::IsCollidedTop()
 {
 	return m_object.y + m_object.height - m_velocity.y < m_bar.y && m_object.y + m_object.height >= m_bar.y
-										&& m_object.x + m_object.width > m_bar.x && m_object.x < m_bar.x + m_bar.width;
+										&& m_object.x + m_object.width >= m_bar.x && m_object.x <= m_bar.x + m_bar.width;
 }
 
 bool Game::IsCollidedBottom()
 {
 	return m_object.y - m_velocity.y > m_bar.y + m_bar.height && m_object.y <= m_bar.y + m_bar.height
-										&& m_object.x + m_object.width > m_bar.x && m_object.x < m_bar.x + m_bar.width;
+										&& m_object.x + m_object.width >= m_bar.x && m_object.x <= m_bar.x + m_bar.width;
 }
 
 bool Game::IsKeyLeft()
