@@ -11,6 +11,7 @@
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "glew32s.lib")
 #pragma comment(lib, "OpenGL32.lib")
+#pragma comment(lib, "FreeImage.lib")
 
 #pragma comment(lib, "stdio_fw.lib")
 
