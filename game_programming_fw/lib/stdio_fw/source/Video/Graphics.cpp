@@ -126,6 +126,10 @@ namespace stdio_fw
 
 	void Graphics::draw(int x, int y, int width, int height, unsigned int texture_id)
 	{
+		//enable blend
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		// Compute vertices array
 		float vertices[] = {
 			XSCREEN2GL(x, m_iScreenW), YSCREEN2GL(y, m_iScreenH),
@@ -178,11 +182,12 @@ namespace stdio_fw
 		if (colorUniLoc != -1)
 		{
 			glUniform4fv(colorUniLoc, 1, &m_drawColor[0]);
-		}
-
-		
+		}		
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		//enable blend
+		glDisable(GL_BLEND);
 	}
 
 	void Graphics::setColor(unsigned int color)
