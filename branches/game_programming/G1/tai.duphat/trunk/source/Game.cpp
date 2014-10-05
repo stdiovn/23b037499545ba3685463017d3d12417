@@ -5,8 +5,8 @@
 #include "Game.h"
 #include <stdlib.h>
 #include <ctime>
-
-
+#include "Sprite.h"
+#include "STDIO_FW\Video\Image.h"
 #define FPS 30
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
@@ -15,12 +15,26 @@
 #define YELLOW 0xFFFF00FF
 #define PURPLE 0x7030A0FF
 
+#define Height_imageWall 50
+#define Width_imageWall 50
+#define WallPerRow 16
+
+
+int Count = 48;
+Rect *FrameWall = new Rect[Count];
+
+Rect ball(100, 130, 200, 230, std::pair<int, int>(2, 2));
+Rect RectMove(50, 250, 570, 600, std::pair<int, int>(4, 4));
+
+int color = RED;
+
+Image *img = new Image("pink.png");
+Image *imgWall = new Image("wall.png");
 
 struct Vector2D
 {
 	int X;
 	int Y;
-
 	Vector2D(int X = 0, int Y = 0)
 	{
 		this->X = X;
@@ -29,14 +43,11 @@ struct Vector2D
 
 	Vector2D operator +(Vector2D x)
 	{
-		return Vector2D(X + x.X, Y + x.Y);
+		return (X + x.X, Y + x.Y);
 	}
 };
 
-Vector2D positionRect(100, 100), veclocity(1, 1);
-Vector2D positionRect2(50, 550), veclocity2(2,0);
-int color = RED;
-
+Vector2D veclocity(2,2);
 
 Game::Game()
 {
@@ -48,10 +59,31 @@ Game::~Game()
 
 }
 
+void SetPositionForWall(Rect *FrameWall, int CountWall)
+{
+	for (int i = 0; i < CountWall; i++)
+	{
+		int width = Width_imageWall;
+		int height = Height_imageWall;
+
+		FrameWall[i].m_Left = (i % WallPerRow) * width;
+		FrameWall[i].m_Right = FrameWall[i].m_Left + width;
+		FrameWall[i].m_Top = (i / WallPerRow) * height;
+		FrameWall[i].m_Bottom = FrameWall[i].m_Top + height;
+	}
+}
+
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
 
+	img->loadImage();
+	img->scale(0.25);
+
+
+	imgWall->loadImage();
+	float scale = imgWall->getWidth();
+	imgWall->scale((float)Width_imageWall / scale);
 	return errCode;
 }
 
@@ -64,29 +96,25 @@ void Game::Update(float deltaTime)
 		CurrenTime = GetTickCount();
 		CurrenTime = CurrenTime - StartTime + deltaTime;
 	} while (CurrenTime < (float)1000 / FPS);
+
 	
+	if (getKeyState(KeyCode::KEY_LEFT))
+		RectMove.KeyBoard(KeyCode::KEY_LEFT);
+	else if (getKeyState(KeyCode::KEY_RIGHT))
+		RectMove.KeyBoard(KeyCode::KEY_RIGHT);
+	
+	ball.Update();
 
-	// hinh vuong
-	positionRect = positionRect + veclocity;
-
-	if (positionRect.X + 100 > SCREEN_WIDTH || positionRect.X < 0)
+	for (int i = 0; i < Count; i++)
 	{
-		veclocity.X = -veclocity.X;
-		color = rand() % 3 + 1;
-	}
-	else 
-	if (positionRect.Y + 100 > SCREEN_HEIGHT || positionRect.Y < 0)
-	{
-		veclocity.Y = -veclocity.Y;
-		color = rand() % 3 + 1;
+		if (FrameWall[i].IsDraw && ball.IsPact(FrameWall[i]))
+		{
+			FrameWall[i].IsDraw = false;
+			color = rand() % 3 + 1;
+		}
 	}
 
-	// hinh chu nhat
-	positionRect2.X += veclocity2.X;
-
-	if (positionRect2.X + 200 > SCREEN_WIDTH || positionRect2.X < 0) 
-		veclocity2.X = -veclocity2.X;
-
+	ball.IsPact(RectMove);
 
 	switch (color)
 	{
@@ -102,16 +130,22 @@ void Game::Update(float deltaTime)
 	}
 }
 
-
 void Game::Render(Graphics* g)
 {
 	g->cleanScreen();
 	g->setColor(color);
 
-	g->drawRect(positionRect.X, positionRect.Y, 100, 100);
-	g->fillRect(positionRect.X, positionRect.Y, 100, 100);
+	for (int i = 0; i < Count; i++)
+	{
+		if (FrameWall[i].IsDraw == true)
+		{
+			g->drawImage(imgWall,FrameWall[i].m_Left, FrameWall[i].m_Top);
+		}
+	}
 
-	g->drawRect(positionRect2.X, positionRect2.Y, 200, 50);
+	g->drawRect(RectMove.m_Left, RectMove.m_Top, RectMove.m_Right - RectMove.m_Left, RectMove.m_Bottom - RectMove.m_Top);
+
+	g->drawImage(img, ball.m_Left, ball.m_Top);
 }
 
 
@@ -126,9 +160,8 @@ void Game::Exit()
 void main()
 {
 	srand(time(NULL));
+	SetPositionForWall(FrameWall, Count);	
 	Game g;
 	g.Init(SCREEN_WIDTH, SCREEN_HEIGHT, "Game");
-
-
 	g.Run();
 }

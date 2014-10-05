@@ -3,8 +3,10 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
+    <ClCompile Include="..\source\Sprite.cpp" />
   </ItemGroup>
 </Project>
