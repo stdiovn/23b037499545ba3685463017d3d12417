@@ -2,6 +2,9 @@
 
 #include "STDIO_FW\Core\Application.h"
 #include "STDIO_FW\Video\Graphics.h"
+#include "STDIO_FW\Video\Image.h"
+
+#include "config.h"
 
 #include "Game.h"
 #include <time.h>
@@ -19,103 +22,71 @@ Game::~Game()
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
+	
+	m_background = new Image("image\\background.jpg");
+	m_background->loadImage();
+	m_background->scale(0.5);
 
-	//Initialize Object
-	m_object.x = 0;
-	m_object.y = 0;
-	m_object.width = 50;
-	m_object.height = 50;
+	m_brick = new Brick* [45];
 
-	m_object_color = 0xF000FFFF;
+	int brick_width = 70;
+	int brick_height = 20;
 
-	//Initialize Bar
-	m_bar.x = 300;
-	m_bar.y = 500;
-	m_bar.width = 200;
-	m_bar.height = 30;
+	for(int i = 0; i < 45; i++)
+	{
+		m_brick[i] = new Brick();
+		m_brick[i]->Init(40 + (i % 9) * (brick_width + 10), 20 + (i / 9) * (brick_height + 10), brick_width, brick_height);
+	}
 
-	m_bar_color = 0x00FFFFFF;
+	m_bar = new Bar();
+	m_bar->Init();
 
-	//Set the Velocity
-	m_velocity.x = 3;
-	m_velocity.y = 3;
-
-	m_bar_velocity = 5;
+	m_ball = new Ball();
+	m_ball->Init();
 
 	return errCode;
 }
 
 void Game::Update(float deltaTime)
 {
-	m_object.x += m_velocity.x;
-	m_object.y += m_velocity.y;
-
-	//Check collides with Screen edges
-	if(m_object.x <= 0)
+	for(int i = 0; i < 45; i++)
 	{
-		m_object.x = 0;
-		m_velocity.x = -m_velocity.x;
-	}
-	else if(m_object.x + m_object.width >= SCREEN_WIDTH)
-	{
-		m_object.x = SCREEN_WIDTH - m_object.width;
-		m_velocity.x = -m_velocity.x;
-	}
-	else if(m_object.y <= 0)
-	{
-		m_object.y = 0;
-		m_velocity.y = -m_velocity.y;
-	}
-	else if(m_object.y + m_object.height >= SCREEN_HEIGHT)		//Change color when collides with Screen bottom edge
-	{
-		m_object.y = SCREEN_HEIGHT - m_object.height;
-		m_velocity.y = -m_velocity.y;
-
-		m_object_color = RANDOM_RED | RANDOM_GREEN | RANDOM_BLUE | ALPHA;
-	}
-
-	//Collision with Bar detected
-	if(IsCollided())
-	{
-		if(IsCollidedLeft())
+		if(m_brick[i]->IsAlive())
 		{
-			m_object.x = m_bar.x - m_object.width;
-			m_velocity.x = -m_velocity.x;
-		}
-		else if(IsCollidedRight())
-		{
-			m_object.x = m_bar.x + m_bar.width;
-			m_velocity.x = -m_velocity.x;
-		}
+			bool collide_with_brick = m_ball->CheckCollisionWithObject(m_brick[i]->GetRect(), 0);
 
-		if(IsCollidedTop())
-		{
-			m_object.y = m_bar.y - m_object.height;
-			m_velocity.y = -m_velocity.y;
-		}
-		else if(IsCollidedBottom())
-		{
-			m_object.y = m_bar.y + m_bar.height;
-			m_velocity.y = -m_velocity.y;
+			if(collide_with_brick)
+				m_brick[i]->DeActivate();
 		}
 	}
-	else	//Move bar when not collided with Object	
+
+	for(int i = 0; i < 45; i++)
 	{
-		if(IsKeyLeft() && m_bar.x > 0)
-			m_bar.x -= m_bar_velocity;
-		else if(IsKeyRight() && m_bar.x + m_bar.width < SCREEN_WIDTH)
-			m_bar.x += m_bar_velocity;
+		if(m_brick[i]->IsAlive())
+			m_brick[i]->Update();
 	}
+
+	if(getKeyState(KeyCode::KEY_LEFT) == KeyState::KEY_PRESSED)
+		m_bar->KeyPress(KeyCode::KEY_LEFT);
+	else if(getKeyState(KeyCode::KEY_RIGHT) == KeyState::KEY_PRESSED)
+		m_bar->KeyPress(KeyCode::KEY_RIGHT);
+	else
+		m_bar->KeyPress(KeyCode::KEY_UNKNOWN);
+
+	bool collide_with_bar = m_ball->CheckCollisionWithObject(m_bar->GetRect(), m_bar->GetVelocity());
+
+	if(!collide_with_bar)
+		m_bar->Update();
+
+	m_ball->Update();
 
 	if(IsExit())
-	{
-		exit(1);
-	}
+		Exit();
 
 	//Framerate Limited
-	if(1000 / FRAMERATE > deltaTime)
+	if(1000.0f / FRAMERATE > deltaTime)
 	{
-		Sleep(1000 / FRAMERATE - deltaTime);
+		Sleep(1000.0f / FRAMERATE - deltaTime);
 	}
 }
 
@@ -123,68 +94,45 @@ void Game::Render(Graphics* g)
 {
 	g->cleanScreen();
 
-	//Draw Object
-	g->setColor(m_object_color);
-	g->drawRect(m_object.x, m_object.y, m_object.width, m_object.height);
-	g->fillRect(m_object.x, m_object.y, m_object.width, m_object.height);
+	g->drawImage(m_background, 0, 0);
 
-	//Draw Bar
-	g->setColor(m_bar_color);
-	g->drawRect(m_bar.x, m_bar.y, m_bar.width, m_bar.height);
-	g->fillRect(m_bar.x, m_bar.y, m_bar.width, m_bar.height);
+	for(int i = 0; i < 45; i++)
+	{
+		if(m_brick[i]->IsAlive())
+			m_brick[i]->Render(g);
+	}
+
+	m_bar->Render(g);
+	m_ball->Render(g);
 }
 
 void Game::Exit()
 {
+	m_background->unloadImage();
+	delete m_background;
 
+	m_ball->Release();
+	delete m_ball;
+
+	m_bar->Release();
+	delete m_bar;
+
+	for(int i = 0; i < 45; i++)
+	{
+		m_brick[i]->Release();
+		delete m_brick[i];
+	}
+	delete m_brick;
+
+	exit(1);
 }
 
 /////////////////////////////////////
 //Support Function
 /////////////////////////////////////
-bool Game::IsCollided()
-{
-	return m_object.x + m_object.width >= m_bar.x && m_object.x <= m_bar.x + m_bar.width
-										&& m_object.y + m_object.height >= m_bar.y && m_object.y <= m_bar.y + m_bar.height;
-}
-
-bool Game::IsCollidedLeft()
-{
-	return m_object.x + m_object.width - m_velocity.x < m_bar.x + m_bar_velocity && m_object.x + m_object.width >= m_bar.x
-										&& m_object.y + m_object.height >= m_bar.y && m_object.y <= m_bar.y + m_bar.height;
-}
-
-bool Game::IsCollidedRight()
-{
-	return m_object.x - m_velocity.x > m_bar.x + m_bar.width - m_bar_velocity && m_object.x <= m_bar.x + m_bar.width + m_bar_velocity
-										&& m_object.y + m_object.height >= m_bar.y && m_object.y <= m_bar.y + m_bar.height;
-}
-
-bool Game::IsCollidedTop()
-{
-	return m_object.y + m_object.height - m_velocity.y < m_bar.y && m_object.y + m_object.height >= m_bar.y
-										&& m_object.x + m_object.width >= m_bar.x && m_object.x <= m_bar.x + m_bar.width;
-}
-
-bool Game::IsCollidedBottom()
-{
-	return m_object.y - m_velocity.y > m_bar.y + m_bar.height && m_object.y <= m_bar.y + m_bar.height
-										&& m_object.x + m_object.width >= m_bar.x && m_object.x <= m_bar.x + m_bar.width;
-}
-
-bool Game::IsKeyLeft()
-{
-	return GetAsyncKeyState(VK_LEFT);
-}
-
-bool Game::IsKeyRight()
-{
-	return GetAsyncKeyState(VK_RIGHT);
-}
-
 bool Game::IsExit()
 {
-	return GetAsyncKeyState(VK_ESCAPE);
+	return getKeyState(KeyCode::KEY_ESCAPE) == KeyState::KEY_PRESSED;
 }
 
 /////////////////////////////////////
@@ -192,7 +140,7 @@ bool Game::IsExit()
 /////////////////////////////////////
 void main()
 {
-	srand(time(NULL));
+	srand(unsigned(time(NULL)));
 
 	Game g;
 	g.Init(SCREEN_WIDTH, SCREEN_HEIGHT, "Rye's Game");
