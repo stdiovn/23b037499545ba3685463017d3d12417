@@ -1,42 +1,21 @@
 #pragma once
 
+#include "Ball.h"
+#include "Bar.h"
+#include "Brick.h"
+
+#include "support.h"
+
 using namespace stdio_fw;
-
-#define SCREEN_WIDTH		800
-#define SCREEN_HEIGHT		600
-
-#define FRAMERATE			60
-
-#define RANDOM_RED			rand() % (0xFF + 1) << 8 * 3
-#define RANDOM_GREEN		rand() % (0xFF + 1) << 8 * 2
-#define RANDOM_BLUE			rand() % (0xFF + 1) << 8
-#define ALPHA				0xFF
-
-typedef struct Vector2D
-{
-	int		x;
-	int		y;
-}SVector2D;
-
-typedef struct Rect
-{
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-}SRect;
 
 class Game : public Application
 {
 private:
-	Rect				m_object;
-	Rect				m_bar;
+	Ball*				m_ball;
+	Bar*				m_bar;
+	Brick**				m_brick;
 
-	DWORD32				m_object_color;
-	DWORD32				m_bar_color;
-
-	Vector2D			m_velocity;
-	int					m_bar_velocity;
+	Image*				m_background;
 public:
 	Game();
 	virtual				~Game();
@@ -47,13 +26,5 @@ public:
 	virtual void		Render(Graphics* g);
 	virtual void		Exit();
 
-	virtual bool		IsCollided();
-	virtual bool		IsCollidedLeft();
-	virtual bool		IsCollidedRight();
-	virtual bool		IsCollidedTop();
-	virtual bool		IsCollidedBottom();
-
-	virtual bool		IsKeyLeft();
-	virtual bool		IsKeyRight();
 	virtual bool		IsExit();
 };
