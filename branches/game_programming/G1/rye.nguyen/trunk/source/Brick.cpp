@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "STDIO_FW\Video\Graphics.h"
 #include "config.h"
 
@@ -27,8 +28,6 @@ void Brick::Init(int position_x, int position_y, int width, int height)
 	m_object.height = height;
 
 	m_color = RANDOM_COLOR;
-
-	m_is_alive = true;
 }
 
 void Brick::Release()

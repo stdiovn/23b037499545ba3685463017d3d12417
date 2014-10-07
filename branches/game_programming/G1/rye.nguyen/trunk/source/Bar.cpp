@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "STDIO_FW\Video\Graphics.h"
 #include "STDIO_FW\Video\Image.h"
 #include "config.h"
@@ -47,8 +48,6 @@ void Bar::Update()
 
 void Bar::Render(Graphics* g)
 {
-	/*g->drawRect(m_object.x, m_object.y, m_object.width, m_object.height);
-	g->fillRect(m_object.x, m_object.y, m_object.width, m_object.height);*/
 	g->drawImage(m_image, m_object.x, m_object.y);
 }
 
@@ -57,12 +56,18 @@ void Bar::KeyPress(KeyCode key)
 	m_key_press = key;
 }
 
+int Bar::GetVelocity()
+{
+	return m_velocity;
+}
+
 Rect Bar::GetRect()
 {
 	return m_object;
 }
 
-int Bar::GetVelocity()
+void Bar::Reset()
 {
-	return m_velocity;
+	m_object.x = 300;
+	m_object.y = 500;
 }

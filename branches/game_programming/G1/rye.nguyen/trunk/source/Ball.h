@@ -12,6 +12,8 @@ private:
 	Rect				m_object;
 	Vector2D			m_velocity;
 
+	bool				m_is_alive;
+
 	Image*				m_image;
 public:
 	Ball();
@@ -23,8 +25,11 @@ public:
 	virtual void		Update();
 	virtual void		Render(Graphics* g);
 
-	virtual bool		CheckCollisionWithScreen();
-	virtual bool		CheckCollisionWithObject(Rect object, int velocity);
+	void				CheckCollisionWithScreen();
+	bool				CheckCollisionWithObject(Rect object, int velocity);
+
+	bool				IsAlive();
+	void				Reset();
 };
 
 #endif
