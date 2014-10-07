@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "support.h"
 
+using namespace stdio_fw;
+
 class Bar : public Object
 {
 private:
@@ -24,8 +26,10 @@ public:
 	virtual void		Render(Graphics* g);
 
 	void				KeyPress(KeyCode key);
-	Rect				GetRect();
 	int					GetVelocity();
+	Rect				GetRect();
+
+	void				Reset();
 };
 
 #endif

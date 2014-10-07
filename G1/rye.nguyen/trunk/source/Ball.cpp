@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "STDIO_FW\Video\Graphics.h"
 #include "STDIO_FW\Video\Image.h"
 #include "config.h"
@@ -29,6 +30,8 @@ void Ball::Init()
 	m_image = new Image("image\\ball.png");
 	m_image->loadImage();
 	m_image->scale(50.0f / 600);
+
+	m_is_alive = true;
 }
 
 void Ball::Release()
@@ -47,46 +50,40 @@ void Ball::Update()
 
 void Ball::Render(Graphics* g)
 {
-	/*g->drawRect(m_object.x, m_object.y, m_object.width, m_object.height);
-	g->fillRect(m_object.x, m_object.y, m_object.width, m_object.height);*/
 	g->drawImage(m_image, m_object.x, m_object.y);
 }
 
-bool Ball::CheckCollisionWithScreen()
+void Ball::CheckCollisionWithScreen()
 {
 	if(m_object.x <= 0)
 	{
 		m_object.x = 0;
 		m_velocity.x = -m_velocity.x;
-
-		return true;
 	}
 	else if(m_object.x + m_object.width >= SCREEN_WIDTH)
 	{
 		m_object.x = SCREEN_WIDTH - m_object.width;
 		m_velocity.x = -m_velocity.x;
-
-		return true;
 	}
 	
 	if(m_object.y <= 0)
 	{
 		m_object.y = 0;
 		m_velocity.y = -m_velocity.y;
-
-		return true;
 	}
 	else if(m_object.y + m_object.height >= SCREEN_HEIGHT)
 	{
 		m_object.y = SCREEN_HEIGHT - m_object.height;
 		m_velocity.y = -m_velocity.y;
 
-		return true;
+		//Lose a live when collides with the bottom edge
+		m_is_alive = false;
 	}
-
-	return false;
 }
 
+
+//Check collides between Ball's rect and other objects' rect
+//Return: true when collided and false when not collided
 bool Ball::CheckCollisionWithObject(Rect object, int velocity)
 {
 	if(m_object.x + m_object.width >= object.x && m_object.x <= object.x + object.width && m_object.y + m_object.height >= object.y && m_object.y <= object.y + object.height)
@@ -117,4 +114,20 @@ bool Ball::CheckCollisionWithObject(Rect object, int velocity)
 	}
 
 	return false;
+}
+
+bool Ball::IsAlive()
+{
+	return m_is_alive;
+}
+
+void Ball::Reset()
+{
+	m_object.x = 375;
+	m_object.y = 200;
+
+	m_velocity.x = 3;
+	m_velocity.y = 3;
+
+	m_is_alive = true;
 }

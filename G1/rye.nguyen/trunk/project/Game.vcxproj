@@ -50,7 +50,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\Stdio\Graphic_and_Game_Training\Game\trunk\lib\FreeImage;$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,11 +68,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\Bar.h" />
+    <ClInclude Include="..\source\Brick.h" />
+    <ClInclude Include="..\source\config.h" />
     <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\Object.h" />
+    <ClInclude Include="..\source\Ball.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\support.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\Bar.cpp" />
+    <ClCompile Include="..\source\Brick.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
+    <ClCompile Include="..\source\Ball.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
