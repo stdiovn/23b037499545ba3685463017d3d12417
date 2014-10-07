@@ -54,12 +54,17 @@ Rect Brick::GetRect()
 	return m_object;
 }
 
-void Brick::DeActivate()
-{
-	m_is_alive = false;
-}
-
 bool Brick::IsAlive()
 {
 	return m_is_alive;
+}
+
+void Brick::Activate()
+{
+	m_is_alive = true;
+}
+
+void Brick::DeActivate()
+{
+	m_is_alive = false;
 }

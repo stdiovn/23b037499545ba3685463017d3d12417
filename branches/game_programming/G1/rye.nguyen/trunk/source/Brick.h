@@ -25,8 +25,10 @@ public:
 	virtual void		Render(Graphics* g);
 
 	Rect				GetRect();
-	void				DeActivate();
 	bool				IsAlive();
+
+	void				Activate();
+	void				DeActivate();
 };
 
 #endif

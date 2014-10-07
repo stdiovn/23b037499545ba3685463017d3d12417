@@ -14,8 +14,13 @@ private:
 	Ball*				m_ball;
 	Bar*				m_bar;
 	Brick**				m_brick;
+	int					m_count_of_brick;
+	int					m_brick_active_left;
+
+	bool				m_is_game_over;
 
 	Image*				m_background;
+	Image*				m_game_over;
 public:
 	Game();
 	virtual				~Game();
@@ -27,4 +32,5 @@ public:
 	virtual void		Exit();
 
 	virtual bool		IsExit();
+	void				Reset();
 };
