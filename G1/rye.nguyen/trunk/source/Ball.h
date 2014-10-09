@@ -12,7 +12,7 @@ private:
 	Rect				m_object;
 	Vector2D			m_velocity;
 
-	bool				m_is_alive;
+	bool				m_is_active;
 
 	Image*				m_image;
 public:
@@ -28,7 +28,7 @@ public:
 	void				CheckCollisionWithScreen();
 	bool				CheckCollisionWithObject(Rect object, int velocity);
 
-	bool				IsAlive();
+	bool				IsActive();
 	void				Reset();
 };
 

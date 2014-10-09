@@ -1,6 +1,7 @@
 #ifndef __SUPPORT_H__
 #define __SUPPORT_H__
 
+
 struct Vector2D
 {
 	int		x;

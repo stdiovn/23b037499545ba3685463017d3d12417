@@ -10,9 +10,9 @@ class Brick : public Object
 {
 private:
 	Rect				m_object;
-	bool				m_is_alive;
+	bool				m_is_active;
 	
-	DWORD32				m_color;
+	Image*				m_image;
 public:
 	Brick();
 	virtual				~Brick();
@@ -25,7 +25,7 @@ public:
 	virtual void		Render(Graphics* g);
 
 	Rect				GetRect();
-	bool				IsAlive();
+	bool				IsActive();
 
 	void				Activate();
 	void				DeActivate();

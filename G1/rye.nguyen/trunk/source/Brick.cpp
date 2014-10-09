@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "STDIO_FW\Video\Graphics.h"
+#include "STDIO_FW\Video\Image.h"
 #include "config.h"
 
 #include "Brick.h"
@@ -26,13 +27,15 @@ void Brick::Init(int position_x, int position_y, int width, int height)
 	m_object.y = position_y;
 	m_object.width = width;
 	m_object.height = height;
-
-	m_color = RANDOM_COLOR;
+	
+	m_image = new Image("image\\brick.png");
+	m_image->loadImage();
 }
 
 void Brick::Release()
 {
-
+	m_image->unloadImage();
+	delete m_image;
 }
 
 void Brick::Update()
@@ -42,10 +45,7 @@ void Brick::Update()
 
 void Brick::Render(Graphics* g)
 {
-	g->setColor(m_color);
-
-	g->drawRect(m_object.x, m_object.y, m_object.width, m_object.height);
-	g->fillRect(m_object.x, m_object.y, m_object.width, m_object.height);
+	g->drawImage(m_image, m_object.x, m_object.y);
 }
 
 Rect Brick::GetRect()
@@ -53,17 +53,17 @@ Rect Brick::GetRect()
 	return m_object;
 }
 
-bool Brick::IsAlive()
+bool Brick::IsActive()
 {
-	return m_is_alive;
+	return m_is_active;
 }
 
 void Brick::Activate()
 {
-	m_is_alive = true;
+	m_is_active = true;
 }
 
 void Brick::DeActivate()
 {
-	m_is_alive = false;
+	m_is_active = false;
 }

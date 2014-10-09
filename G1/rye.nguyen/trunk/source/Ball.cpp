@@ -31,7 +31,7 @@ void Ball::Init()
 	m_image->loadImage();
 	m_image->scale(50.0f / 600);
 
-	m_is_alive = true;
+	m_is_active = true;
 }
 
 void Ball::Release()
@@ -77,7 +77,7 @@ void Ball::CheckCollisionWithScreen()
 		m_velocity.y = -m_velocity.y;
 
 		//Lose a live when collides with the bottom edge
-		m_is_alive = false;
+		m_is_active = false;
 	}
 }
 
@@ -116,9 +116,9 @@ bool Ball::CheckCollisionWithObject(Rect object, int velocity)
 	return false;
 }
 
-bool Ball::IsAlive()
+bool Ball::IsActive()
 {
-	return m_is_alive;
+	return m_is_active;
 }
 
 void Ball::Reset()
@@ -129,5 +129,5 @@ void Ball::Reset()
 	m_velocity.x = 3;
 	m_velocity.y = 3;
 
-	m_is_alive = true;
+	m_is_active = true;
 }
