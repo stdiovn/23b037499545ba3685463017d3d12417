@@ -27,7 +27,7 @@ void Ball::Init()
 	m_object.width = 50;
 	m_object.height = 50;
 
-	m_image = new Image("image\\ball.png");
+	m_image = new Image(BALL_IMAGE);
 	m_image->loadImage();
 	m_image->scale(50.0f / 600);
 

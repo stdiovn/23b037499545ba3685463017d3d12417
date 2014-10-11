@@ -25,7 +25,7 @@ void Bar::Init()
 
 	m_velocity = 5;
 
-	m_image = new Image("image\\bar.png");
+	m_image = new Image(BAR_IMAGE);
 	m_image->loadImage();
 	m_image->scale(0.5);
 
