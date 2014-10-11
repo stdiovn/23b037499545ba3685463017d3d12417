@@ -46,11 +46,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\stdio_fw\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\FreeImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\Stdio\Graphic_and_Game_Training\Game\trunk\lib\FreeImage;$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\lib\FreeImage;$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
