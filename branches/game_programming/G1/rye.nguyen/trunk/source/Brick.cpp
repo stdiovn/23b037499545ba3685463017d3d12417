@@ -28,7 +28,7 @@ void Brick::Init(int position_x, int position_y, int width, int height)
 	m_object.width = width;
 	m_object.height = height;
 	
-	m_image = new Image("image\\brick.png");
+	m_image = new Image(BRICK_IMAGE);
 	m_image->loadImage();
 }
 
