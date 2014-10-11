@@ -68,6 +68,7 @@ namespace stdio_fw
 		{
 			DWORD curTime = GetTickCount();
 			float deltaTime = static_cast<float>(curTime - lastTime);
+			
 			lastTime = curTime;
 
 			Update(deltaTime);
@@ -80,6 +81,7 @@ namespace stdio_fw
 
 			glfwSwapBuffers(m_pWindow);
 			glfwPollEvents();
+			
 		}
 
 		Exit();
