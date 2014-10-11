@@ -31,6 +31,8 @@ int color = RED;
 Image *img = new Image("pink.png");
 Image *imgWall = new Image("wall.png");
 
+Image *background = new Image("BackGround.jpg");
+
 struct Vector2D
 {
 	int X;
@@ -80,6 +82,7 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 	img->loadImage();
 	img->scale(0.25);
 
+	background->loadImage();
 
 	imgWall->loadImage();
 	float scale = imgWall->getWidth();
@@ -135,6 +138,8 @@ void Game::Render(Graphics* g)
 	g->cleanScreen();
 	g->setColor(color);
 
+	g->drawImage(background, 0, 0);
+
 	for (int i = 0; i < Count; i++)
 	{
 		if (FrameWall[i].IsDraw == true)
@@ -151,7 +156,9 @@ void Game::Render(Graphics* g)
 
 void Game::Exit()
 {
-
+	delete img;
+	delete imgWall;
+	delete background;
 }
 
 /////////////////////////////////////
