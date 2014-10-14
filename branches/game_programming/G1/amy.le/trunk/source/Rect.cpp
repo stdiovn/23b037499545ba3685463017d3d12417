@@ -5,6 +5,8 @@
 
 #define SRCWidth 800
 #define SRCHeight 600
+#define TenisNet "Net1.png"
+#define TenisNet2 "Net2.png"
 using namespace stdio_fw;
 
 Rect::Rect()
@@ -22,7 +24,7 @@ void Rect::InitRect()
 	m_RectSpeedX = 10;
 	m_RectX = 0;
 	m_RectY = 500;
-	m_RectImage = new Image("TenisNet.jpg");
+	m_RectImage = new Image(TenisNet);
 	m_RectImage->loadImage();
 }
 
@@ -48,13 +50,14 @@ void Rect::ConllideRect()
 
 void Rect::TransferRect(KeyState KeyRight, KeyState KeyLeft)
 {
-	if (((m_RectX + RectWidth <SRCWidth) && (KeyRight == 1)) || ((m_RectX > 0) && (KeyLeft == 1)))
+	if ((KeyRight == 1) && (m_RectX + RectWidth <SRCWidth))
 	{
 		m_RectX += m_RectSpeedX;
 	}
-	if ((m_RectX + RectWidth > SRCWidth) || (m_RectX < 0) || ((m_RectSpeedX < 0) && (KeyRight == 1)) || ((m_RectSpeedX > 0) && (KeyLeft == 1)))
+	else
+	if ((KeyLeft == 1) && (m_RectX > 0))
 	{
-		m_RectSpeedX = -m_RectSpeedX;
+		m_RectX -= m_RectSpeedX;
 	}
 }
 

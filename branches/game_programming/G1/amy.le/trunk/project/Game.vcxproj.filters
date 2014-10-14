@@ -5,10 +5,16 @@
     <ClInclude Include="..\source\stdafx.h" />
     <ClInclude Include="..\source\Square.h" />
     <ClInclude Include="..\source\Rect.h" />
+    <ClInclude Include="..\source\Brick.h" />
+    <ClInclude Include="..\source\BrickType1.h" />
+    <ClInclude Include="..\source\BrickType2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\Square.cpp" />
     <ClCompile Include="..\source\Rect.cpp" />
+    <ClCompile Include="..\source\Brick.cpp" />
+    <ClCompile Include="..\source\BrickType2.cpp" />
+    <ClCompile Include="..\source\BrickType1.cpp" />
   </ItemGroup>
 </Project>
