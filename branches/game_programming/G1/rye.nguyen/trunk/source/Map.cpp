@@ -1,8 +1,7 @@
+#include "stdafx.h"
 #include "config.h"
 
 #include "Map.h"
-
-#include <stdio.h>
 
 Map::Map()
 {
@@ -17,13 +16,9 @@ Map::~Map()
 void Map::Release()
 {
 	for(int i = 0; i < 7; i++)
-	{
-		delete [] m_image_path[i];
-		m_image_path[i] = NULL;
-	}
+		SAFE_DEL_ARR(m_image_path[i]);
 
-	delete [] m_bricks_position;
-	m_bricks_position = NULL;
+	SAFE_DEL_ARR(m_bricks_position);
 }
 
 void Map::ReadMap(char* path)
@@ -33,11 +28,14 @@ void Map::ReadMap(char* path)
 	//Close File when the process is completed
 	//Variable:
 	//size: sizeof file/sizeof buffer map
-	//map: save map into buffer
-	FILE *f = fopen(path, "rb");
+	//map: read map into buffer
+
+	char* _path = _strdup(path);
+
+	FILE *f = fopen(_path, "rb");
+
 	fseek(f, 0, SEEK_END);
 	int size = ftell(f);
-
 	fseek(f, 0, SEEK_SET);
 
 	char* map = new char[size];
@@ -45,23 +43,20 @@ void Map::ReadMap(char* path)
 
 	fclose(f);
 
+	SAFE_DEL_ARR(_path);
 
 
-	//Variable:
-	//current_pos: the beginning position of each image's path
-	//data_size: path's size
-	//buff: a copy of map. It's referrence to map
-	//Using pointer arithmetics to change it's value
 	int current_pos = 0;
 
+
+	//Get data from map into variables
 	SetImagesPath(map, current_pos);
 	SetBallVeloc(map, current_pos);
 	SetBarVeloc(map, current_pos);
 	SetBrickQuantity(map, current_pos);
 	SetBricksPosition(map, current_pos);
 
-	delete [] map;
-	map = NULL;
+	SAFE_DEL_ARR(map);
 }
 
 char** Map::GetImagesPath()
@@ -94,6 +89,8 @@ Vector2D* Map::GetBricksPosition()
 	return m_bricks_position;
 }
 
+
+
 void Map::SetImagesPath(char* map, int &current_position)
 {
 	int data_size;
@@ -103,13 +100,13 @@ void Map::SetImagesPath(char* map, int &current_position)
 	{
 		data_size = 0;
 
-#if FLATFORM == MACOS
+#if PLATFORM == MACOS
 		//New line character in MacOS is '\r'
 		while(*buff != (char)13)
 #else
 		//New line character in Linux is '\n'
-		//New line character in Windows is "\r\n"
-		//So I just gather 2 Flatforms into 1 case
+		//New line characters in Windows are "\r\n"
+		//So I just gather 2 platforms into 1 case
 		while(*buff != (char)10)
 #endif
 		{
@@ -117,8 +114,9 @@ void Map::SetImagesPath(char* map, int &current_position)
 			data_size++;
 		}
 
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 		//Because in Windows, there're 2 new line characters
+		//We stopped at the second ones
 		data_size--;
 #endif
 		m_image_path[i] = new char[data_size];
@@ -130,7 +128,7 @@ void Map::SetImagesPath(char* map, int &current_position)
 
 
 		//Move to next non-new line character
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 		current_position += data_size + 2;
 #else
 		current_position += data_size + 1;
@@ -140,7 +138,6 @@ void Map::SetImagesPath(char* map, int &current_position)
 
 void Map::SetBallVeloc(char* map, int &current_position)
 {
-	//Get ball's velocity
 	int data_size = 0;
 	char* buff = map + current_position;
 
@@ -149,18 +146,21 @@ void Map::SetBallVeloc(char* map, int &current_position)
 		buff++;
 		data_size++;
 	}
+
 	char* ball_veloc_x = new char[data_size];
 	for(int i = 0; i < data_size; i++)
 		ball_veloc_x[i] = *(map + current_position + i);
+
 	m_ball_veloc.x = ConvertToNumber(ball_veloc_x);
 	buff++;
 	current_position += data_size + 1;
 
-	delete [] ball_veloc_x;
-	ball_veloc_x = NULL;
+	SAFE_DEL_ARR(ball_veloc_x);
+
+
 
 	data_size = 0;
-#if FLATFORM == MACOS
+#if PLATFORM == MACOS
 	while(*buff != (char)13)
 #else
 	while(*buff != (char)10)
@@ -169,7 +169,8 @@ void Map::SetBallVeloc(char* map, int &current_position)
 		buff++;
 		data_size++;
 	}
-#if FLATFORM == WINDOWS
+
+#if PLATFORM == WINDOWS
 	data_size--;
 #endif
 
@@ -178,10 +179,9 @@ void Map::SetBallVeloc(char* map, int &current_position)
 		ball_veloc_y[i] = *(map + current_position + i);
 	m_ball_veloc.y = ConvertToNumber(ball_veloc_y);
 
-	delete [] ball_veloc_y;
-	ball_veloc_y = NULL;
+	SAFE_DEL_ARR(ball_veloc_y);
 
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 	current_position += data_size + 2;
 #else
 	current_position += data_size + 1;
@@ -193,7 +193,7 @@ void Map::SetBarVeloc(char* map, int &current_position)
 	int data_size = 0;
 	char* buff = map + current_position;
 
-#if FLATFORM == MACOS
+#if PLATFORM == MACOS
 	while(*buff != (char)13)
 #else
 	while(*buff != (char)10)
@@ -202,7 +202,7 @@ void Map::SetBarVeloc(char* map, int &current_position)
 		buff++;
 		data_size++;
 	}
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 	data_size--;
 #endif
 
@@ -211,10 +211,9 @@ void Map::SetBarVeloc(char* map, int &current_position)
 		bar_veloc[i] = *(map + current_position + i);
 	m_bar_veloc = ConvertToNumber(bar_veloc);
 	
-	delete [] bar_veloc;
-	bar_veloc = NULL;
+	SAFE_DEL_ARR(bar_veloc);
 	
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 	current_position += data_size + 2;
 #else
 	current_position += data_size + 1;
@@ -235,15 +234,17 @@ void Map::SetBrickQuantity(char* map, int &current_position)
 	char* brick_quantity = new char[data_size];
 	for(int i = 0; i < data_size; i++)
 		brick_quantity[i] = *(map + current_position + i);
+
 	m_brick_quantity = ConvertToNumber(brick_quantity);
 	buff++;
 	current_position += data_size + 1;
 
-	delete [] brick_quantity;
-	brick_quantity = NULL;
+	SAFE_DEL_ARR(brick_quantity);
+
+
 
 	data_size = 0;
-#if FLATFORM == MACOS
+#if PLATFORM == MACOS
 	while(*buff != (char)13)
 #else
 	while(*buff != (char)10)
@@ -252,7 +253,7 @@ void Map::SetBrickQuantity(char* map, int &current_position)
 		buff++;
 		data_size++;
 	}
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 	data_size--;
 #endif
 
@@ -261,10 +262,9 @@ void Map::SetBrickQuantity(char* map, int &current_position)
 		super_brick_quantity[i] = *(map + current_position + i);
 	m_super_brick_quantity = ConvertToNumber(super_brick_quantity);
 
-	delete [] super_brick_quantity;
-	super_brick_quantity = NULL;
+	SAFE_DEL_ARR(super_brick_quantity);
 
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 	current_position += data_size + 2;
 #else
 	current_position += data_size + 1;
@@ -289,16 +289,16 @@ void Map::SetBricksPosition(char* map, int &current_position)
 		char* brick_pos_x = new char[data_size];
 		for(int j = 0; j < data_size; j++)
 			brick_pos_x[j] = *(map + current_position + j);
+
 		m_bricks_position[i].x = ConvertToNumber(brick_pos_x);
 		current_position += data_size + 1;
 		buff++;
 
-		delete [] brick_pos_x;
-		brick_pos_x = NULL;
+		SAFE_DEL_ARR(brick_pos_x);
 
 
 		data_size = 0;
-#if FLATFORM == MACOS
+#if PLATFORM == MACOS
 		while(*buff != (char)13)
 #else
 		while(*buff != (char)10)
@@ -307,7 +307,7 @@ void Map::SetBricksPosition(char* map, int &current_position)
 			buff++;
 			data_size++;
 		}
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 		data_size--;
 #endif
 
@@ -316,36 +316,13 @@ void Map::SetBricksPosition(char* map, int &current_position)
 			brick_pos_y[j] = *(map + current_position + j);
 		m_bricks_position[i].y = ConvertToNumber(brick_pos_y);
 
-		delete [] brick_pos_y;
-		brick_pos_y = NULL;
+		SAFE_DEL_ARR(brick_pos_y);
 		
-#if FLATFORM == WINDOWS
+#if PLATFORM == WINDOWS
 		current_position += data_size + 2;
 		buff++;
 #else
 		current_position += data_size + 1;
 #endif
 	}
-}
-
-int Map::ConvertToNumber(char* str)
-{
-	int sign = 1;
-	if(*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
-	else if(*str == '+')
-		str++;
-
-	int value = 0;
-	while(*str >= '0' && *str <= '9')
-	{
-		value *= 10;
-		value += (*str - 48);
-		str++;
-	}
-
-	return value * sign;
 }

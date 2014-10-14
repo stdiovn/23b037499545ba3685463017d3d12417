@@ -41,15 +41,20 @@ void Bar::Init(char* path, int veloc)
 void Bar::Release()
 {
 	m_image->unloadImage();
-	delete m_image;
+	SAFE_DEL(m_image);
 }
 
 void Bar::Update()
 {
-	if(m_key_press == KeyCode::KEY_LEFT && m_object.x >= 0)
+	if(m_key_press == KeyCode::KEY_LEFT && m_object.x > 0)
 		m_object.x -= m_velocity;
-	else if(m_key_press == KeyCode::KEY_RIGHT && m_object.x + m_object.width <= SCREEN_WIDTH)
+	else if(m_key_press == KeyCode::KEY_RIGHT && m_object.x + m_object.width < SCREEN_WIDTH)
 		m_object.x += m_velocity;
+
+	if(m_object.x < 0)
+		m_object.x = 0;
+	else if(m_object.x + m_object.width > SCREEN_WIDTH)
+		m_object.x = SCREEN_WIDTH - m_object.width;
 }
 
 void Bar::Render(Graphics* g)

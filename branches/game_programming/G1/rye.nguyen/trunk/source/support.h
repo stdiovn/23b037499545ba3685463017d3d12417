@@ -1,6 +1,7 @@
 #ifndef __SUPPORT_H__
 #define __SUPPORT_H__
 
+#include <string.h>
 
 struct Vector2D
 {
@@ -17,6 +18,7 @@ struct Rect
 };
 
 
-char* ConvertToString(int num);
+int			ConvertToNumber(char* str);
+char*		ConvertToString(int num);
 
 #endif
