@@ -18,16 +18,22 @@ Bar::~Bar()
 
 void Bar::Init()
 {
+
+}
+
+void Bar::Init(char* path, int veloc)
+{
+	m_image = new Image(path);
+	m_image->loadImage();
+	m_image->scale(0.5);
+
 	m_object.x = 300;
 	m_object.y = 500;
 	m_object.width = 200;
 	m_object.height = 30;
 
-	m_velocity = 5;
-
-	m_image = new Image(BAR_IMAGE);
-	m_image->loadImage();
-	m_image->scale(0.5);
+	m_default_veloc = veloc;
+	m_velocity = m_default_veloc;
 
 	m_key_press = KeyCode::KEY_UNKNOWN;
 }
@@ -70,4 +76,6 @@ void Bar::Reset()
 {
 	m_object.x = 300;
 	m_object.y = 500;
+
+	m_velocity = m_default_veloc;
 }

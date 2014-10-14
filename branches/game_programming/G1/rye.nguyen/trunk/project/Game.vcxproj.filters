@@ -19,6 +19,9 @@
     <ClInclude Include="..\source\Ball.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\Map.h">
+      <Filter>Maps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Bar.cpp">
@@ -33,6 +36,10 @@
     <ClCompile Include="..\source\Ball.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\Map.cpp">
+      <Filter>Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\support.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -41,5 +48,13 @@
     <Filter Include="Core">
       <UniqueIdentifier>{ae839592-1b47-472e-8322-444185d772f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maps">
+      <UniqueIdentifier>{cd526bb6-4bf5-4faf-80ad-4f2c5254fad8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\source\Map.txt">
+      <Filter>Maps</Filter>
+    </Text>
   </ItemGroup>
 </Project>

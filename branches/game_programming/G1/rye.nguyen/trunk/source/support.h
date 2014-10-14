@@ -16,4 +16,7 @@ struct Rect
 	int		height;
 };
 
+
+char* ConvertToString(int num);
+
 #endif

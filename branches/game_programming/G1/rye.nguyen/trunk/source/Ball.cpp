@@ -9,7 +9,7 @@
 
 Ball::Ball()
 {
-
+	
 }
 
 Ball::~Ball()
@@ -19,17 +19,25 @@ Ball::~Ball()
 
 void Ball::Init()
 {
-	m_velocity.x = 3;
-	m_velocity.y = 3;
+
+}
+
+void Ball::Init(char* path, Vector2D veloc)
+{
+	m_image = new Image(path);
+	m_image->loadImage();
+	m_image->scale(0.5);
+
+	m_default_veloc.x = veloc.x;
+	m_default_veloc.y = veloc.y;
+
+	m_velocity.x = m_default_veloc.x;
+	m_velocity.y = m_default_veloc.y;
 
 	m_object.x = 375;
-	m_object.y = 200;
+	m_object.y = 350;
 	m_object.width = 50;
 	m_object.height = 50;
-
-	m_image = new Image(BALL_IMAGE);
-	m_image->loadImage();
-	m_image->scale(50.0f / 600);
 
 	m_is_active = true;
 }
@@ -84,7 +92,7 @@ void Ball::CheckCollisionWithScreen()
 
 //Check collides between Ball's rect and other objects' rect
 //Return: true when collided and false when not collided
-bool Ball::CheckCollisionWithObject(Rect object, int velocity)
+bool Ball::IsCollisionWithObject(Rect object, int velocity)
 {
 	if(m_object.x + m_object.width >= object.x && m_object.x <= object.x + object.width && m_object.y + m_object.height >= object.y && m_object.y <= object.y + object.height)
 	{
@@ -124,10 +132,10 @@ bool Ball::IsActive()
 void Ball::Reset()
 {
 	m_object.x = 375;
-	m_object.y = 200;
+	m_object.y = 350;
 
-	m_velocity.x = 3;
-	m_velocity.y = 3;
+	m_velocity.x = m_default_veloc.x;
+	m_velocity.y = m_default_veloc.y;
 
 	m_is_active = true;
 }
