@@ -1,8 +1,8 @@
 #ifndef __RECT_H__
 #define __RECT_H__
 
-#define RectWidth 200
-#define  RectHeight 63
+#define RectWidth 60
+#define  RectHeight 90
 using namespace stdio_fw;
 class Rect
 {
