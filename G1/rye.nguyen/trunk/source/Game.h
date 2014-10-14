@@ -15,7 +15,8 @@ private:
 	Bar*				m_bar;
 
 	Brick**				m_brick;
-	int					m_count_of_brick;
+	int					m_brick_quantity;
+	int					m_super_brick_quantity;
 	int					m_brick_active_left;
 
 	Image*				m_background;
@@ -26,6 +27,7 @@ private:
 	bool				m_is_win;
 	int					m_lives;
 	bool				m_is_active;
+	int					m_level;
 public:
 	Game();
 	virtual				~Game();
@@ -38,4 +40,6 @@ public:
 
 	virtual bool		IsExit();
 	void				Reset();
+	void				CreateMap(char* path);
+	char*				GetPath();
 };

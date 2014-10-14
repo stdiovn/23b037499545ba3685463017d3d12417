@@ -1,0 +1,14 @@
+Each map has the following structure:
+
+_First 7 lines are the image's path
+	1.		Background
+	2.		GameOver
+	3.		Win
+	4.		Ball
+	5.		Bar
+	6-7.	Brick
+
+_Next 2 values are ball's velocity
+_Next value is bar's velocity
+_Next value is count of bricks
+_Next several pairs value are the brick's top-left position

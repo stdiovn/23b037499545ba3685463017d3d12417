@@ -11,6 +11,7 @@ class Bar : public Object
 private:
 	Rect				m_object;
 	int					m_velocity;
+	int					m_default_veloc;
 
 	Image*				m_image;
 
@@ -20,6 +21,7 @@ public:
 	virtual				~Bar();
 
 	virtual void		Init();
+	void				Init(char* path, int veloc);
 	virtual void		Release();
 
 	virtual void		Update();

@@ -46,11 +46,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\FreeImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\FreeImage;$(ProjectDir)..\lib\vld\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\lib\FreeImage;$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\lib\vld;$(ProjectDir)..\lib\FreeImage;$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,6 +73,7 @@
     <ClInclude Include="..\source\Brick.h" />
     <ClInclude Include="..\source\config.h" />
     <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\Map.h" />
     <ClInclude Include="..\source\Object.h" />
     <ClInclude Include="..\source\Ball.h" />
     <ClInclude Include="..\source\stdafx.h" />
@@ -82,6 +84,11 @@
     <ClCompile Include="..\source\Brick.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\Ball.cpp" />
+    <ClCompile Include="..\source\Map.cpp" />
+    <ClCompile Include="..\source\support.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\source\Map.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

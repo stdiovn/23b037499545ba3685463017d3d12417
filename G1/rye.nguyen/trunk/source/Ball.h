@@ -11,6 +11,7 @@ class Ball : public Object
 private:
 	Rect				m_object;
 	Vector2D			m_velocity;
+	Vector2D			m_default_veloc;
 
 	bool				m_is_active;
 
@@ -20,13 +21,14 @@ public:
 	virtual				~Ball();
 
 	virtual void		Init();
+	void				Init(char* path, Vector2D veloc);
 	virtual void		Release();
 
 	virtual void		Update();
 	virtual void		Render(Graphics* g);
 
 	void				CheckCollisionWithScreen();
-	bool				CheckCollisionWithObject(Rect object, int velocity);
+	bool				IsCollisionWithObject(Rect object, int velocity);
 
 	bool				IsActive();
 	void				Reset();

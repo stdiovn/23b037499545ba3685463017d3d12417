@@ -8,6 +8,8 @@
 #include "Game.h"
 #include <time.h>
 
+#include "Map.h"
+
 Game::Game()
 {
 
@@ -21,53 +23,15 @@ Game::~Game()
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
-	
-	m_background = new Image("image\\background.jpg");
-	m_background->loadImage();
-	m_background->scale(0.5);
 
-	m_game_over = new Image("image\\gameover.png");
-	m_game_over->loadImage();
-
-	m_win = new Image("image\\youwin.png");
-	m_win->loadImage();
-	m_win->scale(0.5);
-
-	
-
-	//Init several bricks
-	//Position depend on variable 'i'
-	//Set all brick activate
-	m_count_of_brick = 45;
-	m_brick = new Brick*[m_count_of_brick];
-
-	int brick_width = 80;
-	int brick_height = 20;
-
-	for(int i = 0; i < m_count_of_brick; i++)
-	{
-		m_brick[i] = new Brick();
-		m_brick[i]->Init(40 + (i % 9) * brick_width, 20 + (i / 9) * (brick_height + 10), brick_width, brick_height);
-		
-		m_brick[i]->Activate();
-	}
-	m_brick_active_left = m_count_of_brick;
-
-
-
-	m_bar = new Bar();
-	m_bar->Init();
-
-	m_ball = new Ball();
-	m_ball->Init();
-
-
+	CreateMap("map\\map1.rye");
 
 	//Init some default values for game
 	m_is_game_over = false;
 	m_is_win = false;
 	m_lives = 3;
 	m_is_active = true;
+	m_level = 1;
 
 	return errCode;
 }
@@ -77,19 +41,24 @@ void Game::Update(float deltaTime)
 	if(m_is_active)
 	{
 		//Check collides between Ball and each Brick
-		for(int i = 0; i < m_count_of_brick; i++)
+		for(int i = 0; i < m_brick_quantity; i++)
 		{
-			if(m_brick[i]->IsActive() && m_ball->CheckCollisionWithObject(m_brick[i]->GetRect(), 0))
+			if(m_brick[i]->IsActive() && m_ball->IsCollisionWithObject(m_brick[i]->GetRect(), 0))
 			{
+				m_brick[i]->SetLive(-1);
+
+				if(m_brick[i]->GetLives() == 0)
+				{
 					m_brick[i]->DeActivate();
 					m_brick_active_left--;
+				}
 			}
 		}
 
 
 
 		//Update all active Brick
-		for(int i = 0; i < m_count_of_brick; i++)
+		for(int i = 0; i < m_brick_quantity; i++)
 		{
 			if(m_brick[i]->IsActive())
 				m_brick[i]->Update();
@@ -114,6 +83,7 @@ void Game::Update(float deltaTime)
 		}
 
 
+
 		//Check key for moving Bar
 		if(getKeyState(KeyCode::KEY_LEFT) == KeyState::KEY_PRESSED)
 			m_bar->KeyPress(KeyCode::KEY_LEFT);
@@ -123,16 +93,30 @@ void Game::Update(float deltaTime)
 			m_bar->KeyPress(KeyCode::KEY_UNKNOWN);
 
 
+
 		//Check collides with Bar and update Bar
-		bool collide_with_bar = m_ball->CheckCollisionWithObject(m_bar->GetRect(), m_bar->GetVelocity());
+		bool collide_with_bar = m_ball->IsCollisionWithObject(m_bar->GetRect(), m_bar->GetVelocity());
 		if(!collide_with_bar)
 			m_bar->Update();
 
-
 		m_ball->Update();
 	}
-	else if((m_is_game_over || m_is_win) && getKeyState(KeyCode::KEY_ENTER))
+	else if(m_is_game_over && getKeyState(KeyCode::KEY_ENTER))
 		Reset();
+	else if(m_is_win && getKeyState(KeyCode::KEY_ENTER))
+	{
+		if(m_level < MAX_LEVEL)
+			m_level++;
+
+		char* path = GetPath();
+		CreateMap(path);
+
+		/*delete[] path;
+		path = NULL;*/
+
+		m_is_win = false;
+		m_is_active = true;
+	}
 	//Set game reactived after 120 frames
 	//Reset ball and bar to default
 	else	
@@ -173,7 +157,7 @@ void Game::Render(Graphics* g)
 	//Render all objects
 	if(!m_is_game_over && !m_is_win)
 	{
-		for(int i = 0; i < m_count_of_brick; i++)
+		for(int i = 0; i < m_brick_quantity; i++)
 		{
 			if(m_brick[i]->IsActive())
 				m_brick[i]->Render(g);
@@ -202,7 +186,7 @@ void Game::Exit()
 	m_win->unloadImage();
 	delete m_win;
 
-	for(int i = 0; i < m_count_of_brick; i++)
+	for(int i = 0; i < m_brick_quantity; i++)
 	{
 		m_brick[i]->Release();
 		delete m_brick[i];
@@ -229,11 +213,11 @@ bool Game::IsExit()
 //Reset all values to its default
 void Game::Reset()
 {
-	for(int i = 0; i < m_count_of_brick; i++)
+	for(int i = 0; i < m_brick_quantity; i++)
 	{
 		m_brick[i]->Activate();
 	}
-	m_brick_active_left = m_count_of_brick;
+	m_brick_active_left = m_brick_quantity;
 
 	m_bar->Init();
 	m_ball->Init();
@@ -242,6 +226,77 @@ void Game::Reset()
 	m_is_win = false;
 
 	m_lives = 3;
+}
+
+void Game::CreateMap(char* path)
+{
+	Map* m_map = new Map();
+	m_map->ReadMap(path);
+
+	char** image_path = m_map->GetImagesPath();
+
+	m_background = new Image(image_path[0]);
+	m_background->loadImage();
+	m_background->scale(0.5);
+
+	m_game_over = new Image(image_path[1]);
+	m_game_over->loadImage();
+	m_game_over->scale(0.5);
+
+	m_win = new Image(image_path[2]);
+	m_win->loadImage();
+	m_win->scale(0.5);
+
+
+
+	//Init several bricks
+	//Position depend on variable 'i'
+	//Set all brick activate
+	m_brick_quantity = m_map->GetBrickQuantity();
+	m_brick = new Brick*[m_brick_quantity];
+
+	Vector2D* bricks_position = m_map->GetBricksPosition();
+
+	for(int i = 0; i < m_brick_quantity; i++)
+	{
+		m_brick[i] = new Brick();
+		m_brick[i]->Init(image_path[5], image_path[6], bricks_position[i].x, bricks_position[i].y, 80, 20);
+
+		m_brick[i]->Activate();
+	}
+	m_brick_active_left = m_brick_quantity;
+
+	m_super_brick_quantity = m_map->GetSuperBrickQuantity();
+	int count = m_super_brick_quantity;
+	while(count != 0)
+	{
+		int i = rand() % m_brick_quantity;
+
+		if(m_brick[i]->GetLives() < 2)
+		{
+			m_brick[i]->SetLive(1);
+			count--;
+		}
+	}
+
+	m_bar = new Bar();
+	m_bar->Init(image_path[4], m_map->GetBarVeloc());
+
+	m_ball = new Ball();
+	m_ball->Init(image_path[3], m_map->GetBallVeloc());
+
+	//m_map->Release();
+	delete m_map;
+	m_map = NULL;
+}
+
+char* Game::GetPath()
+{
+	char* path = new char[12];
+	strcpy(path, "map\\mapx.rye");
+	path[7] = m_level + 48;
+	
+	return path;
 }
 
 /////////////////////////////////////
