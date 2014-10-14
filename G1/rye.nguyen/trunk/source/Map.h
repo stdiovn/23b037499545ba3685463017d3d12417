@@ -33,8 +33,6 @@ public:
 	void			SetBarVeloc			(char* map, int &current_position);
 	void			SetBrickQuantity	(char* map, int &current_position);
 	void			SetBricksPosition	(char* map, int &current_position);
-
-	int				ConvertToNumber(char* str);
 };
 
 #endif

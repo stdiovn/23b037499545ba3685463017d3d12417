@@ -45,7 +45,7 @@ void Ball::Init(char* path, Vector2D veloc)
 void Ball::Release()
 {
 	m_image->unloadImage();
-	delete m_image;
+	SAFE_DEL(m_image);
 }
 
 void Ball::Update()

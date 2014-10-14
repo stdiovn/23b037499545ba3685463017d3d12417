@@ -8,7 +8,7 @@
 
 
 //Define Flatform is using.
-#define FLATFORM			WINDOWS
+#define PLATFORM			WINDOWS
 
 #define WINDOWS				0
 #define LINUS				1

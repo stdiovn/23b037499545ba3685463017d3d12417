@@ -24,14 +24,19 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
 
-	CreateMap("map\\map1.rye");
-
 	//Init some default values for game
 	m_is_game_over = false;
 	m_is_win = false;
 	m_lives = 3;
 	m_is_active = true;
 	m_level = 1;
+
+	//Init map from it's path
+	//Each level has one different map's path
+	char* path = GetPath();
+	CreateMap(path);
+
+	//SAFE_DEL_ARR(path);
 
 	return errCode;
 }
@@ -45,7 +50,7 @@ void Game::Update(float deltaTime)
 		{
 			if(m_brick[i]->IsActive() && m_ball->IsCollisionWithObject(m_brick[i]->GetRect(), 0))
 			{
-				m_brick[i]->SetLive(-1);
+				m_brick[i]->SetLive(m_brick[i]->GetLives() - 1);
 
 				if(m_brick[i]->GetLives() == 0)
 				{
@@ -67,7 +72,7 @@ void Game::Update(float deltaTime)
 
 
 		//Check game win or game over
-		if(m_brick_active_left == 0)
+		if(m_brick_active_left < 34)
 		{
 			m_is_win = true;
 			m_is_active = false;
@@ -168,7 +173,7 @@ void Game::Render(Graphics* g)
 
 
 	if(m_is_game_over)
-		g->drawImage(m_game_over, 170, 100);
+		g->drawImage(m_game_over, 200, 150);
 	else if(m_is_win)
 		g->drawImage(m_win, 200, 150);
 }
@@ -178,26 +183,26 @@ void Game::Render(Graphics* g)
 void Game::Exit()
 {
 	m_background->unloadImage();
-	delete m_background;
+	SAFE_DEL(m_background);
 
 	m_game_over->unloadImage();
-	delete m_game_over;
+	SAFE_DEL(m_game_over);
 
 	m_win->unloadImage();
-	delete m_win;
+	SAFE_DEL(m_win);
 
 	for(int i = 0; i < m_brick_quantity; i++)
 	{
 		m_brick[i]->Release();
-		delete m_brick[i];
+		SAFE_DEL(m_brick[i])
 	}
 	delete m_brick;
 
 	m_bar->Release();
-	delete m_bar;
+	SAFE_DEL(m_bar);
 
 	m_ball->Release();
-	delete m_ball;
+	SAFE_DEL(m_ball);
 
 	exit(1);
 }
@@ -216,24 +221,37 @@ void Game::Reset()
 	for(int i = 0; i < m_brick_quantity; i++)
 	{
 		m_brick[i]->Activate();
+		m_brick[i]->SetLive(1);
 	}
 	m_brick_active_left = m_brick_quantity;
 
-	m_bar->Init();
-	m_ball->Init();
+	int count = m_super_brick_quantity;
+	while(count != 0)
+	{
+		int i = rand() % m_brick_quantity;
+
+		if(m_brick[i]->GetLives() < 2)
+		{
+			m_brick[i]->SetLive(2);
+			count--;
+		}
+	}
+
+	m_bar->Reset();
+	m_ball->Reset();
 
 	m_is_game_over = false;
-	m_is_win = false;
+	m_is_active = true;
 
 	m_lives = 3;
 }
 
 void Game::CreateMap(char* path)
 {
-	Map* m_map = new Map();
-	m_map->ReadMap(path);
+	Map* map = new Map();
+	map->ReadMap(path);
 
-	char** image_path = m_map->GetImagesPath();
+	char** image_path = map->GetImagesPath();
 
 	m_background = new Image(image_path[0]);
 	m_background->loadImage();
@@ -252,10 +270,10 @@ void Game::CreateMap(char* path)
 	//Init several bricks
 	//Position depend on variable 'i'
 	//Set all brick activate
-	m_brick_quantity = m_map->GetBrickQuantity();
+	m_brick_quantity = map->GetBrickQuantity();
 	m_brick = new Brick*[m_brick_quantity];
 
-	Vector2D* bricks_position = m_map->GetBricksPosition();
+	Vector2D* bricks_position = map->GetBricksPosition();
 
 	for(int i = 0; i < m_brick_quantity; i++)
 	{
@@ -266,7 +284,7 @@ void Game::CreateMap(char* path)
 	}
 	m_brick_active_left = m_brick_quantity;
 
-	m_super_brick_quantity = m_map->GetSuperBrickQuantity();
+	m_super_brick_quantity = map->GetSuperBrickQuantity();
 	int count = m_super_brick_quantity;
 	while(count != 0)
 	{
@@ -274,20 +292,24 @@ void Game::CreateMap(char* path)
 
 		if(m_brick[i]->GetLives() < 2)
 		{
-			m_brick[i]->SetLive(1);
+			m_brick[i]->SetLive(2);
 			count--;
 		}
 	}
 
 	m_bar = new Bar();
-	m_bar->Init(image_path[4], m_map->GetBarVeloc());
+	m_bar->Init(image_path[4], map->GetBarVeloc());
 
 	m_ball = new Ball();
-	m_ball->Init(image_path[3], m_map->GetBallVeloc());
+	m_ball->Init(image_path[3], map->GetBallVeloc());
 
-	//m_map->Release();
-	delete m_map;
-	m_map = NULL;
+
+	/*for(int i = 0; i < 7; i++)
+		SAFE_DEL_ARR(image_path[i]);
+	image_path = NULL;*/
+
+	//map->Release();
+	SAFE_DEL(map);
 }
 
 char* Game::GetPath()
@@ -302,7 +324,7 @@ char* Game::GetPath()
 /////////////////////////////////////
 // Entry Point
 /////////////////////////////////////
-void main()
+int main()
 {
 	srand(unsigned(time(NULL)));
 
@@ -310,4 +332,6 @@ void main()
 	g.Init(SCREEN_WIDTH, SCREEN_HEIGHT, "Rye's Game");
 
 	g.Run();
+
+	return 0;
 }

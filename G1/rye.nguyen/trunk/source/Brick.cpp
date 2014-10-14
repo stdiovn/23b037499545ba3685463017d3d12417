@@ -42,10 +42,12 @@ void Brick::Init(char* path1, char* path2, int position_x, int position_y, int w
 void Brick::Release()
 {
 	m_image1->unloadImage();
-	delete m_image1;
+	SAFE_DEL(m_image1);
 
 	m_image2->unloadImage();
-	delete m_image1;
+	SAFE_DEL(m_image2);
+
+	m_image = NULL;
 }
 
 void Brick::Update()
@@ -68,7 +70,7 @@ int Brick::GetLives()
 
 void Brick::SetLive(int value)
 {
-	m_lives += value;
+	m_lives = value;
 }
 
 Rect Brick::GetRect()
