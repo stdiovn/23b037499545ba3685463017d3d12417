@@ -22,6 +22,6 @@
 
 #define IS_SUPER_BRICK		rand() % 4
 
-#define MAX_LEVEL			2
+#define MAX_LEVEL			3
 
 #endif
