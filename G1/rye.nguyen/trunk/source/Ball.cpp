@@ -35,7 +35,7 @@ void Ball::Init(char* path, Vector2D veloc)
 	m_velocity.y = m_default_veloc.y;
 
 	m_object.x = 375;
-	m_object.y = 350;
+	m_object.y = 450;
 	m_object.width = 50;
 	m_object.height = 50;
 
@@ -132,7 +132,7 @@ bool Ball::IsActive()
 void Ball::Reset()
 {
 	m_object.x = 375;
-	m_object.y = 350;
+	m_object.y = 450;
 
 	m_velocity.x = m_default_veloc.x;
 	m_velocity.y = m_default_veloc.y;

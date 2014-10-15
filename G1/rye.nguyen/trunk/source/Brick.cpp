@@ -37,6 +37,11 @@ void Brick::Init(char* path1, char* path2, int position_x, int position_y, int w
 	m_object.height = height;
 
 	m_lives = 1;
+
+	if(m_lives == 2)
+		m_image = m_image2;
+	else
+		m_image = m_image1;
 }
 
 void Brick::Release()

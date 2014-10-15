@@ -15,8 +15,8 @@ Map::~Map()
 
 void Map::Release()
 {
-	for(int i = 0; i < 7; i++)
-		SAFE_DEL_ARR(m_image_path[i]);
+	/*for(int i = 0; i < 7; i++)
+		SAFE_DEL_ARR(m_image_path[i]);*/
 
 	SAFE_DEL_ARR(m_bricks_position);
 }
@@ -30,9 +30,7 @@ void Map::ReadMap(char* path)
 	//size: sizeof file/sizeof buffer map
 	//map: read map into buffer
 
-	char* _path = _strdup(path);
-
-	FILE *f = fopen(_path, "rb");
+	FILE *f = fopen(path, "rb");
 
 	fseek(f, 0, SEEK_END);
 	int size = ftell(f);
@@ -43,7 +41,7 @@ void Map::ReadMap(char* path)
 
 	fclose(f);
 
-	SAFE_DEL_ARR(_path);
+	//SAFE_DEL_ARR(path);
 
 
 	int current_pos = 0;

@@ -36,7 +36,7 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 	char* path = GetPath();
 	CreateMap(path);
 
-	//SAFE_DEL_ARR(path);
+	SAFE_DEL_ARR(path);
 
 	return errCode;
 }
@@ -72,7 +72,7 @@ void Game::Update(float deltaTime)
 
 
 		//Check game win or game over
-		if(m_brick_active_left < 34)
+		if(m_brick_active_left < m_brick_quantity - 2)
 		{
 			m_is_win = true;
 			m_is_active = false;
@@ -106,22 +106,27 @@ void Game::Update(float deltaTime)
 
 		m_ball->Update();
 	}
-	else if(m_is_game_over && getKeyState(KeyCode::KEY_ENTER))
-		Reset();
-	else if(m_is_win && getKeyState(KeyCode::KEY_ENTER))
+	else if(getKeyState(KeyCode::KEY_ENTER))
 	{
-		if(m_level < MAX_LEVEL)
-			m_level++;
+		if(m_is_game_over)
+			Reset();
+		else if(m_is_win)
+		{
+			if(m_level < MAX_LEVEL)
+				m_level++;
 
-		char* path = GetPath();
-		CreateMap(path);
+			char* path = GetPath();
+			CreateMap(path);
 
-		/*delete[] path;
-		path = NULL;*/
+			SAFE_DEL_ARR(path);
 
-		m_is_win = false;
-		m_is_active = true;
+			m_is_win = false;
+			m_is_active = true;
+
+			m_lives = 3;
+		}
 	}
+
 	//Set game reactived after 120 frames
 	//Reset ball and bar to default
 	else	
@@ -308,7 +313,7 @@ void Game::CreateMap(char* path)
 		SAFE_DEL_ARR(image_path[i]);
 	image_path = NULL;*/
 
-	//map->Release();
+	map->Release();
 	SAFE_DEL(map);
 }
 
