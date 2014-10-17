@@ -72,7 +72,7 @@ void Game::Update(float deltaTime)
 
 
 		//Check game win or game over
-		if(m_brick_active_left < m_brick_quantity - 2)
+		if(m_brick_active_left == 0)
 		{
 			m_is_win = true;
 			m_is_active = false;
@@ -112,6 +112,8 @@ void Game::Update(float deltaTime)
 			Reset();
 		else if(m_is_win)
 		{
+			ReleaseCurrentLevel();
+
 			if(m_level < MAX_LEVEL)
 				m_level++;
 
@@ -187,6 +189,13 @@ void Game::Render(Graphics* g)
 //Release all objects have been alloc before
 void Game::Exit()
 {
+	ReleaseCurrentLevel();
+
+	exit(1);
+}
+
+void Game::ReleaseCurrentLevel()
+{
 	m_background->unloadImage();
 	SAFE_DEL(m_background);
 
@@ -201,15 +210,13 @@ void Game::Exit()
 		m_brick[i]->Release();
 		SAFE_DEL(m_brick[i])
 	}
-	delete m_brick;
+	SAFE_DEL_ARR(m_brick);
 
 	m_bar->Release();
 	SAFE_DEL(m_bar);
 
 	m_ball->Release();
 	SAFE_DEL(m_ball);
-
-	exit(1);
 }
 
 /////////////////////////////////////
@@ -308,18 +315,13 @@ void Game::CreateMap(char* path)
 	m_ball = new Ball();
 	m_ball->Init(image_path[3], map->GetBallVeloc());
 
-
-	/*for(int i = 0; i < 7; i++)
-		SAFE_DEL_ARR(image_path[i]);
-	image_path = NULL;*/
-
 	map->Release();
 	SAFE_DEL(map);
 }
 
 char* Game::GetPath()
 {
-	char* path = new char[12];
+	char* path = new char[13];
 	strcpy(path, "map\\mapx.rye");
 	path[7] = m_level + 48;
 	

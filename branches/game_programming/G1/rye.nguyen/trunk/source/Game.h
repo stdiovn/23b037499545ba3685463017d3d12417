@@ -37,6 +37,7 @@ public:
 
 	virtual void		Render(Graphics* g);
 	virtual void		Exit();
+	void				ReleaseCurrentLevel();
 
 	virtual bool		IsExit();
 	void				Reset();
