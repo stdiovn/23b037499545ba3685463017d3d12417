@@ -3,10 +3,45 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Sprite.h" />
+    <ClInclude Include="ObjectMap.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall_1.h">
+      <Filter>Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall_2.h">
+      <Filter>Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h" />
+    <ClInclude Include="ImageSource.h" />
+    <ClInclude Include="Global.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\Sprite.cpp" />
+    <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="ImageSource.cpp" />
+    <ClCompile Include="BackGround.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectMap.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall_1.cpp">
+      <Filter>Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall_2.cpp">
+      <Filter>Wall</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BackGround">
+      <UniqueIdentifier>{6f1b7169-db07-4d8e-999c-03200e30bc05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wall">
+      <UniqueIdentifier>{5136e5d0-3c62-4f73-8a8c-fb446fa3f7d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
