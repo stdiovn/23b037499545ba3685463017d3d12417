@@ -15,13 +15,14 @@ Map::~Map()
 
 void Map::Release()
 {
-	/*for(int i = 0; i < 7; i++)
-		SAFE_DEL_ARR(m_image_path[i]);*/
+	for(int i = 0; i < 7; i++)
+		SAFE_DEL_ARR(m_image_path[i]);
+	SAFE_DEL_ARR(m_image_path);
 
 	SAFE_DEL_ARR(m_bricks_position);
 }
 
-void Map::ReadMap(char* path)
+ErrorCode Map::ReadMap(char* path)
 {
 	//Open File to read data
 	//Read the whole map to buffer
@@ -32,6 +33,9 @@ void Map::ReadMap(char* path)
 
 	FILE *f = fopen(path, "rb");
 
+	if(!f)
+		return ErrorCode::ERR_CANT_OPEN_FILE;
+
 	fseek(f, 0, SEEK_END);
 	int size = ftell(f);
 	fseek(f, 0, SEEK_SET);
@@ -41,7 +45,6 @@ void Map::ReadMap(char* path)
 
 	fclose(f);
 
-	//SAFE_DEL_ARR(path);
 
 
 	int current_pos = 0;
@@ -55,6 +58,8 @@ void Map::ReadMap(char* path)
 	SetBricksPosition(map, current_pos);
 
 	SAFE_DEL_ARR(map);
+
+	return ErrorCode::ERR_NO_ERROR;
 }
 
 char** Map::GetImagesPath()
@@ -117,7 +122,7 @@ void Map::SetImagesPath(char* map, int &current_position)
 		//We stopped at the second ones
 		data_size--;
 #endif
-		m_image_path[i] = new char[data_size];
+		m_image_path[i] = new char[data_size + 1];
 		for(int j = 0; j < data_size; j++)
 			m_image_path[i][j] = *(map + current_position + j);
 

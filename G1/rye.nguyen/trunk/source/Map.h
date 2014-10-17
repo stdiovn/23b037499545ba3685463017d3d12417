@@ -3,6 +3,8 @@
 
 #include "support.h"
 
+using namespace stdio_fw;
+
 class Map
 {
 private:
@@ -19,7 +21,7 @@ public:
 	~Map();
 
 	void			Release();
-	void			ReadMap(char* path);
+	ErrorCode		ReadMap(char* path);
 
 	char**			GetImagesPath();
 	Vector2D		GetBallVeloc();
