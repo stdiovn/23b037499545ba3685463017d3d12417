@@ -40,6 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\bin\</OutDir>
+    <IncludePath>C:\Users\Tai\Desktop\tai.duphat\trunk\lib\FreeImage;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Tai\Desktop\tai.duphat\trunk\lib\FreeImage;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -50,7 +52,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Tai\Desktop\tai.duphat\trunk\lib\FreeImage;$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\FreeImage;$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -70,12 +72,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
-    <ClInclude Include="..\source\Sprite.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="ImageSource.h" />
+    <ClInclude Include="ObjectMap.h" />
+    <ClInclude Include="Rect.h" />
+    <ClInclude Include="Wall_1.h" />
+    <ClInclude Include="Wall_2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\Sprite.cpp" />
+    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="ImageSource.cpp" />
+    <ClCompile Include="ObjectMap.cpp" />
+    <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Wall_1.cpp" />
+    <ClCompile Include="Wall_2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
