@@ -3,8 +3,70 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\Rect.h" />
+    <ClInclude Include="..\source\BackGround.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ObjectMap.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Wall_1.h">
+      <Filter>Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Wall_2.h">
+      <Filter>Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ImageSource.h">
+      <Filter>SourceImage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ThanhMove.h">
+      <Filter>ThanhMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Global.h" />
+    <ClInclude Include="..\source\Ball.h">
+      <Filter>Ball</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
+    <ClCompile Include="..\source\Rect.cpp" />
+    <ClCompile Include="..\source\BackGround.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ObjectMap.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wall_1.cpp">
+      <Filter>Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wall_2.cpp">
+      <Filter>Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ImageSource.cpp">
+      <Filter>SourceImage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ThanhMove.cpp">
+      <Filter>ThanhMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Ball.cpp">
+      <Filter>Ball</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BackGround">
+      <UniqueIdentifier>{da2a1145-aad6-4914-a8ca-5545e0560a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wall">
+      <UniqueIdentifier>{204a68ea-f9b0-4e7e-8731-a9344aa9006c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceImage">
+      <UniqueIdentifier>{d146e208-f4e9-4238-be50-b556a38883c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThanhMove">
+      <UniqueIdentifier>{410f7f59-cb0c-456c-840e-ee237c2711e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ball">
+      <UniqueIdentifier>{d866ce48-cbf9-4e62-9f14-8b60425ce6c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

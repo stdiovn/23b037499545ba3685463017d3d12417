@@ -40,6 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\bin\</OutDir>
+    <IncludePath>C:\Users\Tai\Desktop\New folder %282%29\game_programming_fw\lib\FreeImage;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Tai\Desktop\New folder %282%29\game_programming_fw\lib\FreeImage;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -51,6 +53,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)..\lib\glfw3;$(ProjectDir)..\lib\glew;$(ProjectDir)..\lib\stdio_fw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,11 +71,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\BackGround.h" />
+    <ClInclude Include="..\source\Ball.h" />
     <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\Global.h" />
+    <ClInclude Include="..\source\ImageSource.h" />
+    <ClInclude Include="..\source\ObjectMap.h" />
+    <ClInclude Include="..\source\Rect.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\ThanhMove.h" />
+    <ClInclude Include="..\source\Wall_1.h" />
+    <ClInclude Include="..\source\Wall_2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\BackGround.cpp" />
+    <ClCompile Include="..\source\Ball.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
+    <ClCompile Include="..\source\ImageSource.cpp" />
+    <ClCompile Include="..\source\ObjectMap.cpp" />
+    <ClCompile Include="..\source\Rect.cpp" />
+    <ClCompile Include="..\source\ThanhMove.cpp" />
+    <ClCompile Include="..\source\Wall_1.cpp" />
+    <ClCompile Include="..\source\Wall_2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
