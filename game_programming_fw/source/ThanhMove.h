@@ -1,18 +1,22 @@
 #pragma once
-#include "ImageSource.h"
-#include "STDIO_FW\Video\Image.h"
-#include "Rect.h"
-#include "Ball.h"
-using namespace stdio_fw;
+#include "Entity.h"
+#define MoveImage "data//ThanhMove.png"
 
-class ThanhMove: public Rect
+class ThanhMove
 {
-	Image *m_Move;
-	int m_Speed;
-public:
-	void Update(KeyCode);
-	Image *GetImage();
-	ThanhMove();
+	Entity *m_Move;
+
+	int m_Y;
 	~ThanhMove();
+public:
+	ThanhMove(int x, int y);
+	void UpdateCollisionWithWindows(int, int);
+	void UpdateSpeedKeyBoard(KeyCode);
+	int getWidth();
+	int getHeight();
+	int getPositionX();
+	int getPositionY();
+	void Render(Graphics*);
+	void Clear();
 };
 

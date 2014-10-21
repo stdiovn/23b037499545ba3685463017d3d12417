@@ -1,19 +1,24 @@
-#pragma once
-#include "ImageSource.h"
-#include "STDIO_FW\Video\Image.h"
-#include "Rect.h"
+#ifndef _Ball_
+#define _Ball_
 
-class Ball : public Rect
+#include"Entity.h"
+#include <vector>
+#define ImageBall "data//ball.png"
+
+class Ball
 {
-	Image *m_Ball;
+	Entity *entities;
 
-	int m_Veclocity_x;
-	int m_Veclocity_y;
-
-	DIR m_DIR;
+	~Ball();
 public:
 	Ball();
-	Image *GetImage(); 
-	void SetDIR(DIR);
+	DIR UpdateCollisionWindows(int, int);
+	bool isCollsionObject(int left, int right, int top, int bottom);
+	void UpdateVeclocity(int left, int right, int top, int bottom);
 	void Update();
+	void setPosition(int, int);
+	void Render(Graphics*);
+	void Clear();
 };
+
+#endif

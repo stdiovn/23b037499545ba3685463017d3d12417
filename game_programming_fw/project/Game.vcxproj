@@ -71,25 +71,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\BackGround.h" />
     <ClInclude Include="..\source\Ball.h" />
+    <ClInclude Include="..\source\Entity.h" />
     <ClInclude Include="..\source\Game.h" />
-    <ClInclude Include="..\source\Global.h" />
-    <ClInclude Include="..\source\ImageSource.h" />
-    <ClInclude Include="..\source\ObjectMap.h" />
-    <ClInclude Include="..\source\Rect.h" />
+    <ClInclude Include="..\source\MapObject.h" />
+    <ClInclude Include="..\source\Map1.h" />
+    <ClInclude Include="..\source\Map2.h" />
+    <ClInclude Include="..\source\Object.h" />
     <ClInclude Include="..\source\stdafx.h" />
     <ClInclude Include="..\source\ThanhMove.h" />
     <ClInclude Include="..\source\Wall_1.h" />
     <ClInclude Include="..\source\Wall_2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\BackGround.cpp" />
     <ClCompile Include="..\source\Ball.cpp" />
+    <ClCompile Include="..\source\Entity.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\ImageSource.cpp" />
-    <ClCompile Include="..\source\ObjectMap.cpp" />
-    <ClCompile Include="..\source\Rect.cpp" />
+    <ClCompile Include="..\source\MapObject.cpp" />
+    <ClCompile Include="..\source\Map1.cpp" />
+    <ClCompile Include="..\source\Map2.cpp" />
+    <ClCompile Include="..\source\Object.cpp" />
     <ClCompile Include="..\source\ThanhMove.cpp" />
     <ClCompile Include="..\source\Wall_1.cpp" />
     <ClCompile Include="..\source\Wall_2.cpp" />

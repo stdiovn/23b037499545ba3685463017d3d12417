@@ -3,70 +3,72 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Rect.h" />
-    <ClInclude Include="..\source\BackGround.h">
-      <Filter>BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\ObjectMap.h">
-      <Filter>BackGround</Filter>
-    </ClInclude>
+    <ClInclude Include="..\source\Entity.h" />
     <ClInclude Include="..\source\Wall_1.h">
       <Filter>Wall</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Wall_2.h">
       <Filter>Wall</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\ImageSource.h">
-      <Filter>SourceImage</Filter>
+    <ClInclude Include="..\source\Ball.h">
+      <Filter>Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\MapObject.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Map1.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Map2.h">
+      <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="..\source\ThanhMove.h">
       <Filter>ThanhMove</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Global.h" />
-    <ClInclude Include="..\source\Ball.h">
-      <Filter>Ball</Filter>
+    <ClInclude Include="..\source\Object.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\Rect.cpp" />
-    <ClCompile Include="..\source\BackGround.cpp">
-      <Filter>BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\ObjectMap.cpp">
-      <Filter>BackGround</Filter>
-    </ClCompile>
+    <ClCompile Include="..\source\Entity.cpp" />
     <ClCompile Include="..\source\Wall_1.cpp">
       <Filter>Wall</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Wall_2.cpp">
       <Filter>Wall</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\ImageSource.cpp">
-      <Filter>SourceImage</Filter>
+    <ClCompile Include="..\source\Ball.cpp">
+      <Filter>Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\MapObject.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Map1.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Map2.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="..\source\ThanhMove.cpp">
       <Filter>ThanhMove</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Ball.cpp">
-      <Filter>Ball</Filter>
+    <ClCompile Include="..\source\Object.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="BackGround">
-      <UniqueIdentifier>{da2a1145-aad6-4914-a8ca-5545e0560a81}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Wall">
-      <UniqueIdentifier>{204a68ea-f9b0-4e7e-8731-a9344aa9006c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SourceImage">
-      <UniqueIdentifier>{d146e208-f4e9-4238-be50-b556a38883c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThanhMove">
-      <UniqueIdentifier>{410f7f59-cb0c-456c-840e-ee237c2711e1}</UniqueIdentifier>
+      <UniqueIdentifier>{2a39955e-a047-40c7-9dd8-c58bebf77ce2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Ball">
-      <UniqueIdentifier>{d866ce48-cbf9-4e62-9f14-8b60425ce6c3}</UniqueIdentifier>
+      <UniqueIdentifier>{9011ff6c-c898-4d8a-b52d-1d03eec7e7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{10d0b338-73a4-4baa-a6aa-475034b2859b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThanhMove">
+      <UniqueIdentifier>{8afb9305-2ecd-45ef-ba94-9ff4270de602}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,51 +1,69 @@
-#include "stdafx.h"
 #include "ThanhMove.h"
-#define SPEED 3
+#define SPEED 4
 
-ThanhMove::ThanhMove()
+ThanhMove::ThanhMove(int x, int y)
 {
-	m_Move = ImageSource::GetInstance()->GetImage(KindOfImage::Thanh);
-	m_Left = 100;
-	m_Right = m_Left + m_Move->getWidth();
-	m_Top = 460;
-	m_Bottom = m_Top + m_Move->getHeight();
+	m_Move = new Entity();
+	m_Move->activeRenderComponent(MoveImage, x, y);
 
-	m_Speed = 0;
-	//m_Direct = Move::NONE;
+	m_Move->activeMoveComponent(SPEED);
+	m_Move->setVeclocity(SPEED, 0);
+
+	m_Move->activeIsCollision();
+
+	m_Y = y;
 }
 
-
-void ThanhMove::Update(KeyCode key)
+void ThanhMove::Render(Graphics *g)
 {
-	if (key == KeyCode::KEY_LEFT)
-	{
-		m_Speed = -SPEED;
-	}
-	else if (key == KeyCode::KEY_RIGHT)
-	{
-		m_Speed = SPEED;
-	}
-	else
-	{
-		m_Speed = 0;
-	}
-
-	if (m_Left < 0 || m_Right > SCREEN_WIDTH)
-	{
-		if (m_Left < SCREEN_WIDTH) m_Left = 0;
-		else m_Left = SCREEN_WIDTH;
-		m_Speed = 0;
-	}
-
-	m_Left += m_Speed;
-	m_Right += m_Speed;
+	m_Move->Render(g);
 }
 
-Image* ThanhMove::GetImage()
+void ThanhMove::UpdateSpeedKeyBoard(KeyCode key)
 {
-	return m_Move;
+	m_Move->UpdateSpeedWithKeyBoard(key);
+	m_Move->UpdateMovement();
+}
+
+void ThanhMove::UpdateCollisionWithWindows(int width, int height)
+{
+	switch (m_Move->isCollisionWindows(width, height))
+	{
+	case DIR::LEFT:
+		m_Move->setPosition(0, m_Y);
+		break;
+	case DIR::RIGHT:
+		m_Move->setPosition(width - m_Move->getWidth(), m_Y);
+		break;
+	}
+}
+
+int ThanhMove::getHeight()
+{
+	return m_Move->getHeight();
+}
+
+int ThanhMove::getWidth()
+{
+	return m_Move->getWidth();
+}
+
+int ThanhMove::getPositionX()
+{
+	return m_Move->getPositionX();
+}
+
+int ThanhMove::getPositionY()
+{
+	return m_Move->getPositionY();
 }
 
 ThanhMove::~ThanhMove()
 {
+	m_Move->ClearAll();
+}
+
+void ThanhMove::Clear()
+{
+	ThanhMove::~ThanhMove();
 }

@@ -1,27 +1,26 @@
-#pragma once
-#include "Rect.h"
-#include <vector>
-#include "STDIO_FW\Video\Image.h"
-#include "ImageSource.h"
-using namespace stdio_fw;
+#ifndef _Wall_1_
+#define _Wall_1_
 
-// one hit will be break
+#include"Entity.h"
+#include <vector>
+#define ImageWall "data//wall-break.png"
+
 class Wall_1
 {
 protected:
-	Image* m_Image;
+	std::vector<Entity*> entities;
+	int m_Healthy;
 
-	int m_CountImage;
-
-	int m_Width, m_Height;
-	KindOfImage temp;
+	~Wall_1();
 public:
-	Wall_1(int width = 0, int height = 0);
-	void UpdateImage();
-	Image *GetImage();
-	bool GetActionDraw();
-	int GetWidth();
-	int GetHeight();
-	virtual ~Wall_1();
+	Wall_1();
+	void Clear();
+	int getWidth();
+	int getHeight();
+	void Render(Graphics *g);
+	bool isActiveRender();
+	void de_activeRender();
+	void setPosition(int x, int y);
 };
 
+#endif

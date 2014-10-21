@@ -2,123 +2,122 @@
 
 #include "STDIO_FW\Core\Application.h"
 #include "STDIO_FW\Video\Graphics.h"
+
 #include "Game.h"
-
-#include "BackGround.h"
-
+#include "Map1.h"
+#include "Map2.h"
+#define FPS 30
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
 #include "Ball.h"
-#include "BackGround.h"
-#include "ImageSource.h"
 #include "ThanhMove.h"
 
-#define FPS 30
-#define FileMap1 "data//Map_1.txt"
-#define FileMap2 "data//Map_2.txt"
+#define MapFile2 "data//Map_2.txt"
+#define MapFile "data//Map_1.txt"
 
 
-BackGround *Map1 = NULL;
-BackGround *Map2 = NULL;
+MapObject *state = NULL;
 
-BackGround *RunMap = NULL;
-
-ThanhMove *Space = NULL;
+MapObject *state1 = NULL;
+MapObject *state2 = NULL;
 Ball *ball = NULL;
+ThanhMove *Space = NULL;
 
 Game::Game()
 {
-	
+
 }
 
 Game::~Game()
 {
-
+	ball->Clear();
+	state1->Clear();
+	state2->Clear();
+	Space->Clear();
 }
 
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
 
-	ImageSource::GetInstance()->LoadImageSource();
-
-	Map1 = new BackGround(FileMap1);
-	Map2 = new BackGround(FileMap2);
-	RunMap = Map1;
-
-	Space = new ThanhMove();
 	ball = new Ball();
+	ball->setPosition(100, 300);
+
+	state1 = new Map1();
+	state1->InitMap(MapFile);
+
+	state2 = new Map2();
+	state2->InitMap(MapFile2);
+
+	state = state1;
+
+	Space = new ThanhMove(100, 450);
 
 	return errCode;
 }
 
 void Game::Update(float deltaTime)
 {
-	float last = GetTickCount();
-	float curren;
+	// set gamerun with time 1000 / fps (ms)
+	float lasttime = GetTickCount();
+	float current;
 	do
 	{
-		curren = GetTickCount();
-	} while (curren - last + deltaTime < (float)1000 / FPS);
+		current = GetTickCount();
+	} while (current - lasttime + deltaTime < (float)1000 / FPS);
 
-
-	if (getKeyState(KeyCode::KEY_RIGHT) == KeyState::KEY_PRESSED)
+	if (state->NextMap())
 	{
-		Space->Update(KeyCode::KEY_RIGHT);
+		state = state1;
 	}
-	else if (getKeyState(KeyCode::KEY_LEFT) == KeyState::KEY_PRESSED)
-	{
-		Space->Update(KeyCode::KEY_LEFT);
-	}
-	else
-		Space->Update(KeyCode::KEY_UNKNOWN);
-	
 
-	for (int i = 0; i < RunMap->m_FrameOnject.size(); i++)
+	if (ball->UpdateCollisionWindows(SCREEN_WIDTH, SCREEN_HEIGHT) == DIR::ABOVE)
 	{
-		if (RunMap->m_isDraw[i])
+		state->setIsActive(false);
+	}
+
+	Space->UpdateCollisionWithWindows(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	for (int i = 0; i < state->getCountFrameWallOnMap(); i++)
+	{
+		Object temp = state->getPosition(i);
+		if (state->isActiveRenderAt(i) && ball->isCollsionObject(temp.X, temp.X + state->getWidth(i), temp.Y, temp.Y + state->getHeight(i)))
 		{
-			int left = RunMap->m_FrameOnject[i].X;
-			int right = left + RunMap->GetWall(i)->GetImage()->getWidth();
-			int top = RunMap->m_FrameOnject[i].Y;
-			int bottom = top + RunMap->GetWall(i)->GetImage()->getHeight();
-
-			if (ball->IsCollisionWithRect(left, right, top, bottom))
-			{
-				ball->SetDIR(ball->Orientation(left, right, top, bottom));
-				RunMap->m_isDraw[i] = RunMap->GetWall(i)->GetActionDraw();
-				break;
-			}
+			ball->UpdateVeclocity(temp.X, temp.X + state->getWidth(i), temp.Y, temp.Y + state->getHeight(i));
+			state->deActiveRenderAt(i);
+			break;
 		}
 	}
 
-	if (ball->IsCollisionWithRect(Space->m_Left, Space->m_Right, Space->m_Top, Space->m_Bottom))
+	if (ball->isCollsionObject(Space->getPositionX(), Space->getPositionX() + Space->getWidth(), Space->getPositionY(), Space->getPositionY() + Space->getHeight()))
 	{
-		ball->SetDIR(ball->Orientation(Space->m_Left, Space->m_Right, Space->m_Top, Space->m_Bottom));
+		ball->UpdateVeclocity(Space->getPositionX(), Space->getPositionX() + Space->getWidth(), Space->getPositionY(), Space->getPositionY() + Space->getHeight());
+	}
+
+	if (getKeyState(KEY_LEFT) == KeyState::KEY_PRESSED)
+	{
+		Space->UpdateSpeedKeyBoard(KEY_LEFT);
+	}
+	else if (getKeyState(KEY_RIGHT) == KeyState::KEY_PRESSED)
+	{
+		Space->UpdateSpeedKeyBoard(KEY_RIGHT);
 	}
 
 	ball->Update();
-	RunMap->Update();
-
-	if (RunMap->NextBackGround())
-	{
-		RunMap = Map2;
-	}
 }
 
 void Game::Render(Graphics* g)
 {
 	g->cleanScreen();
 	g->setColor(0x00FF00FF);
+	
+	state->Render(g);
 
-	g->drawImage(RunMap->m_BackGround, 0, 0);
+	if (state->isGameOver()) return;
 
-	for (int i = 0; i < RunMap->m_FrameOnject.size(); i++)
-	{
-		if (RunMap->m_isDraw[i])
-			g->drawImage(RunMap->GetWall(i)->GetImage(), RunMap->m_FrameOnject[i].X, RunMap->m_FrameOnject[i].Y);
-	}
+	ball->Render(g);
+	Space->Render(g);
 
-	g->drawImage(ball->GetImage(), ball->m_Left, ball->m_Top);
-	g->drawImage(Space->GetImage(), Space->m_Left, Space->m_Top);
 }
 
 void Game::Exit()
