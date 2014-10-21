@@ -13,7 +13,7 @@
 #pragma comment(lib, "OpenGL32.lib")
 
 #pragma comment(lib, "stdio_fw.lib")
-#pragma comment(lib, "FreeImage.lib")
+
 #include "STDIO_FW\stdio_fw.h"
 
 #ifdef USE_VLD
