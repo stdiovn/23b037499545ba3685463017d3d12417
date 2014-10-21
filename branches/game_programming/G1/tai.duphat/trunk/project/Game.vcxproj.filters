@@ -3,37 +3,58 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="ObjectMap.h">
+    <ClInclude Include="..\source\Map1.h">
       <Filter>BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
+    <ClInclude Include="..\source\Map2.h">
       <Filter>BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="Wall_1.h">
+    <ClInclude Include="..\source\MapObject.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Object.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Wall_1.h">
       <Filter>Wall</Filter>
     </ClInclude>
-    <ClInclude Include="Wall_2.h">
+    <ClInclude Include="..\source\Wall_2.h">
       <Filter>Wall</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h" />
-    <ClInclude Include="ImageSource.h" />
-    <ClInclude Include="Global.h" />
+    <ClInclude Include="..\source\Entity.h" />
+    <ClInclude Include="..\source\ThanhMove.h">
+      <Filter>ThanhMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Ball.h">
+      <Filter>Ball</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="Rect.cpp" />
-    <ClCompile Include="ImageSource.cpp" />
-    <ClCompile Include="BackGround.cpp">
+    <ClCompile Include="..\source\Map1.cpp">
       <Filter>BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectMap.cpp">
+    <ClCompile Include="..\source\Map2.cpp">
       <Filter>BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="Wall_1.cpp">
+    <ClCompile Include="..\source\MapObject.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Object.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wall_1.cpp">
       <Filter>Wall</Filter>
     </ClCompile>
-    <ClCompile Include="Wall_2.cpp">
+    <ClCompile Include="..\source\Wall_2.cpp">
       <Filter>Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Entity.cpp" />
+    <ClCompile Include="..\source\ThanhMove.cpp">
+      <Filter>ThanhMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Ball.cpp">
+      <Filter>Ball</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +63,12 @@
     </Filter>
     <Filter Include="Wall">
       <UniqueIdentifier>{5136e5d0-3c62-4f73-8a8c-fb446fa3f7d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThanhMove">
+      <UniqueIdentifier>{218b20b6-5c80-4d2e-99ae-401b6112d621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ball">
+      <UniqueIdentifier>{b01ac00e-ad23-4963-b5eb-47a9b2f1ac99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

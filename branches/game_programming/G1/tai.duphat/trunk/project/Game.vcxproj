@@ -71,24 +71,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\Ball.h" />
+    <ClInclude Include="..\source\Entity.h" />
     <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\Map1.h" />
+    <ClInclude Include="..\source\Map2.h" />
+    <ClInclude Include="..\source\MapObject.h" />
+    <ClInclude Include="..\source\Object.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="BackGround.h" />
-    <ClInclude Include="Global.h" />
-    <ClInclude Include="ImageSource.h" />
-    <ClInclude Include="ObjectMap.h" />
-    <ClInclude Include="Rect.h" />
-    <ClInclude Include="Wall_1.h" />
-    <ClInclude Include="Wall_2.h" />
+    <ClInclude Include="..\source\ThanhMove.h" />
+    <ClInclude Include="..\source\Wall_1.h" />
+    <ClInclude Include="..\source\Wall_2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\Ball.cpp" />
+    <ClCompile Include="..\source\Entity.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="BackGround.cpp" />
-    <ClCompile Include="ImageSource.cpp" />
-    <ClCompile Include="ObjectMap.cpp" />
-    <ClCompile Include="Rect.cpp" />
-    <ClCompile Include="Wall_1.cpp" />
-    <ClCompile Include="Wall_2.cpp" />
+    <ClCompile Include="..\source\Map1.cpp" />
+    <ClCompile Include="..\source\Map2.cpp" />
+    <ClCompile Include="..\source\MapObject.cpp" />
+    <ClCompile Include="..\source\Object.cpp" />
+    <ClCompile Include="..\source\ThanhMove.cpp" />
+    <ClCompile Include="..\source\Wall_1.cpp" />
+    <ClCompile Include="..\source\Wall_2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
