@@ -2,54 +2,26 @@
 
 #include "STDIO_FW\Core\Application.h"
 #include "STDIO_FW\Video\Graphics.h"
+
 #include "Game.h"
-#include <stdlib.h>
-#include <ctime>
-#include "Sprite.h"
-#include "STDIO_FW\Video\Image.h"
+#include "Map1.h"
+#include "Map2.h"
 #define FPS 30
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+#include "Ball.h"
+#include "ThanhMove.h"
 
-#define RED 0xFF0000FF
-#define YELLOW 0xFFFF00FF
-#define PURPLE 0x7030A0FF
-
-#define Height_imageWall 50
-#define Width_imageWall 50
-#define WallPerRow 16
+#define MapFile2 "Data//Map_2.txt"
+#define MapFile "Data//Map_1.txt"
 
 
-int Count = 48;
-Rect *FrameWall = new Rect[Count];
+MapObject *state = NULL;
 
-Rect ball(100, 130, 200, 230, std::pair<int, int>(2, 2));
-Rect RectMove(50, 250, 570, 600, std::pair<int, int>(4, 4));
-
-int color = RED;
-
-Image *img = new Image("pink.png");
-Image *imgWall = new Image("wall.png");
-
-Image *background = new Image("BackGround.jpg");
-
-struct Vector2D
-{
-	int X;
-	int Y;
-	Vector2D(int X = 0, int Y = 0)
-	{
-		this->X = X;
-		this->Y = Y;
-	}
-
-	Vector2D operator +(Vector2D x)
-	{
-		return (X + x.X, Y + x.Y);
-	}
-};
-
-Vector2D veclocity(2,2);
+MapObject *state1 = NULL;
+MapObject *state2 = NULL;
+Ball *ball = NULL;
+ThanhMove *Space = NULL;
 
 Game::Game()
 {
@@ -58,107 +30,99 @@ Game::Game()
 
 Game::~Game()
 {
-
-}
-
-void SetPositionForWall(Rect *FrameWall, int CountWall)
-{
-	for (int i = 0; i < CountWall; i++)
-	{
-		int width = Width_imageWall;
-		int height = Height_imageWall;
-
-		FrameWall[i].m_Left = (i % WallPerRow) * width;
-		FrameWall[i].m_Right = FrameWall[i].m_Left + width;
-		FrameWall[i].m_Top = (i / WallPerRow) * height;
-		FrameWall[i].m_Bottom = FrameWall[i].m_Top + height;
-	}
+	ball->Clear();
+	state1->Clear();
+	state2->Clear();
+	Space->Clear();
 }
 
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
 
-	img->loadImage();
-	img->scale(0.25);
+	ball = new Ball();
+	ball->setPosition(100, 300);
 
-	background->loadImage();
+	state1 = new Map1();
+	state1->InitMap(MapFile);
 
-	imgWall->loadImage();
-	float scale = imgWall->getWidth();
-	imgWall->scale((float)Width_imageWall / scale);
+	state2 = new Map2();
+	state2->InitMap(MapFile2);
+
+	state = state1;
+
+	Space = new ThanhMove(100, 450);
+
 	return errCode;
 }
 
 void Game::Update(float deltaTime)
 {
-	float CurrenTime;
-	float StartTime = GetTickCount();
+	// set gamerun with time 1000 / fps (ms)
+	float lasttime = GetTickCount();
+	float current;
 	do
 	{
-		CurrenTime = GetTickCount();
-		CurrenTime = CurrenTime - StartTime + deltaTime;
-	} while (CurrenTime < (float)1000 / FPS);
+		current = GetTickCount();
+	} while (current - lasttime + deltaTime < (float)1000 / FPS);
 
-	
-	if (getKeyState(KeyCode::KEY_LEFT))
-		RectMove.KeyBoard(KeyCode::KEY_LEFT);
-	else if (getKeyState(KeyCode::KEY_RIGHT))
-		RectMove.KeyBoard(KeyCode::KEY_RIGHT);
-	
-	ball.Update();
-
-	for (int i = 0; i < Count; i++)
+	if (state->NextMap())
 	{
-		if (FrameWall[i].IsDraw && ball.IsPact(FrameWall[i]))
+		state = state1;
+	}
+
+	if (ball->UpdateCollisionWindows(SCREEN_WIDTH, SCREEN_HEIGHT) == DIR::ABOVE)
+	{
+		state->setIsActive(false);
+	}
+
+	Space->UpdateCollisionWithWindows(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	for (int i = 0; i < state->getCountFrameWallOnMap(); i++)
+	{
+		Object temp = state->getPosition(i);
+		if (state->isActiveRenderAt(i) && ball->isCollsionObject(temp.X, temp.X + state->getWidth(i), temp.Y, temp.Y + state->getHeight(i)))
 		{
-			FrameWall[i].IsDraw = false;
-			color = rand() % 3 + 1;
+			ball->UpdateVeclocity(temp.X, temp.X + state->getWidth(i), temp.Y, temp.Y + state->getHeight(i));
+			state->deActiveRenderAt(i);
+			break;
 		}
 	}
 
-	ball.IsPact(RectMove);
-
-	switch (color)
+	if (ball->isCollsionObject(Space->getPositionX(), Space->getPositionX() + Space->getWidth(), Space->getPositionY(), Space->getPositionY() + Space->getHeight()))
 	{
-	case 1:
-		color = RED;
-		break;
-	case 2:
-		color = PURPLE;
-		break;
-	case 3:
-		color = YELLOW;
-		break;
+		ball->UpdateVeclocity(Space->getPositionX(), Space->getPositionX() + Space->getWidth(), Space->getPositionY(), Space->getPositionY() + Space->getHeight());
 	}
+
+	if (getKeyState(KEY_LEFT) == KeyState::KEY_PRESSED)
+	{
+		Space->UpdateSpeedKeyBoard(KEY_LEFT);
+	}
+	else if (getKeyState(KEY_RIGHT) == KeyState::KEY_PRESSED)
+	{
+		Space->UpdateSpeedKeyBoard(KEY_RIGHT);
+	}
+
+	ball->Update();
 }
 
 void Game::Render(Graphics* g)
 {
 	g->cleanScreen();
-	g->setColor(color);
+	g->setColor(0x00FF00FF);
 
-	g->drawImage(background, 0, 0);
+	state->Render(g);
 
-	for (int i = 0; i < Count; i++)
-	{
-		if (FrameWall[i].IsDraw == true)
-		{
-			g->drawImage(imgWall,FrameWall[i].m_Left, FrameWall[i].m_Top);
-		}
-	}
+	if (state->isGameOver()) return;
 
-	g->drawRect(RectMove.m_Left, RectMove.m_Top, RectMove.m_Right - RectMove.m_Left, RectMove.m_Bottom - RectMove.m_Top);
+	ball->Render(g);
+	Space->Render(g);
 
-	g->drawImage(img, ball.m_Left, ball.m_Top);
 }
-
 
 void Game::Exit()
 {
-	delete img;
-	delete imgWall;
-	delete background;
+
 }
 
 /////////////////////////////////////
@@ -166,9 +130,8 @@ void Game::Exit()
 /////////////////////////////////////
 void main()
 {
-	srand(time(NULL));
-	SetPositionForWall(FrameWall, Count);	
 	Game g;
 	g.Init(SCREEN_WIDTH, SCREEN_HEIGHT, "Game");
+
 	g.Run();
 }
