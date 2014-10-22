@@ -3,12 +3,9 @@
 #include "STDIO_FW\Video\Graphics.h"
 #include "STDIO_FW\Video\Image.h"
 #include "Game.h"
-#include "Brick.h"
-#include "BrickType1.h"
-#include "BrickType2.h"
 
-#define SRCWidth 800
-#define SRCHeight 600
+#define SrcWidth 800
+#define SrcHeight 600
 
 #define GameOverImg "GameOver.jpg"
 #define BackGround "Background.jpg"
@@ -25,27 +22,25 @@ Game::~Game()
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
-	//Color
-	m_SqrColor = 0x00FF00FF;
-	//Rect
-	R = new Rect;
-	R->InitRect();
-	//Square
-	S = new Square;
-	S->InitSquare();
+	//Turtle
+	Tur = new Turtle;
+	Tur->Init();
+	//Boomerang
+	Bmr = new Boomerang;
+	Bmr->Init();
 	//Image
-	GameOverImage = new Image(GameOverImg);
-	ErrorCode code = GameOverImage->loadImage();
-	Background = new Image(BackGround);
-	Background->loadImage();
+	m_GameOverImage = new Image(GameOverImg);
+	ErrorCode code = m_GameOverImage->loadImage();
+	m_Background = new Image(BackGround);
+	m_Background->loadImage();
 	//Map
-	m_Map = 3;
+	m_Map = 1;
 	//Count alive
-	m_CountAlive = 0;
+	m_CountIsAlive = 0;
 	//File
 	f = fopen("Map.tat", "rb");
 	char* buf = new char[Row * Column];
-	fseek(f, (Row* Column + 2) * (m_Map-1) , SEEK_SET);
+	fseek(f, (Row* Column + 2) * (m_Map - 1), SEEK_SET);
 	fread(buf, 1, Row* Column, f);
 	fclose(f);
 	//Brick
@@ -53,20 +48,12 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 	{
 		for (int j = 0; j < Column; j++)
 		{
-			B[i][j] = NULL;
+			Brk[i][j] = new Brick;
+			Brk[i][j]->SetCounti(i);
+			Brk[i][j]->SetCountj(j);
+			Brk[i][j]->Init();
 			int Number = int(buf[Column * i + j]) - 48;
-			int Type = (BrickType)Number;
-			if (Type == 1)
-			{
-				B[i][j] = new Type1;
-			}
-			else
-			{
-				B[i][j] = new Type2;
-			}
-			B[i][j]->SetCounti(i);
-			B[i][j]->SetCountj(j);
-			B[i][j]->InitBrick();
+			Brk[i][j]->SetIsAlive(Number);
 		}
 	}
 	delete buf;
@@ -93,34 +80,33 @@ void Game::Update(float deltaTime)
 {
 	//Limit FPS
 	LimitFPS(60, deltaTime);
-	//transfer square
-	S->TransferSquare(R);
-	m_CountAlive = 0;
+	//Turtle
+	Tur->GetRect()->TransferOfControlledRect(getKeyState(KEY_LEFT), getKeyState(KEY_RIGHT));
+	//Boomerang
+	Bmr->Tranfer();
+	Bmr->Collide(Tur->GetRect());
+	//Brick
 	for (int i = 0; i < Row; i++)
 	{
 		for (int j = 0; j < Column; j++)
 		{
-			if (B[i][j]->GetLive() != 0)
+			Bmr->Collide(Brk[i][j]->GetRect());
+			if (Bmr->GetRect()->GetIsCollide())
 			{
-				S->ConllideSquare(R, B[i][j]);
+				Brk[i][j]->SetIsAlive(Brk[i][j]->GetIsAlive() - 1);
 			}
-			else
+			if (Brk[i][j]->GetIsAlive() < 0)
 			{
-				m_CountAlive++;
+				m_CountIsAlive++;
 			}
 		}
 	}
-
-	//Press Key
-	if (!S->GetIsConllideRect())
-	{
-		R->TransferRect(getKeyState(KEY_RIGHT), getKeyState(KEY_LEFT));
-	}
-	//Change Map
-	if (m_CountAlive == Row * Column)
+	//Change map
+	if (m_CountIsAlive == Row*Column)
 	{
 		m_Map++;
 	}
+
 }
 
 void Game::Render(Graphics* g)
@@ -131,54 +117,46 @@ void Game::Render(Graphics* g)
 	if (!GameOver)
 	{
 		//Draw background
-		g->drawImage(Background,0,0);
+		g->drawImage(m_Background, 0, 0);
 		//Draw brick
 		for (int i = 0; i < Row; i++)
 		{
 			for (int j = 0; j < Column; j++)
 			{
-				B[i][j]->SetCounti(i);
-				B[i][j]->SetCountj(j);
-				if (B[i][j]->GetLive() != 0)
+				Brk[i][j]->SetCounti(i);
+				Brk[i][j]->SetCountj(j);
+				if (Brk[i][j]->GetIsAlive() != 0)
 				{
-					g->drawImage(B[i][j]->GetImage(), B[i][j]->GetBrickX(), B[i][j]->GetBrickY());
+					g->drawImage(Brk[i][j]->GetImage(), Brk[i][j]->GetRect()->GetX(), Brk[i][j]->GetRect()->GetY());
 				}
 			}
 		}
 
-		//Draw square
-		g->drawImage(S->GetSquareImage(), S->GetSqrX(), S->GetSqrY());
-		//Draw rect
-		g->drawImage(R->GetRectImage(), R->GetRectX(), R->GetRectY());
+		//Draw turtle
+		g->drawImage(Tur->GetImage(), Tur->GetRect()->GetX(), Tur->GetRect()->GetY());
+		//Draw Boomerang
+		g->drawImage(Bmr->GetImage(), Bmr->GetRect()->GetX(), Bmr->GetRect()->GetY());
 
-		if (S->GetSqrY() + SqrWidth >= SRCHeight)
+		if (Bmr->GetRect()->GetY() + SrcWidth >= SrcHeight)
 		{
 			GameOver = true;
 		}
 	}
-	else
-	{
-		g->drawImage(GameOverImage, 0, 0);
-		Counting++;
-		if (Counting == 120)
-		{
+	//else
+	//{
+	//	g->drawImage(m_GameOverImage, 0, 0);
+	//	Counting++;
+	//	if (Counting == 120)
+	//	{
 			GameOver = false;
-			Counting = 0;
-		}
-	}
+	//		Counting = 0;
+	//	}
+	//}
 }
 
 void Game::Exit()
 {
-	for (int i = 0; i < Row; i++)
-	{
-		for (int j = 0; j < Column; j++)
-		{
-			B[i][j]->ReleaseBrick();
-		}
-	}
-	S->ReleaseSquare();
-	R->ReleaseRect();
+
 }
 
 /////////////////////////////////////
@@ -189,7 +167,7 @@ void main()
 {
 	Game g;
 	
-	g.Init(SRCWidth, SRCHeight, "Game");
+	g.Init(SrcWidth, SrcHeight, "Game");
 	g.Run();
 	g.Exit();
 }

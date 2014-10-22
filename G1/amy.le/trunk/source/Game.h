@@ -1,6 +1,6 @@
 #pragma once
-#include "Rect.h"
-#include "Square.h"
+#include "Boomerang.h"
+#include "Turtle.h"
 #include "Brick.h"
 using namespace stdio_fw;
 #define Row 3
@@ -8,15 +8,14 @@ using namespace stdio_fw;
 class Game : public Application
 {
 private:
-	Rect* R;
-	Square* S;
-	Image* GameOverImage;
-	Image* Background;
-	Brick* B[Row][Column];
-	FILE* f ;
+	Boomerang* Bmr;
+	Turtle* Tur;
+	Brick* Brk[Row][Column];
+	Image* m_GameOverImage;
+	Image* m_Background;
 	int m_Map;
-	int m_CountAlive;
-	unsigned int m_SqrColor;
+	int m_CountIsAlive;
+	FILE* f;
 public:
 	Game();
 	virtual ~Game();

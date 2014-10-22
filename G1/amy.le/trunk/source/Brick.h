@@ -1,34 +1,28 @@
-#ifndef __BRICK_H__
-#define __BRICK_H__
-using namespace stdio_fw;
-#define BrickWidth 60
-#define BrickHeight 90
+#pragma once
 
-enum BrickType
-{
-	BrickType1,
-	BrickType2
-};
-
+#include "Rect.h"
+#include "STDIO_FW\Video\Image.h"
 class Brick
 {
-protected:
-	int m_BrickX;
-	int m_BrickY;
-	int m_Counti = 0;
-	int m_Countj = 0;
-	int m_Live;
+private:
+	int m_IsAlive;
+	Rect* m_Rect;
+	Image* m_Image1;
+	Image* m_Image2;
+	Image* m_Image3;
+	int m_Counti;
+	int m_Countj;
 public:
 	Brick();
+	void Init();
+	Rect* GetRect();
+	Image* GetImage();
+	void SetCounti(int i);
+	void SetCountj(int j);
+	void Conllide(Rect* R);
+	int GetIsAlive();
+	void SetIsAlive(int IsAlive);
+	void Release();
 	~Brick();
-	virtual void InitBrick() = 0;
-	virtual int GetBrickX() = 0;
-	virtual int GetBrickY() = 0;
-	virtual int GetLive() = 0;
-	virtual void SetLive() = 0;
-	virtual void SetCounti(int i) = 0;
-	virtual void SetCountj(int j) = 0;
-	virtual Image* GetImage() = 0;
-	virtual void ReleaseBrick() = 0;
 };
-#endif
+
