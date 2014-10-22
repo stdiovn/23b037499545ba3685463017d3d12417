@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C403DB3D-1F00-4F8F-B903-E9E587981102}</ProjectGuid>
     <RootNamespace>Game</RootNamespace>
+    <ProjectName>Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -69,21 +70,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\Boomerang.h" />
     <ClInclude Include="..\source\Brick.h" />
-    <ClInclude Include="..\source\BrickType1.h" />
-    <ClInclude Include="..\source\BrickType2.h" />
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\Rect.h" />
-    <ClInclude Include="..\source\Square.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\Turtle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\Boomerang.cpp" />
     <ClCompile Include="..\source\Brick.cpp" />
-    <ClCompile Include="..\source\BrickType1.cpp" />
-    <ClCompile Include="..\source\BrickType2.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\Rect.cpp" />
-    <ClCompile Include="..\source\Square.cpp" />
+    <ClCompile Include="..\source\Turtle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

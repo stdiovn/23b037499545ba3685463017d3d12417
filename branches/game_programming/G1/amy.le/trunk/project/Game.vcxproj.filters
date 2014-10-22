@@ -1,20 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Square.h" />
-    <ClInclude Include="..\source\Rect.h" />
-    <ClInclude Include="..\source\Brick.h" />
-    <ClInclude Include="..\source\BrickType1.h" />
-    <ClInclude Include="..\source\BrickType2.h" />
+    <ClInclude Include="..\source\Rect.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Game.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Boomerang.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Turtle.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Brick.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\Square.cpp" />
-    <ClCompile Include="..\source\Rect.cpp" />
-    <ClCompile Include="..\source\Brick.cpp" />
-    <ClCompile Include="..\source\BrickType2.cpp" />
-    <ClCompile Include="..\source\BrickType1.cpp" />
+    <Filter Include="Header">
+      <UniqueIdentifier>{12991058-2ae5-4368-9a35-addd1c2feb03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{d8afd19b-e6d1-48cf-8552-e664112dca9a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\Rect.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Game.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Boomerang.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Turtle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Brick.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
