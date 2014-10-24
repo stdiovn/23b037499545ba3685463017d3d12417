@@ -9,6 +9,7 @@ class Turtle
 public:
 	Turtle();
 	void Init();
+	void Collide(Rect* R);
 	Rect* GetRect();
 	Image* GetImage();
 	void Release();
