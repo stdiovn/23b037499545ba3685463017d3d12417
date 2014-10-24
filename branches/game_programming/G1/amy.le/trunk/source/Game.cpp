@@ -118,6 +118,9 @@ void Game::Render(Graphics* g)
 	{
 		//Draw background
 		g->drawImage(m_Background, 0, 0);
+		//Draw Boomerang
+		g->drawImage(Bmr->GetImage(), Bmr->GetRect()->GetX(), Bmr->GetRect()->GetY());
+
 		//Draw brick
 		for (int i = 0; i < Row; i++)
 		{
@@ -134,8 +137,7 @@ void Game::Render(Graphics* g)
 
 		//Draw turtle
 		g->drawImage(Tur->GetImage(), Tur->GetRect()->GetX(), Tur->GetRect()->GetY());
-		//Draw Boomerang
-		g->drawImage(Bmr->GetImage(), Bmr->GetRect()->GetX(), Bmr->GetRect()->GetY());
+		
 
 		if (Bmr->GetRect()->GetY() + SrcWidth >= SrcHeight)
 		{

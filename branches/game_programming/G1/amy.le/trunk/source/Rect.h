@@ -22,6 +22,8 @@ public:
 	void SetY(int y);
 	int GetSpeedX();
 	int GetSpeedY();
+	int GetWidth();
+	int GetHeight();
 	int GetIsCollide();
 	void SetSpeedX(int speedx);
 	void SetSpeedY(int speedy);
