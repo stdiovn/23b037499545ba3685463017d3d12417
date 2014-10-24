@@ -75,7 +75,7 @@ void Rect::TransferOfAutoRect()
 
 	if ((m_X >= SrcWidth - m_Width) || (m_X <= 0))
 	{
-		m_SpeedX = -m_SpeedX;
+
 		if (m_SpeedX > 0)
 		{
 			m_X = SrcWidth - m_Width;
@@ -84,11 +84,13 @@ void Rect::TransferOfAutoRect()
 		{
 			m_X = 0;
 		}
+
+		m_SpeedX = -m_SpeedX;
 	}
 	
 	if ((m_Y >= SrcHeight - m_Height) || (m_Y <= 0) )
 	{
-		m_SpeedY = -m_SpeedY;
+
 		if (m_SpeedY > 0)
 		{
 			m_Y = SrcHeight - m_Height;
@@ -97,6 +99,7 @@ void Rect::TransferOfAutoRect()
 		{
 			m_Y = 0;
 		}
+		m_SpeedY = -m_SpeedY;
 	}
 }
 
@@ -125,31 +128,25 @@ void Rect::CollideWithRect(Rect* R)
 			if (m_SpeedY > 0)
 			{
 				m_Y = R->GetY() - m_Height;
+				m_SpeedY = -m_SpeedY;
 			}
 			else
 			{
 				m_Y = R->GetY() + R->GetHeight() - m_Height;
+				m_SpeedY = -m_SpeedY;
 			}
-			m_SpeedY = -m_SpeedY;
-			m_IsCollideRect = true;
-		}
-	}
-
-	if ((m_Y + m_Height >= R->GetY()) && (m_Y + m_Height <= R->GetY() + R->GetHeight()))
-	{
-		if ((m_X + m_Width >= R->GetX()) && (m_X + m_Width <= R->GetX() + R->GetWidth()))
-		{
 			if (m_SpeedX > 0)
 			{
 				m_X = R->GetX() - m_Width;
+				m_SpeedX = -m_SpeedX;
 			}
 			else
 			{
 				m_X = R->GetX() + R->GetWidth() - m_Width;
+				m_SpeedX = -m_SpeedX;
 			}
-			m_SpeedX = -m_SpeedX;
 			m_IsCollideRect = true;
-		}	
+		}
 	}
 }
 

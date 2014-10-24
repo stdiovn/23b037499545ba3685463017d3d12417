@@ -139,7 +139,7 @@ void Game::Render(Graphics* g)
 		g->drawImage(Tur->GetImage(), Tur->GetRect()->GetX(), Tur->GetRect()->GetY());
 		
 
-		if (Bmr->GetRect()->GetY() + SrcWidth >= SrcHeight)
+		if (Bmr->GetRect()->GetY() + Bmr->GetRect()->GetHeight() >= SrcHeight)
 		{
 			GameOver = true;
 		}
