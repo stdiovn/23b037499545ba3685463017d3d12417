@@ -3,72 +3,8 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Entity.h" />
-    <ClInclude Include="..\source\Wall_1.h">
-      <Filter>Wall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Wall_2.h">
-      <Filter>Wall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Ball.h">
-      <Filter>Ball</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\MapObject.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Map1.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Map2.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\ThanhMove.h">
-      <Filter>ThanhMove</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Object.h">
-      <Filter>Map</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\Entity.cpp" />
-    <ClCompile Include="..\source\Wall_1.cpp">
-      <Filter>Wall</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Wall_2.cpp">
-      <Filter>Wall</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Ball.cpp">
-      <Filter>Ball</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\MapObject.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Map1.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Map2.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\ThanhMove.cpp">
-      <Filter>ThanhMove</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Object.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Wall">
-      <UniqueIdentifier>{2a39955e-a047-40c7-9dd8-c58bebf77ce2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Ball">
-      <UniqueIdentifier>{9011ff6c-c898-4d8a-b52d-1d03eec7e7a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{10d0b338-73a4-4baa-a6aa-475034b2859b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThanhMove">
-      <UniqueIdentifier>{8afb9305-2ecd-45ef-ba94-9ff4270de602}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
 </Project>
