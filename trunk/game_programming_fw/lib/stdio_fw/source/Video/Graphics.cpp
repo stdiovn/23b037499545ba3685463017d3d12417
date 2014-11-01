@@ -94,7 +94,24 @@ namespace stdio_fw
 
 	void Graphics::drawImage(Image* img, int x, int y)
 	{
-		draw(x, y, img->getWidth(), img->getHeight(), img->m_texID);
+		draw(x, y, img->getWidth(), img->getHeight(), nullptr, img->m_texID);
+	}
+
+	void Graphics::drawRegion(Image* img, int x, int y, int src_x, int src_y, int src_w, int src_h)
+	{
+		float w = img->getWidth();
+		float t = X2UVGL(src_x + src_w, img->getWidth());
+		float v = Y2UVGL(src_y, img->getHeight());
+		float uv[]
+		{
+			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
+			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
+			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight())
+		};
+		draw(x, y, src_w, src_h, uv, img->m_texID);
 	}
 
 	void Graphics::drawLine(float x1, float y1, float x2, float y2)
@@ -124,7 +141,7 @@ namespace stdio_fw
 		glDrawArrays(GL_LINES, 0, 2);
 	}
 
-	void Graphics::draw(int x, int y, int width, int height, unsigned int texture_id)
+	void Graphics::draw(int x, int y, int width, int height, float *uv, unsigned int texture_id)
 	{
 		//enable blend
 		glEnable(GL_BLEND);
@@ -165,7 +182,7 @@ namespace stdio_fw
 		GLint uvLoc = m_cachedLocs[CACHED_LOC::ATRIB_TEXCOORD];
 		if (uvLoc != -1)
 		{
-			float uv[] = {
+			float default_uv[] = {
 				0.0f, 1.0f,
 				0.0f, 0.0f,
 				1.0f, 0.0f,
@@ -173,6 +190,9 @@ namespace stdio_fw
 				1.0f, 0.0f,
 				1.0f, 1.0f
 			};
+			if (uv == nullptr)
+				uv = default_uv;
+
 			glVertexAttribPointer(uvLoc, 2, GL_FLOAT, GL_FALSE, 0, uv);
 			glEnableVertexAttribArray(uvLoc);
 		}
