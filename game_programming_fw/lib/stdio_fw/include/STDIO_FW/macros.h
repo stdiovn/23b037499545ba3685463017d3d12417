@@ -5,6 +5,9 @@
 #define XSCREEN2GL(x, width)			((1.0f*x - (width >> 1))/(width >> 1))
 #define YSCREEN2GL(y, height)			(-1.0f*(1.0f*y - (height >> 1))/(height >> 1))
 
+#define X2UVGL(x, width)				((x)/(width*1.0f))
+#define Y2UVGL(y, height)				((y)/(height*1.0f))
+
 // Safe delete
 #define SAFE_DEL(x)					\
 {									\

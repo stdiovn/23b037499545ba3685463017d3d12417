@@ -39,6 +39,7 @@ namespace stdio_fw
 		void				drawLine(float x1, float y1, float x2, float y2);
 
 		void				drawImage(Image* img, int x, int y);
+		void				drawRegion(Image* img, int x, int y, int src_x, int src_y, int src_w, int src_h);
 
 		// Set color function: 0xRRGGBBAA
 		void				setColor(unsigned int color);
@@ -47,6 +48,6 @@ namespace stdio_fw
 		void				cleanScreen();	
 
 	private:
-		void				draw(int x, int y, int width, int height, unsigned int texture_id = 0);
+		void				draw(int x, int y, int width, int height, float *uv = nullptr, unsigned int texture_id = 0);
 	};
 }
