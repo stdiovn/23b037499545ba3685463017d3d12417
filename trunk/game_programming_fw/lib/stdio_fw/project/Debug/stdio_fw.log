@@ -1,0 +1,20 @@
+﻿Build started 7/11/2014 10:17:30 PM.
+     1>Project "E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\stdio_fw.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\..\include\STDIO_FW\\" /I"E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\..\..\glew\include\\" /I"E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\..\..\glfw3\include\\" /I"E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\..\..\vld\include\\" /I"E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\..\..\FreeImage\\" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\source\Core\Application.cpp ..\source\Video\Graphics.cpp ..\source\Video\Image.cpp
+         Image.cpp
+         Graphics.cpp
+     1>e:\stdio\graphic_and_game_training\rye's game\trunk\lib\stdio_fw\source\video\graphics.cpp(102): warning C4244: 'initializing' : conversion from 'unsigned int' to 'float', possible loss of data
+         Application.cpp
+         Generating Code...
+     1>e:\stdio\graphic_and_game_training\rye's game\trunk\lib\stdio_fw\source\video\image.cpp(49): warning C4715: 'stdio_fw::Image::loadImage' : not all control paths return a value
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\..\stdio_fw.lib" /NOLOGO Debug\Application.obj
+         Debug\Graphics.obj
+         Debug\Image.obj
+         stdio_fw.vcxproj -> E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\..\stdio_fw.lib
+     1>Done Building Project "E:\Stdio\Graphic_and_Game_Training\Rye's Game\trunk\lib\stdio_fw\project\stdio_fw.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.03

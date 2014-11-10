@@ -2,59 +2,66 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\config.h" />
-    <ClInclude Include="..\source\support.h" />
-    <ClInclude Include="..\source\Bar.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Object.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\Game.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Brick.h">
-      <Filter>Object</Filter>
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\config.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Factory.h">
+      <Filter>Factory</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Ball.h">
-      <Filter>Object</Filter>
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Entity.h">
+      <Filter>EntityManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Map.h">
-      <Filter>Maps</Filter>
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\support.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.h">
+      <Filter>ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.h">
+      <Filter>EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Component.h">
+      <Filter>ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Map.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Bar.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Brick.cpp">
-      <Filter>Object</Filter>
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Factory.cpp">
+      <Filter>Factory</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Ball.cpp">
-      <Filter>Object</Filter>
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.cpp">
+      <Filter>ComponentSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Map.cpp">
-      <Filter>Maps</Filter>
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.cpp">
+      <Filter>EntityManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\support.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Entity.cpp">
+      <Filter>EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\TileMap.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Object">
-      <UniqueIdentifier>{072d0c93-e2d4-4115-9a49-f46cb232c182}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{ae839592-1b47-472e-8322-444185d772f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Maps">
-      <UniqueIdentifier>{cd526bb6-4bf5-4faf-80ad-4f2c5254fad8}</UniqueIdentifier>
+    <Filter Include="Factory">
+      <UniqueIdentifier>{20e17241-2338-4cd8-89ad-e964b9f8f680}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\source\Map.txt">
-      <Filter>Maps</Filter>
-    </Text>
+    <Filter Include="EntityManager">
+      <UniqueIdentifier>{a481c9df-ad3b-4d00-8b5d-7ee7f1444d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComponentSystem">
+      <UniqueIdentifier>{e1f852e5-e03f-4080-bd6c-cf7f50ff62a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{a709bc8f-b239-4467-ab68-3eda211658a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
