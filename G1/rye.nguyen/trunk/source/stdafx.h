@@ -20,3 +20,6 @@
 #ifdef USE_VLD
 #pragma comment(lib, "vld.lib")
 #endif
+
+#include "config.h"
+#include "support.h"

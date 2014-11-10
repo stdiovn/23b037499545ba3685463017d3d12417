@@ -69,26 +69,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\Bar.h" />
-    <ClInclude Include="..\source\Brick.h" />
-    <ClInclude Include="..\source\config.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Component.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\config.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Entity.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Factory.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Map.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.h" />
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\support.h" />
     <ClInclude Include="..\source\Game.h" />
-    <ClInclude Include="..\source\Map.h" />
-    <ClInclude Include="..\source\Object.h" />
-    <ClInclude Include="..\source\Ball.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\support.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Bar.cpp" />
-    <ClCompile Include="..\source\Brick.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Entity.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Factory.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Map.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.cpp" />
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\TileMap.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\Ball.cpp" />
-    <ClCompile Include="..\source\Map.cpp" />
-    <ClCompile Include="..\source\support.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\source\Map.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

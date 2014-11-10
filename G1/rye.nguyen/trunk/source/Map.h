@@ -1,40 +1,28 @@
-#ifndef __MAP_H__
-#define __MAP_H__
+#pragma once
 
-#include "support.h"
-
+#include "STDIO_FW\Video\Graphics.h"
+#include "STDIO_FW\Video\Image.h"
 using namespace stdio_fw;
 
 class Map
 {
 private:
-	char**			m_image_path;
+	int**	m_map;
+	int		m_width;
+	int		m_height;
 
-	Vector2D		m_ball_veloc;
-	int				m_bar_veloc;
-	
-	int				m_brick_quantity;
-	int				m_super_brick_quantity;
-	Vector2D*		m_bricks_position;
+	Image*	m_tile_map;
+	int		m_tile_width;
+	int		m_tile_height;
 public:
 	Map();
 	~Map();
 
-	void			Release();
-	ErrorCode		ReadMap(char* path);
+	void	Init();
+	void	Release();
 
-	char**			GetImagesPath();
-	Vector2D		GetBallVeloc();
-	int				GetBarVeloc();
-	int				GetBrickQuantity();
-	int				GetSuperBrickQuantity();
-	Vector2D*		GetBricksPosition();
+	void	LoadMap(int level);
+	void	ReleaseCurrentMap();
 
-	void			SetImagesPath		(char* map, int &current_position);
-	void			SetBallVeloc		(char* map, int &current_position);
-	void			SetBarVeloc			(char* map, int &current_position);
-	void			SetBrickQuantity	(char* map, int &current_position);
-	void			SetBricksPosition	(char* map, int &current_position);
+	void	Render(Graphics* g, int offset, int offset_position);
 };
-
-#endif

@@ -1,33 +1,18 @@
 #pragma once
 
-#include "Ball.h"
-#include "Bar.h"
-#include "Brick.h"
-
-#include "support.h"
-
+#include "STDIO_FW\Core\Application.h"
+#include "STDIO_FW\Video\Graphics.h"
+#include "STDIO_FW\Video\Image.h"
 using namespace stdio_fw;
+
+#include "Map.h"
 
 class Game : public Application
 {
 private:
-	Ball*				m_ball;
-	Bar*				m_bar;
-
-	Brick**				m_brick;
-	int					m_brick_quantity;
-	int					m_super_brick_quantity;
-	int					m_brick_active_left;
-
-	Image*				m_background;
-	Image*				m_game_over;
-	Image*				m_win;
-
-	bool				m_is_game_over;
-	bool				m_is_win;
-	int					m_lives;
-	bool				m_is_active;
-	int					m_level;
+	Map*				m_map;
+	int					m_offset_position;
+	int					m_map_offset;
 public:
 	Game();
 	virtual				~Game();
@@ -37,10 +22,4 @@ public:
 
 	virtual void		Render(Graphics* g);
 	virtual void		Exit();
-	void				ReleaseCurrentLevel();
-
-	virtual bool		IsExit();
-	void				Reset();
-	void				CreateMap(char* path);
-	char*				GetPath();
 };
