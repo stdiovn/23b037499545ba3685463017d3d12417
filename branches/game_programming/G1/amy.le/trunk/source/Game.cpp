@@ -100,6 +100,14 @@ void Game::Update(float deltaTime)
 				{
 					m_CurMap[i][j] = m_Map[i--][j];
 				}
+				else
+				{
+					break;
+				}
+			}
+			if (i == 0)
+			{
+				break;
 			}
 		}
 	}
@@ -120,12 +128,22 @@ void Game::Update(float deltaTime)
 	{
 		for (int i = 0; i < MapHeight; i++)
 		{
+			bool Check = true;
 			for (int j = 0; j < SrcWidth / 20; j++)
 			{
 				if (j != 0)
 				{
 					m_CurMap[i][j] = m_Map[i][j--];
 				}
+				else
+				{
+					Check = false;
+					break;
+				}
+			}
+			if (Check == false)
+			{
+				break;
 			}
 		}
 	}
