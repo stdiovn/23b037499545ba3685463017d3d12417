@@ -2,19 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Rect.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\Game.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Boomerang.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Turtle.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Brick.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -27,19 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Rect.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\Game.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Boomerang.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Turtle.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Brick.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
