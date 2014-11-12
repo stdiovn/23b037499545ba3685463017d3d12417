@@ -10,8 +10,7 @@
 #define MapHeight 16
 #define TiledWidth 12
 #define TiledHeight 17
-#define GameOverImg "GameOver.jpg"
-#define BackGround "Background.jpg"
+#define TiledImage "tileset.png"
 Game::Game()
 {
 
@@ -56,7 +55,9 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 		}
 		buf += 2;
 	}
-
+	//Image
+	m_Image = new Image(TiledImage);
+	m_Image->loadImage();
 	return errCode;
 }
 
@@ -79,11 +80,11 @@ void Game::Update(float deltaTime)
 void Game::Render(Graphics* g)
 {
 	g->cleanScreen();
-	for (int i = 0; i < MapWidth; i++)
+	for (int i = 0; i < MapHeight; i++)
 	{
-		for (int j = 0; j < MapHeight; j++)
+		for (int j = 0; j < MapWidth; j++)
 		{
-		
+			g->drawRegion(m_Image, 20 * i +50, j * 20 + 50, (m_Map[i][j] - 1) / TiledWidth, (m_Map[i][j] - 1) % TiledWidth, 20, 20);
 		}
 	}
 }

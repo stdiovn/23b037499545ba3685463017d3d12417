@@ -6,6 +6,7 @@ class Game : public Application
 private:
 	FILE* f;
 	int** m_Map;
+	Image* m_Image;
 public:
 	Game();
 	virtual ~Game();
