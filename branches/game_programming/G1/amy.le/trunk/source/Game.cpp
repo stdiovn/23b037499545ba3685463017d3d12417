@@ -6,7 +6,10 @@
 
 #define SrcWidth 800
 #define SrcHeight 600
-
+#define MapWidth 100
+#define MapHeight 16
+#define TiledWidth 12
+#define TiledHeight 17
 #define GameOverImg "GameOver.jpg"
 #define BackGround "Background.jpg"
 Game::Game()
@@ -22,42 +25,38 @@ Game::~Game()
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
-	//Turtle
-	Tur = new Turtle;
-	Tur->Init();
-	//Boomerang
-	Bmr = new Boomerang;
-	Bmr->Init();
-	//Image
-	m_GameOverImage = new Image(GameOverImg);
-	ErrorCode code = m_GameOverImage->loadImage();
-	m_Background = new Image(BackGround);
-	m_Background->loadImage();
-	//Map
-	m_Map = 1;
-	//Count alive
-	m_CountIsAlive = 0;
 	//File
-	f = fopen("Map.tat", "rb");
-	char* buf = new char[Row * Column];
-	fseek(f, (Row* Column + 2) * (m_Map - 1), SEEK_SET);
-	fread(buf, 1, Row* Column, f);
+	f = fopen("Map.txt", "rb");
+	fseek(f, 0, SEEK_END);
+	int m_size = ftell(f);
+	fseek(f, 0, SEEK_SET);
+
+	char* buf = new char[m_size];
+	fread(buf, 1, m_size, f);
 	fclose(f);
-	//Brick
-	for (int i = 0; i < Row; i++)
+
+	m_Map = new int*[MapHeight];
+	for (int i = 0; i < MapHeight; i++)
 	{
-		for (int j = 0; j < Column; j++)
-		{
-			Brk[i][j] = new Brick;
-			Brk[i][j]->SetCounti(i);
-			Brk[i][j]->SetCountj(j);
-			Brk[i][j]->Init();
-			int Number = int(buf[Column * i + j]) - 48;
-			Brk[i][j]->SetIsAlive(Number);
-		}
+		m_Map[i] = new int[MapWidth];
 	}
-	delete buf;
-	buf = NULL;
+
+	for (int i = 0; i < MapHeight; i++)
+	{
+		for (int j = 0; j < MapWidth; j++)
+		{
+			m_Map[i][j] = 0;
+			while (*buf != ',')
+			{
+				m_Map[i][j] *= 10;
+				m_Map[i][j] += *buf - 48;
+				buf++;
+			}
+			buf++;
+		}
+		buf += 2;
+	}
+
 	return errCode;
 }
 
@@ -71,89 +70,22 @@ void Game::LimitFPS(int LimitFPS, float DeltaTime)
 	}
 }
 
-unsigned int Game::ColorRandom(int Red, int Green, int Blue, int Alpha)
-{
-	return ((Red << 24) | (Green << 16) | (Blue << 8) | Alpha);
-}
-
 void Game::Update(float deltaTime)
 {
 	//Limit FPS
 	LimitFPS(60, deltaTime);
-	//Turtle
-	Tur->GetRect()->TransferOfControlledRect(getKeyState(KEY_LEFT), getKeyState(KEY_RIGHT));
-	//Boomerang
-	Bmr->Tranfer();
-	Bmr->Collide(Tur->GetRect());
-	//Brick
-	for (int i = 0; i < Row; i++)
-	{
-		for (int j = 0; j < Column; j++)
-		{
-			Bmr->Collide(Brk[i][j]->GetRect());
-			if (Bmr->GetRect()->GetIsCollide())
-			{
-				Brk[i][j]->SetIsAlive(Brk[i][j]->GetIsAlive() - 1);
-			}
-			if (Brk[i][j]->GetIsAlive() < 0)
-			{
-				m_CountIsAlive++;
-			}
-		}
-	}
-	//Change map
-	if (m_CountIsAlive == Row*Column)
-	{
-		m_Map++;
-	}
-
 }
 
 void Game::Render(Graphics* g)
 {
 	g->cleanScreen();
-	static bool GameOver = false;
-	static int Counting = 0;
-	if (!GameOver)
+	for (int i = 0; i < MapWidth; i++)
 	{
-		//Draw background
-		g->drawImage(m_Background, 0, 0);
-		//Draw Boomerang
-		g->drawImage(Bmr->GetImage(), Bmr->GetRect()->GetX(), Bmr->GetRect()->GetY());
-
-		//Draw brick
-		for (int i = 0; i < Row; i++)
+		for (int j = 0; j < MapHeight; j++)
 		{
-			for (int j = 0; j < Column; j++)
-			{
-				Brk[i][j]->SetCounti(i);
-				Brk[i][j]->SetCountj(j);
-				if (Brk[i][j]->GetIsAlive() != 0)
-				{
-					g->drawImage(Brk[i][j]->GetImage(), Brk[i][j]->GetRect()->GetX(), Brk[i][j]->GetRect()->GetY());
-				}
-			}
-		}
-
-		//Draw turtle
-		g->drawImage(Tur->GetImage(), Tur->GetRect()->GetX(), Tur->GetRect()->GetY());
 		
-
-		if (Bmr->GetRect()->GetY() + Bmr->GetRect()->GetHeight() >= SrcHeight)
-		{
-			GameOver = true;
 		}
 	}
-	//else
-	//{
-	//	g->drawImage(m_GameOverImage, 0, 0);
-	//	Counting++;
-	//	if (Counting == 120)
-	//	{
-			GameOver = false;
-	//		Counting = 0;
-	//	}
-	//}
 }
 
 void Game::Exit()
