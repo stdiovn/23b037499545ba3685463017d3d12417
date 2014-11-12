@@ -7,7 +7,8 @@ private:
 	FILE* f;
 	int** m_Map;
 	Image* m_Image;
-	int** m_CurMap;
+	int m_Curi;
+	int m_Curj;
 public:
 	Game();
 	virtual ~Game();

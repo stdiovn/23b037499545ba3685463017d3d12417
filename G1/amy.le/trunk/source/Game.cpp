@@ -56,19 +56,7 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 		}
 		buf += 2;
 	}
-	//Current Map
-	m_CurMap = new int*[MapHeight];
-	for (int i = 0; i < MapHeight; i++)
-	{
-		m_CurMap[i] = new int[SrcWidth / 20];
-	}
-	for (int i = 0; i < MapHeight; i++)
-	{
-		for (int j = 0; j < SrcWidth / 20; j++)
-		{
-			m_CurMap[i][j] = m_Map[i][j];
-		}
-	}
+	m_Curi = m_Curj = 0;
 	//Image
 	m_Image = new Image(TiledImage);
 	m_Image->loadImage();
@@ -90,74 +78,26 @@ void Game::Update(float deltaTime)
 	//Limit FPS
 	LimitFPS(60, deltaTime);
 	//Update Map
-	if (getKeyState(KeyCode::KEY_LEFT))
+	//if (getKeyState(KEY_UP))
+	//{
+	//	m_Curi--;
+	//}
+	//if (getKeyState(KEY_DOWN))
+	//{
+	//	m_Curi++;
+	//}
+	if (getKeyState(KEY_LEFT))
 	{
-		for (int i = 0; i < MapHeight; i++)
+		if (m_Curj != 0)
 		{
-			for (int j = 0; j < SrcWidth / 20; j++)
-			{
-				if (i != 0)
-				{
-					m_CurMap[i][j] = m_Map[i--][j];
-				}
-				else
-				{
-					break;
-				}
-			}
-			if (i == 0)
-			{
-				break;
-			}
+			m_Curj--;
 		}
 	}
-	if (getKeyState(KeyCode::KEY_RIGHT))
+	if (getKeyState(KEY_RIGHT))
 	{
-		for (int i = 0; i < MapHeight; i++)
+		if (m_Curj != (MapWidth -1) )
 		{
-			for (int j = 0; j < SrcWidth / 20; j++)
-			{
-				if (i != MapHeight - 1)
-				{
-					m_CurMap[i][j] = m_Map[i++][j];
-				}
-			}
-		}
-	}
-	if (getKeyState(KeyCode::KEY_UP))
-	{
-		for (int i = 0; i < MapHeight; i++)
-		{
-			bool Check = true;
-			for (int j = 0; j < SrcWidth / 20; j++)
-			{
-				if (j != 0)
-				{
-					m_CurMap[i][j] = m_Map[i][j--];
-				}
-				else
-				{
-					Check = false;
-					break;
-				}
-			}
-			if (Check == false)
-			{
-				break;
-			}
-		}
-	}
-	if (getKeyState(KeyCode::KEY_DOWN))
-	{
-		for (int i = 0; i < MapHeight; i++)
-		{
-			for (int j = 0; j < SrcWidth / 20; j++)
-			{
-				if (j != SrcWidth / 20 - 1)
-				{
-					m_CurMap[i][j] = m_Map[i][j++];
-				}
-			}
+			m_Curj++;
 		}
 	}
 }
@@ -169,7 +109,7 @@ void Game::Render(Graphics* g)
 	{
 		for (int j = 0; j < MapWidth; j++)
 		{
-			g->drawRegion(m_Image, 20 * i +50, j * 20 + 50, (m_CurMap[i][j] - 1) / TiledWidth, (m_CurMap[i][j] - 1) % TiledWidth, 20, 20);
+			g->drawRegion(m_Image, 20 * j, i * 20 + 150, ((m_Map[i + m_Curi][j + m_Curj] - 1) % TiledWidth) * 20, ((m_Map[i + m_Curi][j + m_Curj] - 1) / TiledWidth) * 20, 20, 20);
 		}
 	}
 }
