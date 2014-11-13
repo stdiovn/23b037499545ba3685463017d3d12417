@@ -141,14 +141,17 @@ void Map::Render(Graphics* g, int offset, int offset_position)
 	{
 		for(int y = 0; y < m_height; y++)
 		{
-			g->drawRegion	(m_tile_map, 
-							offset_position + x * DEFAULT_TILE_WIDTH * m_scale, 
-							50 + y * DEFAULT_TILE_HEIGHT * m_scale,
-							((m_map[y][x + offset] - 1) % m_tile_map_width) * DEFAULT_TILE_WIDTH * m_scale,
-							((m_map[y][x + offset] - 1) / m_tile_map_width) * DEFAULT_TILE_HEIGHT * m_scale,
-							DEFAULT_TILE_WIDTH * m_scale, DEFAULT_TILE_HEIGHT * m_scale);
+			if(m_map[y][x + offset] != 0)
+			{
+				g->drawRegion	(m_tile_map,
+								offset_position + x * DEFAULT_TILE_WIDTH * m_scale,
+								50 + y * DEFAULT_TILE_HEIGHT * m_scale,
+								((m_map[y][x + offset] - 1) % m_tile_map_width) * DEFAULT_TILE_WIDTH * m_scale,
+								((m_map[y][x + offset] - 1) / m_tile_map_width) * DEFAULT_TILE_HEIGHT * m_scale,
+								DEFAULT_TILE_WIDTH * m_scale, DEFAULT_TILE_HEIGHT * m_scale);
+			}
 
-			if(offset > 0)
+			if(offset > 0 && m_map[y][offset - 1] != 0)
 				g->drawRegion	(m_tile_map, 
 								offset_position - DEFAULT_TILE_WIDTH * m_scale, 
 								50 + y * DEFAULT_TILE_HEIGHT * m_scale,
