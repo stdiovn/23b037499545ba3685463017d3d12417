@@ -95,7 +95,7 @@ void Game::Update(float deltaTime)
 	}
 	if (getKeyState(KEY_RIGHT))
 	{
-		if (m_Curj != (MapWidth -1) )
+		if (m_Curj != (MapWidth - 1 - SrcWidth / 20))
 		{
 			m_Curj++;
 		}
@@ -116,7 +116,6 @@ void Game::Render(Graphics* g)
 
 void Game::Exit()
 {
-
 }
 
 /////////////////////////////////////
