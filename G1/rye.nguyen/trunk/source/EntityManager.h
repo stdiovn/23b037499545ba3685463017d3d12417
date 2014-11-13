@@ -17,6 +17,9 @@ public:
 
 	static EntityManager*	GetInstance();
 
+	virtual void			Init();
+	virtual void			Release();
+
 	EntityList*				GetEntityList();
 
 	void					AddEntity(Entity* entity);

@@ -69,3 +69,11 @@ enum ComponentType
 	COM_ANIMATION,
 	COM_COUNT
 };
+
+enum AnimationType
+{
+	ANM_UNKNOWN = -1,
+	ANM_FRAME_IN_SEPARATE_FILE,
+	ANM_FRAME_IN_SPRTESHET,
+	ANM_COUNT
+};

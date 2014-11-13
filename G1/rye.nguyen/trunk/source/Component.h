@@ -8,6 +8,9 @@ using namespace stdio_fw;
 struct Component
 {
 	ComponentType	m_type;
+
+	Component(){}
+	virtual ~Component(){}
 };
 
 struct Transform : public Component
@@ -20,7 +23,10 @@ struct Transform : public Component
 		m_position = new Vector2D(_x, _y);
 		m_scale = _scale;
 	}
-	~Transform(){}
+	~Transform()
+	{
+		SAFE_DEL(m_position);
+	}
 };
 
 
@@ -39,7 +45,10 @@ struct Movement : public Component
 
 		m_type = MoveType::MOVE_NORMAL;
 	}
-	~Movement(){}
+	~Movement()
+	{
+		SAFE_DEL(m_veloc);
+	}
 };
 
 
@@ -52,7 +61,11 @@ struct Renderer : public Component
 	{
 		m_image = image;
 	}
-	~Renderer(){}
+	~Renderer()
+	{
+		m_image->unloadImage();
+		SAFE_DEL(m_image);
+	}
 };
 
 
@@ -67,5 +80,15 @@ struct Animation : public Component
 		m_image_list = _image_list;
 		m_current_frame = m_image_list->begin();
 	}
-	~Animation(){}
+	~Animation()
+	{
+		while(!m_image_list->empty())
+		{
+			m_image_list->back()->unloadImage();
+			SAFE_DEL(m_image_list->back());
+			m_image_list->pop_back();
+		}
+
+		SAFE_DEL(m_image_list);
+	}
 };
