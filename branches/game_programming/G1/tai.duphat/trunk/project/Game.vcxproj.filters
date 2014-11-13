@@ -28,6 +28,21 @@
     <ClInclude Include="..\source\Ball.h">
       <Filter>Ball</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\AbstractState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Main.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\StateManager.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\GamePlay.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\TileMap.h">
+      <Filter>TileMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
@@ -56,6 +71,21 @@
     <ClCompile Include="..\source\Ball.cpp">
       <Filter>Ball</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\AbstractState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Main.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\StateManager.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\GamePlay.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\TileMap.cpp">
+      <Filter>TileMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BackGround">
@@ -69,6 +99,12 @@
     </Filter>
     <Filter Include="Ball">
       <UniqueIdentifier>{b01ac00e-ad23-4963-b5eb-47a9b2f1ac99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{0c2ec9c2-077a-4e23-9db9-6aebe63e9fbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TileMap">
+      <UniqueIdentifier>{ddddc775-959b-42c5-84e4-e244f0b014a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

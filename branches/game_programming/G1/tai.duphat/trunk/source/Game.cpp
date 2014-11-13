@@ -14,7 +14,9 @@
 
 #define MapFile2 "Data//Map_2.txt"
 #define MapFile "Data//Map_1.txt"
-
+#include "StateManager.h"
+#include "TileMap.h"
+StateManager *m_State;
 
 MapObject *state = NULL;
 
@@ -23,6 +25,8 @@ MapObject *state2 = NULL;
 Ball *ball = NULL;
 ThanhMove *Space = NULL;
 
+TileMap *tileMap = NULL;
+
 Game::Game()
 {
 
@@ -30,17 +34,19 @@ Game::Game()
 
 Game::~Game()
 {
-	ball->Clear();
+	/*ball->Clear();
 	state1->Clear();
 	state2->Clear();
-	Space->Clear();
+	Space->Clear();*/
+
+	delete tileMap;
 }
 
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
 
-	ball = new Ball();
+	/*ball = new Ball();
 	ball->setPosition(100, 300);
 
 	state1 = new Map1();
@@ -53,6 +59,10 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 
 	Space = new ThanhMove(100, 450);
 
+	m_State = new StateManager();
+	m_State->switchState(StateMap::MenuState);*/
+
+	tileMap = new TileMap("Data//TileMap.txt");
 	return errCode;
 }
 
@@ -66,7 +76,7 @@ void Game::Update(float deltaTime)
 		current = GetTickCount();
 	} while (current - lasttime + deltaTime < (float)1000 / FPS);
 
-	if (state->NextMap())
+	/*if (state->NextMap())
 	{
 		state = state1;
 	}
@@ -103,7 +113,7 @@ void Game::Update(float deltaTime)
 		Space->UpdateSpeedKeyBoard(KEY_RIGHT);
 	}
 
-	ball->Update();
+	ball->Update();*/
 }
 
 void Game::Render(Graphics* g)
@@ -111,13 +121,14 @@ void Game::Render(Graphics* g)
 	g->cleanScreen();
 	g->setColor(0x00FF00FF);
 
-	state->Render(g);
+	tileMap->Render(g);
+	/*state->Render(g);
 
 	if (state->isGameOver()) return;
 
 	ball->Render(g);
-	Space->Render(g);
-
+	Space->Render(g);*/
+	//m_State->renderState(g);
 }
 
 void Game::Exit()
