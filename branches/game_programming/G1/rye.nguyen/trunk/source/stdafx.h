@@ -23,3 +23,8 @@
 
 #include "config.h"
 #include "support.h"
+
+//#define USE_VLD
+#ifdef USE_VLD
+	#include "vld.h"
+#endif

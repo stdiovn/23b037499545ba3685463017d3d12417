@@ -13,5 +13,8 @@ public:
 
 	static RenderSystem*	GetInstance();
 
+	virtual void			Init();
+	virtual void			Release();
+
 	virtual void			Render(Graphics* g);
 };

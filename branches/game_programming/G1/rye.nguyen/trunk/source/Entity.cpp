@@ -14,55 +14,38 @@ Entity::~Entity()
 
 void Entity::Init(EntityType type)
 {
-	m_transform = NULL;
+	/*m_transform = NULL;
 	m_move = NULL;
 	m_render = NULL;
-	m_animation = NULL;
+	m_animation = NULL;*/
+
+	m_component_list = new Component*[ComponentType::COM_COUNT];
+
+	for(int i = 0; i < ComponentType::COM_COUNT; i++)
+		m_component_list[i] = NULL;
 
 	m_type = type;
 }
 
 void Entity::Release()
 {
-	//SAFE_DEL_ARR(m_component_list);
+	for(int i = 0; i < ComponentType::COM_COUNT; i++)
+	{
+		if(m_component_list[i])
+			delete m_component_list[i];
+	}
+
+	SAFE_DEL_ARR(m_component_list);
 }
 
-Transform* Entity::GetTransform()
+void Entity::SetComponent(Component* component, ComponentType type)
 {
-	return m_transform;
+	m_component_list[type] = component;
+
+	m_component_list[type]->m_type = type;
 }
 
-Movement* Entity::GetMovement()
+Component* Entity::GetComponent(ComponentType type)
 {
-	return m_move;
-}
-
-Renderer* Entity::GeRenderer()
-{
-	return m_render;
-}
-
-Animation* Entity::GetAnimation()
-{
-	return m_animation;
-}
-
-void Entity::SetTransform(int x, int y, float scale)
-{
-	m_transform = new Transform(x, y, scale);
-}
-
-void Entity::SetMovement(int velocx, int velocy, int accel)
-{
-	m_move = new Movement(velocx, velocy, accel);
-}
-
-void Entity::SetRenderer(Image* image)
-{
-	m_render = new Renderer(image);
-}
-
-void Entity::SetAnimation(ImageList* image_list)
-{
-	m_animation = new Animation(image_list);
+	return m_component_list[type];
 }

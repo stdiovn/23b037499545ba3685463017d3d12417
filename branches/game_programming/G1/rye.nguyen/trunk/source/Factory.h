@@ -10,8 +10,12 @@ public:
 	Factory();
 	virtual			~Factory();
 
+	virtual void	Init();
+	virtual void	Release();
+
 	static Factory*	GetInstance();
 
 	Entity*			CreateMushroom();
+	Entity*			CreatePlayer();
 
 };

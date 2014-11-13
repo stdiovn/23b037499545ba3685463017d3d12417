@@ -69,24 +69,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Component.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\config.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Entity.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Factory.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Map.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\support.h" />
+    <ClInclude Include="..\source\TransformSystem.h" />
+    <ClInclude Include="..\source\AnimationSystem.h" />
+    <ClInclude Include="..\source\Component.h" />
+    <ClInclude Include="..\source\config.h" />
+    <ClInclude Include="..\source\Entity.h" />
+    <ClInclude Include="..\source\EntityManager.h" />
+    <ClInclude Include="..\source\Factory.h" />
+    <ClInclude Include="..\source\Map.h" />
+    <ClInclude Include="..\source\RenderSystem.h" />
+    <ClInclude Include="..\source\support.h" />
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Entity.cpp" />
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.cpp" />
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Factory.cpp" />
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Map.cpp" />
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.cpp" />
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\TileMap.cpp" />
+    <ClCompile Include="..\source\TransformSystem.cpp" />
+    <ClCompile Include="..\source\Entity.cpp" />
+    <ClCompile Include="..\source\EntityManager.cpp" />
+    <ClCompile Include="..\source\Factory.cpp" />
+    <ClCompile Include="..\source\Map.cpp" />
+    <ClCompile Include="..\source\RenderSystem.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

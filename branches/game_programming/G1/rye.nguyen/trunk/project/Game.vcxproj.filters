@@ -5,46 +5,54 @@
     <ClInclude Include="..\source\Game.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\config.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Factory.h">
+    <ClInclude Include="..\source\config.h" />
+    <ClInclude Include="..\source\support.h" />
+    <ClInclude Include="..\source\Factory.h">
       <Filter>Factory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Entity.h">
-      <Filter>EntityManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\support.h" />
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.h">
+    <ClInclude Include="..\source\Component.h">
       <Filter>ComponentSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.h">
-      <Filter>EntityManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Component.h">
+    <ClInclude Include="..\source\RenderSystem.h">
       <Filter>ComponentSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\Map.h">
+    <ClInclude Include="..\source\Map.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Entity.h">
+      <Filter>EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EntityManager.h">
+      <Filter>EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\AnimationSystem.h">
+      <Filter>ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\TransformSystem.h">
+      <Filter>ComponentSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Factory.cpp">
+    <ClCompile Include="..\source\Factory.cpp">
       <Filter>Factory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\RenderSystem.cpp">
+    <ClCompile Include="..\source\RenderSystem.cpp">
       <Filter>ComponentSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\EntityManager.cpp">
-      <Filter>EntityManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Entity.cpp">
-      <Filter>EntityManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\TileMap.cpp" />
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\Map.cpp">
+    <ClCompile Include="..\source\Map.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Entity.cpp">
+      <Filter>EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EntityManager.cpp">
+      <Filter>EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\TransformSystem.cpp">
+      <Filter>ComponentSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
