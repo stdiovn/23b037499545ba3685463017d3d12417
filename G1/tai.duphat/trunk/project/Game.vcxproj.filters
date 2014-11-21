@@ -3,108 +3,28 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Map1.h">
-      <Filter>BackGround</Filter>
+    <ClInclude Include="..\source\Component.h">
+      <Filter>Entity Component System</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Map2.h">
-      <Filter>BackGround</Filter>
+    <ClInclude Include="..\source\Entity.h">
+      <Filter>Entity Component System</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\MapObject.h">
-      <Filter>BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Object.h">
-      <Filter>BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Wall_1.h">
-      <Filter>Wall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Wall_2.h">
-      <Filter>Wall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Entity.h" />
-    <ClInclude Include="..\source\ThanhMove.h">
-      <Filter>ThanhMove</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Ball.h">
-      <Filter>Ball</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\AbstractState.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Main.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\StateManager.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\GamePlay.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\TileMap.h">
-      <Filter>TileMap</Filter>
+    <ClInclude Include="..\source\System.h">
+      <Filter>Entity Component System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\Map1.cpp">
-      <Filter>BackGround</Filter>
+    <ClCompile Include="..\source\Entity.cpp">
+      <Filter>Entity Component System</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Map2.cpp">
-      <Filter>BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\MapObject.cpp">
-      <Filter>BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Object.cpp">
-      <Filter>BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Wall_1.cpp">
-      <Filter>Wall</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Wall_2.cpp">
-      <Filter>Wall</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Entity.cpp" />
-    <ClCompile Include="..\source\ThanhMove.cpp">
-      <Filter>ThanhMove</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Ball.cpp">
-      <Filter>Ball</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\AbstractState.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Main.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\StateManager.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\GamePlay.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\TileMap.cpp">
-      <Filter>TileMap</Filter>
+    <ClCompile Include="..\source\System.cpp">
+      <Filter>Entity Component System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="BackGround">
-      <UniqueIdentifier>{6f1b7169-db07-4d8e-999c-03200e30bc05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Wall">
-      <UniqueIdentifier>{5136e5d0-3c62-4f73-8a8c-fb446fa3f7d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThanhMove">
-      <UniqueIdentifier>{218b20b6-5c80-4d2e-99ae-401b6112d621}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Ball">
-      <UniqueIdentifier>{b01ac00e-ad23-4963-b5eb-47a9b2f1ac99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="State">
-      <UniqueIdentifier>{0c2ec9c2-077a-4e23-9db9-6aebe63e9fbe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TileMap">
-      <UniqueIdentifier>{ddddc775-959b-42c5-84e4-e244f0b014a6}</UniqueIdentifier>
+    <Filter Include="Entity Component System">
+      <UniqueIdentifier>{edd0bf19-d83e-41a9-a4fa-12bc30776594}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
