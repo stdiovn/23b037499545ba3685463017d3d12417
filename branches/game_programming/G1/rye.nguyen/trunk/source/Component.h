@@ -27,6 +27,14 @@ struct Transform : public Component
 	{
 		SAFE_DEL(m_position);
 	}
+
+	Vector2D* operator+=(Vector2D* vector)
+	{
+		m_position->x += vector->x;
+		m_position->y += vector->y;
+
+		return m_position;
+	}
 };
 
 
@@ -48,6 +56,14 @@ struct Movement : public Component
 	~Movement()
 	{
 		SAFE_DEL(m_veloc);
+	}
+
+	Vector2D* operator+=(int accel)
+	{
+		m_veloc->x += accel;
+		m_veloc->y += (m_veloc->y / m_veloc->x) * accel;
+
+		return m_veloc;
 	}
 };
 
@@ -90,5 +106,43 @@ struct Animation : public Component
 		}
 
 		SAFE_DEL(m_image_list);
+	}
+};
+
+
+
+struct Label : public Component
+{
+	Image*		m_font;
+	char*		m_text;
+
+	char*		m_char;
+	Rect**		m_char_map;
+
+	int			m_char_distance;
+	int*		m_char_offset;
+
+	Label(Image* _font, char* _text, char* _char, Rect** _char_map, int _char_distance, int* _char_offset)
+	{
+		m_font = _font;
+		m_text = _text;
+
+		m_char = _char;
+		m_char_map = _char_map;
+
+		m_char_distance = _char_distance;
+		m_char_offset = _char_offset;
+	}
+	~Label()
+	{
+		m_font->unloadImage();
+		SAFE_DEL(m_font);
+
+		for(int i = 0; i < strlen(m_char); i++)
+			delete m_char_map[i];
+		SAFE_DEL_ARR(m_char_map);
+
+		SAFE_DEL_ARR(m_char);
+		SAFE_DEL_ARR(m_char_offset);
 	}
 };

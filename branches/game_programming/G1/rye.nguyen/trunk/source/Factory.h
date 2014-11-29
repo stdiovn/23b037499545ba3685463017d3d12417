@@ -6,6 +6,8 @@ class Factory
 {
 private:
 	static Factory*	m_instance;
+
+	Label*			CreateText(char* text);
 public:
 	Factory();
 	virtual			~Factory();
@@ -16,6 +18,5 @@ public:
 	static Factory*	GetInstance();
 
 	Entity*			CreateMushroom();
-	Entity*			CreatePlayer();
-
+	Entity*			CreatePlayer(char* player_name);
 };

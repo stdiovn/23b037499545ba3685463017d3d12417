@@ -28,7 +28,7 @@
     <ClInclude Include="..\source\AnimationSystem.h">
       <Filter>ComponentSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Rye%27s Game\trunk\source\TransformSystem.h">
+    <ClInclude Include="..\source\TransformSystem.h">
       <Filter>ComponentSystem</Filter>
     </ClInclude>
   </ItemGroup>
@@ -51,7 +51,7 @@
     <ClCompile Include="..\source\EntityManager.cpp">
       <Filter>EntityManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Rye%27s Game\trunk\source\TransformSystem.cpp">
+    <ClCompile Include="..\source\TransformSystem.cpp">
       <Filter>ComponentSystem</Filter>
     </ClCompile>
   </ItemGroup>

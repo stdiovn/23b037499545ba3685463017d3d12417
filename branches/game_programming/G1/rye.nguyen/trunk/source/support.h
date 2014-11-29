@@ -25,22 +25,22 @@ struct Vector2D
 	~Vector2D(){}
 };
 
-struct Rect
-{
-	int x;
-	int y;
-	int width;
-	int height;
-
-	Rect(int _x = 0, int _y = 0, int _width = 0, int _height = 0)
-	{
-		x = _x;
-		y = _y;
-		width = _width;
-		height = _height;
-	}
-	~Rect(){}
-};
+//struct Rect
+//{
+//	int x;
+//	int y;
+//	int width;
+//	int height;
+//
+//	Rect(int _x = 0, int _y = 0, int _width = 0, int _height = 0)
+//	{
+//		x = _x;
+//		y = _y;
+//		width = _width;
+//		height = _height;
+//	}
+//	~Rect(){}
+//};
 
 /////////////////////////////////////////////
 //ENUM
@@ -57,6 +57,7 @@ enum EntityType
 {
 	ENT_UNKNOWN = -1,
 	ENT_MUSHROOM,
+	ENT_PLAYER,
 	ENT_COUNT
 };
 
@@ -67,6 +68,7 @@ enum ComponentType
 	COM_MOVEMENT,
 	COM_RENDERER,
 	COM_ANIMATION,
+	COM_LABEL,
 	COM_COUNT
 };
 

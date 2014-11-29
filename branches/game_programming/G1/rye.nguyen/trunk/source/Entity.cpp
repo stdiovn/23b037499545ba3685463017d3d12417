@@ -14,11 +14,6 @@ Entity::~Entity()
 
 void Entity::Init(EntityType type)
 {
-	/*m_transform = NULL;
-	m_move = NULL;
-	m_render = NULL;
-	m_animation = NULL;*/
-
 	m_component_list = new Component*[ComponentType::COM_COUNT];
 
 	for(int i = 0; i < ComponentType::COM_COUNT; i++)
@@ -41,7 +36,6 @@ void Entity::Release()
 void Entity::SetComponent(Component* component, ComponentType type)
 {
 	m_component_list[type] = component;
-
 	m_component_list[type]->m_type = type;
 }
 
