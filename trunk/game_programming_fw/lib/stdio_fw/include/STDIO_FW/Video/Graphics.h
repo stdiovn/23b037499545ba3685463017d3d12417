@@ -7,12 +7,10 @@ namespace stdio_fw
 	enum CACHED_LOC
 	{		
 		// Solid object
-		ATRIB_POSITION0 = 0,
-		UNIFO_MAT0,
+		ATRIB_POSITION0 = 0,		
 		UNIFO_COLOR,
 		// Image
 		ATRIB_POSITION1,
-		UNIFO_MAT1,
 		ATRIB_TEXCOORD,
 		UNIFO_TEXTURE,
 		// Max cached loc

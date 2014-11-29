@@ -26,12 +26,10 @@ namespace stdio_fw
 
 		const char* solid_obj_vertex_shader_src =
 			"#version 120\n"
-			"attribute vec2 a_pos;\n"
-			"uniform mat3 u_mat;\n"
+			"attribute vec2 a_pos;\n"			
 			"void main()\n"
-			"{\n"
-			"vec3 pos = u_mat * vec3(a_pos, 1.0);\n"
-			"gl_Position = vec4(pos, 1.0);\n"
+			"{\n"			
+			"gl_Position = vec4(a_pos, 1.0, 1.0);\n"
 			"}\n";
 
 		const char* solid_obj_fragment_shader_src = 
@@ -44,8 +42,7 @@ namespace stdio_fw
 
 		m_aPrograms[0] = createProgram(solid_obj_vertex_shader_src, solid_obj_fragment_shader_src);
 
-		m_cachedLocs[CACHED_LOC::ATRIB_POSITION0] = glGetAttribLocation(m_aPrograms[0], "a_pos");
-		m_cachedLocs[CACHED_LOC::UNIFO_MAT0] = glGetUniformLocation(m_aPrograms[0], "u_mat");
+		m_cachedLocs[CACHED_LOC::ATRIB_POSITION0] = glGetAttribLocation(m_aPrograms[0], "a_pos");		
 		m_cachedLocs[CACHED_LOC::UNIFO_COLOR] = glGetUniformLocation(m_aPrograms[0], "u_color");
 
 		// For image
@@ -57,8 +54,7 @@ namespace stdio_fw
 			"varying vec2 v_uv;\n"
 			"void main()\n"
 			"{\n"
-			"vec3 pos = u_mat * vec3(a_pos, 1.0);\n"
-			"gl_Position = vec4(pos, 1.0);\n"
+			"gl_Position = vec4(a_pos, 1.0, 1.0);\n"
 			"v_uv = a_uv;\n"
 			"}\n";
 
@@ -73,8 +69,7 @@ namespace stdio_fw
 
 		m_aPrograms[1] = createProgram(img_vertex_shader_src, img_fragment_shader_src);
 		
-		m_cachedLocs[CACHED_LOC::ATRIB_POSITION1] = glGetAttribLocation(m_aPrograms[1], "a_pos");
-		m_cachedLocs[CACHED_LOC::UNIFO_MAT1] = glGetUniformLocation(m_aPrograms[1], "u_mat");
+		m_cachedLocs[CACHED_LOC::ATRIB_POSITION1] = glGetAttribLocation(m_aPrograms[1], "a_pos");		
 		m_cachedLocs[CACHED_LOC::ATRIB_TEXCOORD] = glGetAttribLocation(m_aPrograms[1], "a_uv");
 		m_cachedLocs[CACHED_LOC::UNIFO_TEXTURE] = glGetUniformLocation(m_aPrograms[1], "u_tex");
 
@@ -175,14 +170,32 @@ namespace stdio_fw
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+		// Compute vertices value
+		Vec3 v1(x, y, 1.0f);
+		Vec3 v2(x + width, y + height, 1.0f);
+		if (m_listMat.empty() == false)
+		{
+			Mat3 finalMat;
+			finalMat.SetIdentity();
+
+			while (m_listMat.size() > 0)
+			{
+				finalMat = finalMat * m_listMat.front();
+				m_listMat.pop_front();
+			}
+
+			v1 = v1 * finalMat;
+			v2 = v2 * finalMat;
+		}
+
 		// Compute vertices array
 		float vertices[] = {
-			XSCREEN2GL(x, m_iScreenW), YSCREEN2GL(y, m_iScreenH),
-			XSCREEN2GL(x, m_iScreenW), YSCREEN2GL(y + height, m_iScreenH),
-			XSCREEN2GL(x + width, m_iScreenW), YSCREEN2GL(y + height, m_iScreenH),
-			XSCREEN2GL(x, m_iScreenW), YSCREEN2GL(y, m_iScreenH),
-			XSCREEN2GL(x + width, m_iScreenW), YSCREEN2GL(y + height, m_iScreenH),
-			XSCREEN2GL(x + width, m_iScreenW), YSCREEN2GL(y, m_iScreenH)
+			XSCREEN2GL(v1.x, m_iScreenW), YSCREEN2GL(v1.y, m_iScreenH),
+			XSCREEN2GL(v1.x, m_iScreenW), YSCREEN2GL(v2.y, m_iScreenH),
+			XSCREEN2GL(v2.x, m_iScreenW), YSCREEN2GL(v2.y, m_iScreenH),
+			XSCREEN2GL(v1.x, m_iScreenW), YSCREEN2GL(v1.y, m_iScreenH),
+			XSCREEN2GL(v2.x, m_iScreenW), YSCREEN2GL(v2.y, m_iScreenH),
+			XSCREEN2GL(v2.x, m_iScreenW), YSCREEN2GL(v1.y, m_iScreenH)
 		};
 
 		GLint activeProgram = 0;
@@ -239,31 +252,7 @@ namespace stdio_fw
 		if (colorUniLoc != -1)
 		{
 			glUniform4fv(colorUniLoc, 1, &m_drawColor[0]);
-		}
-
-		GLint matUniLoc = texture_id == 0 ? m_cachedLocs[CACHED_LOC::UNIFO_MAT0] : m_cachedLocs[CACHED_LOC::UNIFO_MAT1];
-		if (matUniLoc != -1)
-		{
-			Mat3 finalMat;
-			finalMat.SetIdentity();
-
-			if (m_listMat.empty() == false)
-			{
-				//while (m_listMat.size() > 0)
-				//{
-				//	Mat3 mat = m_listMat.front();
-
-				//	// format the translate if any
-				//	mat.m[2][0] = XSCREEN2GL(mat.m[2][0], m_iScreenW);
-				//	mat.m[2][1] = YSCREEN2GL(mat.m[2][1], m_iScreenH);
-
-				//	finalMat = finalMat * mat;
-
-				//	m_listMat.pop_front();
-				//}
-			}
-			glUniformMatrix3fv(matUniLoc, 1, GL_FALSE, &finalMat.m[0][0]);			
-		}
+		}		
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
