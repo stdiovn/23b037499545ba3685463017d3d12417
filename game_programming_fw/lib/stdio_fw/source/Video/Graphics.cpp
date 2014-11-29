@@ -1,6 +1,6 @@
-#include "GL\glew.h"
-
 #include "stdio_fw.h"
+
+#include "GL\glew.h"
 #include "Video\Graphics.h"
 #include "Video\Image.h"
 
@@ -27,9 +27,11 @@ namespace stdio_fw
 		const char* solid_obj_vertex_shader_src =
 			"#version 120\n"
 			"attribute vec2 a_pos;\n"
+			"uniform mat3 u_mat;\n"
 			"void main()\n"
 			"{\n"
-			"gl_Position = vec4(a_pos, 1.0, 1.0);\n"
+			"vec3 pos = u_mat * vec3(a_pos, 1.0);\n"
+			"gl_Position = vec4(pos, 1.0);\n"
 			"}\n";
 
 		const char* solid_obj_fragment_shader_src = 
@@ -43,6 +45,7 @@ namespace stdio_fw
 		m_aPrograms[0] = createProgram(solid_obj_vertex_shader_src, solid_obj_fragment_shader_src);
 
 		m_cachedLocs[CACHED_LOC::ATRIB_POSITION0] = glGetAttribLocation(m_aPrograms[0], "a_pos");
+		m_cachedLocs[CACHED_LOC::UNIFO_MAT0] = glGetUniformLocation(m_aPrograms[0], "u_mat");
 		m_cachedLocs[CACHED_LOC::UNIFO_COLOR] = glGetUniformLocation(m_aPrograms[0], "u_color");
 
 		// For image
@@ -50,10 +53,12 @@ namespace stdio_fw
 			"#version 120\n"
 			"attribute vec2 a_pos;\n"
 			"attribute vec2 a_uv;\n"
+			"uniform mat3 u_mat;\n"
 			"varying vec2 v_uv;\n"
 			"void main()\n"
 			"{\n"
-			"gl_Position = vec4(a_pos, 1.0, 1.0);\n"
+			"vec3 pos = u_mat * vec3(a_pos, 1.0);\n"
+			"gl_Position = vec4(pos, 1.0);\n"
 			"v_uv = a_uv;\n"
 			"}\n";
 
@@ -69,6 +74,7 @@ namespace stdio_fw
 		m_aPrograms[1] = createProgram(img_vertex_shader_src, img_fragment_shader_src);
 		
 		m_cachedLocs[CACHED_LOC::ATRIB_POSITION1] = glGetAttribLocation(m_aPrograms[1], "a_pos");
+		m_cachedLocs[CACHED_LOC::UNIFO_MAT1] = glGetUniformLocation(m_aPrograms[1], "u_mat");
 		m_cachedLocs[CACHED_LOC::ATRIB_TEXCOORD] = glGetAttribLocation(m_aPrograms[1], "a_uv");
 		m_cachedLocs[CACHED_LOC::UNIFO_TEXTURE] = glGetUniformLocation(m_aPrograms[1], "u_tex");
 
@@ -78,6 +84,11 @@ namespace stdio_fw
 	void Graphics::fillRect(int x, int y, int width, int height)
 	{
 		draw(x, y, width, height);
+	}
+
+	void Graphics::fillRect(Rect rect)
+	{
+		draw(rect.x, rect.y, rect.width, rect.height);
 	}
 
 	void Graphics::drawRect(int x, int y, int width, int height, int weight)
@@ -92,29 +103,41 @@ namespace stdio_fw
 		fillRect(x + width - weight, y + weight, weight, height - (weight << 1));
 	}
 
-	void Graphics::drawImage(Image* img, int x, int y)
+	void Graphics::drawRect(Rect rect, int weight)
 	{
-		draw(x, y, img->getWidth(), img->getHeight(), nullptr, img->m_texID);
+		drawRect(rect.x, rect.y, rect.width, rect.height, weight);
 	}
 
-	void Graphics::drawRegion(Image* img, int x, int y, int src_x, int src_y, int src_w, int src_h)
+	void Graphics::drawImage(Image* img, int x, int y, unsigned int flipping)
 	{
-		float w = img->getWidth();
-		float t = X2UVGL(src_x + src_w, img->getWidth());
-		float v = Y2UVGL(src_y, img->getHeight());
+		draw(x, y, img->getWidth(), img->getHeight(), nullptr, img->m_texID, flipping);
+	}
+
+	void Graphics::drawImage(Image* img, Rect rect, unsigned int flipping)
+	{
+		draw(rect.x, rect.y, rect.width, rect.height, nullptr, img->m_texID, flipping);
+	}
+
+	void Graphics::drawRegion(Image* img, int x, int y, int width, int height, int src_x, int src_y, int src_w, int src_h, unsigned int flipping)
+	{
 		float uv[]
 		{
-			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
 			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
-			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
 			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
-			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
-			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight())
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
+			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight())
 		};
-		draw(x, y, src_w, src_h, uv, img->m_texID);
+		draw(x, y, width, height, uv, img->m_texID, flipping);
 	}
 
-	void Graphics::drawLine(float x1, float y1, float x2, float y2)
+	void Graphics::drawRegion(Image* img, Rect src, Rect dest, unsigned int flipping)
+	{
+		drawRegion(img, src.x, src.y, src.width, src.height, dest.x, dest.y, dest.width, dest.height, flipping);
+	}
+
+	void Graphics::drawLine(int x1, int y1, int x2, int y2)
 	{
 		// Compute vertices array
 		float vertices[] = {
@@ -141,7 +164,12 @@ namespace stdio_fw
 		glDrawArrays(GL_LINES, 0, 2);
 	}
 
-	void Graphics::draw(int x, int y, int width, int height, float *uv, unsigned int texture_id)
+	void Graphics::drawLine(Vec2 p1, Vec2 p2)
+	{
+		drawLine(p1.x, p1.y, p2.x, p2.y);
+	}
+
+	void Graphics::draw(int x, int y, int width, int height, float *uv, unsigned int texture_id, unsigned int flipping)
 	{
 		//enable blend
 		glEnable(GL_BLEND);
@@ -193,6 +221,15 @@ namespace stdio_fw
 			if (uv == nullptr)
 				uv = default_uv;
 
+			for (int i = 0; i < 12; i += 2)
+			{
+				if (flipping & FLIP_X)
+					uv[i] -= 1.0f;
+				
+				if (flipping & FLIP_Y)
+					uv[i+1] -= 1.0f;
+			}
+
 			glVertexAttribPointer(uvLoc, 2, GL_FLOAT, GL_FALSE, 0, uv);
 			glEnableVertexAttribArray(uvLoc);
 		}
@@ -202,11 +239,35 @@ namespace stdio_fw
 		if (colorUniLoc != -1)
 		{
 			glUniform4fv(colorUniLoc, 1, &m_drawColor[0]);
-		}		
+		}
+
+		GLint matUniLoc = texture_id == 0 ? m_cachedLocs[CACHED_LOC::UNIFO_MAT0] : m_cachedLocs[CACHED_LOC::UNIFO_MAT1];
+		if (matUniLoc != -1)
+		{
+			Mat3 finalMat;
+			finalMat.SetIdentity();
+
+			if (m_listMat.empty() == false)
+			{
+				//while (m_listMat.size() > 0)
+				//{
+				//	Mat3 mat = m_listMat.front();
+
+				//	// format the translate if any
+				//	mat.m[2][0] = XSCREEN2GL(mat.m[2][0], m_iScreenW);
+				//	mat.m[2][1] = YSCREEN2GL(mat.m[2][1], m_iScreenH);
+
+				//	finalMat = finalMat * mat;
+
+				//	m_listMat.pop_front();
+				//}
+			}
+			glUniformMatrix3fv(matUniLoc, 1, GL_FALSE, &finalMat.m[0][0]);			
+		}
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-		//enable blend
+		// Disable blend
 		glDisable(GL_BLEND);
 	}
 
@@ -219,6 +280,7 @@ namespace stdio_fw
 		m_drawColor[3] = (color & 0xFF) / 255.0f;
 		
 	}
+
 	void Graphics::setClearColor(unsigned int color)
 	{
 		// [0000 0000] [0000 0000] [0000 0000] [0000 0000]
@@ -227,10 +289,21 @@ namespace stdio_fw
 		m_clearColor[2] = ((color >> 8) & 0xFF) / 255.0f;
 		m_clearColor[3] = 1.0f;
 	}
+
 	void Graphics::cleanScreen()
 	{
 		glClearColor(m_clearColor[0], m_clearColor[1], m_clearColor[2], m_clearColor[3]);
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	}
+
+	void Graphics::pushMatrix(Mat3 mat)
+	{
+		m_listMat.push_back(mat);
+	}
+
+	void Graphics::popMatrix()
+	{
+		m_listMat.clear();
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////

@@ -20,8 +20,6 @@ namespace stdio_fw
 		ErrorCode			loadImage();
 		void				unloadImage();
 
-		void				scale(float ratio);
-
 		unsigned int		getWidth() { return m_imgWidth; };
 		unsigned int		getHeight() { return m_imgHeight; };
 

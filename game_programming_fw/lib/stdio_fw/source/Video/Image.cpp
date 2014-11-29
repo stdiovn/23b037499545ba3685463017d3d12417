@@ -1,6 +1,6 @@
-#include "GL\glew.h"
-
 #include "stdio_fw.h"
+
+#include "GL\glew.h"
 #include "Video\Image.h"
 
 #include "FreeImage.h"
@@ -38,14 +38,16 @@ namespace stdio_fw
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 		m_isLoaded = true;
 
 		// Clean up
 		SAFE_DEL_ARR(data);
+
+		return ErrorCode::ERR_NO_ERROR;
 	}
 
 	unsigned char* Image::loadImageData()
@@ -83,14 +85,5 @@ namespace stdio_fw
 	{
 		glDeleteTextures(1, &m_texID);
 		m_isLoaded = false;
-	}
-
-	void Image::scale(float ratio)
-	{
-		if (ratio <= 0.0f)
-			return;
-
-		m_imgWidth = static_cast<unsigned int>(m_imgWidth * ratio);
-		m_imgHeight = static_cast<unsigned int>(m_imgHeight * ratio);
 	}
 }

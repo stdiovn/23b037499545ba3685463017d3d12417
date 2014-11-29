@@ -1,7 +1,6 @@
-#include "GL\glew.h"
-
 #include "stdio_fw.h"
 
+#include "GL\glew.h"
 #include "GLFW\glfw3.h"
 #include "Core\Application.h"
 #include "Video\Graphics.h"
