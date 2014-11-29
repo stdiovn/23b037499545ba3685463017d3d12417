@@ -18,12 +18,12 @@ namespace stdio_fw
 		return *this;
 	}
 
-	Vec2 Vec2::operator + (Vec2 & Vec)
+	Vec2 Vec2::operator + (const Vec2 & Vec)
 	{
 		return Vec2(x + Vec.x, y + Vec.y);
 	}
 
-	Vec2 & Vec2::operator += (Vec2 & Vec)
+	Vec2 & Vec2::operator += (const Vec2 & Vec)
 	{
 		x += Vec.x;
 		y += Vec.y;
@@ -36,12 +36,12 @@ namespace stdio_fw
 		return Vec2(-x, -y);
 	}
 
-	Vec2 Vec2::operator - (Vec2 & Vec)
+	Vec2 Vec2::operator - (const Vec2 & Vec)
 	{
 		return Vec2(x - Vec.x, y - Vec.y);
 	}
 
-	Vec2 & Vec2::operator -= (Vec2 & Vec)
+	Vec2 & Vec2::operator -= (const Vec2 & Vec)
 	{
 		x -= Vec.x;
 		y -= Vec.y;
@@ -73,7 +73,7 @@ namespace stdio_fw
 		return operator *= (1.0f / k);
 	}
 
-	Vec2 & Vec2::operator = (Vec2 & Vec)
+	Vec2 & Vec2::operator = (const Vec2 & Vec)
 	{
 		x = Vec.x;
 		y = Vec.y;
@@ -86,12 +86,12 @@ namespace stdio_fw
 		return (&x)[idx];
 	}
 
-	Vec2 Vec2::Modulate(Vec2 & Vec)
+	Vec2 Vec2::Modulate(const Vec2 & Vec)
 	{
 		return Vec2(x * Vec.x, y * Vec.y);
 	}
 
-	float Vec2::Dot(Vec2 & Vec)
+	float Vec2::Dot(const Vec2 & Vec)
 	{
 		return x * Vec.x + y * Vec.y;
 	}
@@ -112,12 +112,12 @@ namespace stdio_fw
 		return *this;
 	}
 
-	Vec3 Vec3::operator + (Vec3 & Vec)
+	Vec3 Vec3::operator + (const Vec3 & Vec)
 	{
 		return Vec3(x + Vec.x, y + Vec.y, z + Vec.z);
 	}
 
-	Vec3 & Vec3::operator += (Vec3 & Vec)
+	Vec3 & Vec3::operator += (const Vec3 & Vec)
 	{
 		x += Vec.x;
 		y += Vec.y;
@@ -131,12 +131,12 @@ namespace stdio_fw
 		return Vec3(-x, -y, -z);
 	}
 
-	Vec3 Vec3::operator - (Vec3 & Vec)
+	Vec3 Vec3::operator - (const Vec3 & Vec)
 	{
 		return Vec3(x - Vec.x, y - Vec.y, z - Vec.z);
 	}
 
-	Vec3 & Vec3::operator -= (Vec3 & Vec)
+	Vec3 & Vec3::operator -= (const Vec3 & Vec)
 	{
 		x -= Vec.x;
 		y -= Vec.y;
@@ -170,7 +170,7 @@ namespace stdio_fw
 		return operator *= (1.0f / k);
 	}
 
-	Vec3 & Vec3::operator = (Vec3 & Vec)
+	Vec3 & Vec3::operator = (const Vec3 & Vec)
 	{
 		x = Vec.x;
 		y = Vec.y;
@@ -184,19 +184,29 @@ namespace stdio_fw
 		return (&x)[idx];
 	}
 
-	Vec3 Vec3::Modulate(Vec3 & Vec)
+	Vec3 Vec3::Modulate(const Vec3 & Vec)
 	{
 		return Vec3(x * Vec.x, y * Vec.y, z * Vec.z);
 	}
 
-	float Vec3::Dot(Vec3 & Vec)
+	float Vec3::Dot(const Vec3 & Vec)
 	{
 		return x * Vec.x + y * Vec.y + z * Vec.z;
 	}
 
-	Vec3 Vec3::Cross(Vec3 & Vec)
+	Vec3 Vec3::Cross(const Vec3 & Vec)
 	{
 		return Vec3(y * Vec.z - z * Vec.y, z * Vec.x - x * Vec.z, x * Vec.y - y * Vec.x);
+	}
+
+	Vec3 Vec3::operator * (const Mat3 & m)
+	{
+		Vec3 res;
+		res.x = x * m.m[0][0] + y * m.m[1][0] + z * m.m[2][0];
+		res.y = x * m.m[0][1] + y * m.m[1][1] + z * m.m[2][1];
+		res.z = x * m.m[0][2] + y * m.m[1][2] + z * m.m[2][2];		
+
+		return res;
 	}
 
 	// Rect
@@ -276,7 +286,7 @@ namespace stdio_fw
 		return *this;
 	}
 
-	Mat3 & Mat3::SetScale(Vec2 & scaleVec)
+	Mat3 & Mat3::SetScale(const Vec2 & scaleVec)
 	{
 		m[0][0] = scaleVec.x; m[0][1] = 0.0f;       m[0][2] = 0.0f;
 		m[1][0] = 0.0f;       m[1][1] = scaleVec.y; m[1][2] = 0.0f;
@@ -303,7 +313,7 @@ namespace stdio_fw
 		return *this;
 	}
 
-	Mat3 & Mat3::SetTranslation(Vec2 &vec)
+	Mat3 & Mat3::SetTranslation(const Vec2 &vec)
 	{
 		m[0][0] = 1.0f;		m[0][1] = 0.0f;		m[0][2] = 0.0f;
 		m[1][0] = 0.0f;		m[1][1] = 1.0f;		m[1][2] = 0.0f;
@@ -322,14 +332,14 @@ namespace stdio_fw
 		return res;
 	}
 
-	Mat3 Mat3::operator + (Mat3 & mat)
+	Mat3 Mat3::operator + (const Mat3 & mat)
 	{
 		Mat3 res(*this);
 		res += mat;
 		return res;
 	}
 
-	Mat3 & Mat3::operator += (Mat3 & mat)
+	Mat3 & Mat3::operator += (const Mat3 & mat)
 	{
 		m[0][0] += mat.m[0][0]; m[0][1] += mat.m[0][1]; m[0][2] += mat.m[0][2];
 		m[1][0] += mat.m[1][0]; m[1][1] += mat.m[1][1]; m[1][2] += mat.m[1][2];
@@ -338,14 +348,14 @@ namespace stdio_fw
 		return *this;
 	}
 
-	Mat3 Mat3::operator - (Mat3 & mat)
+	Mat3 Mat3::operator - (const Mat3 & mat)
 	{
 		Mat3 res(*this);
 		res -= mat;
 		return res;
 	}
 
-	Mat3 & Mat3::operator -= (Mat3 & mat)
+	Mat3 & Mat3::operator -= (const Mat3 & mat)
 	{
 		m[0][0] -= mat.m[0][0]; m[0][1] -= mat.m[0][1]; m[0][2] -= mat.m[0][2];
 		m[1][0] -= mat.m[1][0]; m[1][1] -= mat.m[1][1]; m[1][2] -= mat.m[1][2];
@@ -354,7 +364,7 @@ namespace stdio_fw
 		return *this;
 	}
 
-	Mat3 Mat3::operator * (Mat3 & mat)
+	Mat3 Mat3::operator * (const Mat3 & mat)
 	{
 		Mat3 res;
 		res.m[0][0] = m[0][0] * mat.m[0][0] + m[0][1] * mat.m[1][0] + m[0][2] * mat.m[2][0];
@@ -389,7 +399,7 @@ namespace stdio_fw
 	}
 
 
-	Vec3 Mat3::operator * (Vec3 & vec)
+	Vec3 Mat3::operator * (const Vec3 & vec)
 	{
 		Vec3 res;
 		res.x = vec.x * m[0][0] + vec.y * m[0][1] + vec.z * m[0][2];
@@ -399,7 +409,7 @@ namespace stdio_fw
 		return res;
 	}
 
-	Mat3 & Mat3::operator = (Mat3 & mat)
+	Mat3 & Mat3::operator = (const Mat3 & mat)
 	{
 		m[0][0] = mat.m[0][0]; m[0][1] = mat.m[0][1]; m[0][2] = mat.m[0][2];
 		m[1][0] = mat.m[1][0]; m[1][1] = mat.m[1][1]; m[1][2] = mat.m[1][2];

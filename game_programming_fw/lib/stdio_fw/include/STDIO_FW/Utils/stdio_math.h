@@ -8,23 +8,23 @@ namespace stdio_fw
 		Vec2() : x(0.0f), y(0.0f){}
 		Vec2(float _x, float _y) : x(_x), y(_y) {}
 		Vec2(float * pArg) : x(pArg[0]), y(pArg[1]) {}
-		Vec2(Vec2 & Vec) : x(Vec.x), y(Vec.y) {}
+		Vec2(const Vec2 & Vec) : x(Vec.x), y(Vec.y) {}
 
 		//Vector's operations
 		float Length();
 		Vec2 & Normalize();
-		Vec2 operator + (Vec2 & Vec);
-		Vec2 & operator += (Vec2 & Vec);
+		Vec2 operator + (const Vec2 & Vec);
+		Vec2 & operator += (const Vec2 & Vec);
 		Vec2 operator - ();
-		Vec2 operator - (Vec2 & Vec);
-		Vec2 & operator -= (Vec2 & Vec);
+		Vec2 operator - (const Vec2 & Vec);
+		Vec2 & operator -= (const Vec2 & Vec);
 		Vec2 operator * (float k);
 		Vec2 & operator *= (float k);
 		Vec2 operator / (float k);
 		Vec2 & operator /= (float k);
-		Vec2 & operator = (Vec2 & Vec);
-		Vec2 Modulate(Vec2 & Vec);
-		float Dot(Vec2 & Vec);
+		Vec2 & operator = (const Vec2 & Vec);
+		Vec2 Modulate(const Vec2 & Vec);
+		float Dot(const Vec2 & Vec);
 
 		//access to elements
 		float operator [] (unsigned int idx);
@@ -34,33 +34,37 @@ namespace stdio_fw
 		float y;
 	};
 
+	struct Mat3;
 	struct Vec3
 	{
 		//Constructors
 		Vec3() : x(0.0f), y(0.0f), z(0.0f) {}
 		Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 		Vec3(float * pArg) : x(pArg[0]), y(pArg[1]), z(pArg[2]) {}
-		Vec3(Vec3 & Vec) : x(Vec.x), y(Vec.y), z(Vec.z) {}
+		Vec3(const Vec3 & Vec) : x(Vec.x), y(Vec.y), z(Vec.z) {}
 
 		//Vector's operations
 		float Length();
 		Vec3 & Normalize();
-		Vec3 operator + (Vec3 & Vec);
-		Vec3 & operator += (Vec3 & Vec);
+		Vec3 operator + (const Vec3 & Vec);
+		Vec3 & operator += (const Vec3 & Vec);
 		Vec3 operator - ();
-		Vec3 operator - (Vec3 & Vec);
-		Vec3 & operator -= (Vec3 & Vec);
+		Vec3 operator - (const Vec3 & Vec);
+		Vec3 & operator -= (const Vec3 & Vec);
 		Vec3 operator * (float k);
 		Vec3 & operator *= (float k);
 		Vec3 operator / (float k);
 		Vec3 & operator /= (float k);
-		Vec3 & operator = (Vec3 & Vec);
-		Vec3 Modulate(Vec3 & Vec);
-		float Dot(Vec3 & Vec);
-		Vec3 Cross(Vec3 & Vec);
+		Vec3 & operator = (const Vec3 & Vec);
+		Vec3 Modulate(const Vec3 & Vec);
+		float Dot(const Vec3 & Vec);
+		Vec3 Cross(const Vec3 & Vec);
 
 		// access to elements
 		float operator [] (unsigned int idx);
+
+		//matrix multiplication
+		Vec3 operator * (const Mat3 & m);
 
 		// data members
 		float x;
@@ -84,26 +88,26 @@ namespace stdio_fw
 		Mat3 & SetScale(float scale);
 		Mat3 & SetScale(float scaleX, float scaleY);
 		Mat3 & SetScale(float * pScale);
-		Mat3 & SetScale(Vec2 &scaleVec);
+		Mat3 & SetScale(const Vec2 &scaleVec);
 
 		Mat3 & SetTranslation(float x, float y);
 		Mat3 & SetTranslation(float *pTrans);
-		Mat3 & SetTranslation(Vec2 &vec);
+		Mat3 & SetTranslation(const Vec2 &vec);
 
 		Mat3 Transpose();
 
-		Mat3 operator + (Mat3 & mat);
-		Mat3 & operator += (Mat3 & mat);
-		Mat3 operator - (Mat3 & mat);
-		Mat3 &operator -= (Mat3 & mat);
+		Mat3 operator + (const Mat3 & mat);
+		Mat3 & operator += (const Mat3 & mat);
+		Mat3 operator - (const Mat3 & mat);
+		Mat3 &operator -= (const Mat3 & mat);
 
-		Mat3 operator * (Mat3 & mat);
+		Mat3 operator * (const Mat3 & mat);
 		Mat3 operator * (float k);
 		Mat3 & operator *= (float k);
 
-		Vec3 operator * (Vec3 & vec);
+		Vec3 operator * (const Vec3 & vec);
 
-		Mat3 & operator = (Mat3 & mat);
+		Mat3 & operator = (const Mat3 & mat);
 
 		//data members
 		float m[3][3];
