@@ -13,5 +13,5 @@ public:
 	virtual void			Init();
 	virtual void			Release();
 
-	virtual void			Transform();
+	virtual void			Transformation();
 };

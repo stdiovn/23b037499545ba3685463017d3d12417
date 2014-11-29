@@ -13,6 +13,9 @@ private:
 	Map*				m_map;
 	int					m_offset_position;
 	int					m_map_offset;
+
+	Image*				image;
+	int					offset_x, offset_y;
 public:
 	Game();
 	virtual				~Game();
