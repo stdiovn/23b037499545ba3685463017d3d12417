@@ -7,6 +7,9 @@
     <Filter Include="Video">
       <UniqueIdentifier>{a57b4f87-002e-42d6-bc6d-f86dfe47005b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{f76151fa-4f0d-4ac0-a848-e9677f2a980c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\STDIO_FW\stdio_fw.h" />
@@ -21,6 +24,12 @@
       <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="..\include\STDIO_FW\defined.h" />
+    <ClInclude Include="..\include\STDIO_FW\Video\Font.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STDIO_FW\Utils\stdio_math.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Core\Application.cpp">
@@ -31,6 +40,13 @@
     </ClCompile>
     <ClCompile Include="..\source\Video\Image.cpp">
       <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\stdio_fw.cpp" />
+    <ClCompile Include="..\source\Video\Font.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Utils\stdio_math.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

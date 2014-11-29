@@ -18,6 +18,12 @@ namespace stdio_fw
 		KEY_RELEASED = 0
 	};
 
+	enum FlippingFlag {
+		FLIP_NONE = 0x0L,
+		FLIP_X = 0x1L,
+		FLIP_Y = 0x2L
+	};
+
 	enum KeyCode
 	{
 		KEY_UNKNOWN = -1,
@@ -142,5 +148,6 @@ namespace stdio_fw
 		KEY_RIGHT_SUPER = 347,
 		KEY_MENU = 348,
 		KEY_LAST = KEY_MENU
-	};
+	};	
 }
+

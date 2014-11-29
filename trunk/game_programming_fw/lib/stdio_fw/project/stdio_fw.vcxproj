@@ -46,7 +46,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\include\STDIO_FW\;$(ProjectDir)..\..\glew\include\;$(ProjectDir)..\..\glfw3\include\;$(ProjectDir)..\..\vld\include\;$(ProjectDir)..\..\FreeImage\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\include\STDIO_FW\;$(ProjectDir)..\..\glew\include\;$(ProjectDir)..\..\glfw3\include\;$(ProjectDir)..\..\vld\include\;$(ProjectDir)..\..\FreeImage\;$(ProjectDir)..\..\FreeType\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdio_fw.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -71,11 +73,19 @@
     <ClInclude Include="..\include\STDIO_FW\defined.h" />
     <ClInclude Include="..\include\STDIO_FW\stdio_fw.h" />
     <ClInclude Include="..\include\STDIO_FW\macros.h" />
+    <ClInclude Include="..\include\STDIO_FW\Utils\stdio_math.h" />
+    <ClInclude Include="..\include\STDIO_FW\Video\Font.h" />
     <ClInclude Include="..\include\STDIO_FW\Video\Graphics.h" />
     <ClInclude Include="..\include\STDIO_FW\Video\Image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Core\Application.cpp" />
+    <ClCompile Include="..\source\stdio_fw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdio_fw.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\source\Utils\stdio_math.cpp" />
+    <ClCompile Include="..\source\Video\Font.cpp" />
     <ClCompile Include="..\source\Video\Graphics.cpp" />
     <ClCompile Include="..\source\Video\Image.cpp" />
   </ItemGroup>
