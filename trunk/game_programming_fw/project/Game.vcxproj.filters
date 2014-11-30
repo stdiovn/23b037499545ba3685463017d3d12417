@@ -6,5 +6,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
+    <ClCompile Include="..\source\stdafx.cpp" />
+    <ClCompile Include="..\source\main.cpp" />
   </ItemGroup>
 </Project>
