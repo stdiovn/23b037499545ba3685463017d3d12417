@@ -117,12 +117,12 @@ namespace stdio_fw
 	{
 		float uv[]
 		{
-			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
 			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
-			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
 			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
-			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
-			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight())
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
+			X2UVGL(src_x, img->getWidth()), Y2UVGL(src_y, img->getHeight()),
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y + src_h, img->getHeight()),
+			X2UVGL(src_x + src_w, img->getWidth()), Y2UVGL(src_y, img->getHeight())
 		};
 		draw(x, y, width, height, uv, img->m_texID, flipping);
 	}
@@ -172,7 +172,9 @@ namespace stdio_fw
 
 		// Compute vertices value
 		Vec3 v1(x, y, 1.0f);
-		Vec3 v2(x + width, y + height, 1.0f);
+		Vec3 v2(x + width, y, 1.0f);
+		Vec3 v3(x, y + height, 1.0f);
+		Vec3 v4(x + width, y + height, 1.0f);
 		if (m_listMat.empty() == false)
 		{
 			Mat3 finalMat;
@@ -186,16 +188,18 @@ namespace stdio_fw
 
 			v1 = v1 * finalMat;
 			v2 = v2 * finalMat;
+			v3 = v3 * finalMat;
+			v4 = v4 * finalMat;
 		}
 
 		// Compute vertices array
 		float vertices[] = {
 			XSCREEN2GL(v1.x, m_iScreenW), YSCREEN2GL(v1.y, m_iScreenH),
-			XSCREEN2GL(v1.x, m_iScreenW), YSCREEN2GL(v2.y, m_iScreenH),
-			XSCREEN2GL(v2.x, m_iScreenW), YSCREEN2GL(v2.y, m_iScreenH),
+			XSCREEN2GL(v3.x, m_iScreenW), YSCREEN2GL(v3.y, m_iScreenH),
+			XSCREEN2GL(v4.x, m_iScreenW), YSCREEN2GL(v4.y, m_iScreenH),
 			XSCREEN2GL(v1.x, m_iScreenW), YSCREEN2GL(v1.y, m_iScreenH),
-			XSCREEN2GL(v2.x, m_iScreenW), YSCREEN2GL(v2.y, m_iScreenH),
-			XSCREEN2GL(v2.x, m_iScreenW), YSCREEN2GL(v1.y, m_iScreenH)
+			XSCREEN2GL(v4.x, m_iScreenW), YSCREEN2GL(v4.y, m_iScreenH),
+			XSCREEN2GL(v2.x, m_iScreenW), YSCREEN2GL(v2.y, m_iScreenH)
 		};
 
 		GLint activeProgram = 0;
