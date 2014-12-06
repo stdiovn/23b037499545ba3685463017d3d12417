@@ -1,5 +1,8 @@
-#pragma once
-
+#ifndef __GAME_H__
+#define __GAME_H__
+#include "MapManager.h"
+#include "Sun.h"
+#include "SuperMan.h"
 using namespace stdio_fw;
 class Game : public Application
 {
@@ -12,4 +15,11 @@ public:
 
 	virtual void		Render(Graphics* g);
 	virtual void		Exit();
+protected:
+			CMapManager*m_mapManager;
+			CSun*		m_sun;
+			CSuperMan*	m_superMan;
+			Image*		m_congtratulation, *m_gameOver;
 };
+
+#endif

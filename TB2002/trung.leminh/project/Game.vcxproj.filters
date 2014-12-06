@@ -3,10 +3,79 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\Objects.h">
+      <Filter>BT1_BrickBreaker\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\source\Sun.h">
+      <Filter>BT1_BrickBreaker\Object\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Cloud.h">
+      <Filter>BT1_BrickBreaker\Object\Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\MapManager.h">
+      <Filter>BT1_BrickBreaker\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SuperMan.h">
+      <Filter>BT1_BrickBreaker\Object\SuperMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\CommonStructure.h">
+      <Filter>BT1_BrickBreaker\CommonStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Geometry.h">
+      <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\stdafx.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\Objects.cpp">
+      <Filter>BT1_BrickBreaker\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Sun.cpp">
+      <Filter>BT1_BrickBreaker\Object\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Cloud.cpp">
+      <Filter>BT1_BrickBreaker\Object\Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\MapManager.cpp">
+      <Filter>BT1_BrickBreaker\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\SuperMan.cpp">
+      <Filter>BT1_BrickBreaker\Object\SuperMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Geometry.cpp">
+      <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BT1_BrickBreaker">
+      <UniqueIdentifier>{2372c4ad-be08-4a99-b5de-30e43e763bb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object">
+      <UniqueIdentifier>{e784941a-70e8-4e42-84a5-5814b9eae320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\Cloud">
+      <UniqueIdentifier>{f2c0fb6c-2ed9-4da9-83b0-00799340273a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\CommonStructure">
+      <UniqueIdentifier>{f8e44d38-233c-4381-9589-6dae31512bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Math">
+      <UniqueIdentifier>{b82c7e9f-a041-41d0-9600-44f518012d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\Sun">
+      <UniqueIdentifier>{cd4e3f11-c812-4f27-807a-ef9722d310c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\MapManager">
+      <UniqueIdentifier>{f2d2a350-65e8-46f3-bee5-a17ffdbe8441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\SuperMan">
+      <UniqueIdentifier>{d55f4add-a413-49de-afc9-1dc036785d69}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
 </Project>
