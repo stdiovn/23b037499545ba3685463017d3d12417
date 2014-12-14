@@ -3,6 +3,8 @@
 using namespace stdio_fw;
 class Game : public Application
 {
+private:
+	CBall* ball;
 public:
 	Game();
 	virtual ~Game();
