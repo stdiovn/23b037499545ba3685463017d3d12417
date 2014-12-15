@@ -3,10 +3,117 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\BrickBreaker\Core\Vector2.h">
+      <Filter>Brick Breaker\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\Core\BBMacros.h">
+      <Filter>Brick Breaker\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\Core\KeyBuffer.h">
+      <Filter>Brick Breaker\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\Core\Default.h">
+      <Filter>Brick Breaker\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\Manager\BrickMap.h">
+      <Filter>Brick Breaker\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\Object.h">
+      <Filter>Brick Breaker\Objects\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\MoveObject.h">
+      <Filter>Brick Breaker\Objects\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\ControlableObject.h">
+      <Filter>Brick Breaker\Objects\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\StaticObject.h">
+      <Filter>Brick Breaker\Objects\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\Brick.h">
+      <Filter>Brick Breaker\Objects\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\Ball.h">
+      <Filter>Brick Breaker\Objects\Delivered</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\Bat.h">
+      <Filter>Brick Breaker\Objects\Delivered</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\ImmortalBrick.h">
+      <Filter>Brick Breaker\Objects\Delivered\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\NormalBrick.h">
+      <Filter>Brick Breaker\Objects\Delivered\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BrickBreaker\GameObject\Item.h">
+      <Filter>Brick Breaker\Objects\Delivered\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\stdafx.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\BrickBreaker\Core\KeyBuffer.cpp">
+      <Filter>Brick Breaker\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\GameObject\Ball.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\GameObject\Bat.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\GameObject\NormalBrick.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\GameObject\ImmortalBrickcpp.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\Core\Default.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\Manager\BrickMap.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\GameObject\MoveObject.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\GameObject\Brick.cpp">
+      <Filter>Brick Breaker\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BrickBreaker\GameObject\Item.cpp">
+      <Filter>Brick Breaker\Objects\Delivered\Items</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Brick Breaker">
+      <UniqueIdentifier>{02238021-a164-4651-beb4-1ed323d1ba3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Objects">
+      <UniqueIdentifier>{b9bc590a-3979-41a0-99c9-cdd5a3f7a354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Core">
+      <UniqueIdentifier>{f9d883fd-fc78-4b32-962f-215138905633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Singletons">
+      <UniqueIdentifier>{208af2c1-0e27-41d8-9d89-d36b56a8f3d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Manager">
+      <UniqueIdentifier>{11e7eab4-c8e8-4b61-89b6-f6c784a0f8c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Objects\Delivered">
+      <UniqueIdentifier>{5479f960-c800-4370-9f3c-6f5086cea124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Objects\Base">
+      <UniqueIdentifier>{e757f193-3a4b-413d-9bcb-8de3105577a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Objects\Delivered\Items">
+      <UniqueIdentifier>{b76bf885-8f4e-4e0e-9aed-6e7dedc58d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\Objects\Delivered\Bricks">
+      <UniqueIdentifier>{1f98c5b8-3daf-4c44-8a73-1ab2dd10a106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brick Breaker\cpp files">
+      <UniqueIdentifier>{7cce6262-a34c-41fe-b0ee-bfa2f2216e4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

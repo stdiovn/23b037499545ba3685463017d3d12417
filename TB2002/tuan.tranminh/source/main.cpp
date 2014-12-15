@@ -7,7 +7,7 @@
 void main()
 {
 	Game g;
-	g.Init(800, 600, "Game");
+	g.Init(SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, "Brick Breaker");
 
 	g.Run();
 }
