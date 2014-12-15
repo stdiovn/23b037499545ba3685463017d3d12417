@@ -1,6 +1,16 @@
-#pragma once
+#ifndef Game_h__
+#define Game_h__
+
+#include "BrickBreaker/GameObject/Bat.h"
+#include "BrickBreaker/GameObject/Ball.h"
+#include "BrickBreaker/Core/KeyBuffer.h"
+#include "BrickBreaker/Core/Default.h"
+#include "BrickBreaker/Manager/BrickMap.h"
+
+#include <vector>
 
 using namespace stdio_fw;
+
 class Game : public Application
 {
 public:
@@ -12,4 +22,11 @@ public:
 
 	virtual void		Render(Graphics* g);
 	virtual void		Exit();
+
+private:
+	Bat* _bat;
+	vector<Ball*> _balls;
+	Image* temp;
 };
+
+#endif // Game_h__
