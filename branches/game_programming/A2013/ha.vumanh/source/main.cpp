@@ -7,7 +7,7 @@
 void main()
 {
 	Game g;
-	g.Init(800, 600, "Game");
+	g.Init(950, 650, "Brick Breaker Demo");
 
 	g.Run();
 }
