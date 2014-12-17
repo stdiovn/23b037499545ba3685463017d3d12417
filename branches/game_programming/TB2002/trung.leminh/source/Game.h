@@ -1,8 +1,7 @@
 #ifndef __GAME_H__
 #define __GAME_H__
-#include "MapManager.h"
-#include "Sun.h"
-#include "SuperMan.h"
+#include "Ball.h"
+#include "Bar.h"
 using namespace stdio_fw;
 class Game : public Application
 {
@@ -12,14 +11,13 @@ public:
 
 	virtual ErrorCode	Init(int screenW, int screenH, const char* title);
 	virtual void		Update(float deltaTime);
-
 	virtual void		Render(Graphics* g);
 	virtual void		Exit();
+			void		UpdateInputHandle();
 protected:
-			CMapManager*m_mapManager;
-			CSun*		m_sun;
-			CSuperMan*	m_superMan;
-			Image*		m_congtratulation, *m_gameOver;
+	CBall*				m_miniBall;
+	CMoveableObject*	m_miniBar;
+	CMapmanager*		m_map;
 };
 
 #endif

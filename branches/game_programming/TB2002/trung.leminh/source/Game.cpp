@@ -1,12 +1,10 @@
 #include "stdafx.h"
-
 #include "Game.h"
-#include "Cloud.h"
-#include "Sun.h"
+#include "CommonStructure.h"
 
-
-e_Direction g_moveDirection = NONE;
-e_StateGame	g_statusGame = START;
+//----------------global variable-----------------------//
+e_Direction g_directionBar;		// using connect information 2 object file.
+//-----------------------------------------------------//
 
 Game::Game()
 {
@@ -30,22 +28,15 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
 	
-	//-----------scene-------------------//
-	m_mapManager		= new CMapManager();
-	m_mapManager		->Init();
-	//-----------------------------------//
+	m_miniBall = new CBall(BALL_FILE_PATH, s_vector2D(400, 400));
+	m_miniBall->Init();
+	m_miniBar	= new CBar(BAR_FILE_PATH,  s_vector2D(400, 500));
+	m_miniBar->Init();
+	
+	m_map = new CMapmanager();
+	m_map->Init();
 
-	m_sun				= new CSun();
-	m_sun				->Init();
 
-	m_superMan			= new CSuperMan();
-	m_superMan			->Init();
-
-	g_statusGame		= START;
-	m_congtratulation	= new Image("Finish.png");
-	m_congtratulation	->loadImage();
-	m_gameOver			= new Image("GameOver.png");
-	m_gameOver			->loadImage();
 	return errCode;
 }
 
@@ -57,27 +48,34 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 //---------------------------------------------------------------------------------------------------------------------------------
 void Game::Update(float deltaTime)
 {
-	m_sun			->Update(deltaTime);
-	m_superMan		->Update(deltaTime);
-	m_sun->UpdateCollision(m_mapManager, m_superMan);
-	m_mapManager	->Update(m_sun);
+	UpdateInputHandle();
+	m_miniBall	->Update(deltaTime);
+	m_miniBall->UpdateCollisionWithAllthingInMap((CBar*)m_miniBar, m_map);
+	m_miniBar	->Update(deltaTime);
 	
-	
-
-	//-----------STUPID CODE---------------------------//
-	// temp and stupid. But i will repair it.
-	if (getKeyState(KEY_RIGHT))
-	{
-		g_moveDirection = RIGHT;
-	}
-	if (getKeyState(KEY_LEFT))
-	{
-		g_moveDirection = LEFT;
-	}
-	//--------------------------------------------------//
+	m_map->Update(deltaTime, m_miniBall);
 
 	Sleep((DWORD)0.020); // frame honor ^^ I'm going to pro.
 }
+
+//--------------------------------------------------------------------------------------------------------------------------------//
+/// @description: Update Input handle. Exactly we have to update keyboard
+/// @parameter	: Nothing
+/// @return	    	: void
+/// @warning    	: No
+//--------------------------------------------------------------------------------------------------------------------------------//
+void Game::UpdateInputHandle()
+{
+	if (getKeyState(KEY_LEFT))
+	{
+		g_directionBar = e_Direction::LEFT_DIRECTION;
+	}
+	if (getKeyState(KEY_RIGHT))
+	{
+		g_directionBar = e_Direction::RIGHT_DIRECTION;
+	}
+}
+
 
 //--------------------------------------------------------------------------------------------------------------------------------
 /// @description: We are going to draw our world. We don't no couting in this funtion because this only using draw
@@ -87,24 +85,12 @@ void Game::Update(float deltaTime)
 //---------------------------------------------------------------------------------------------------------------------------------
 void Game::Render(Graphics* g)
 {
-	if (g_statusGame == START){
-		g->setClearColor(0xFFFFFFFF);
-		g->cleanScreen();
-
-		m_mapManager->Render(g);
-		m_sun->Render(g);
-		m_superMan->Render(g);
-	}
-	if (g_statusGame == END_GAMEOVER)
-	{
-		g->drawImage(m_gameOver, Rect(0, 0, m_gameOver->getWidth(), m_gameOver->getHeight()), 0);
-	}
-
-	if (g_statusGame == END_CONGTRATULATION)
-	{
-		g->drawImage(m_congtratulation, Rect(0, 0, m_congtratulation->getWidth(), m_congtratulation->getHeight()), 0);
-
-	}
+	g->setClearColor(0x0000FFFF);
+	g->cleanScreen();
+	m_miniBar	->Render(g);
+	m_miniBall	->Render(g);
+	m_map		->Render(g);
+	
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +101,6 @@ void Game::Render(Graphics* g)
 //---------------------------------------------------------------------------------------------------------------------------------
 void Game::Exit()
 {
-	m_sun		->Release();
-	m_superMan	->Release();
-	m_mapManager->Release();
+	m_miniBar->Release();
+	m_miniBall->Release();
 }

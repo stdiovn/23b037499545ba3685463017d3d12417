@@ -72,29 +72,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\Cloud.h" />
+    <ClInclude Include="..\source\AbstractItemObject.h" />
+    <ClInclude Include="..\source\AbstractObject.h" />
+    <ClInclude Include="..\source\Algebra.h" />
+    <ClInclude Include="..\source\AtomBoomItem.h" />
+    <ClInclude Include="..\source\Backgrounds.h" />
+    <ClInclude Include="..\source\Ball.h" />
+    <ClInclude Include="..\source\Bar.h" />
+    <ClInclude Include="..\source\BonusSeedBallItem.h" />
+    <ClInclude Include="..\source\Brick.h" />
+    <ClInclude Include="..\source\CloneBallItem.h" />
     <ClInclude Include="..\source\CommonStructure.h" />
-    <ClInclude Include="..\source\Geometry.h" />
-    <ClInclude Include="..\source\MapManager.h" />
-    <ClInclude Include="..\source\Sun.h" />
     <ClInclude Include="..\source\Game.h" />
-    <ClInclude Include="..\source\Objects.h" />
+    <ClInclude Include="..\source\Geometry.h" />
+    <ClInclude Include="..\source\Mapmanager.h" />
+    <ClInclude Include="..\source\MoveableObject.h" />
+    <ClInclude Include="..\source\StaticObject.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\SuperMan.h" />
+    <ClInclude Include="..\source\Stone.h" />
+    <ClInclude Include="..\source\Wood.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Cloud.cpp" />
-    <ClCompile Include="..\source\Geometry.cpp" />
-    <ClCompile Include="..\source\MapManager.cpp" />
-    <ClCompile Include="..\source\Sun.cpp" />
+    <ClCompile Include="..\source\AbstractItemObject.cpp" />
+    <ClCompile Include="..\source\AbstractObject.cpp" />
+    <ClCompile Include="..\source\Algebra.cpp" />
+    <ClCompile Include="..\source\AtomBoomItem.cpp" />
+    <ClCompile Include="..\source\Backgrounds.cpp" />
+    <ClCompile Include="..\source\Ball.cpp" />
+    <ClCompile Include="..\source\Bar.cpp" />
+    <ClCompile Include="..\source\BonusSeedBallItem.cpp" />
+    <ClCompile Include="..\source\Brick.cpp" />
+    <ClCompile Include="..\source\CloneBallItem.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
+    <ClCompile Include="..\source\Geometry.cpp" />
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\source\Objects.cpp" />
+    <ClCompile Include="..\source\Mapmanager.cpp" />
+    <ClCompile Include="..\source\MoveableObject.cpp" />
+    <ClCompile Include="..\source\StaticObject.cpp" />
     <ClCompile Include="..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\source\SuperMan.cpp" />
+    <ClCompile Include="..\source\Stone.cpp" />
+    <ClCompile Include="..\source\Wood.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

@@ -1,36 +1,38 @@
-//---------------------------------------------------//
-// When i created this class. I want to expand it and i think it's good for other people work.
-// Because it' easily to improve and expand
-
-#ifndef __C_MAPMANAGER_H__
-#define __C_MAPMANAGER_H__
-
-#include <fstream>
+#ifndef __MAP_MANAGER_H__
+#define __MAP_MANAGER_H__
+#include "Wood.h"
+#include "Stone.h"
+#include "Brick.h"
+#include "Ball.h"
 #include <vector>
-#include "Cloud.h"
-#include "Sun.h"
+#include <fstream>
 
-using namespace std;
-
-struct SMap	{
-	vector<CCloud*> m_cloud;
-	//...increase
+struct SMap{
+	wstring m_nameMap;
+	std::vector<CBrick*> m_brick;
+	SMap(wstring nameMap)
+	{
+		m_nameMap = L"Map1.txt";
+	};
 };
 
-class CMapManager
+class CMapmanager
 {
 public:
-	CMapManager();
-	~CMapManager();
+	CMapmanager();
+	~CMapmanager();
 
+	void loadMap();
+	//void reloadNap();
+
+	e_KindOfBrick getNameBrick(wstring name);
 	void Init();
-	void Update(CSun* sun);
+	void Update(float deltaTime, CBall* ball);
 	void Render(Graphics* g);
 	void Release();
 	SMap getMap();
-
 private:
 	SMap* m_map;
 };
 
-#endif	
+#endif
