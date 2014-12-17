@@ -1,105 +1,139 @@
 #include "stdafx.h"
-#include "Sun.h"
-#include "MapManager.h"
+#include "Mapmanager.h"
 #include "Geometry.h"
-#include <vector>
+
+using namespace std;
+
+CMapmanager::CMapmanager()
+{
+	m_map = new SMap(L"Map1.txt");
+}
+
+
+CMapmanager::~CMapmanager()
+{
 	
-extern e_StateGame g_statusGame;
-
-CMapManager::CMapManager()
-{
 }
 
 
-CMapManager::~CMapManager()
-{
-}
 
 //--------------------------------------------------------------------------------------------------------------------------------
-/// @description: Initialize all thing in map
+/// @description: Load data
 /// @parameter:   No
 /// @return type: void.
 /// @warning : 
 //---------------------------------------------------------------------------------------------------------------------------------
-void CMapManager::Init()
+void CMapmanager::loadMap()
 {
-	int		idCloud,
-			posCloudX,
-			posCloudY,
-			rectCloudX,
-			rectCloudY;
+
+	int		idBrick		= 0,
+			posBrickX	= 0,
+			posBrickY	= 0,
+			rectBrickX	= 0,
+			rectBrickY	= 0,
+			isCollis	= 0;
+	wstring	typeBrick;
 
 	// create local memory	
-	m_map = new SMap();
-	wfstream fileStream(L"MapOne_Cloud.txt");
+	
+	wfstream fileStream(m_map->m_nameMap);
 	if (fileStream.is_open())
 	{
 		while (!fileStream.eof())
 		{
-			fileStream >> idCloud >> posCloudX >> posCloudY >> rectCloudX >> rectCloudY;
-			m_map->m_cloud.push_back(new CCloud(posCloudX, posCloudY, 0, 0));
+			fileStream >> idBrick >> posBrickX >> posBrickY >> rectBrickX >> rectBrickY >> isCollis >> typeBrick;
+			switch (getNameBrick(typeBrick))
+			{
+			case WOOD_BRICK:
+				m_map->m_brick.push_back(new CWood(WOOD_FILE_PATH, s_vector2D(posBrickX, posBrickY)));
+				break;
+			case STONE_BRICK:
+				m_map->m_brick.push_back(new CStone(WOOD_FILE_PATH, STONE_FILE_PATH, s_vector2D(posBrickX, posBrickY)));
+				break;
+			default:
+				break;
+			}
+			
 		}
 	}
 }
 
+void CMapmanager::Init()
+{
+	loadMap();
+	for (int i = 0; i < m_map->m_brick.size(); i++)
+	{
+		m_map->m_brick[i]->Init();
+	}
+}
+
 //--------------------------------------------------------------------------------------------------------------------------------
-/// @description: Update all object in map with sun. This mean we check collision between sun and object in map
-/// @parameter:   CSun* sun
+/// @description: Update all object in map with ball. This mean we check collision between ball and object in map
+/// @parameter:   float deltaTime, CBall* ball
 /// @return type: void.
 /// @warning : 
 //---------------------------------------------------------------------------------------------------------------------------------
-void CMapManager::Update(CSun* sun)
+void CMapmanager::Update(float deltaTime, CBall* ball)
 {
 	// ----------------stupid idea----------------------------//
-	for (int i = 0; i < m_map->m_cloud.size(); i++)
+	for (int i = 0; i < m_map->m_brick.size(); i++)
 	{
-		if (checkIntersectRectangle(m_map->m_cloud[i]->getSizeRectOfObject(), sun->getSizeRectOfObject()))
+		if (m_map->m_brick[i])
 		{
-			CCloud* tempCloud = m_map->m_cloud[i];
-			(m_map->m_cloud).erase(m_map->m_cloud.begin() + i);
-			tempCloud->Release();
+			m_map->m_brick[i]->Update(deltaTime);
+			if (checkIntersectRectangle(m_map->m_brick[i]->getSizeRectOfObject(), ball->getSizeRectOfObject()))
+			{
+				if (m_map->m_brick[i]->getStateBrick() == e_StateBrick::STONE_BRICK_STATE)
+				{
+					m_map->m_brick[i]->setStateBrick(WOOD_BRICK_STATE);
+				}
+				else if (m_map->m_brick[i]->getStateBrick() == e_StateBrick::WOOD_BRICK_STATE)
+				{
+					CBrick* tempBrick = m_map->m_brick[i];
+					m_map->m_brick.erase(m_map->m_brick.begin() + i);
+					delete tempBrick;
+				}
+			}
 		}
 	}
 
-	if (m_map->m_cloud.size() <= 0)
+	if (m_map->m_brick.size() <= 0)
 	{
-		g_statusGame = END_CONGTRATULATION;
+		if (m_map->m_nameMap == L"Map1.txt")
+		{
+			m_map->m_nameMap = L"Map2.txt";
+			Init();
+		}
+
 	}
 }
+//------------------------------------------------//
+e_KindOfBrick CMapmanager::getNameBrick(wstring name)
+{
+	if (name == L"0T")
+		return WOOD_BRICK;
+	if (name == L"1T")
+		return STONE_BRICK;
 
-
-//--------------------------------------------------------------------------------------------------------------------------------
-/// @description: return some information of Map
-/// @parameter:   No
-/// @return type: SMap.
-/// @warning : 
-//---------------------------------------------------------------------------------------------------------------------------------
-SMap CMapManager::getMap()
+	printf("Don't specific type name brick");
+	exit(0);
+}
+//------------------------------------------------------//
+SMap CMapmanager::getMap()
 {
 	return *m_map;
 }
-
+//----------------------------------------------------//
 //--------------------------------------------------------------------------------------------------------------------------------
-/// @description: Render all thing in map. We only render cloud
+/// @description: Render all thing in map. We only render brick and stone
 /// @parameter:   Graphics* g
 /// @return type: void.
 /// @warning : 
 //---------------------------------------------------------------------------------------------------------------------------------
-void CMapManager::Render(Graphics* g)
+void CMapmanager::Render(Graphics* g)
 {
-	for (int i = 0; i < m_map->m_cloud.size(); i++)
+	for (int i = 0; i < m_map->m_brick.size(); i++)
 	{
-		m_map->m_cloud[i]->Render(g);
+		m_map->m_brick[i]->Render(g);
 	}
-}
-
-//--------------------------------------------------------------------------------------------------------------------------------
-/// @description: Release resource of all thing in map
-/// @parameter:   No
-/// @return type: void.
-/// @warning :	  Alway remember it
-//---------------------------------------------------------------------------------------------------------------------------------
-void CMapManager::Release()
-{
-	//delete[] &m_map->m_cloud;
 }

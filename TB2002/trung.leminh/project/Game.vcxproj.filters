@@ -1,52 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Objects.h">
-      <Filter>BT1_BrickBreaker\Object</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="..\source\Sun.h">
-      <Filter>BT1_BrickBreaker\Object\Sun</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Cloud.h">
-      <Filter>BT1_BrickBreaker\Object\Cloud</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\MapManager.h">
-      <Filter>BT1_BrickBreaker\MapManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\SuperMan.h">
-      <Filter>BT1_BrickBreaker\Object\SuperMan</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\CommonStructure.h">
       <Filter>BT1_BrickBreaker\CommonStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\AbstractObject.h">
+      <Filter>BT1_BrickBreaker\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Algebra.h">
+      <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\MoveableObject.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Backgrounds.h">
+      <Filter>BT1_BrickBreaker\Object\StaticObject\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Bar.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Bar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\StaticObject.h">
+      <Filter>BT1_BrickBreaker\Object\StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Ball.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Ball</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Geometry.h">
       <Filter>BT1_BrickBreaker\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\AbstractItemObject.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BonusSeedBallItem.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item\BonusSpeedItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\CloneBallItem.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item\CloneItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Game.h">
+      <Filter>BT1_BrickBreaker\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Wood.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Brick\Wood</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Stone.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Brick\Stone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Brick.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Mapmanager.h">
+      <Filter>BT1_BrickBreaker\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\AtomBoomItem.h">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item\BoomItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\stdafx.cpp" />
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\source\Objects.cpp">
+    <ClCompile Include="..\source\AbstractObject.cpp">
       <Filter>BT1_BrickBreaker\Object</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Sun.cpp">
-      <Filter>BT1_BrickBreaker\Object\Sun</Filter>
+    <ClCompile Include="..\source\Algebra.cpp">
+      <Filter>BT1_BrickBreaker\Math</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Cloud.cpp">
-      <Filter>BT1_BrickBreaker\Object\Cloud</Filter>
+    <ClCompile Include="..\source\MoveableObject.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\MapManager.cpp">
-      <Filter>BT1_BrickBreaker\MapManager</Filter>
+    <ClCompile Include="..\source\Backgrounds.cpp">
+      <Filter>BT1_BrickBreaker\Object\StaticObject\Background</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\SuperMan.cpp">
-      <Filter>BT1_BrickBreaker\Object\SuperMan</Filter>
+    <ClCompile Include="..\source\Bar.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Bar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\StaticObject.cpp">
+      <Filter>BT1_BrickBreaker\Object\StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Ball.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Ball</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Geometry.cpp">
       <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\AbstractItemObject.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BonusSeedBallItem.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item\BonusSpeedItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\CloneBallItem.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item\CloneItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Game.cpp">
+      <Filter>BT1_BrickBreaker\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wood.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Brick\Wood</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Stone.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Brick\Stone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Brick.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Mapmanager.cpp">
+      <Filter>BT1_BrickBreaker\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\AtomBoomItem.cpp">
+      <Filter>BT1_BrickBreaker\Object\MoveableObject\Item\BoomItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,26 +120,64 @@
     <Filter Include="BT1_BrickBreaker\Object">
       <UniqueIdentifier>{e784941a-70e8-4e42-84a5-5814b9eae320}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BT1_BrickBreaker\Object\Cloud">
-      <UniqueIdentifier>{f2c0fb6c-2ed9-4da9-83b0-00799340273a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BT1_BrickBreaker\CommonStructure">
       <UniqueIdentifier>{f8e44d38-233c-4381-9589-6dae31512bdb}</UniqueIdentifier>
     </Filter>
     <Filter Include="BT1_BrickBreaker\Math">
       <UniqueIdentifier>{b82c7e9f-a041-41d0-9600-44f518012d35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BT1_BrickBreaker\Object\Sun">
-      <UniqueIdentifier>{cd4e3f11-c812-4f27-807a-ef9722d310c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BT1_BrickBreaker\MapManager">
       <UniqueIdentifier>{f2d2a350-65e8-46f3-bee5-a17ffdbe8441}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BT1_BrickBreaker\Object\SuperMan">
-      <UniqueIdentifier>{d55f4add-a413-49de-afc9-1dc036785d69}</UniqueIdentifier>
+    <Filter Include="BT1_BrickBreaker\Object\StaticObject">
+      <UniqueIdentifier>{6ca03fbf-7c78-4269-a820-a8ac94dc70ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\StaticObject\Background">
+      <UniqueIdentifier>{8a3c06b3-fd1a-4fc7-9e8d-4a85ec30f50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject">
+      <UniqueIdentifier>{cd583c09-3649-46ed-bf4b-d761b6c52ec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Bar">
+      <UniqueIdentifier>{9e18af10-d498-4b03-aded-1952f9c094d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Ball">
+      <UniqueIdentifier>{faa39534-bcb1-4afa-a356-f45fa706a401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Item">
+      <UniqueIdentifier>{c0c21126-fe37-4c99-9622-3596ca4ff377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\DesignPater">
+      <UniqueIdentifier>{f2d47c78-848c-4670-8c21-ab7b4a16f280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\DesignPater\Factory">
+      <UniqueIdentifier>{8fc51012-9fcf-4891-93ee-7c206c3b5a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Item\BoomItem">
+      <UniqueIdentifier>{d73a6b94-76b1-40a3-9113-c7ebfda5d507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Item\CloneItem">
+      <UniqueIdentifier>{5baf29eb-f1f4-451d-b6cf-5663a0f6587a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Item\BonusSpeedItem">
+      <UniqueIdentifier>{d51f55e8-2621-4eda-8d38-b821dc33b350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Brick">
+      <UniqueIdentifier>{ce3013a5-fb8c-42be-97fc-02629e6272ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Game">
+      <UniqueIdentifier>{1780cd07-5460-4bf8-a351-9e5f47ebf90d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Brick\Stone">
+      <UniqueIdentifier>{a02e1b36-092c-425a-9203-0ef018675df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Object\MoveableObject\Brick\Wood">
+      <UniqueIdentifier>{2f041997-c0c4-4d7f-9f7c-96eead14ba25}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Game.rc" />
+    <ResourceCompile Include="Game.rc">
+      <Filter>BT1_BrickBreaker\Game</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
