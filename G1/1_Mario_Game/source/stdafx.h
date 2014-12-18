@@ -17,3 +17,5 @@
 #pragma comment(lib, "stdio_fw.lib")
 
 #include "STDIO_FW\stdio_fw.h"
+
+#include "config.h"

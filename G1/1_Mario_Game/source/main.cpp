@@ -7,7 +7,7 @@
 void main()
 {
 	Game g;
-	g.Init(800, 600, "Game");
+	g.Init(SCREEN_WIDTH, SCREEN_HEIGHT, "Game");
 
 	g.Run();
 }

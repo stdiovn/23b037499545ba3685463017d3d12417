@@ -72,15 +72,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\config.h" />
     <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\Quadtree.h" />
     <ClInclude Include="..\source\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\Quadtree.cpp" />
     <ClCompile Include="..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\source\Note.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

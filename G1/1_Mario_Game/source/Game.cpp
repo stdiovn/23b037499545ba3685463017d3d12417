@@ -21,7 +21,12 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 
 void Game::Update(float deltaTime)
 {
-	
+
+	/////////////////////////////////////////////////
+	//Coder: Rye
+	//Purpose: manage FPS
+	if(1000.0f / FPS > deltaTime)
+		Sleep(1000.0f / FPS - deltaTime);
 }
 
 void Game::Render(Graphics* g)
