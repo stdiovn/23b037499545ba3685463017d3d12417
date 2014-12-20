@@ -70,6 +70,11 @@ enum e_KindOfBrick
 	STONE_BRICK
 };
 
+enum EStateKey
+{
+	KEY_PRESS		= 1,
+	KEY_RELEASE		= 0
+};
 
 #define WOOD_FILE_PATH		"Mozukai.png"
 #define STONE_FILE_PATH		"Iwa.png"
