@@ -1,8 +1,15 @@
 #pragma once
+#include "Object.h"
+#include "StaticObject.h"
+#include "MoveableObject.h"
 
 using namespace stdio_fw;
 class Game : public Application
 {
+protected:
+	StaticObject *mBackground;
+	MoveableObject *mBrick;
+	MoveableObject *mBall;
 public:
 	Game();
 	virtual ~Game();
