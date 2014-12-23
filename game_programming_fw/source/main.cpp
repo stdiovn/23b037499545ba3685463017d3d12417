@@ -7,7 +7,7 @@
 void main()
 {
 	Game g;
-	g.Init(800, 600, "Game");
+	g.init(800, 600, "Game");
 
-	g.Run();
+	g.run();
 }
