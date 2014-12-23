@@ -12,24 +12,29 @@ Game::~Game()
 
 }
 
-ErrorCode Game::Init(int screenW, int screenH, const char* title)
+ErrorCode Game::init(int screenW, int screenH, const char* title)
 {
-	ErrorCode errCode = Application::Init(screenW, screenH, title);	
+	ErrorCode errCode = Application::init(screenW, screenH, title);	
 
 	return errCode;
 }
 
-void Game::Update(float deltaTime)
+void Game::update(float deltaTime)
 {
 	
 }
 
-void Game::Render(Graphics* g)
+void Game::render(Graphics* g)
 {
-	g->cleanScreen();	
+	g->cleanScreen();
 }
 
-void Game::Exit()
+void Game::exit()
 {
 	
+}
+
+void Game::onKeyProc(KeyCode key, KeyState state)
+{
+	printf("Key: %c - State: %d\n", key, state);
 }
