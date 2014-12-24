@@ -1,5 +1,8 @@
 #pragma once
+
 #include "AbstractBrick.h"
+
+
 class NormalBrick :
 	public AbstractBrick
 {

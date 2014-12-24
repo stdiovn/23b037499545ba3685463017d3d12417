@@ -1,5 +1,7 @@
 #pragma once
 #include "AbstractBrick.h"
+
+
 class ImmortalBrick :
 	public AbstractBrick
 {

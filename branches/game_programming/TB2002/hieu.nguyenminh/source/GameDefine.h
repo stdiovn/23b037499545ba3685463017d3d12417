@@ -1,0 +1,11 @@
+#pragma once
+
+enum ObjectID
+{
+	ID_BACKGROUND = 0,
+	ID_BALL,
+	ID_BAR,
+	ID_NORMALBRICK,
+	ID_IMMORTALBRICK,
+	ID_EXPLOSIVEBRICK,
+};

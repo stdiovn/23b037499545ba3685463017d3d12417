@@ -41,8 +41,8 @@ void Game::Update(float deltaTime)
 
 	}
 
-	mBall->Update();
-	mBrick->Update();
+	mBall->Update(deltaTime);
+	mBrick->Update(deltaTime);
 }
 
 void Game::Render(Graphics* g)

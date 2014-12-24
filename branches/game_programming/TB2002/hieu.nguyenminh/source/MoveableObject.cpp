@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MoveableObject.h"
+#include "GameDefine.h"
 
 
 MoveableObject::MoveableObject()
@@ -14,25 +15,25 @@ MoveableObject::~MoveableObject()
 
 void MoveableObject::Dead()
 {
-	_isDead = true;
+	m_isDead = true;
 }
 
 
-void MoveableObject::Update()
+void MoveableObject::Update(float deltaTime)
 {
-	if (!_isDead)
+	if (!m_isDead)
 	{
-		mPosition.x += _vx;
-		mPosition.y += _vy;
+		m_Position.x += m_vx;
+		m_Position.y += m_vy;
 	}
 }
 
 
 void MoveableObject::Render(Graphics *g)
 {
-	if (!_isDead)
+	if (!m_isDead)
 	{
-		g->drawImage(*mImage, mPosition.x, mPosition.y);
+		g->drawImage(*m_Image, m_Position.x, m_Position.y);
 	}
 }
 
@@ -40,10 +41,10 @@ void MoveableObject::Render(Graphics *g)
 Rect MoveableObject::getBound()
 {
 	Rect _rect;
-	_rect.x = mPosition.x;
-	_rect.y = mPosition.y;
-	_rect.width = (*mImage)->getWidth();
-	_rect.height = (*mImage)->getHeight();
+	_rect.x = m_Position.x;
+	_rect.y = m_Position.y;
+	_rect.width = (*m_Image)->getWidth();
+	_rect.height = (*m_Image)->getHeight();
 
 	return _rect;
 }

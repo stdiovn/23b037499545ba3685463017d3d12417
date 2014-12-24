@@ -78,6 +78,7 @@
     <ClInclude Include="..\source\Collision.h" />
     <ClInclude Include="..\source\ExplosiveBrick.h" />
     <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\GameDefine.h" />
     <ClInclude Include="..\source\ImmortalBrick.h" />
     <ClInclude Include="..\source\MoveableObject.h" />
     <ClInclude Include="..\source\NormalBrick.h" />
