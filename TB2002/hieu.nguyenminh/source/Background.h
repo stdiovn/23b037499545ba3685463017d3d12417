@@ -1,15 +1,20 @@
 #pragma once
+
 #include "StaticObject.h"
+
+using namespace stdio_fw;
+
+
 class Background :
 	public StaticObject
 {
 protected:
-	Image** mImage;
+	Image** m_Image;
 public:
 	Background();
 	Background(Image *_image_Backgound);
-	virtual void Update();
-	virtual void Render(Graphics *g);
+	virtual void Update(float deltaTime) override;
+	virtual void Render(Graphics *g) override;
 	virtual ~Background();
 };
 

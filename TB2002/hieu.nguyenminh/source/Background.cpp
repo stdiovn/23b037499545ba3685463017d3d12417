@@ -1,34 +1,36 @@
 #include "stdafx.h"
 #include "Background.h"
 #include "Resources.h"
+#include "GameDefine.h"
+
 
 Background::Background()
 {
-	mPosition.x = 0;
-	mPosition.y = 0;
-	mImage = &_image_BackGround;
+	m_Position.x = 0;
+	m_Position.y = 0;
+	m_Image = &_image_Background;
 }
 
 Background::Background(Image *_image_Backgound)
 {
-	mPosition.x = 0;
-	mPosition.y = 0;
-	mImage = &_image_Backgound;
+	m_Position.x = 0;
+	m_Position.y = 0;
+	m_Image = &_image_Backgound;
 }
 
 
 Background::~Background()
 {
-	delete mImage;
+	delete m_Image;
 }
 
 
-void Background::Update()
+void Background::Update(float deltaTime)
 {
 }
 
 
 void Background::Render(Graphics *g)
 {
-	g->drawImage(*mImage, Rect(0, 0, 800, 600));
+	g->drawImage(*m_Image, Rect(0, 0, 800, 600));
 }

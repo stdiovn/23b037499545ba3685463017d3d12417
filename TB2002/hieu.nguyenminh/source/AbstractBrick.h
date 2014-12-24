@@ -1,5 +1,7 @@
 #pragma once
 #include "MoveableObject.h"
+
+
 class AbstractBrick :
 	public MoveableObject
 {

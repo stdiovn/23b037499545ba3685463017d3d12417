@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "ImmortalBrick.h"
+#include "Resources.h"
+#include "GameDefine.h"
 
 
 ImmortalBrick::ImmortalBrick()
