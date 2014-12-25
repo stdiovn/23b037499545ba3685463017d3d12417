@@ -14,14 +14,17 @@ protected:
 	Vec2 m_Position;
 	Image **m_Image;
 	bool m_isDead;
-	float m_vx;
-	float m_vy;
+	Vec2 m_Velocity;
 public:
 	MoveableObject();
-	~MoveableObject();
-	virtual void Dead();
-	virtual void Update(float deltaTime);
-	virtual void Render(Graphics *g);
+	virtual ~MoveableObject();
+	MoveableObject(Vec2 _Position, Vec2 _Velocity);
+	virtual ObjectID getID();
+	virtual void setDead();
+	virtual void update(float deltaTime) override = 0;
+	virtual void render(Graphics *g) override;
 	virtual Rect getBound();
+	virtual Vec2 getPositionLeftTop();
+	virtual Vec2 getPositionRightBottom();
 };
 

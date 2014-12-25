@@ -4,19 +4,22 @@
 #include "MoveableObject.h"
 
 using namespace stdio_fw;
+
 class Game : public Application
 {
 protected:
-	StaticObject *mBackground;
-	MoveableObject *mBrick;
-	MoveableObject *mBall;
+	StaticObject *m_Background;
+	MoveableObject *m_Brick;
+	MoveableObject *m_Ball;
+	MoveableObject *m_Bar;
 public:
 	Game();
 	virtual ~Game();
 
-	virtual ErrorCode	Init(int screenW, int screenH, const char* title);
-	virtual void		Update(float deltaTime);
+	virtual ErrorCode	init(int screenW, int screenH, const char* title);
+	virtual void		update(float deltaTime);
 
-	virtual void		Render(Graphics* g);
-	virtual void		Exit();
+	virtual void		render(Graphics* g);
+	virtual void		onKeyProc(KeyCode key, KeyState state);
+	virtual void		exit();
 };

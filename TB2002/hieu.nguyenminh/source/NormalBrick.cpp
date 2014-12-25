@@ -6,22 +6,16 @@
 
 NormalBrick::NormalBrick()
 {
-	m_Position.x = 0;
-	m_Position.y = 0;
-	m_isDead = false;
+	m_ID = ID_NORMALBRICK;
 	m_Image = &_image_NormalBrick;
-	m_vx = 0;
-	m_vy = 0;
+
 }
 
-NormalBrick::NormalBrick(float x, float y)
+NormalBrick::NormalBrick(Vec2 _Position) : AbstractBrick(_Position)
 {
-	m_Position.x = x;
-	m_Position.y = y;
-	m_isDead = false;
+	m_ID = ID_NORMALBRICK;
 	m_Image = &_image_NormalBrick;
-	m_vx = 0;
-	m_vy = 0;
+
 }
 
 
@@ -29,3 +23,7 @@ NormalBrick::~NormalBrick()
 {
 }
 
+void NormalBrick::update(float deltaTime)
+{
+
+}

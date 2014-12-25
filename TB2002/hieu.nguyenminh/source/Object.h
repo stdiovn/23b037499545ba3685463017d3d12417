@@ -6,8 +6,8 @@ class Object
 {
 public:
 	Object();
-	virtual void Update(float deltaTime) = 0;
-	virtual void Render(Graphics *g) = 0;
 	virtual ~Object();
+	virtual void update(float deltaTime) = 0;
+	virtual void render(Graphics *g) = 0;
 };
 

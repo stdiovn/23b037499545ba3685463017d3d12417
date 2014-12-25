@@ -4,6 +4,7 @@
 #include "Resources.h"
 #include "Background.h"
 #include "Ball.h"
+#include "Bar.h"
 #include "NormalBrick.h"
 #include "Collision.h"
 
@@ -17,43 +18,53 @@ Game::~Game()
 
 }
 
-ErrorCode Game::Init(int screenW, int screenH, const char* title)
+ErrorCode Game::init(int screenW, int screenH, const char* title)
 {
-	ErrorCode errCode = Application::Init(screenW, screenH, title);	
+	ErrorCode errCode = Application::init(screenW, screenH, title);	
 
 	InitImage();
-	mBackground = new Background();
-	mBall = new Ball(5, 400);
-	mBrick = new NormalBrick(500, 400);
+	m_Background = new Background();
+	m_Ball = new Ball(Vec2(400, 500), Vec2(0.7, 0.7));
+	m_Bar = new Bar(Vec2(400, 300), Vec2(2, 0));
+	//m_Brick = new NormalBrick(Vec2(5, 5));
 
 	return errCode;
 }
 
-void Game::Update(float deltaTime)
+void Game::update(float deltaTime)
 {
-	if (isCollided(mBall->getBound(), mBrick->getBound()))
+	if (getKeyState(KEY_LEFT) == KEY_PRESSED)
 	{
-		mBrick->Dead();
+		((Bar*)m_Bar)->moveLeft(deltaTime);
 	}
 
-	if (getKeyState(KEY_A) == KEY_PRESSED)
+	if (getKeyState(KEY_RIGHT) == KEY_PRESSED)
 	{
-
+		((Bar*)m_Bar)->moveRight(deltaTime);
 	}
 
-	mBall->Update(deltaTime);
-	mBrick->Update(deltaTime);
+	m_Ball->update(deltaTime);
+	((Ball*)m_Ball)->CollisionBehavior(m_Bar);
+	//((Ball*)m_Ball)->CollisionBehavior(m_Brick);
+	
 }
 
-void Game::Render(Graphics* g)
+void Game::render(Graphics* g)
 {
 	g->cleanScreen();	
-	mBackground->Render(g);
-	mBall->Render(g);
-	mBrick->Render(g);
+	m_Background->render(g);
+	m_Ball->render(g);
+	m_Bar->render(g);
+	//m_Brick->render(g);
 }
 
-void Game::Exit()
+void Game::exit()
 {
 	
+}
+
+
+void Game::onKeyProc(KeyCode key, KeyState state)
+{
+
 }

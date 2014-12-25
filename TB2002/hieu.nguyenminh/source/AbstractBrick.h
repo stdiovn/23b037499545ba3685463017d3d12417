@@ -8,5 +8,6 @@ class AbstractBrick :
 public:
 	AbstractBrick();
 	virtual ~AbstractBrick();
+	AbstractBrick(Vec2 _Position);
 };
 

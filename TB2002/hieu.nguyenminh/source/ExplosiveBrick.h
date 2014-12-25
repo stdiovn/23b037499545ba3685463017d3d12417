@@ -7,6 +7,6 @@ class ExplosiveBrick :
 {
 public:
 	ExplosiveBrick();
-	~ExplosiveBrick();
+	virtual ~ExplosiveBrick();
 };
 

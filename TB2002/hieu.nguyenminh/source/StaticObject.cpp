@@ -11,3 +11,8 @@ StaticObject::StaticObject()
 StaticObject::~StaticObject()
 {
 }
+
+ObjectID StaticObject::getID()
+{
+	return m_ID;
+}

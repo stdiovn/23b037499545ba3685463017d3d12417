@@ -2,9 +2,10 @@
 
 using namespace stdio_fw;
 
-enum Collision
+enum CollisionDirection
 {
-	COLLISION_LEFT = 0,
+	COLLISION_NONE =0,
+	COLLISION_LEFT,
 	COLLISION_RIGHT,
 	COLLISION_TOP,
 	COLLISION_BOTTOM
@@ -12,3 +13,5 @@ enum Collision
 
 
 bool isCollided(Rect _rect1, Rect _rect2);
+
+CollisionDirection getCollisionDirection(Rect _rect1, Rect _rect2);

@@ -8,7 +8,8 @@ class NormalBrick :
 {
 public:
 	NormalBrick();
-	NormalBrick(float x, float y);
+	NormalBrick(Vec2 _Position);
 	virtual ~NormalBrick();
+	virtual void update(float deltaTime) override;
 };
 
