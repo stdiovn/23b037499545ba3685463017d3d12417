@@ -12,3 +12,8 @@ ExplosiveBrick::ExplosiveBrick()
 ExplosiveBrick::~ExplosiveBrick()
 {
 }
+
+void ExplosiveBrick::update(float deltaTime)
+{
+
+}

@@ -71,3 +71,9 @@ Vec2 MoveableObject::getPositionRightBottom()
 
 	return _RightBottom;
 }
+
+
+bool MoveableObject::isDead()
+{
+	return m_isDead;
+}

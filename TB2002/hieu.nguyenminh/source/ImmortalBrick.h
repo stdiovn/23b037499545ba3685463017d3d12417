@@ -8,5 +8,6 @@ class ImmortalBrick :
 public:
 	ImmortalBrick();
 	virtual ~ImmortalBrick();
+	virtual void update(float deltaTime) override;
 };
 
