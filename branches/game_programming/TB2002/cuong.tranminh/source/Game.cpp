@@ -37,13 +37,13 @@ void Game::update(float deltaTime)
 		if (Collision(ball.getRect(), bar.getRect()) || Collision(bar.getRect(), ball.getRect()))ball.setDirection(EN);
 	}
 	if (Collision(ball.getRect(), bar.getRect()) || Collision(bar.getRect(), ball.getRect()))ball.setDirection(ball.getDirection());
-	for each(Brick brick in ArrBrick)
+	for (int i = 0; i < ArrBrick.size(); i++)
 	{
-		if (Collision(ball.getRect(), brick.getRect()) && br.getalive())
+		if (Collision(ball.getRect(), ArrBrick[i].getRect()) && br.getalive())
 		{
 	
 			ball.setalive(ball.getDirection());
-			brick.setalive(false);
+			ArrBrick[i].setalive(false);
 		}
 	}
 	
