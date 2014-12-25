@@ -12,9 +12,9 @@ protected:
 	Image** m_Image;
 public:
 	Background();
-	Background(Image *_image_Backgound);
-	virtual void Update(float deltaTime) override;
-	virtual void Render(Graphics *g) override;
 	virtual ~Background();
+	Background(Image *_image_Backgound);
+	virtual void update(float deltaTime) override;
+	virtual void render(Graphics *g) override;
 };
 

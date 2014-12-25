@@ -7,37 +7,37 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\source\MoveableObject.h">
-      <Filter>GameObject\Object\MoveableObject</Filter>
+      <Filter>GameObject\MoveableObject</Filter>
     </ClInclude>
     <ClInclude Include="..\source\StaticObject.h">
-      <Filter>GameObject\Object\StaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Object.h">
-      <Filter>GameObject\Object</Filter>
+      <Filter>GameObject\StaticObject</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Collision.h" />
     <ClInclude Include="..\source\Background.h">
-      <Filter>GameObject\Object\StaticObject</Filter>
+      <Filter>GameObject\StaticObject</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Bar.h">
-      <Filter>GameObject\Object\MoveableObject</Filter>
+      <Filter>GameObject\MoveableObject</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Ball.h">
-      <Filter>GameObject\Object\MoveableObject</Filter>
+      <Filter>GameObject\MoveableObject</Filter>
     </ClInclude>
     <ClInclude Include="..\source\AbstractBrick.h">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="..\source\ExplosiveBrick.h">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="..\source\ImmortalBrick.h">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="..\source\NormalBrick.h">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="..\source\GameDefine.h" />
+    <ClInclude Include="..\source\Object.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
@@ -47,35 +47,35 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\source\MoveableObject.cpp">
-      <Filter>GameObject\Object\MoveableObject</Filter>
+      <Filter>GameObject\MoveableObject</Filter>
     </ClCompile>
     <ClCompile Include="..\source\StaticObject.cpp">
-      <Filter>GameObject\Object\StaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Object.cpp">
-      <Filter>GameObject\Object</Filter>
+      <Filter>GameObject\StaticObject</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Collision.cpp" />
     <ClCompile Include="..\source\Background.cpp">
-      <Filter>GameObject\Object\StaticObject</Filter>
+      <Filter>GameObject\StaticObject</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Bar.cpp">
-      <Filter>GameObject\Object\MoveableObject</Filter>
+      <Filter>GameObject\MoveableObject</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Ball.cpp">
-      <Filter>GameObject\Object\MoveableObject</Filter>
+      <Filter>GameObject\MoveableObject</Filter>
     </ClCompile>
     <ClCompile Include="..\source\AbstractBrick.cpp">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
     </ClCompile>
     <ClCompile Include="..\source\ExplosiveBrick.cpp">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
     </ClCompile>
     <ClCompile Include="..\source\ImmortalBrick.cpp">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
     </ClCompile>
     <ClCompile Include="..\source\NormalBrick.cpp">
-      <Filter>GameObject\Object\MoveableObject\Brick</Filter>
+      <Filter>GameObject\MoveableObject\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Object.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,17 +85,14 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{8ea5db2b-2654-4314-9f8f-ccaa73f61390}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Object">
-      <UniqueIdentifier>{edf4c780-bf98-45e8-9cc9-e234873707d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Object\MoveableObject">
+    <Filter Include="GameObject\MoveableObject">
       <UniqueIdentifier>{6ce4dac3-c723-4617-a36a-c7d7578eea51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Object\StaticObject">
-      <UniqueIdentifier>{d54a9c2c-a799-46fc-a2c0-ec08daa99bdb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Object\MoveableObject\Brick">
+    <Filter Include="GameObject\MoveableObject\Brick">
       <UniqueIdentifier>{5a29ad07-e797-4bed-95cb-7d07011f495f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\StaticObject">
+      <UniqueIdentifier>{d54a9c2c-a799-46fc-a2c0-ec08daa99bdb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

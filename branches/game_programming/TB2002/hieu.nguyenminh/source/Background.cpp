@@ -25,12 +25,12 @@ Background::~Background()
 }
 
 
-void Background::Update(float deltaTime)
+void Background::update(float deltaTime)
 {
 }
 
 
-void Background::Render(Graphics *g)
+void Background::render(Graphics *g)
 {
 	g->drawImage(*m_Image, Rect(0, 0, 800, 600));
 }
