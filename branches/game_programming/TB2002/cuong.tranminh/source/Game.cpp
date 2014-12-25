@@ -26,6 +26,7 @@ ErrorCode Game::init(int screenW, int screenH, const char* title)
 
 void Game::update(float deltaTime)
 {
+
 	if (getKeyState(KEY_LEFT))
 	{
 		bar.moveleft();
