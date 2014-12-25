@@ -46,8 +46,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\vld\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\vld\include;$(ProjectDir)..\lib\FreeType\include\;$(ProjectDir)..\lib\stdio_fw\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -71,15 +71,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\Ball.h" />
+    <ClInclude Include="..\source\Bar.h" />
+    <ClInclude Include="..\source\BaseObject.h" />
+    <ClInclude Include="..\source\Brick.h" />
+    <ClInclude Include="..\source\DynamicObject.h" />
     <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\Images.h" />
+    <ClInclude Include="..\source\Objects.h" />
     <ClInclude Include="..\source\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\Ball.cpp" />
+    <ClCompile Include="..\source\Bar.cpp" />
+    <ClCompile Include="..\source\BaseObject.cpp" />
+    <ClCompile Include="..\source\Brick.cpp" />
+    <ClCompile Include="..\source\DynamicObject.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\data\Images\ball.png" />
+    <Image Include="..\data\Images\brick.png" />
+    <Image Include="..\data\Images\GreenBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\data\Map\map1.inp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
