@@ -12,6 +12,7 @@ using namespace stdio_fw;
 #define BALL_SIZE_HEIGHT 10
 #define BALL_RESOURCE	"resource//ball.png"
 #define BALL_DEFAULT_SPEED	(SPEED_DEFAULT / 4.0)
+#define BALL_SPEED_CAP	5
 
 enum BallStatus
 {

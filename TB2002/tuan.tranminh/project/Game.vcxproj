@@ -40,14 +40,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\bin\</OutDir>
-    <IncludePath>E:\Game Dev\B2 Projects\lib\stdio_fw\include\STDIO_FW\Core;E:\Game Dev\B2 Projects\lib\stdio_fw\include\STDIO_FW;E:\Game Dev\B2 Projects\lib\FreeImage;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\lib\freetype\include;$(ProjectDir)..\lib\stdio_fw\include\STDIO_FW\Core;$(ProjectDir)..\lib\stdio_fw\include\STDIO_FW;$(ProjectDir)..\lib\FreeImage;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\Game Dev\B2 Projects\source;$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\vld\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\source;$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\vld\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>

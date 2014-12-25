@@ -47,6 +47,12 @@ void Ball::update(float deltaTime)
 			moveVertical(-getVelocity().y);
 			moveHorizontal(generateVeloXForTheBallWhenHitBat());
 		}
+
+		if (getVelocity().x > SPEED_TO_RIGHT(BALL_SPEED_CAP))
+			moveHorizontal(SPEED_TO_RIGHT(BALL_SPEED_CAP));
+
+		if (getVelocity().x < SPEED_TO_LEFT(BALL_SPEED_CAP))
+			moveHorizontal(SPEED_TO_LEFT(BALL_SPEED_CAP));
 		break;
 	default:
 		break;
@@ -113,7 +119,9 @@ float Ball::generateVeloXForTheBallWhenHitBat()
 {
 	float ballVerticalCenter = getPosition().x + getDefRect().width / 2.0f;
 	float batVerticalCenter = _linkedBat->getPosition().x + _linkedBat->getDefRect().width / 2.0f;
-	return (getVelocity().x + (ballVerticalCenter - batVerticalCenter) / 4.0f);
+	float accele = (ballVerticalCenter - batVerticalCenter) / 4.0f;
+
+	return (getVelocity().x + accele);
 }
 
 

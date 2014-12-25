@@ -7,6 +7,9 @@
 #include "BrickBreaker/Core/Default.h"
 #include "BrickBreaker/Manager/BrickMap.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include <vector>
 
 using namespace stdio_fw;
@@ -27,6 +30,7 @@ private:
 	Bat* _bat;
 	vector<Ball*> _balls;
 	Image* temp;
+	int _ballRemaining;
 };
 
 #endif // Game_h__
