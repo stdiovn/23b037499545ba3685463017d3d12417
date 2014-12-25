@@ -3,10 +3,85 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\Images.h">
+      <Filter>Data\Images</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BaseObject.h">
+      <Filter>BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\DynamicObject.h">
+      <Filter>DynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Ball.h">
+      <Filter>DynamicObject\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Bar.h">
+      <Filter>DynamicObject\Bar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Brick.h">
+      <Filter>DynamicObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Objects.h">
+      <Filter>DynamicObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\stdafx.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\BaseObject.cpp">
+      <Filter>BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\DynamicObject.cpp">
+      <Filter>DynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Ball.cpp">
+      <Filter>DynamicObject\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Bar.cpp">
+      <Filter>DynamicObject\Bar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Brick.cpp">
+      <Filter>DynamicObject\Brick</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BaseObject">
+      <UniqueIdentifier>{1fb2cf76-6cc0-4640-807e-a4c4e4fa6f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicObject">
+      <UniqueIdentifier>{24accd63-2445-4d4e-9e13-6aa792a79261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{23616339-eaf1-46db-b1c9-2acd0a65701e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Images">
+      <UniqueIdentifier>{76301628-4bf5-4436-bb9b-6eca8de80059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicObject\Bar">
+      <UniqueIdentifier>{8abac0e7-c9d9-4824-a59e-5697ba452271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicObject\Ball">
+      <UniqueIdentifier>{8f35efe1-395f-4098-a667-53a861425432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicObject\Brick">
+      <UniqueIdentifier>{5388c2d8-57d6-4f8b-a42b-ec17b1e4b512}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\data\Images\ball.png">
+      <Filter>Data\Images</Filter>
+    </Image>
+    <Image Include="..\data\Images\brick.png">
+      <Filter>Data\Images</Filter>
+    </Image>
+    <Image Include="..\data\Images\GreenBar.png">
+      <Filter>Data\Images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\data\Map\map1.inp">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>
