@@ -5,7 +5,7 @@ using namespace std;
 
 Game::Game()
 {
-
+	_ballRemaining = 3;
 }
 
 Game::~Game()
@@ -26,28 +26,52 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 
 void Game::Update(float deltaTime)
 {
-	KeyBuffer::update((Application*)this, Default::_controlKeysArray);
-
-	BrickMap::update(deltaTime);
-
-	FOR_t(_balls.size())
+	if (_balls.size() > 0)
 	{
-		_balls.at(i)->eventHandling(KeyBuffer::getCurrentKeyStates());
-		_balls.at(i)->update(deltaTime);
-		if (BrickMap::checkIfTouchBrick(_balls.at(i)->getDefRect()) != BRICK_NONE)
-			_balls.at(i)->hitBrick();
+		KeyBuffer::update((Application*)this, Default::_controlKeysArray);
+
+		BrickMap::update(deltaTime);
+
+		FOR_t(_balls.size())
+		{
+			_balls.at(i)->eventHandling(KeyBuffer::getCurrentKeyStates());
+			_balls.at(i)->update(deltaTime);
+
+			if (BrickMap::checkIfTouchBrick(_balls.at(i)->getDefRect()) != BRICK_NONE)
+				_balls.at(i)->hitBrick();
+
+			if (_balls.at(i)->getDefRect().y > SCREEN_SIZE_HEIGHT)
+			{
+				SAFE_DEL(_balls.at(i));
+				_balls.erase(_balls.begin() + i);
+				i--;
+
+				if (_ballRemaining > 0)
+				{
+					_balls.push_back(new Ball(_bat));
+					_ballRemaining--;
+				}
+			}
+		}
+		_bat->eventHandling(KeyBuffer::getCurrentKeyStates());
+		_bat->update(deltaTime);
 	}
-	_bat->eventHandling(KeyBuffer::getCurrentKeyStates());
-	_bat->update(deltaTime);
 }
 
 void Game::Render(Graphics* g)
 {
 	g->cleanScreen();
+	g->setColor(0xFF0000F0);
+
+	FOR(_ballRemaining)
+		g->fillRect(Rect(1 + i * 7, SCREEN_SIZE_HEIGHT - 13, 6, 12));
+
 	_bat->draw(g);
 	BrickMap::draw(g);
 	FOR_t(_balls.size())
 		_balls.at(i)->draw(g);
+	
+	
 }
 
 void Game::Exit()
