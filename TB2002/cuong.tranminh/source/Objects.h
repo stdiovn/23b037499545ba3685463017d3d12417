@@ -32,6 +32,8 @@ using namespace std;
 		 a.push_back(index);
 	 }
 	 in.close();*/
+
+
 	 Brick b1(50), b2(200), b3(350), b4(500), b5(650);
 	 a.push_back(b1);
 	 a.push_back(b2);
