@@ -56,37 +56,39 @@ void Ball::CollisionBehavior(MoveableObject* _Collided_Object)
 {
 	CollisionDirection _direction = getCollisionDirection(this->getBound(), _Collided_Object->getBound());
 
-	if ((_Collided_Object->getID() == ID_BAR) || ((_Collided_Object->getID() > ID_BRICK_REGION_BEGIN) && (_Collided_Object->getID() < ID_BRICK_REGION_END)))
-	{
-		if ((_direction == COLLISION_LEFT))
+	if ((!_Collided_Object->isDead()) && (_direction != COLLISION_NONE))
+	{ 
+		if ((_Collided_Object->getID() == ID_BAR) || ((_Collided_Object->getID() > ID_BRICK_REGION_BEGIN) && (_Collided_Object->getID() < ID_BRICK_REGION_END)))
 		{
-			m_Velocity.x = -m_Velocity.x;
-			m_Position.x = _Collided_Object->getPositionLeftTop().x - getBound().width;
-		}
+			if ((_direction == COLLISION_LEFT))
+			{
+				m_Velocity.x = -m_Velocity.x;
+				m_Position.x = _Collided_Object->getPositionLeftTop().x - getBound().width;
+			}
 
-		if ((_direction == COLLISION_RIGHT))
-		{
-			m_Velocity.x = -m_Velocity.x;
-			m_Position.x = _Collided_Object->getPositionRightBottom().x;
-		}
+			if ((_direction == COLLISION_RIGHT))
+			{
+				m_Velocity.x = -m_Velocity.x;
+				m_Position.x = _Collided_Object->getPositionRightBottom().x;
+			}
 
-		if ((_direction == COLLISION_TOP))
-		{
-			m_Velocity.y = -m_Velocity.y;
-			m_Position.y = _Collided_Object->getPositionLeftTop().y - getBound().height;
-		}
-		if ((_direction == COLLISION_BOTTOM))
-		{
-			m_Velocity.y = -m_Velocity.y;
-			m_Position.y = _Collided_Object->getPositionRightBottom().y;
-		}
+			if ((_direction == COLLISION_TOP))
+			{
+				m_Velocity.y = -m_Velocity.y;
+				m_Position.y = _Collided_Object->getPositionLeftTop().y - getBound().height;
+			}
+			if ((_direction == COLLISION_BOTTOM))
+			{
+				m_Velocity.y = -m_Velocity.y;
+				m_Position.y = _Collided_Object->getPositionRightBottom().y;
+			}
 
-		if ((_Collided_Object->getID() > ID_BRICK_REGION_BEGIN) && (_Collided_Object->getID() < ID_BRICK_REGION_END))
-		{
-			_Collided_Object->setDead();
+			if ((_Collided_Object->getID() > ID_BRICK_REGION_BEGIN) && (_Collided_Object->getID() < ID_BRICK_REGION_END) && (_Collided_Object->getID() != ID_IMMORTALBRICK))
+			{
+				_Collided_Object->setDead();
+			}
 		}
-	}
-	
+	}	
 }
 
 void Ball::update(float deltaTime)

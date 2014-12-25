@@ -8,5 +8,6 @@ class ExplosiveBrick :
 public:
 	ExplosiveBrick();
 	virtual ~ExplosiveBrick();
+	virtual void update(float deltaTime) override;
 };
 

@@ -12,3 +12,9 @@ ImmortalBrick::ImmortalBrick()
 ImmortalBrick::~ImmortalBrick()
 {
 }
+
+
+void ImmortalBrick::update(float deltaTime)
+{
+
+}

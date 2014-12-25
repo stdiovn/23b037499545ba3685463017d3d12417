@@ -19,6 +19,7 @@ public:
 	MoveableObject();
 	virtual ~MoveableObject();
 	MoveableObject(Vec2 _Position, Vec2 _Velocity);
+	virtual bool isDead();
 	virtual ObjectID getID();
 	virtual void setDead();
 	virtual void update(float deltaTime) override = 0;
