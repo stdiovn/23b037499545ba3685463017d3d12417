@@ -75,6 +75,7 @@
     <ClInclude Include="..\source\Background.h" />
     <ClInclude Include="..\source\Ball.h" />
     <ClInclude Include="..\source\Bar.h" />
+    <ClInclude Include="..\source\BrickVector.h" />
     <ClInclude Include="..\source\Collision.h" />
     <ClInclude Include="..\source\ExplosiveBrick.h" />
     <ClInclude Include="..\source\Game.h" />
@@ -92,6 +93,7 @@
     <ClCompile Include="..\source\Background.cpp" />
     <ClCompile Include="..\source\Ball.cpp" />
     <ClCompile Include="..\source\Bar.cpp" />
+    <ClCompile Include="..\source\BrickVector.cpp" />
     <ClCompile Include="..\source\Collision.cpp" />
     <ClCompile Include="..\source\ExplosiveBrick.cpp" />
     <ClCompile Include="..\source\Game.cpp" />

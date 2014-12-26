@@ -7,6 +7,7 @@
 #include "Bar.h"
 #include "NormalBrick.h"
 #include "Collision.h"
+#include "BrickVector.h"
 
 Game::Game()
 {
@@ -24,9 +25,10 @@ ErrorCode Game::init(int screenW, int screenH, const char* title)
 
 	InitImage();
 	m_Background = new Background();
-	m_Ball = new Ball(Vec2(400, 350), Vec2(0.7, 0.7));
-	m_Bar = new Bar(Vec2(400, 450), Vec2(2, 0));
-	m_Brick = new NormalBrick(Vec2(5, 5));
+	m_Ball = new Ball(Vec2(400, 350), Vec2(0.4, 0.4));
+	m_Bar = new Bar(Vec2(400, 500), Vec2(2, 0));
+	m_BrickVector = new BrickVector();
+	m_BrickVector->createNormalBrickMap(30, Vec2(5, 5), 5, 5);
 
 	return errCode;
 }
@@ -45,7 +47,7 @@ void Game::update(float deltaTime)
 
 	m_Ball->update(deltaTime);
 	((Ball*)m_Ball)->CollisionBehavior(m_Bar);
-	((Ball*)m_Ball)->CollisionBehavior(m_Brick);
+	m_BrickVector->CollisionBehaviorwithBall((Ball*)m_Ball);
 	
 }
 
@@ -55,7 +57,7 @@ void Game::render(Graphics* g)
 	m_Background->render(g);
 	m_Ball->render(g);
 	m_Bar->render(g);
-	m_Brick->render(g);
+	m_BrickVector->render(g);
 }
 
 void Game::exit()
