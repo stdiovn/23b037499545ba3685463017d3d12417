@@ -32,14 +32,14 @@ void Bar::Render(Graphics* g)
 
 void Bar::moveleft()
 {
-	Sleep(2);
+	Sleep(0.99);
 	rDynamicObject.x--;
 	if (rDynamicObject.x < 0)rDynamicObject.x = 0;
 }
 
 void Bar::moveright()
 {
-	Sleep(2);
+	Sleep(0.99);
 	rDynamicObject.x++;
 	if (rDynamicObject.x > 800 - 408)rDynamicObject.x = 800 - 408;
 }

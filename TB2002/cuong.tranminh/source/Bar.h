@@ -9,7 +9,6 @@ public:
 	void Render(Graphics* g);
 	void moveleft();
 	void moveright();
-
 	Bar();
 	~Bar();
 };
