@@ -5,14 +5,13 @@
 Ball::Ball()
 {
 	dBall = ES;
-	rDynamicObject.x = 460;
+	rDynamicObject.x = 400 - 12;
 	rDynamicObject.y = 600 - 60;
 }
 
 
 Ball::~Ball()
 {
-	
 }
 
 void Ball::Init()

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Game.h"
 
-Brick br;
 
 
 Game::Game()
@@ -40,14 +39,14 @@ void Game::update(float deltaTime)
 	if (Collision(ball.getRect(), bar.getRect()) || Collision(bar.getRect(), ball.getRect()))ball.setDirection(ball.getDirection());
 	for (int i = 0; i < ArrBrick.size(); i++)
 	{
-		if (Collision(ball.getRect(), ArrBrick[i].getRect()) && br.getalive())
+		if (Collision(ball.getRect(), ArrBrick[i].getRect()) && ArrBrick[i].getalive()== true)
 		{
 	
 			ball.setalive(ball.getDirection());
 			ArrBrick[i].setalive(false);
+			
 		}
 	}
-	
 	ball.Update();
 }
 
@@ -56,13 +55,12 @@ void Game::render(Graphics* g)
 	g->cleanScreen();	
 	ball.Render(g);
 	bar.Render(g);
-	
-	for each(Brick b in ArrBrick)b.Render(g);
+	for (int i = 0; i < ArrBrick.size(); i++)ArrBrick[i].Render(g);
 }
 
 void Game::exit()
 {
-	
+	ArrBrick.clear();
 }
 
 void Game::onKeyProc(KeyCode key, KeyState state)
