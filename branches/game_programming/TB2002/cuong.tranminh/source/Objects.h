@@ -22,8 +22,8 @@ using namespace std;
 
  static void inputArr(vector<Brick>& a)
  {
-	 /*float temp;
-	 ifstream in("map1.inp");
+	 float temp;
+	 ifstream in("Map\\map1.inp");
 	 if (!in.is_open())return;
 	 while (!in.eof())
 	 {
@@ -31,15 +31,15 @@ using namespace std;
 		 Brick index(temp);
 		 a.push_back(index);
 	 }
-	 in.close();*/
+	 in.close();
 
 
-	 Brick b1(50), b2(200), b3(350), b4(500), b5(650);
+	 /*Brick b1(50), b2(200), b3(350), b4(500), b5(650);
 	 a.push_back(b1);
 	 a.push_back(b2);
 	 a.push_back(b3);
 	 a.push_back(b4);
-	 a.push_back(b5);
+	 a.push_back(b5);*/
 
  }
 
