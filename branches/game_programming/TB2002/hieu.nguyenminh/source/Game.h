@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "StaticObject.h"
 #include "MoveableObject.h"
+#include "BrickVector.h"
 
 using namespace stdio_fw;
 
@@ -9,9 +10,9 @@ class Game : public Application
 {
 protected:
 	StaticObject *m_Background;
-	MoveableObject *m_Brick;
 	MoveableObject *m_Ball;
 	MoveableObject *m_Bar;
+	BrickVector *m_BrickVector;
 public:
 	Game();
 	virtual ~Game();
