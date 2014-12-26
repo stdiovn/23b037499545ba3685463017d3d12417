@@ -33,10 +33,8 @@ void Game::update(float deltaTime)
 	{
 		if (Collision(ball.getRect(), ArrBrick[i].getRect()) && ArrBrick[i].getalive()== true)
 		{
-	
 			ball.setalive(ball.getDirection());
 			ArrBrick[i].setalive(false);
-			
 		}
 	}
 	ball.Update();
