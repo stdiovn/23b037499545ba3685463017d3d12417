@@ -13,6 +13,12 @@
     <ClInclude Include="..\source\config.h">
       <Filter>Support</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\Components.h">
+      <Filter>ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\support.h">
+      <Filter>Support</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Quadtree.cpp">
@@ -25,6 +31,12 @@
       <Filter>MainGame</Filter>
     </ClCompile>
     <ClCompile Include="..\source\stdafx.cpp">
+      <Filter>Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Components.cpp">
+      <Filter>ComponentSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\support.cpp">
       <Filter>Support</Filter>
     </ClCompile>
   </ItemGroup>

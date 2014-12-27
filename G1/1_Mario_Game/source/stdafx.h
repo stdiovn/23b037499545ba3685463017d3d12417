@@ -19,3 +19,4 @@
 #include "STDIO_FW\stdio_fw.h"
 
 #include "config.h"
+#include "support.h"
