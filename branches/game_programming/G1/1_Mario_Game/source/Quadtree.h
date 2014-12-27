@@ -5,7 +5,6 @@
 //Quadtree algorithm
 //Purpose: push each entity into a region to detect collision effeciently
 
-#include "STDIO_FW\Utils\stdio_math.h"
 using namespace stdio_fw;
 
 #include <list>
