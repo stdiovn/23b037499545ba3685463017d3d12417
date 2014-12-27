@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="..\source\Quadtree.h">
-      <Filter>Quadtree</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\Game.h">
       <Filter>MainGame</Filter>
     </ClInclude>
@@ -13,17 +10,11 @@
     <ClInclude Include="..\source\config.h">
       <Filter>Support</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Components.h">
-      <Filter>ComponentSystem</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\support.h">
       <Filter>Support</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Quadtree.cpp">
-      <Filter>Quadtree</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\Game.cpp">
       <Filter>MainGame</Filter>
     </ClCompile>
@@ -33,37 +24,16 @@
     <ClCompile Include="..\source\stdafx.cpp">
       <Filter>Support</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Components.cpp">
-      <Filter>ComponentSystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\support.cpp">
       <Filter>Support</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Quadtree">
-      <UniqueIdentifier>{7ec92aeb-6526-4d56-9f6b-9a2d08302747}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MainGame">
       <UniqueIdentifier>{dcb18555-6c94-44a0-a07e-58f3e33e718c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Support">
       <UniqueIdentifier>{1c9f8dca-1518-4fb3-b2e9-6cf614bdf4bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ComponentSystem">
-      <UniqueIdentifier>{c72806b6-d37a-467a-839a-3d057a57f314}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EntitySystem">
-      <UniqueIdentifier>{c74d9fdd-ee3f-4f55-990a-07591014ea54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Factory">
-      <UniqueIdentifier>{1337e198-0dce-4b7a-aeab-d15f63c23e30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{e6b20ee1-f879-4286-af5d-b9af58e34dbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StateManager">
-      <UniqueIdentifier>{7181f21b-4977-4097-8397-1ece72d42f9d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

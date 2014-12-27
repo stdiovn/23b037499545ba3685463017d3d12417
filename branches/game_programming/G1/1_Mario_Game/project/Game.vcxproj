@@ -72,18 +72,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\Components.h" />
     <ClInclude Include="..\source\config.h" />
     <ClInclude Include="..\source\Game.h" />
-    <ClInclude Include="..\source\Quadtree.h" />
     <ClInclude Include="..\source\stdafx.h" />
     <ClInclude Include="..\source\support.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Components.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\source\Quadtree.cpp" />
     <ClCompile Include="..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
