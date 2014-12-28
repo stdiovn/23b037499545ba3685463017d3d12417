@@ -16,18 +16,18 @@ BrickVector::~BrickVector()
 }
 
 
-void BrickVector::createNormalBrickMap(unsigned int _Number_of_Bricks, Vec2 _First_Position, float _Horizontal_Distance, float _Vertial_Distance)
+void BrickVector::createNormalBrickMap(uint _Number_of_Bricks, Vec2 _First_Position, float _Horizontal_Distance, float _Vertial_Distance)
 {
 	AbstractBrick* _Temp_Brick;
 	_Temp_Brick = new NormalBrick(_First_Position);
 	float _Brick_Width = _Temp_Brick->getBound().width;
 	float _Brick_Height = _Temp_Brick->getBound().height;
-	int _num_of_brick_in_a_row = (800 - _First_Position.x) / (_Brick_Width + _Horizontal_Distance);
+	uint _num_of_brick_in_a_row = (800 - _First_Position.x) / (_Brick_Width + _Horizontal_Distance);
 
 	m_Vector.push_back(_Temp_Brick);
 	Vec2 _Temp_Postion = _First_Position + Vec2(_Brick_Width + _Horizontal_Distance, 0);
 
-	for (int i = 1; i < _Number_of_Bricks; i++)
+	for (uint i = 1; i < _Number_of_Bricks; i++)
 	{
 		_Temp_Brick = new NormalBrick(_Temp_Postion);
 		m_Vector.push_back(_Temp_Brick);
@@ -53,12 +53,26 @@ int BrickVector::getSize()
 
 void BrickVector::CollisionBehaviorwithBall(Ball* _Ball)
 {
-	for (int i = 0; i < m_Vector.size(); i++)
+	/*for (int i = 0; i < m_Vector.size(); i++)
 	{
 		_Ball->CollisionBehavior(m_Vector[i]);
 		if (m_Vector[i]->isDead())
 		{
 			m_Vector.erase(m_Vector.begin() + i);
+		}
+	}*/
+
+	vector<AbstractBrick*>::iterator Iter;
+	for (Iter = m_Vector.begin(); Iter != m_Vector.end(); )
+	{
+		_Ball->CollisionBehavior(*Iter);
+		if ((*Iter)->isDead())
+		{
+			Iter = m_Vector.erase(Iter);
+		}
+		else
+		{
+			Iter++;
 		}
 	}
 }
@@ -66,8 +80,12 @@ void BrickVector::CollisionBehaviorwithBall(Ball* _Ball)
 
 void BrickVector::render(Graphics *g)
 {
-	for (int i = 0; i < m_Vector.size(); i++)
+	/*for (int i = 0; i < m_Vector.size(); i++)
 	{
 		m_Vector[i]->render(g);
+	}*/
+	for each(AbstractBrick* _Brick in m_Vector)
+	{
+		_Brick->render(g);
 	}
 }

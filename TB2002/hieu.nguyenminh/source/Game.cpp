@@ -48,7 +48,6 @@ void Game::update(float deltaTime)
 	m_Ball->update(deltaTime);
 	((Ball*)m_Ball)->CollisionBehavior(m_Bar);
 	m_BrickVector->CollisionBehaviorwithBall((Ball*)m_Ball);
-	
 }
 
 void Game::render(Graphics* g)
