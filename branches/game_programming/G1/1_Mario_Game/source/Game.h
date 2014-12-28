@@ -5,6 +5,8 @@ class Game : public Application
 {
 private:
 	Font*				m_font;
+
+	GameState			m_state;
 public:
 	Game();
 	virtual ~Game();
