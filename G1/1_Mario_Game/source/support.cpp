@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include <string>
+
 #include "support.h"
 
 bool isCollide(Rect st, Rect nd)

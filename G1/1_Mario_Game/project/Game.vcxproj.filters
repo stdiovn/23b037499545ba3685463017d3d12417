@@ -13,6 +13,24 @@
     <ClInclude Include="..\source\support.h">
       <Filter>Support</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ResourcesManager.h">
+      <Filter>ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BaseObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Mario.h">
+      <Filter>GameObjects\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Mushroom.h">
+      <Filter>GameObjects\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LevelUp.h">
+      <Filter>GameObjects\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp">
@@ -27,6 +45,24 @@
     <ClCompile Include="..\source\support.cpp">
       <Filter>Support</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BaseObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ReourcesManager.cpp">
+      <Filter>ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Mario.cpp">
+      <Filter>GameObjects\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Mushroom.cpp">
+      <Filter>GameObjects\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LevelUp.cpp">
+      <Filter>GameObjects\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MainGame">
@@ -34,6 +70,21 @@
     </Filter>
     <Filter Include="Support">
       <UniqueIdentifier>{1c9f8dca-1518-4fb3-b2e9-6cf614bdf4bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{eafe34f9-6f51-4ef5-a760-699c41f50ac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager">
+      <UniqueIdentifier>{93a87f34-80ea-4ddf-ae6c-d6a8cd250550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{81377c41-ed6d-402f-a450-763bde31e946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Entities">
+      <UniqueIdentifier>{2cad8976-04ad-440c-bb4a-3bfb77620aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Items">
+      <UniqueIdentifier>{61dd133c-a183-431d-9f3c-fda4e634a907}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
