@@ -1,33 +1,38 @@
 #pragma once
 
+////////////////////////////////////////////////////////////
+//Coder: Rye
+//Purpose: Load resource for using later
+#include <vector>
+
 using namespace stdio_fw;
 class ResourcesManager
 {
 private:
 	static ResourcesManager*	m_instance;
 
-	Image*		m_mario;
-	Frame*		m_marioFrameList;
+	Image*					m_mario;
+	std::vector<Frame>*		m_marioFrameList;
 
-	Image*		m_enemies;
-	Frame*		m_enemyFrameList;
+	Image*					m_enemies;
+	std::vector<Frame>*		m_enemiesFrameList;
 
-	Image*		m_item;
-	Frame*		m_itemFrameList;
+	Image*					m_items;
+	std::vector<Frame>*		m_itemsFrameList;
 
 	Image*		m_tileSet;
+
+	void		loadFrameList(std::vector<Frame>* frameList, const char* path);
 public:
 	ResourcesManager();
-	~ResourcesManager();
+	virtual ~ResourcesManager();
 
 	static ResourcesManager* getInstance();
 
-	ErrorCode		loadResources();
-	void			unloadResources();
+	void		loadResources();
+	void		unloadResources();
 
-	void		loadImage();
-	void		loadSpriteInfo();
-
-	Image*		getResource(SpriteSheet sheet);
-	Frame*		getFrame(SpriteSheet sheet);
+	Image*				getResource(SpriteSheet sheet);
+	std::vector<Frame>*	getFrameList(SpriteSheet sheet);
 };
+////////////////////////////////////////////////////////////

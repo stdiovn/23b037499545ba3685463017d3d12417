@@ -1,21 +1,23 @@
 #pragma once
 
+////////////////////////////////////////////////////////////
+//Coder: Rye
 #include "BaseObject.h"
 
 using namespace stdio_fw;
 class Mario : public BaseObject
 {
 private:
-	Image*		m_mario;
-	Frame*		m_marioFrameList;
+	int			m_lives;
 
 	void		stand();
-	void		run();
+	void		run(KeyCode key);
 	void		jump();
 	void		sit();
 public:
-	Mario(Image* image, Frame* frameList);
-	~Mario();
+	Mario(Image* spritesheet, std::vector<Frame>* frameList)
+		: BaseObject(spritesheet, frameList){}
+	~Mario(){}
 
 	void		update();
 	void		draw(Graphics* g);

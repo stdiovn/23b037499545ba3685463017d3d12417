@@ -75,7 +75,7 @@
     <ClInclude Include="..\source\BaseObject.h" />
     <ClInclude Include="..\source\config.h" />
     <ClInclude Include="..\source\Game.h" />
-    <ClInclude Include="..\source\LevelUp.h" />
+    <ClInclude Include="..\source\Items.h" />
     <ClInclude Include="..\source\Map.h" />
     <ClInclude Include="..\source\Mario.h" />
     <ClInclude Include="..\source\Mushroom.h" />
@@ -84,14 +84,13 @@
     <ClInclude Include="..\source\support.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\BaseObject.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
-    <ClCompile Include="..\source\LevelUp.cpp" />
+    <ClCompile Include="..\source\Items.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\Map.cpp" />
     <ClCompile Include="..\source\Mario.cpp" />
     <ClCompile Include="..\source\Mushroom.cpp" />
-    <ClCompile Include="..\source\ReourcesManager.cpp" />
+    <ClCompile Include="..\source\ResourcesManager.cpp" />
     <ClCompile Include="..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>

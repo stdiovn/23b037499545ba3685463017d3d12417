@@ -28,7 +28,7 @@
     <ClInclude Include="..\source\Mushroom.h">
       <Filter>GameObjects\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\LevelUp.h">
+    <ClInclude Include="..\source\Items.h">
       <Filter>GameObjects\Items</Filter>
     </ClInclude>
   </ItemGroup>
@@ -48,19 +48,16 @@
     <ClCompile Include="..\source\Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\BaseObject.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\ReourcesManager.cpp">
-      <Filter>ResourceManager</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\Mario.cpp">
       <Filter>GameObjects\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Mushroom.cpp">
       <Filter>GameObjects\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\LevelUp.cpp">
+    <ClCompile Include="..\source\ResourcesManager.cpp">
+      <Filter>ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Items.cpp">
       <Filter>GameObjects\Items</Filter>
     </ClCompile>
   </ItemGroup>

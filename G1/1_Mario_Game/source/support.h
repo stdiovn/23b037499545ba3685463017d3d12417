@@ -1,5 +1,9 @@
 #pragma once
 
+////////////////////////////////////////////////////////////
+//Coder: Rye
+//Purpose: Game support
+
 using namespace stdio_fw;
 struct Frame
 {
@@ -25,3 +29,4 @@ enum SpriteSheet
 };
 
 bool g_isCollide(Rect st, Rect nd);
+////////////////////////////////////////////////////////////
