@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Map.h"
 #include "Mario.h"
 
 using namespace stdio_fw;
@@ -9,7 +9,7 @@ private:
 	Font*				m_font;
 	GameState			m_state;
 
-	//Map*				m_map;
+	Map*				m_map;
 	Mario*				m_mario;
 
 public:

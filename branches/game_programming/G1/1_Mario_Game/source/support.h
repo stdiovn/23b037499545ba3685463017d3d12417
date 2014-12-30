@@ -11,6 +11,13 @@ struct Frame
 	Rect			m_frameRect;
 };
 
+struct InformationObject
+{
+	int m_id;
+	Rect m_llocation;
+};
+
+
 enum GameState
 {
 	STATE_PLAY,
