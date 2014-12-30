@@ -10,7 +10,7 @@
 #define SCREEN_SCALE				1
 
 #define FPS							60
-#define FRAME_TIME					20
+#define FRAME_TIME					12.5
 
 #define GRAVITATION					10
 ////////////////////////////////////////////////////////////

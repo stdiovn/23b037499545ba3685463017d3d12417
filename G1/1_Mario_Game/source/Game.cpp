@@ -65,7 +65,7 @@ void Game::render(Graphics* g)
 	g->cleanScreen();
 	g->setColor(0xFFFFFFFF);
 
-	g->drawText("Test", 100, 100);
+	m_mario->draw(g);
 }
 
 void Game::exit()

@@ -22,7 +22,7 @@ private:
 
 	Image*		m_tileSet;
 
-	void		loadFrameList(std::vector<Frame>* frameList, const char* path);
+	void		loadFrameList(std::vector<Frame>*& frameList, const char* path);
 public:
 	ResourcesManager();
 	virtual ~ResourcesManager();

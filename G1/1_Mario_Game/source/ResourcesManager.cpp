@@ -102,7 +102,7 @@ std::vector<Frame>* ResourcesManager::getFrameList(SpriteSheet sheet)
 		return NULL;
 }
 
-void ResourcesManager::loadFrameList(std::vector<Frame>* frameList, const char* path)
+void ResourcesManager::loadFrameList(std::vector<Frame>*& frameList, const char* path)
 {
 	FILE* f = fopen(path, "rb");
 	fseek(f, 0, SEEK_END);
