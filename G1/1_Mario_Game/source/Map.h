@@ -1,8 +1,9 @@
 #pragma once
-
+#include <list>
 //////////////////////////////////////////////////////
 //Coder: Rye
 //Purpose: Load map (prototype)
+
 using namespace stdio_fw;
 class Map
 {
@@ -16,17 +17,24 @@ private:
 	int**		m_map;
 	int			m_mapWidth;
 	int			m_mapHeight;
+
+	int			m_vpx;
+	int			m_vpy;
+
+	std::list<InformationObject> m_informationObjects;
 public:
 	Map(const char* path);
 	~Map();
 
-	void		changeMap(const char* path){}
+	void		changeMap(const char* path);
 
-	ErrorCode			loadMap(){}
-	void				unloadMap(){}
+	ErrorCode			loadMap();
+	void				unloadMap();
 
-	uint		getWidth(){}
-	uint		getHeight(){}
+	uint		getWidth();
+	uint		getHeight();
 
-	void		drawMap(Graphics* g){}
+	void		setCamera(int vpx, int vpy);
+
+	void		drawMap(Graphics* g);
 };

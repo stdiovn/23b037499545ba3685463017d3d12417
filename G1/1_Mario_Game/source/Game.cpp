@@ -31,6 +31,10 @@ ErrorCode Game::init(int screenW, int screenH, const char* title)
 	getGraphics()->setFont(m_font);
 	/////////////////////////////////////////////////
 
+	//Coder: Tai
+
+	m_map = new Map("map//Stage1-1.txt");
+	m_map->loadMap();
 
 	/////////////////////////////////////////////////
 	//Coder: Rye
@@ -50,7 +54,7 @@ void Game::update(float deltaTime)
 	//Coder: Rye
 	m_mario->update();
 	/////////////////////////////////////////////////
-
+	
 
 
 	/////////////////////////////////////////////////
@@ -65,6 +69,7 @@ void Game::render(Graphics* g)
 	g->cleanScreen();
 	g->setColor(0xFFFFFFFF);
 
+	m_map->drawMap(g);
 	m_mario->draw(g);
 }
 

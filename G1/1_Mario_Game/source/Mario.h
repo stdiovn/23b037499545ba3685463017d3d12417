@@ -25,5 +25,6 @@ public:
 	~Mario(){}
 
 	void		update();
+	
 	void		draw(Graphics* g);
 };
