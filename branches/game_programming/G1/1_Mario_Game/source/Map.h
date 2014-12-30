@@ -20,13 +20,13 @@ public:
 	Map(const char* path);
 	~Map();
 
-	void		changeMap(const char* path);
+	void		changeMap(const char* path){}
 
-	ErrorCode			loadMap();
-	void				unloadMap();
+	ErrorCode			loadMap(){}
+	void				unloadMap(){}
 
-	uint		getWidth();
-	uint		getHeight();
+	uint		getWidth(){}
+	uint		getHeight(){}
 
-	void		drawMap(Graphics* g);
+	void		drawMap(Graphics* g){}
 };

@@ -1,6 +1,9 @@
 #include "stdafx.h"
 
-#include "Mario.h"
+#include "Mushroom.h"
+
+#include "Map.h"
+#include "ResourcesManager.h"
 
 #include "Game.h"
 
@@ -28,13 +31,26 @@ ErrorCode Game::init(int screenW, int screenH, const char* title)
 	getGraphics()->setFont(m_font);
 	/////////////////////////////////////////////////
 
-	
+
+	/////////////////////////////////////////////////
+	//Coder: Rye
+	m_state = GameState::STATE_PLAY;
+
+	m_mario = new Mario(ResourcesManager::getInstance()->getResource(SpriteSheet::SHEET_MARIO), 
+						ResourcesManager::getInstance()->getFrameList(SpriteSheet::SHEET_MARIO));
+	/////////////////////////////////////////////////
+
 
 	return errCode;
 }
 
 void Game::update(float deltaTime)
 {
+	/////////////////////////////////////////////////
+	//Coder: Rye
+	m_mario->update();
+	/////////////////////////////////////////////////
+
 
 
 	/////////////////////////////////////////////////
