@@ -28,5 +28,15 @@ enum SpriteSheet
 	SHEET_COUNT
 };
 
+enum MarioState
+{
+	MS_STANDING,
+	MS_RUNNING,
+	MS_FASTRUNNING,
+	MS_JUMPING,
+	MS_FALLING,
+	MS_COUNT
+};
+
 bool g_isCollide(Rect st, Rect nd);
 ////////////////////////////////////////////////////////////

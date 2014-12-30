@@ -14,15 +14,25 @@
 using namespace stdio_fw;
 class BaseObject
 {
-private:
+protected:
 	Image*					m_spriteSheet;
 	std::vector<Frame>*		m_frameList;
 	int			m_currentFrame;
 
+	Vec2		m_position;
+	uint		m_flipping;
+
+	float		m_elapseFrameTime;
+	float		m_lastTime;
+
 	bool		m_isActive;
 public:
 	BaseObject(Image* spritesheet, std::vector<Frame>* frameList)
-		: m_spriteSheet(spritesheet), m_frameList(frameList){}
+		: m_spriteSheet(spritesheet), m_frameList(frameList){
+		m_flipping = 0U;
+		m_elapseFrameTime = 0;
+		m_lastTime = GetTickCount();
+	}
 	virtual ~BaseObject(){}
 
 	virtual void		update() = 0;
