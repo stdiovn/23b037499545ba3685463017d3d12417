@@ -55,8 +55,10 @@ void Game::update(float deltaTime)
 	m_mario->update();
 	/////////////////////////////////////////////////
 	
-
-
+	/*static int x = 0, y = 0;
+	m_map->setCamera(x, y);
+	x--;*/
+	//y--;
 	/////////////////////////////////////////////////
 	//Coder: Rye
 	//Purpose: manage FPS
@@ -67,6 +69,7 @@ void Game::update(float deltaTime)
 void Game::render(Graphics* g)
 {
 	g->cleanScreen();
+	g->setClearColor(0x0000FFF0);
 	g->setColor(0xFFFFFFFF);
 
 	m_map->drawMap(g);
