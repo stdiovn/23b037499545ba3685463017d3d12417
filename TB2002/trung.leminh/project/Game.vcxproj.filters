@@ -30,9 +30,6 @@
     <ClInclude Include="..\source\AbstractItemObject.h">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\BonusSeedBallItem.h">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BonusSpeedItem</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\CloneBallItem.h">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\CloneItem</Filter>
     </ClInclude>
@@ -99,6 +96,18 @@
     <ClInclude Include="..\source\EventButtonW.h">
       <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\Action.h">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\GoLeft.h">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\GoRight.h">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BonusSpeedBallItem.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BonusSpeedItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\stdafx.cpp" />
@@ -126,9 +135,6 @@
     </ClCompile>
     <ClCompile Include="..\source\AbstractItemObject.cpp">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\BonusSeedBallItem.cpp">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BonusSpeedItem</Filter>
     </ClCompile>
     <ClCompile Include="..\source\CloneBallItem.cpp">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\CloneItem</Filter>
@@ -196,6 +202,18 @@
     <ClCompile Include="..\source\EventButtonW.cpp">
       <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\Action.cpp">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\GoLeft.cpp">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\GoRight.cpp">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BonusSpeedBallItem.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BonusSpeedItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT1_BrickBreaker">
@@ -261,8 +279,8 @@
     <Filter Include="BT1_BrickBreaker\InputManager\EventButton">
       <UniqueIdentifier>{26096e99-4a2e-4cfe-8ccc-2c8596f7a1ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BT1_BrickBreaker\InputManager\NewFilter1">
-      <UniqueIdentifier>{95a711cc-d3be-4494-8a80-c66fbaf1b50a}</UniqueIdentifier>
+    <Filter Include="BT1_BrickBreaker\ActionManager">
+      <UniqueIdentifier>{8d50a4f6-2d7b-4797-a5aa-71a61fd710a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

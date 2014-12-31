@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "BonusSpeedBallItem.h"
 #include "Mapmanager.h"
 #include "Geometry.h"
 
@@ -6,7 +7,8 @@ using namespace std;
 
 CMapmanager::CMapmanager()
 {
-	m_map = new SMap(L"Map1.txt");
+	m_map	= new SMap(L"Map1.txt");
+	m_score = 0;
 }
 
 
@@ -75,6 +77,19 @@ void CMapmanager::Init()
 //---------------------------------------------------------------------------------------------------------------------------------
 void CMapmanager::Update(float deltaTime, CBall* ball)
 {
+	if (m_map->m_listItem.size() != 0)
+	{
+		for (int i = 0; i < m_map->m_listItem.size(); i++)
+		{
+			if (checkIntersectRectangle(m_map->m_listItem[i]->getSizeRectOfObject(), ball->getSizeRectOfObject()))
+			{
+				if (m_map->m_listItem[i]->getID() == L"BonusSpeed")
+				{
+					ball->setVelocity(s_vector2D((ball->getVelocity().X) + 5, (ball->getVelocity().Y) + 5));
+				}
+			}
+		}
+	}
 	// ----------------stupid idea----------------------------//
 	for (int i = 0; i < m_map->m_brick.size(); i++)
 	{
@@ -83,12 +98,18 @@ void CMapmanager::Update(float deltaTime, CBall* ball)
 			m_map->m_brick[i]->Update(deltaTime);
 			if (checkIntersectRectangle(m_map->m_brick[i]->getSizeRectOfObject(), ball->getSizeRectOfObject()))
 			{
+				m_score += 5;
 				if (m_map->m_brick[i]->getStateBrick() == e_StateBrick::STONE_BRICK_STATE)
 				{
 					m_map->m_brick[i]->setStateBrick(WOOD_BRICK_STATE);
 				}
 				else if (m_map->m_brick[i]->getStateBrick() == e_StateBrick::WOOD_BRICK_STATE)
 				{
+					//if (RandomInt(11, 10) == 10) // create speed bom....
+					//{
+					//	m_map->m_listItem.push_back(new CBonusSpeedBallItem(BONUS_SPEED_PATH, m_map->m_brick[i]->getPosition()));
+					//}
+					m_map->m_listItem.push_back(new CBonusSpeedBallItem(BONUS_SPEED_PATH, m_map->m_brick[i]->getPosition()));
 					CBrick* tempBrick = m_map->m_brick[i];
 					m_map->m_brick.erase(m_map->m_brick.begin() + i);
 					delete tempBrick;
@@ -132,8 +153,15 @@ SMap CMapmanager::getMap()
 //---------------------------------------------------------------------------------------------------------------------------------
 void CMapmanager::Render(Graphics* g)
 {
+	for (int i = 0; i < m_map->m_listItem.size(); i++)
+	{
+		m_map->m_listItem[i]->Render(g);
+	}
+	
 	for (int i = 0; i < m_map->m_brick.size(); i++)
 	{
 		m_map->m_brick[i]->Render(g);
 	}
+	
 }
+

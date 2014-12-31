@@ -1,5 +1,5 @@
 #pragma once
-#include "E:\OPENGLES\source\EventButton.h"
+#include "EventButton.h"
 class CEventButtonStart :
 	public CEventButton
 {

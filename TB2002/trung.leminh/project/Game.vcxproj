@@ -41,6 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\bin\</OutDir>
     <IncludePath>E:\OPENGLES\lib\stdio_fw\include\STDIO_FW;$(IncludePath)</IncludePath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -74,12 +75,13 @@
   <ItemGroup>
     <ClInclude Include="..\source\AbstractItemObject.h" />
     <ClInclude Include="..\source\AbstractObject.h" />
+    <ClInclude Include="..\source\Action.h" />
     <ClInclude Include="..\source\Algebra.h" />
     <ClInclude Include="..\source\AtomBoomItem.h" />
     <ClInclude Include="..\source\Backgrounds.h" />
     <ClInclude Include="..\source\Ball.h" />
     <ClInclude Include="..\source\Bar.h" />
-    <ClInclude Include="..\source\BonusSeedBallItem.h" />
+    <ClInclude Include="..\source\BonusSpeedBallItem.h" />
     <ClInclude Include="..\source\Brick.h" />
     <ClInclude Include="..\source\CloneBallItem.h" />
     <ClInclude Include="..\source\CommonStructure.h" />
@@ -96,6 +98,8 @@
     <ClInclude Include="..\source\EventButtonW.h" />
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\Geometry.h" />
+    <ClInclude Include="..\source\GoLeft.h" />
+    <ClInclude Include="..\source\GoRight.h" />
     <ClInclude Include="..\source\InputManager.h" />
     <ClInclude Include="..\source\Mapmanager.h" />
     <ClInclude Include="..\source\MoveableObject.h" />
@@ -110,12 +114,13 @@
   <ItemGroup>
     <ClCompile Include="..\source\AbstractItemObject.cpp" />
     <ClCompile Include="..\source\AbstractObject.cpp" />
+    <ClCompile Include="..\source\Action.cpp" />
     <ClCompile Include="..\source\Algebra.cpp" />
     <ClCompile Include="..\source\AtomBoomItem.cpp" />
     <ClCompile Include="..\source\Backgrounds.cpp" />
     <ClCompile Include="..\source\Ball.cpp" />
     <ClCompile Include="..\source\Bar.cpp" />
-    <ClCompile Include="..\source\BonusSeedBallItem.cpp" />
+    <ClCompile Include="..\source\BonusSpeedBallItem.cpp" />
     <ClCompile Include="..\source\Brick.cpp" />
     <ClCompile Include="..\source\CloneBallItem.cpp" />
     <ClCompile Include="..\source\EventButton.cpp" />
@@ -131,6 +136,8 @@
     <ClCompile Include="..\source\EventButtonW.cpp" />
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\Geometry.cpp" />
+    <ClCompile Include="..\source\GoLeft.cpp" />
+    <ClCompile Include="..\source\GoRight.cpp" />
     <ClCompile Include="..\source\InputManager.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\Mapmanager.cpp" />

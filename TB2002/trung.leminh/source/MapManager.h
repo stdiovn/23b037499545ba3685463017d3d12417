@@ -4,15 +4,18 @@
 #include "Stone.h"
 #include "Brick.h"
 #include "Ball.h"
+#include "AbstractItemObject.h"
+
 #include <vector>
 #include <fstream>
 
 struct SMap{
 	wstring m_nameMap;
-	std::vector<CBrick*> m_brick;
+	std::vector<CBrick*>				m_brick;
+	std::vector<CAbstractItemObject*>	m_listItem;
 	SMap(wstring nameMap)
 	{
-		m_nameMap = L"Map1.txt";
+		m_nameMap = nameMap;
 	};
 };
 
@@ -33,6 +36,7 @@ public:
 	SMap getMap();
 private:
 	SMap* m_map;
+	int   m_score;
 };
 
 #endif

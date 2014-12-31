@@ -2,6 +2,7 @@
 #define __GAME_H__
 #include "Ball.h"
 #include "Bar.h"
+#include "Algebra.h"
 using namespace stdio_fw;
 class Game : public Application
 {
@@ -15,9 +16,11 @@ public:
 	virtual void		Exit();
 			void		UpdateInputHandle();
 protected:
-	CBall*				m_miniBall;
-	CMoveableObject*	m_miniBar;
-	CMapmanager*		m_map;
+			Image*		m_Image;
+			e_Direction	m_direction;
+			s_vector2D	m_position;
+			int			m_index;
+			int			m_flip;
 };
 
 #endif
