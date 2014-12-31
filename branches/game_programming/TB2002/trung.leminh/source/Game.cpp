@@ -27,15 +27,13 @@ Game::~Game()
 ErrorCode Game::Init(int screenW, int screenH, const char* title)
 {
 	ErrorCode errCode = Application::Init(screenW, screenH, title);
-	
-	m_miniBall = new CBall(BALL_FILE_PATH, s_vector2D(400, 400));
-	m_miniBall->Init();
-	m_miniBar	= new CBar(BAR_FILE_PATH,  s_vector2D(400, 500));
-	m_miniBar->Init();
-	
-	m_map = new CMapmanager();
-	m_map->Init();
+	m_Image = new Image("SpriteShipMario.png");
+	errCode = m_Image->loadImage();
+	if (errCode != ErrorCode::ERR_NO_ERROR)
+		MessageBox(NULL, "Can not open file image", NULL, MB_OK);
 
+	m_direction = e_Direction::NONE_DIRECTION;
+	m_position	= s_vector2D(0, 0);
 
 	return errCode;
 }
@@ -48,14 +46,35 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 //---------------------------------------------------------------------------------------------------------------------------------
 void Game::Update(float deltaTime)
 {
+	Sleep(80);
 	UpdateInputHandle();
-	m_miniBall	->Update(deltaTime);
-	m_miniBall->UpdateCollisionWithAllthingInMap((CBar*)m_miniBar, m_map);
-	m_miniBar	->Update(deltaTime);
-	
-	m_map->Update(deltaTime, m_miniBall);
-
-	Sleep((DWORD)0.020); // frame honor ^^ I'm going to pro.
+	switch (m_direction)
+	{
+	case NONE_DIRECTION:
+		break;
+	case LEFT_DIRECTION:
+		m_position.X	-= 16;
+		m_direction		= NONE_DIRECTION;
+		m_flip			= 0x1L;
+		m_index--;
+		break;
+	case RIGHT_DIRECTION:
+		m_position.X	+= 16;
+		m_direction		= NONE_DIRECTION;
+		m_index++;
+		m_flip			= 0;
+		break;
+	case TOP_DIRECTION:
+		break;
+	case BOT_DIRECTION:
+		break;
+	default:
+		break;
+	}
+	if (m_index < 0)
+		m_index = 0;
+	if (m_index > 6)
+		m_index = 6;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------//
@@ -67,14 +86,10 @@ void Game::Update(float deltaTime)
 void Game::UpdateInputHandle()
 {
 	if (getKeyState(KEY_LEFT))
-	{
-		g_directionBar = e_Direction::LEFT_DIRECTION;
-	}
+		m_direction = e_Direction::LEFT_DIRECTION;
 	if (getKeyState(KEY_RIGHT))
-	{
-		g_directionBar = e_Direction::RIGHT_DIRECTION;
-	}
-}
+		m_direction = e_Direction::RIGHT_DIRECTION;
+}	
 
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -85,11 +100,21 @@ void Game::UpdateInputHandle()
 //---------------------------------------------------------------------------------------------------------------------------------
 void Game::Render(Graphics* g)
 {
-	g->setClearColor(0x0000FFFF);
+	g->setClearColor(0x000000FF);
 	g->cleanScreen();
-	m_miniBar	->Render(g);
-	m_miniBall	->Render(g);
-	m_map		->Render(g);
+	printf("%d, %d", m_position.X, m_position.Y);
+	g->drawRegion(	m_Image,
+					Rect(	m_position.X,
+							m_position.Y,
+							32,
+							64),
+					Rect(	m_position.X,
+							m_position.Y,
+							16,
+							32),
+					m_flip
+				);
+	
 	
 }
 
@@ -101,6 +126,5 @@ void Game::Render(Graphics* g)
 //---------------------------------------------------------------------------------------------------------------------------------
 void Game::Exit()
 {
-	m_miniBar->Release();
-	m_miniBall->Release();
+	delete m_Image;
 }

@@ -23,8 +23,8 @@ enum e_Sreen
 
 enum e_DeltaDistance
 {
-	DELTA_X = 20,
-	DELTA_Y = 20
+	DELTA_X = 25,
+	DELTA_Y = 25
 };
 
 enum e_StateGame
@@ -80,5 +80,7 @@ enum EStateKey
 #define STONE_FILE_PATH		"Iwa.png"
 #define BALL_FILE_PATH		"Suriken.png"
 #define BAR_FILE_PATH		"Katana.png"
+#define BONUS_SPEED_PATH	"BonusSpeed.png"
+
 #endif
 

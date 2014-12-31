@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stdio_fw", "..\lib\stdio_fw
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game.vcxproj", "{C403DB3D-1F00-4F8F-B903-E9E587981102}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_console", "..\test_console\test_console.vcxproj", "{7A0C5D89-7761-4E66-B9C1-5BE5AD47CB8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +23,10 @@ Global
 		{C403DB3D-1F00-4F8F-B903-E9E587981102}.Debug|Win32.Build.0 = Debug|Win32
 		{C403DB3D-1F00-4F8F-B903-E9E587981102}.Release|Win32.ActiveCfg = Release|Win32
 		{C403DB3D-1F00-4F8F-B903-E9E587981102}.Release|Win32.Build.0 = Release|Win32
+		{7A0C5D89-7761-4E66-B9C1-5BE5AD47CB8C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7A0C5D89-7761-4E66-B9C1-5BE5AD47CB8C}.Debug|Win32.Build.0 = Debug|Win32
+		{7A0C5D89-7761-4E66-B9C1-5BE5AD47CB8C}.Release|Win32.ActiveCfg = Release|Win32
+		{7A0C5D89-7761-4E66-B9C1-5BE5AD47CB8C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
