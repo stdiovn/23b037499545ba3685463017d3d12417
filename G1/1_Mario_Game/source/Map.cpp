@@ -15,30 +15,25 @@ Map::~Map()
 
 void Map::unloadMap()
 {
-	m_tileSet->unloadImage();
-	delete m_tileSet;
-
 	for (int i = 0; i < m_mapHeight; i++)
 		delete m_map[i];
-
-	delete m_map;
+	SAFE_DEL_ARR(m_map);
 }
 
-#pragma region
-
-int getNumber(char *s)
-{
-	char temp[1024] = { 0 };
-	int n = 0;
-	for (int i = 0; i < strlen(s); i++)
-	{
-		if (s[i] >= '0' && s[i] <= '9')
-		{
-			temp[n++] = s[i];
-		}
-	}
-	return atoi(temp);
-}
+#pragma region loadMap
+//int getNumber(char *s)
+//{
+//	char temp[1024] = { 0 };
+//	int n = 0;
+//	for (int i = 0; i < strlen(s); i++)
+//	{
+//		if (s[i] >= '0' && s[i] <= '9')
+//		{
+//			temp[n++] = s[i];
+//		}
+//	}
+//	return atoi(temp);
+//}
 
 void setEmpty(char *s, int size)
 {
@@ -173,7 +168,8 @@ ErrorCode Map::loadMap()
 		fclose(f);
 
 		m_tileSet = ResourcesManager::getInstance()->getResource(SpriteSheet::SHEET_TILESET);
-		m_tileSet->loadImage();
+		//m_tileSet->loadImage();
+
 		return ErrorCode::ERR_NO_ERROR;
 	}
 
@@ -188,7 +184,7 @@ void Map::setCamera(int vpx, int vpy)
 	m_vpx = vpx;
 	m_vpy = vpy;
 
-	if (m_vpx - SCREEN_WIDTH / 2 < 0) m_vpx = 0;
+	//if (m_vpx - SCREEN_WIDTH / 2 < 0) m_vpx = 0;
 }
 
 void Map::drawMap(Graphics *g)
