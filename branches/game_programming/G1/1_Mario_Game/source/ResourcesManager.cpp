@@ -39,7 +39,7 @@ void ResourcesManager::loadResources()
 	m_items->loadImage();
 	loadFrameList(m_itemsFrameList, "image//items.src");
 
-	m_tileSet = new Image("image//tileset.png");
+	m_tileSet = new Image("image//tileset_hq.png");
 	m_tileSet->loadImage();
 }
 
