@@ -10,11 +10,12 @@ public:
 	Game();
 	virtual ~Game();
 
-	virtual ErrorCode	Init(int screenW, int screenH, const char* title);
-	virtual void		Update(float deltaTime);
-	virtual void		Render(Graphics* g);
-	virtual void		Exit();
-			void		UpdateInputHandle();
+	virtual ErrorCode	init(int screenW, int screenH, const char* title);
+	virtual void		update(float deltaTime);
+	virtual void		render(Graphics* g);
+	virtual void		exit();
+	virtual void		onKeyProc(KeyCode key, KeyState state);
+			void		updateInputHandle();
 protected:
 			Image*		m_Image;
 			e_Direction	m_direction;

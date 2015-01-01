@@ -48,7 +48,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\vld\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\lib\stdio_fw\include\;$(ProjectDir)..\lib\vld\include\;$(ProjectDir)..\lib\FreeType\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
@@ -73,17 +73,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\AbstractItemObject.h" />
     <ClInclude Include="..\source\AbstractObject.h" />
     <ClInclude Include="..\source\Action.h" />
     <ClInclude Include="..\source\Algebra.h" />
-    <ClInclude Include="..\source\AtomBoomItem.h" />
     <ClInclude Include="..\source\Backgrounds.h" />
+<<<<<<< .mine
+=======
     <ClInclude Include="..\source\Ball.h" />
     <ClInclude Include="..\source\Bar.h" />
     <ClInclude Include="..\source\BonusSpeedBallItem.h" />
     <ClInclude Include="..\source\Brick.h" />
     <ClInclude Include="..\source\CloneBallItem.h" />
+>>>>>>> .r141
     <ClInclude Include="..\source\CommonStructure.h" />
     <ClInclude Include="..\source\EventButton.h" />
     <ClInclude Include="..\source\EventButtonA.h" />
@@ -107,22 +108,21 @@
     <ClInclude Include="..\source\OPGLGamePadDispatcher.h" />
     <ClInclude Include="..\source\StaticObject.h" />
     <ClInclude Include="..\source\stdafx.h" />
-    <ClInclude Include="..\source\Stone.h" />
-    <ClInclude Include="..\source\Wood.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\AbstractItemObject.cpp" />
     <ClCompile Include="..\source\AbstractObject.cpp" />
     <ClCompile Include="..\source\Action.cpp" />
     <ClCompile Include="..\source\Algebra.cpp" />
-    <ClCompile Include="..\source\AtomBoomItem.cpp" />
     <ClCompile Include="..\source\Backgrounds.cpp" />
+<<<<<<< .mine
+=======
     <ClCompile Include="..\source\Ball.cpp" />
     <ClCompile Include="..\source\Bar.cpp" />
     <ClCompile Include="..\source\BonusSpeedBallItem.cpp" />
     <ClCompile Include="..\source\Brick.cpp" />
     <ClCompile Include="..\source\CloneBallItem.cpp" />
+>>>>>>> .r141
     <ClCompile Include="..\source\EventButton.cpp" />
     <ClCompile Include="..\source\EventButtonA.cpp" />
     <ClCompile Include="..\source\EventButtonD.cpp" />
@@ -148,8 +148,6 @@
     <ClCompile Include="..\source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\source\Stone.cpp" />
-    <ClCompile Include="..\source\Wood.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
