@@ -24,9 +24,9 @@ Game::~Game()
 /// @return type: ErrorCode. This is enum to descreption some error when we create windows 
 /// @warning : .
 //---------------------------------------------------------------------------------------------------------------------------------
-ErrorCode Game::Init(int screenW, int screenH, const char* title)
+ErrorCode Game::init(int screenW, int screenH, const char* title)
 {
-	ErrorCode errCode = Application::Init(screenW, screenH, title);
+	ErrorCode errCode = Application::init(screenW, screenH, title);
 	m_Image = new Image("SpriteShipMario.png");
 	errCode = m_Image->loadImage();
 	if (errCode != ErrorCode::ERR_NO_ERROR)
@@ -44,10 +44,14 @@ ErrorCode Game::Init(int screenW, int screenH, const char* title)
 /// @return type: void.
 /// @warning : .
 //---------------------------------------------------------------------------------------------------------------------------------
-void Game::Update(float deltaTime)
+void Game::update(float deltaTime)
 {
+<<<<<<< .mine
+	updateInputHandle();
+=======
 	Sleep(80);
 	UpdateInputHandle();
+>>>>>>> .r141
 	switch (m_direction)
 	{
 	case NONE_DIRECTION:
@@ -83,7 +87,7 @@ void Game::Update(float deltaTime)
 /// @return	    	: void
 /// @warning    	: No
 //--------------------------------------------------------------------------------------------------------------------------------//
-void Game::UpdateInputHandle()
+void Game::updateInputHandle()
 {
 	if (getKeyState(KEY_LEFT))
 		m_direction = e_Direction::LEFT_DIRECTION;
@@ -98,7 +102,7 @@ void Game::UpdateInputHandle()
 /// @return type: void.
 /// @warning : .
 //---------------------------------------------------------------------------------------------------------------------------------
-void Game::Render(Graphics* g)
+void Game::render(Graphics* g)
 {
 	g->setClearColor(0x000000FF);
 	g->cleanScreen();
@@ -118,13 +122,24 @@ void Game::Render(Graphics* g)
 	
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------//
+/// @description:	
+/// @param		:
+/// @return		:
+/// @warning	:
+//----------------------------------------------------------------------------------------------------------------------------------//
+void Game::onKeyProc(KeyCode key, KeyState state)
+{
+	printf("Key: %c - State: %d\n", key, state);
+}
+
 //--------------------------------------------------------------------------------------------------------------------------------
 /// @description: When game finished or we close windows, we have to release resource.
 /// @parameter:   No
 /// @return type: void .	
 /// @warning :    If you don't release all resource of careless, this is very dangerous because perfomance of device descreased.
 //---------------------------------------------------------------------------------------------------------------------------------
-void Game::Exit()
+void Game::exit()
 {
 	delete m_Image;
 }

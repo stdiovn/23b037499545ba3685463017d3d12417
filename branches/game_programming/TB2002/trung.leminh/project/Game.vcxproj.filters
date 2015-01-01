@@ -15,41 +15,26 @@
     <ClInclude Include="..\source\Backgrounds.h">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject\Background</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Bar.h">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Bar</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\StaticObject.h">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Ball.h">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Ball</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Geometry.h">
       <Filter>BT1_BrickBreaker\Math</Filter>
     </ClInclude>
+<<<<<<< .mine
+=======
     <ClInclude Include="..\source\AbstractItemObject.h">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item</Filter>
     </ClInclude>
     <ClInclude Include="..\source\CloneBallItem.h">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\CloneItem</Filter>
     </ClInclude>
+>>>>>>> .r141
     <ClInclude Include="..\source\Game.h">
       <Filter>BT1_BrickBreaker\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Wood.h">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick\Wood</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Stone.h">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick\Stone</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Brick.h">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\Mapmanager.h">
       <Filter>BT1_BrickBreaker\MapManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\AtomBoomItem.h">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BoomItem</Filter>
     </ClInclude>
     <ClInclude Include="..\source\AbstractObject.h">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject</Filter>
@@ -121,18 +106,14 @@
     <ClCompile Include="..\source\Backgrounds.cpp">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject\Background</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Bar.cpp">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Bar</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\StaticObject.cpp">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Ball.cpp">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Ball</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Geometry.cpp">
       <Filter>BT1_BrickBreaker\Math</Filter>
     </ClCompile>
+<<<<<<< .mine
+=======
     <ClCompile Include="..\source\AbstractItemObject.cpp">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item</Filter>
     </ClCompile>
@@ -148,11 +129,9 @@
     <ClCompile Include="..\source\Brick.cpp">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick</Filter>
     </ClCompile>
+>>>>>>> .r141
     <ClCompile Include="..\source\Mapmanager.cpp">
       <Filter>BT1_BrickBreaker\MapManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\AtomBoomItem.cpp">
-      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BoomItem</Filter>
     </ClCompile>
     <ClCompile Include="..\source\AbstractObject.cpp">
       <Filter>BT1_BrickBreaker\ObjectManager\AbsObject</Filter>
@@ -248,33 +227,6 @@
     </Filter>
     <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject">
       <UniqueIdentifier>{cd583c09-3649-46ed-bf4b-d761b6c52ec0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Bar">
-      <UniqueIdentifier>{9e18af10-d498-4b03-aded-1952f9c094d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Ball">
-      <UniqueIdentifier>{faa39534-bcb1-4afa-a356-f45fa706a401}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item">
-      <UniqueIdentifier>{c0c21126-fe37-4c99-9622-3596ca4ff377}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BoomItem">
-      <UniqueIdentifier>{d73a6b94-76b1-40a3-9113-c7ebfda5d507}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\CloneItem">
-      <UniqueIdentifier>{5baf29eb-f1f4-451d-b6cf-5663a0f6587a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BonusSpeedItem">
-      <UniqueIdentifier>{d51f55e8-2621-4eda-8d38-b821dc33b350}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick">
-      <UniqueIdentifier>{ce3013a5-fb8c-42be-97fc-02629e6272ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick\Stone">
-      <UniqueIdentifier>{a02e1b36-092c-425a-9203-0ef018675df3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick\Wood">
-      <UniqueIdentifier>{2f041997-c0c4-4d7f-9f7c-96eead14ba25}</UniqueIdentifier>
     </Filter>
     <Filter Include="BT1_BrickBreaker\InputManager\EventButton">
       <UniqueIdentifier>{26096e99-4a2e-4cfe-8ccc-2c8596f7a1ec}</UniqueIdentifier>
