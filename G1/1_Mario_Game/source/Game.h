@@ -6,7 +6,7 @@ using namespace stdio_fw;
 class Game : public Application
 {
 private:
-	Font*				m_font;
+	//Font*				m_font;
 	GameState			m_state;
 
 	Map*				m_map;

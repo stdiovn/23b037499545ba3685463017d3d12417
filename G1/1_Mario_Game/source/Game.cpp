@@ -24,11 +24,11 @@ ErrorCode Game::init(int screenW, int screenH, const char* title)
 	/////////////////////////////////////////////////
 	//Coder: Rye
 	//Purpose: Set Font for render text
-	Font::initFontLib();
+	/*Font::initFontLib();
 
 	m_font = new Font("font//Montserrat-Regular.ttf");
 	m_font->loadFont();
-	getGraphics()->setFont(m_font);
+	getGraphics()->setFont(m_font);*/
 	/////////////////////////////////////////////////
 
 	//Coder: Tai
@@ -53,6 +53,34 @@ void Game::update(float deltaTime)
 	/////////////////////////////////////////////////
 	//Coder: Rye
 	m_mario->update();
+
+	std::list<InformationObject> listObjects = m_map->getInformationObjects();
+	std::list<InformationObject>::iterator curInformationObjects = listObjects.begin();
+	while(curInformationObjects != listObjects.end())
+	{
+		InformationObject x = *curInformationObjects;
+		if(x.m_id == 1)
+		{
+			Rect marioBound = m_mario->getRect();
+			Vec2 marioPosition = m_mario->getWorldPosition();
+			Direction dir = g_isCollide(Rect(marioPosition.x, marioPosition.y, marioBound.width, marioBound.height), x.m_rect, m_mario->getVeloc());
+			if(dir == Direction::DIR_TOP)
+			{
+				m_mario->setWorldPosition(marioPosition.x, x.m_rect.y - marioBound.height);
+				break;
+			}
+		}
+		else
+		{
+			if(m_mario->getVeloc().y < 10)
+				m_mario->setVeloc(m_mario->getVeloc().x, m_mario->getVeloc().y + GRAVITATION);
+			m_mario->setWorldPosition(m_mario->getWorldPosition().x, m_mario->getWorldPosition().y + m_mario->getVeloc().y);
+			break;
+		}
+
+		curInformationObjects++;
+	}
+
 	/////////////////////////////////////////////////
 	
 
@@ -80,7 +108,12 @@ void Game::render(Graphics* g)
 
 void Game::exit()
 {
-	
+	m_map->unloadMap();
+	SAFE_DEL(m_map);
+
+	SAFE_DEL(m_mario);
+
+	ResourcesManager::getInstance()->unloadResources();
 }
 
 void Game::onKeyProc(KeyCode key, KeyState state)

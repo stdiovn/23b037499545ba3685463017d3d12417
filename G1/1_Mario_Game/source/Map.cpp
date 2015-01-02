@@ -10,14 +10,17 @@ Map::Map(const char* path)
 
 Map::~Map()
 {
-	unloadMap();
+	
 }
 
 void Map::unloadMap()
 {
-	for (int i = 0; i < m_mapHeight; i++)
-		delete m_map[i];
-	SAFE_DEL_ARR(m_map);
+	if(m_map)
+	{
+		for(int i = 0; i < m_mapHeight; i++)
+			delete m_map[i];
+		SAFE_DEL_ARR(m_map);
+	}
 }
 
 #pragma region loadMap
@@ -72,9 +75,9 @@ ErrorCode Map::loadMap()
 			}
 			else if (strstr(s, "data=") != NULL)
 			{
-				m_map = new int*[m_mapHeight];
+				m_map = new uint*[m_mapHeight];
 				for (int i = 0; i < m_mapHeight; i++)
-					m_map[i] = new int[m_mapWidth];
+					m_map[i] = new uint[m_mapWidth];
 
 				int row = 0;
 				int column = 0;
