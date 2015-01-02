@@ -21,19 +21,19 @@ void Map::unloadMap()
 }
 
 #pragma region loadMap
-//int getNumber(char *s)
-//{
-//	char temp[1024] = { 0 };
-//	int n = 0;
-//	for (int i = 0; i < strlen(s); i++)
-//	{
-//		if (s[i] >= '0' && s[i] <= '9')
-//		{
-//			temp[n++] = s[i];
-//		}
-//	}
-//	return atoi(temp);
-//}
+int getNumber(char *s)
+{
+	char temp[1024] = { 0 };
+	int n = 0;
+	for (int i = 0; i < strlen(s); i++)
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			temp[n++] = s[i];
+		}
+	}
+	return atoi(temp);
+}
 
 void setEmpty(char *s, int size)
 {
@@ -56,19 +56,19 @@ ErrorCode Map::loadMap()
 
 			if (strstr(s, "tilewidth=") != NULL)
 			{
-				m_tileWidth = getNumber(s);
+				m_tileWidth = g_getNumber(s);
 			}
 			else if (strstr(s, "tileheight=") != NULL)
 			{
-				m_tileHeight = getNumber(s);
+				m_tileHeight = g_getNumber(s);
 			}
 			else if (strstr(s, "height=") != NULL)
 			{
-				m_mapHeight = getNumber(s);
+				m_mapHeight = g_getNumber(s);
 			}
 			else if (strstr(s, "width=") != NULL)
 			{
-				m_mapWidth = getNumber(s);
+				m_mapWidth = g_getNumber(s);
 			}
 			else if (strstr(s, "data=") != NULL)
 			{
@@ -121,7 +121,7 @@ ErrorCode Map::loadMap()
 				fgets(s, 1024, f);
 				if (strstr(s, "type=") != NULL)
 				{
-					object.m_id = getNumber(s);
+					object.m_id = g_getNumber(s);
 				}
 
 				setEmpty(s, 1024);
@@ -143,16 +143,16 @@ ErrorCode Map::loadMap()
 						switch (id)
 						{
 						case 0:
-							object.m_llocation.x = getNumber(temp) * m_tileWidth;
+							object.m_rect.x = getNumber(temp) * m_tileWidth;
 							break;
 						case 1:
-							object.m_llocation.y = getNumber(temp) * m_tileHeight;
+							object.m_rect.y = getNumber(temp) * m_tileHeight;
 							break;
 						case 2:
-							object.m_llocation.width = getNumber(temp) * m_tileWidth;
+							object.m_rect.width = getNumber(temp) * m_tileWidth;
 							break;
 						case 3:
-							object.m_llocation.height = getNumber(temp) * m_tileHeight;
+							object.m_rect.height = getNumber(temp) * m_tileHeight;
 							break;
 						}
 
@@ -168,7 +168,8 @@ ErrorCode Map::loadMap()
 		fclose(f);
 
 		m_tileSet = ResourcesManager::getInstance()->getResource(SpriteSheet::SHEET_TILESET);
-		//m_tileSet->loadImage();
+
+		setCamera(0, 0);
 
 		return ErrorCode::ERR_NO_ERROR;
 	}
@@ -199,8 +200,8 @@ void Map::drawMap(Graphics *g)
 		{
 			if (m_map[i][j] != 0)
 			{
-				float src_x = (m_map[i][j] % (m_tileSet->getWidth() / m_tileWidth) - 1) * m_tileWidth;
-				float src_y = m_map[i][j] / (m_tileSet->getWidth() / m_tileWidth) * m_tileHeight;
+				int src_x = (m_map[i][j] % (m_tileSet->getWidth() / m_tileWidth) - 1) * m_tileWidth;
+				int src_y = m_map[i][j] / (m_tileSet->getWidth() / m_tileWidth) * m_tileHeight;
 
 				vector.x = j * m_tileWidth;
 				vector.y = i * m_tileHeight;

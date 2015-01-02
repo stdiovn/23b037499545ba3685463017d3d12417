@@ -6,26 +6,50 @@ void Mario::update()
 {
 	if(m_isActive)
 	{
-		float currentTime = GetTickCount();
+		////////////////////////////////////////////////////////////////////////
+		//Control Animation Time
+		DWORD currentTime = GetTickCount();
 		m_elapseFrameTime = currentTime - m_lastTime;
-		if(m_elapseFrameTime > 1000 / FRAME_TIME)
+		if(m_elapseFrameTime > 1000 / (!m_isBoost ? FRAME_TIME : 2 * FRAME_TIME))
 			m_lastTime = currentTime;
+		////////////////////////////////////////////////////////////////////////
 
+
+		
+		////////////////////////////////////////////////////////////////////////
+		//Handle Input
 		KeyCode key;
-
 		if(GetAsyncKeyState(VK_LEFT))
 			key = KeyCode::KEY_LEFT;
 		else if(GetAsyncKeyState(VK_RIGHT))
 			key = KeyCode::KEY_RIGHT;
+		/*else if(GetAsyncKeyState(VK_DOWN))
+			key = KeyCode::KEY_DOWN;
+		else if(GetAsyncKeyState(VK_UP))
+			key = KeyCode::KEY_UP;*/
 		else
 			key = KeyCode::KEY_UNKNOWN;
+
+		m_isBoost = GetAsyncKeyState(VK_LCONTROL);
+
 
 		if(key == KeyCode::KEY_LEFT || key == KeyCode::KEY_RIGHT || (key == KeyCode::KEY_UNKNOWN && m_veloc != 0))
 			run(key);
 		else
 			stand();
+		////////////////////////////////////////////////////////////////////////
 
-		m_position.x += m_veloc;
+
+
+		////////////////////////////////////////////////////////////////////////
+		//Set position and worldPosition for scrolling map
+		if(m_worldPosition.x + m_veloc < SCREEN_WIDTH / 2)
+			m_position.x += m_veloc;
+		m_position.y = SCREEN_HEIGHT - 32 * 2 - m_frameList->at(m_currentFrame).m_frameRect.height;
+
+		m_worldPosition.x += m_veloc;
+		m_worldPosition.y = m_position.y;
+		////////////////////////////////////////////////////////////////////////
 	}
 }
 
@@ -55,7 +79,10 @@ void Mario::run(KeyCode key)
 	if(m_state != MarioState::MS_RUNNING)
 		m_state = MarioState::MS_RUNNING;
 
-	if(m_elapseFrameTime > 1000.0f / FRAME_TIME)
+
+	////////////////////////////////////////////////////////////////////////
+	//Running Animation
+	if(m_elapseFrameTime > 1000.0f / (!m_isBoost ? FRAME_TIME : 2 * FRAME_TIME))
 	{
 		m_elapseFrameTime = 0;
 		if(m_lives == 1)
@@ -72,17 +99,26 @@ void Mario::run(KeyCode key)
 			m_currentFrame = MarioSheet::SUPER_MARIO_RUN - 1;
 
 		m_currentFrame++;
+		////////////////////////////////////////////////////////////////////////
+
+
 
 		if(key == KeyCode::KEY_LEFT)
 		{
-			if(m_veloc > -3)
+			if(m_veloc > (!m_isBoost ? -2 : -4))
 				m_veloc -= m_accel;
+			if(!m_isBoost && m_veloc < -2)
+				m_veloc = -2;
+
 			m_flipping = FlippingFlag::FLIP_Y;
 		}
 		else if(key == KeyCode::KEY_RIGHT)
 		{
-			if(m_veloc < 3)
+			if(m_veloc < (!m_isBoost ? 2 : 4))
 				m_veloc += m_accel;
+			if(!m_isBoost && m_veloc > 2)
+				m_veloc = 2;
+
 			m_flipping = FlippingFlag::FLIP_NONE;
 		}
 		else
