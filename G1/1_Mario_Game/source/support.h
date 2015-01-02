@@ -13,8 +13,8 @@ struct Frame
 
 struct InformationObject
 {
-	int m_id;
-	Rect m_llocation;
+	int		m_id;
+	Rect	m_rect;
 };
 
 
@@ -64,6 +64,6 @@ enum MarioSheet
 	SUPER_MARIO_SIT	= 20,
 };
 
-bool g_isCollide(Rect st, Rect nd);
-int getNumber(char* s);
+bool	g_isCollide(Rect st, Rect nd);
+int		g_getNumber(char* s);
 ////////////////////////////////////////////////////////////

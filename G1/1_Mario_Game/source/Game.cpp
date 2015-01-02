@@ -55,10 +55,8 @@ void Game::update(float deltaTime)
 	m_mario->update();
 	/////////////////////////////////////////////////
 	
-	/*static int x = 0, y = 0;
-	m_map->setCamera(x, y);
-	x--;*/
-	//y--;
+
+
 	/////////////////////////////////////////////////
 	//Coder: Rye
 	//Purpose: manage FPS
@@ -69,8 +67,12 @@ void Game::update(float deltaTime)
 void Game::render(Graphics* g)
 {
 	g->cleanScreen();
-	g->setClearColor(0x0000FFF0);
+	g->setClearColor(0x5C94FCFF);
 	g->setColor(0xFFFFFFFF);
+
+	Vec2 camera = m_mario->getWorldPosition();
+	if(camera.x >= SCREEN_WIDTH / 2)
+		m_map->setCamera(-(camera.x - SCREEN_WIDTH / 2), 0);
 
 	m_map->drawMap(g);
 	m_mario->draw(g);

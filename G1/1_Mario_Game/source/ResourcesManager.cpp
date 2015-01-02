@@ -27,17 +27,17 @@ ResourcesManager* ResourcesManager::getInstance()
 
 void ResourcesManager::loadResources()
 {
-	m_mario = new Image("image//mario.png");
+	m_mario = new Image("image//mario_hq.png");
 	m_mario->loadImage();
-	loadFrameList(m_marioFrameList, "image//mario.src");
+	loadFrameList(m_marioFrameList, "image//mario_hq.src");
 
-	m_enemies = new Image("image//enemies.png");
+	m_enemies = new Image("image//enemies_hq.png");
 	m_enemies->loadImage();
-	loadFrameList(m_enemiesFrameList, "image//enemies.src");
+	loadFrameList(m_enemiesFrameList, "image//enemies_hq.src");
 
-	m_items = new Image("image//items.png");
+	m_items = new Image("image//items_hq.png");
 	m_items->loadImage();
-	loadFrameList(m_itemsFrameList, "image//items.src");
+	loadFrameList(m_itemsFrameList, "image//items_hq.src");
 
 	m_tileSet = new Image("image//tileset_hq.png");
 	m_tileSet->loadImage();

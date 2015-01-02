@@ -12,7 +12,7 @@ bool g_isCollide(Rect st, Rect nd)
 ///////////////////////////////////////////////////////
 //Coder: Rye
 //Purpose: Reimplement getNumber function
-int getNumber(char* s)
+int g_getNumber(char* s)
 {
 	int result = 0;
 	while(*s < '0' || *s > '9') s++;
