@@ -12,5 +12,5 @@
 #define FPS							60
 #define FRAME_TIME					10
 
-#define GRAVITATION					10
+#define GRAVITATION					2
 ////////////////////////////////////////////////////////////

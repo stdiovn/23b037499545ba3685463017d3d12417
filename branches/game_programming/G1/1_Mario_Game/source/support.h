@@ -23,7 +23,6 @@ enum GameState
 	STATE_PLAY,
 	STATE_WIN,
 	STATE_GAME_OVER,
-	STATE_COUNT
 };
 
 enum SpriteSheet
@@ -32,7 +31,6 @@ enum SpriteSheet
 	SHEET_ENEMIES,
 	SHEET_ITEM,
 	SHEET_TILESET,
-	SHEET_COUNT
 };
 
 enum MarioState
@@ -42,7 +40,7 @@ enum MarioState
 	MS_FASTRUNNING,
 	MS_JUMPING,
 	MS_FALLING,
-	MS_COUNT
+	MS_SITTING,
 };
 
 enum MarioSheet
@@ -64,6 +62,20 @@ enum MarioSheet
 	SUPER_MARIO_SIT	= 20,
 };
 
-bool	g_isCollide(Rect st, Rect nd);
-int		g_getNumber(char* s);
+enum Direction
+{
+	DIR_UNKNOWN = -1,
+	DIR_NONE = 0,
+	DIR_TOP,
+	DIR_BOTTOM,
+	DIR_LEFT,
+	DIR_RIGHT,
+	DIR_TOP_LEFT,
+	DIR_BOTTOM_LEFT,
+	DIR_TOP_RIGHT,
+	DIR_BOTTOM_RIGHT
+};
+
+Direction	g_isCollide(Rect st, Rect nd, Vec2 stVeloc, Vec2 ndVeloc = Vec2(0, 0));
+int			g_getNumber(char* s);
 ////////////////////////////////////////////////////////////

@@ -51,7 +51,10 @@ void ResourcesManager::unloadResources()
 		SAFE_DEL(m_mario)
 	}
 	if(m_marioFrameList)
-		SAFE_DEL_ARR(m_marioFrameList);
+	{
+		m_marioFrameList->clear();
+		SAFE_DEL(m_marioFrameList);
+	}
 
 	if(m_enemies)
 	{
@@ -59,7 +62,10 @@ void ResourcesManager::unloadResources()
 		SAFE_DEL(m_enemies);
 	}
 	if(m_enemiesFrameList)
-		SAFE_DEL_ARR(m_enemiesFrameList);
+	{
+		m_enemiesFrameList->clear();
+		SAFE_DEL(m_enemiesFrameList);
+	}
 
 	if(m_items)
 	{
@@ -67,13 +73,18 @@ void ResourcesManager::unloadResources()
 		SAFE_DEL(m_items);
 	}
 	if(m_itemsFrameList)
-		SAFE_DEL_ARR(m_itemsFrameList);
+	{
+		m_itemsFrameList->clear();
+		SAFE_DEL(m_itemsFrameList);
+	}
 
 	if(m_tileSet)
 	{
 		m_tileSet->unloadImage();
 		SAFE_DEL(m_tileSet);
 	}
+
+	SAFE_DEL(m_instance);
 }
 
 Image* ResourcesManager::getResource(SpriteSheet sheet)
@@ -160,4 +171,6 @@ void ResourcesManager::loadFrameList(std::vector<Frame>*& frameList, const char*
 
 		frameList->push_back(temp);
 	}
+
+	SAFE_DEL_ARR(buff);
 }
