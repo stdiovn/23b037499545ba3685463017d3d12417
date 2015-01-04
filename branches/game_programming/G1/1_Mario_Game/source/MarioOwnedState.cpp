@@ -37,7 +37,7 @@ void Standing::execute(Mario* mario)
 {
 	if(GetAsyncKeyState(VK_LEFT) || GetAsyncKeyState(VK_RIGHT))
 		mario->getStateMachine()->changeState(Running::getInstance());
-	else if(GetAsyncKeyState(VK_LSHIFT))
+	else if(GetAsyncKeyState(VK_LSHIFT) && mario->canJump())
 		mario->getStateMachine()->changeState(Jumping::getInstance());
 	else if(GetAsyncKeyState(VK_DOWN) && mario->isBig())
 		mario->getStateMachine()->changeState(Sitting::getInstance());
@@ -128,7 +128,7 @@ void Running::execute(Mario* mario)
 			if(!GetAsyncKeyState(VK_LCONTROL) && mario->getVeloc().x > 3)
 				mario->setVeloc(3, mario->getVeloc().y);
 
-			if(GetAsyncKeyState(VK_LSHIFT))
+			if(GetAsyncKeyState(VK_LSHIFT) && mario->canJump())
 				mario->getStateMachine()->changeState(Jumping::getInstance());
 		}
 		//////////////////////////////////////////////////////////////////
@@ -177,7 +177,7 @@ void Sitting::execute(Mario* mario)
 {
 	if(!GetAsyncKeyState(VK_DOWN))
 		mario->getStateMachine()->changeState(Standing::getInstance());
-	else if(GetAsyncKeyState(VK_LSHIFT))
+	else if(GetAsyncKeyState(VK_LSHIFT) && mario->canJump())
 		mario->getStateMachine()->changeState(SitJumping::getInstance());
 }
 
@@ -216,7 +216,10 @@ void Jumping::enter(Mario* mario)
 void Jumping::execute(Mario* mario)
 {
 	if(GetAsyncKeyState(VK_LSHIFT) && mario->getVeloc().y < 0)
+	{
 		mario->setVeloc(mario->getVeloc().x, mario->getVeloc().y + GRAVITATION / 2);
+		mario->jump();
+	}
 	else
 		mario->setVeloc(mario->getVeloc().x, mario->getVeloc().y + 2 * GRAVITATION);
 
@@ -226,19 +229,19 @@ void Jumping::execute(Mario* mario)
 	{
 		mario->setFlipping(FlippingFlag::FLIP_Y);
 
-		if(mario->getVeloc().x >(GetAsyncKeyState(VK_LCONTROL) ? -6 : -3))
+		if(mario->getVeloc().x >(GetAsyncKeyState(VK_LCONTROL) ? -6 : -4))
 			mario->setVeloc(mario->getVeloc().x - mario->getAccel(), mario->getVeloc().y);
-		if(!GetAsyncKeyState(VK_LCONTROL) && mario->getVeloc().x < -3)
-			mario->setVeloc(-3, mario->getVeloc().y);
+		if(!GetAsyncKeyState(VK_LCONTROL) && mario->getVeloc().x < -4)
+			mario->setVeloc(-4, mario->getVeloc().y);
 	}
 	else if(GetAsyncKeyState(VK_RIGHT))
 	{
 		mario->setFlipping(FlippingFlag::FLIP_NONE);
 
-		if(mario->getVeloc().x < (GetAsyncKeyState(VK_LCONTROL) ? 6 : 3))
+		if(mario->getVeloc().x < (GetAsyncKeyState(VK_LCONTROL) ? 6 : 4))
 			mario->setVeloc(mario->getVeloc().x + mario->getAccel(), mario->getVeloc().y);
-		if(!GetAsyncKeyState(VK_LCONTROL) && mario->getVeloc().x > 3)
-			mario->setVeloc(3, mario->getVeloc().y);
+		if(!GetAsyncKeyState(VK_LCONTROL) && mario->getVeloc().x > 4)
+			mario->setVeloc(4, mario->getVeloc().y);
 	}
 
 
@@ -295,7 +298,7 @@ void Falling::execute(Mario* mario)
 
 
 	if(mario->getPosition().y >= mario->getGroundPosition() - mario->getFrameList()->at(mario->getCurrentFrame()).m_frameRect.height)
-		mario->getStateMachine()->changeState(Standing::getInstance());
+		mario->getStateMachine()->changeState(Running::getInstance());
 }
 
 void Falling::exit(Mario* mario)
@@ -328,7 +331,10 @@ void SitJumping::enter(Mario* mario)
 void SitJumping::execute(Mario* mario)
 {
 	if(GetAsyncKeyState(VK_LSHIFT) && mario->getVeloc().y < 0)
+	{
 		mario->setVeloc(mario->getVeloc().x, mario->getVeloc().y + GRAVITATION / 2);
+		mario->jump();
+	}
 	else
 		mario->setVeloc(mario->getVeloc().x, mario->getVeloc().y + 2 * GRAVITATION);
 

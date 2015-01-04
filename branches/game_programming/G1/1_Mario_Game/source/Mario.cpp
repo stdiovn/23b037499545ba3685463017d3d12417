@@ -64,23 +64,27 @@ void Mario::update()
 	}
 
 
-	//////////////////////////////////////////////////////////////////
-	//Flying Bug!!!
-	if(!GetAsyncKeyState(VK_LSHIFT))
+
+	if(!GetAsyncKeyState(VK_LSHIFT) || m_veloc.y >= 0)
 	{
 		if(m_position.y < m_groundPosition - m_frameList->at(m_currentFrame).m_frameRect.height)
 			m_veloc.y += GRAVITATION;
 	}
-	//////////////////////////////////////////////////////////////////
+
+	if(!GetAsyncKeyState(VK_LSHIFT))
+		m_canJump = true;
+	
 
 
+	if(m_worldPosition.x + m_veloc.x >= 0)
+	{
+		if(m_worldPosition.x + m_veloc.x < SCREEN_WIDTH / 2)
+			m_position.x += m_veloc.x;
+		m_position.y += m_veloc.y;
 
-	if(m_worldPosition.x + m_veloc.x < SCREEN_WIDTH / 2)
-		m_position.x += m_veloc.x;
-	m_position.y += m_veloc.y;
-
-	m_worldPosition.x += m_veloc.x;
-	m_worldPosition.y = m_position.y;
+		m_worldPosition.x += m_veloc.x;
+		m_worldPosition.y = m_position.y;
+	}
 }
 
 void Mario::draw(Graphics* g)

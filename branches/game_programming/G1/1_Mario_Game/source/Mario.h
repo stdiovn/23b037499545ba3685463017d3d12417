@@ -15,6 +15,7 @@ private:
 
 	bool		m_isBig;
 	bool		m_canShoot;
+	bool		m_canJump;
 
 	int			m_accel;
 	bool		m_isBoost;
@@ -31,6 +32,9 @@ public:
 
 	bool		isBig(){ return m_isBig; }
 	bool		canShoot(){ return m_canShoot; }
+
+	void		jump(bool ability = false){ m_canJump = ability; }
+	bool		canJump(){ return m_canJump; }
 	
 	int			getAccel(){ return m_accel; }
 	bool		isBoost(){ return m_isBoost; }
