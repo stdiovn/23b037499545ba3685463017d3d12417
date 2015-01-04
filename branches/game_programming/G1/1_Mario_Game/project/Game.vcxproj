@@ -78,8 +78,11 @@
     <ClInclude Include="..\source\Items.h" />
     <ClInclude Include="..\source\Map.h" />
     <ClInclude Include="..\source\Mario.h" />
+    <ClInclude Include="..\source\MarioOwnedState.h" />
     <ClInclude Include="..\source\Mushroom.h" />
     <ClInclude Include="..\source\ResourcesManager.h" />
+    <ClInclude Include="..\source\State.h" />
+    <ClInclude Include="..\source\StateMachine.h" />
     <ClInclude Include="..\source\stdafx.h" />
     <ClInclude Include="..\source\support.h" />
   </ItemGroup>
@@ -89,6 +92,7 @@
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\Map.cpp" />
     <ClCompile Include="..\source\Mario.cpp" />
+    <ClCompile Include="..\source\MarioOwnedState.cpp" />
     <ClCompile Include="..\source\Mushroom.cpp" />
     <ClCompile Include="..\source\ResourcesManager.cpp" />
     <ClCompile Include="..\source\stdafx.cpp">

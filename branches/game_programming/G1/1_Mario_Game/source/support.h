@@ -76,6 +76,12 @@ enum Direction
 	DIR_BOTTOM_RIGHT
 };
 
+enum Location
+{
+	LOC_ON_GROUND,
+	LOC_IN_AIR
+};
+
 Direction	g_isCollide(Rect st, Rect nd, Vec2 stVeloc, Vec2 ndVeloc = Vec2(0, 0));
 int			g_getNumber(char* s);
 ////////////////////////////////////////////////////////////

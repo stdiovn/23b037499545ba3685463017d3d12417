@@ -31,6 +31,15 @@
     <ClInclude Include="..\source\Items.h">
       <Filter>GameObjects\Items</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\State.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\StateMachine.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\MarioOwnedState.h">
+      <Filter>StateMachine\MarioOwnedState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp">
@@ -60,6 +69,9 @@
     <ClCompile Include="..\source\Items.cpp">
       <Filter>GameObjects\Items</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\MarioOwnedState.cpp">
+      <Filter>StateMachine\MarioOwnedState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MainGame">
@@ -82,6 +94,12 @@
     </Filter>
     <Filter Include="GameObjects\Items">
       <UniqueIdentifier>{61dd133c-a183-431d-9f3c-fda4e634a907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{86f54f66-c9c4-4347-b40b-250e9b450781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine\MarioOwnedState">
+      <UniqueIdentifier>{55c85c82-9244-43ff-b8b2-2698c188db51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
