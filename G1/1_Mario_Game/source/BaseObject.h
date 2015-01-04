@@ -20,9 +20,11 @@ protected:
 	int			m_currentFrame;
 
 	Vec2		m_veloc;
+	uint		m_flipping;
+
 	Vec2		m_position;
 	Vec2		m_worldPosition;
-	uint		m_flipping;
+	int			m_groundPosition;
 
 	DWORD		m_elapseFrameTime;
 	DWORD		m_lastTime;
@@ -31,7 +33,7 @@ protected:
 public:
 	BaseObject(Image* spritesheet, std::vector<Frame>* frameList)
 		: m_spriteSheet(spritesheet), m_frameList(frameList){
-		m_flipping = 0U;
+		m_flipping = FlippingFlag::FLIP_NONE;
 		m_elapseFrameTime = 0;
 		m_lastTime = GetTickCount();
 	}
@@ -40,7 +42,11 @@ public:
 	virtual void		update() = 0;
 	virtual void		draw(Graphics* g) = 0;
 
-	virtual Rect		getRect(){ return m_frameList->at(m_currentFrame).m_frameRect; }
+	virtual std::vector<Frame>*		getFrameList(){ return m_frameList; }
+	virtual Rect					getRect(){ return m_frameList->at(m_currentFrame).m_frameRect; }
+
+	virtual int			getCurrentFrame(){ return m_currentFrame; }
+	virtual void		setFlipping(FlippingFlag flip){ m_flipping = flip; }
 
 	virtual Vec2		getVeloc(){ return m_veloc; }
 	virtual void		setVeloc(int x, int y){ m_veloc = Vec2(x, y); }
@@ -50,5 +56,8 @@ public:
 
 	virtual Vec2		getWorldPosition(){ return m_worldPosition; }
 	virtual void		setWorldPosition(int x, int y){ m_worldPosition = Vec2(x, y); m_position.y = m_worldPosition.y; }
+
+	virtual int			getGroundPosition(){ return m_groundPosition; }
+	virtual void		setGroundPosition(int position){ m_groundPosition = position; }
 };
 ////////////////////////////////////////////////////////////
