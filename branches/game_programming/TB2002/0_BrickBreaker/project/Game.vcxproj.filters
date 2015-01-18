@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\source\CommonStructure.h">
+      <Filter>BT1_BrickBreaker\CommonStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Algebra.h">
+      <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\MoveableObject.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Backgrounds.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\StaticObject.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Geometry.h">
+      <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClInclude>
+<<<<<<< .mine
+=======
+    <ClInclude Include="..\source\AbstractItemObject.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\CloneBallItem.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\CloneItem</Filter>
+    </ClInclude>
+>>>>>>> .r141
+    <ClInclude Include="..\source\Game.h">
+      <Filter>BT1_BrickBreaker\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Mapmanager.h">
+      <Filter>BT1_BrickBreaker\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\AbstractObject.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\InputManager.h">
+      <Filter>BT1_BrickBreaker\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\OPGLGamePadDispatcher.h">
+      <Filter>BT1_BrickBreaker\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\OPGLAbstractDispatcher.h">
+      <Filter>BT1_BrickBreaker\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButton.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonA.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonD.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonDown.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonExit.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonLeft.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonRight.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonS.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonStart.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonUp.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EventButtonW.h">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Action.h">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\GoLeft.h">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\GoRight.h">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BonusSpeedBallItem.h">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BonusSpeedItem</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\stdafx.cpp" />
+    <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\Algebra.cpp">
+      <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\MoveableObject.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Backgrounds.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\StaticObject.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Geometry.cpp">
+      <Filter>BT1_BrickBreaker\Math</Filter>
+    </ClCompile>
+<<<<<<< .mine
+=======
+    <ClCompile Include="..\source\AbstractItemObject.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\CloneBallItem.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\CloneItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wood.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick\Wood</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Stone.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick\Stone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Brick.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Brick</Filter>
+    </ClCompile>
+>>>>>>> .r141
+    <ClCompile Include="..\source\Mapmanager.cpp">
+      <Filter>BT1_BrickBreaker\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\AbstractObject.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Game.cpp">
+      <Filter>BT1_BrickBreaker\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\InputManager.cpp">
+      <Filter>BT1_BrickBreaker\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\OPGLGamePadDispatcher.cpp">
+      <Filter>BT1_BrickBreaker\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\OPGLAbstractDispatcher.cpp">
+      <Filter>BT1_BrickBreaker\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButton.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonA.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonD.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonDown.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonExit.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonLeft.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonRight.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonS.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonStart.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonUp.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\EventButtonW.cpp">
+      <Filter>BT1_BrickBreaker\InputManager\EventButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Action.cpp">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\GoLeft.cpp">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\GoRight.cpp">
+      <Filter>BT1_BrickBreaker\ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BonusSpeedBallItem.cpp">
+      <Filter>BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject\Item\BonusSpeedItem</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BT1_BrickBreaker">
+      <UniqueIdentifier>{2372c4ad-be08-4a99-b5de-30e43e763bb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\CommonStructure">
+      <UniqueIdentifier>{f8e44d38-233c-4381-9589-6dae31512bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Math">
+      <UniqueIdentifier>{b82c7e9f-a041-41d0-9600-44f518012d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\MapManager">
+      <UniqueIdentifier>{f2d2a350-65e8-46f3-bee5-a17ffdbe8441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\Game">
+      <UniqueIdentifier>{1780cd07-5460-4bf8-a351-9e5f47ebf90d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\InputManager">
+      <UniqueIdentifier>{6c285cfe-3cbc-4f85-b9c4-ed0a0a1fccd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\ObjectManager">
+      <UniqueIdentifier>{e784941a-70e8-4e42-84a5-5814b9eae320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject">
+      <UniqueIdentifier>{7c77af9e-2c41-4084-8b24-433aab07ccdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject">
+      <UniqueIdentifier>{6ca03fbf-7c78-4269-a820-a8ac94dc70ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\StaticObject\Background">
+      <UniqueIdentifier>{8a3c06b3-fd1a-4fc7-9e8d-4a85ec30f50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\ObjectManager\AbsObject\MoveableObject">
+      <UniqueIdentifier>{cd583c09-3649-46ed-bf4b-d761b6c52ec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\InputManager\EventButton">
+      <UniqueIdentifier>{26096e99-4a2e-4cfe-8ccc-2c8596f7a1ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BT1_BrickBreaker\ActionManager">
+      <UniqueIdentifier>{8d50a4f6-2d7b-4797-a5aa-71a61fd710a9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc">
+      <Filter>BT1_BrickBreaker\Game</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
