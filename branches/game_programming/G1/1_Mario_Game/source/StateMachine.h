@@ -9,7 +9,10 @@ class StateMachine
 private:
 	entity_type*		m_owner;
 	State<entity_type>*	m_current_state;
+
 	State<entity_type>*	m_prevous_state;
+
+
 public:
 	StateMachine(entity_type* owner)
 	{

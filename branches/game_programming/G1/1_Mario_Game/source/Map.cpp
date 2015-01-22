@@ -2,7 +2,7 @@
 
 #include "ResourcesManager.h"
 #include "Map.h"
-
+#include "config.h"
 Map::Map(const char* path)
 {
 	strcpy_s(m_mapPath, path);
@@ -10,7 +10,6 @@ Map::Map(const char* path)
 
 Map::~Map()
 {
-	
 }
 
 void Map::unloadMap()
@@ -24,6 +23,7 @@ void Map::unloadMap()
 }
 
 #pragma region loadMap
+
 int getNumber(char *s)
 {
 	char temp[1024] = { 0 };
@@ -193,6 +193,17 @@ void Map::setCamera(int vpx, int vpy)
 
 void Map::drawMap(Graphics *g)
 {
+
+	for (std::vector<Enemy*>::iterator temp = m_frameEnemyOnCamera.begin(); temp != m_frameEnemyOnCamera.end(); temp++)
+	{
+		if ((*temp)->getTypeEnemy() == EnemysType::ET_FLOWER)
+		{
+			(*temp)->setCamera(m_vpx, m_vpy);
+			(*temp)->draw(g);
+		}
+	}
+
+
 	Mat3 matrix;
 	matrix.setTranslation(m_vpx, m_vpy);
 
@@ -215,5 +226,151 @@ void Map::drawMap(Graphics *g)
 			}
 		}
 	}
+
+	for (std::vector<LuckyBox*>::iterator temp = m_frameItem.begin(); temp != m_frameItem.end(); temp++)
+	{
+		(*temp)->setCamera(m_vpx, m_vpy);
+		(*temp)->draw(g);
+	}
+
+	for (std::vector<Enemy*>::iterator temp = m_frameEnemyOnCamera.begin(); temp != m_frameEnemyOnCamera.end(); temp++)
+	{
+		if ((*temp)->getTypeEnemy() != EnemysType::ET_FLOWER)
+		{
+			(*temp)->setCamera(m_vpx, m_vpy);
+			(*temp)->draw(g);
+		}
+	}
+}
+
+void Map::initMap()
+{
+	for (std::vector<InformationObject>::iterator temp = m_informationObjects.begin(); temp != m_informationObjects.end(); temp++)
+	{
+		if (temp->m_id == ID_BOXMONEY_ON_MAP)
+		{
+			LuckyBox* box = new LuckyBox(ItemsType::IT_COIN);
+			box->setPosition(temp->m_rect.x, temp->m_rect.y);
+			
+			m_frameItem.push_back(box);
+		}
+		else if (temp->m_id == ID_BRICK_ON_MAP)
+		{
+			LuckyBox* box = new LuckyBox(ItemsType::IT_BRICK);
+			box->setPosition(temp->m_rect.x, temp->m_rect.y);
+
+			m_frameItem.push_back(box);
+		}
+		else if (temp->m_id == ID_ENEMY_TURTLE_ON_MAP)
+		{
+			Enemy* enemy = new Enemy(EnemysType::ET_TURTLE, Vec2(temp->m_rect.x, temp->m_rect.y));
+
+			m_frameEnemy.push_back(enemy);
+		}
+		else if (temp->m_id == ID_ENEMY_MUSHROOM_ON_MAP)
+		{
+			Enemy* enemy = new Enemy(EnemysType::ET_MUSHROOM, Vec2(temp->m_rect.x, temp->m_rect.y));
+
+			m_frameEnemy.push_back(enemy);
+		}
+		else if (temp->m_id == ID_ENEMY_FLOWER_ON_MAP)
+		{
+			Enemy* enemy = new Enemy(EnemysType::ET_FLOWER, Vec2(temp->m_rect.x + 16 , temp->m_rect.y + temp->m_rect.height + 8));
+
+			m_frameEnemy.push_back(enemy);
+		}
+	}
+}
+
+void Map::update()
+{	
+	for (std::vector<LuckyBox*>::iterator temp = m_frameItem.begin(); temp != m_frameItem.end(); temp++)
+	{
+		if ((*temp)->getActive())
+			(*temp)->update();
+	}
+
+	for (std::vector<Enemy*>::iterator temp = m_frameEnemyOnCamera.begin(); temp != m_frameEnemyOnCamera.end(); temp++)
+	{
+		if ((*temp)->getActive())
+			(*temp)->update();
+	}
+}
+
+
+std::vector<InformationObject> Map::getInformationObjectsOnCamera()
+{
+	std::vector<InformationObject>	m_frame;
+	Rect camera(-m_vpx, m_vpy, SCREEN_WIDTH * 2, SCREEN_HEIGHT);
+
+	for (int i = 0; i < m_informationObjects.size(); i++)
+	{
+		if (m_informationObjects[i].m_id == ID_STAND_ON_MAP
+			|| m_informationObjects[i].m_id == ID_PIPE_ON_MAP || m_informationObjects[i].m_id == ID_STAIR_ON_MAP)
+		{
+			if (g_CheckAABB(m_informationObjects[i].m_rect, camera))
+			{
+				m_frame.push_back(m_informationObjects[i]);
+			}
+		}	
+	}
+
+	return m_frame;
+}
+
+
+std::vector<LuckyBox*> Map::getItemsOnCamera()
+{
+	std::vector<LuckyBox*>	m_frame;
+	Rect camera(-m_vpx, m_vpy, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	for (int i = 0; i < m_frameItem.size(); i++)
+	{
+		Vec2 position = m_frameItem[i]->getBox()->getPosition();
+		Rect bound = m_frameItem[i]->getBox()->getRect();
+
+		if (g_CheckAABB(Rect(position.x, position.y, bound.width, bound.height), camera))
+		{
+			m_frameItem[i]->setActive(true);
+			m_frame.push_back(m_frameItem[i]);
+		}
+	}
+
+	return m_frame;
+}
+
+
+std::vector<Enemy*> Map::getEnemysOnCamera()
+{
+	Rect camera(-m_vpx, m_vpy, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	for (std::vector<Enemy*>::iterator temp = m_frameEnemyOnCamera.begin(); temp != m_frameEnemyOnCamera.end(); temp++)
+	{
+		if ((*temp)->getPosition().x + (*temp)->getRect().width < -m_vpx || 
+			(*temp)->getPosition().y > camera.y + camera.height)
+		{
+			Enemy* x = (*temp);
+			delete x;
+
+			temp = m_frameEnemyOnCamera.erase(temp);
+		}
+	}
+
+	for (std::vector<Enemy*>::iterator temp = m_frameEnemy.begin(); temp != m_frameEnemy.end(); temp++)
+	{
+		Vec2 position = (*temp)->getPosition();
+		Rect bound = (*temp)->getRect();
+
+		if (g_CheckAABB(Rect(position.x, position.y, bound.width, bound.height), camera))
+		{
+			(*temp)->setActive(true);
+			m_frameEnemyOnCamera.push_back(*temp);
+
+			temp = m_frameEnemy.erase(temp);
+		}
+	}
+
+
+	return m_frameEnemyOnCamera;
 }
 

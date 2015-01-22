@@ -60,3 +60,14 @@ int g_getNumber(char* s)
 
 	return result;
 }
+
+
+////////
+
+bool		g_CheckAABB(Rect box1, Rect box2)
+{
+	if (box1.x + box1.width < box2.x || box1.x > box2.x + box2.width || box1.y + box1.height < box2.y || box1.y > box2.y + box2.height)
+		return false;
+
+	return true;
+}

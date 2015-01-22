@@ -41,6 +41,7 @@ void ResourcesManager::loadResources()
 
 	m_tileSet = new Image("image//tileset_hq.png");
 	m_tileSet->loadImage();
+	loadFrameList(m_tileSetFrameList, "image//tileset_hq.src");
 }
 
 void ResourcesManager::unloadResources()
@@ -83,6 +84,11 @@ void ResourcesManager::unloadResources()
 		m_tileSet->unloadImage();
 		SAFE_DEL(m_tileSet);
 	}
+	if (m_tileSetFrameList)
+	{
+		m_tileSetFrameList->clear();
+		SAFE_DEL(m_tileSetFrameList);
+	}
 
 	SAFE_DEL(m_instance);
 }
@@ -109,7 +115,9 @@ std::vector<Frame>* ResourcesManager::getFrameList(SpriteSheet sheet)
 		return m_enemiesFrameList;
 	else if(sheet == SpriteSheet::SHEET_ITEM)
 		return m_itemsFrameList;
-	else
+	else if (sheet == SpriteSheet::SHEET_TILESET)
+		return m_tileSetFrameList;
+	else	
 		return NULL;
 }
 

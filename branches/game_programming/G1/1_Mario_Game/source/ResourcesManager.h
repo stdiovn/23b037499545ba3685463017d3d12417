@@ -21,6 +21,7 @@ private:
 	std::vector<Frame>*		m_itemsFrameList;
 
 	Image*		m_tileSet;
+	std::vector<Frame>*		m_tileSetFrameList;
 
 	void		loadFrameList(std::vector<Frame>*& frameList, const char* path);
 public:
