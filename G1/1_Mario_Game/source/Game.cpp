@@ -1,7 +1,5 @@
 #include "stdafx.h"
 
-#include "Mushroom.h"
-
 #include "Map.h"
 #include "ResourcesManager.h"
 
@@ -35,6 +33,8 @@ ErrorCode Game::init(int screenW, int screenH, const char* title)
 
 	m_map = new Map("map//Stage1-1.txt");
 	m_map->loadMap();
+	m_map->initMap();
+
 
 	/////////////////////////////////////////////////
 	//Coder: Rye
@@ -53,9 +53,8 @@ void Game::update(float deltaTime)
 	/////////////////////////////////////////////////
 	//Coder: Rye
 	
-
-	std::list<InformationObject> listObjects = m_map->getInformationObjects();
-	std::list<InformationObject>::iterator curInformationObjects = listObjects.begin();
+	std::vector<InformationObject> listObjects = m_map->getInformationObjectsOnCamera();
+	std::vector<InformationObject>::iterator curInformationObjects = listObjects.begin();
 	while(curInformationObjects != listObjects.end())
 	{
 		InformationObject x = *curInformationObjects;
@@ -67,18 +66,82 @@ void Game::update(float deltaTime)
 			if(dir == Direction::DIR_TOP)
 			{
 				m_mario->setGroundPosition(x.m_rect.y);
-				break;
 			}
 		}
-
 		curInformationObjects++;
 	}
 
-	m_mario->update();
 
-	/////////////////////////////////////////////////
+	////Coder: Tai
+
+	std::vector<LuckyBox*>	listItems = m_map->getItemsOnCamera();
+
+	std::vector<Enemy*>	listEnemy = m_map->getEnemysOnCamera();
+	m_map->update();
+
+	for (std::vector<Enemy*>::iterator temp = listEnemy.begin(); temp != listEnemy.end(); temp++)
+	{
+		Vec2 position = (*temp)->getPosition();
+		Rect bound = (*temp)->getRect();
+		for (std::vector<InformationObject>::iterator curInformationObjects = listObjects.begin(); curInformationObjects != listObjects.end(); curInformationObjects++)
+		{
+			if (curInformationObjects->m_id == ID_PIPE_ON_MAP || curInformationObjects->m_id == ID_STAIR_ON_MAP 
+				|| curInformationObjects->m_id == ID_STAND_ON_MAP)
+			{
+				Direction direct = g_isCollide(Rect(position.x, position.y, bound.width, bound.height), curInformationObjects->m_rect, (*temp)->getVeloc());
+
+				if (direct == Direction::DIR_TOP || direct == Direction::DIR_TOP_LEFT || direct == Direction::DIR_TOP_RIGHT)
+				{
+					Vec2 position = (*temp)->getPosition();
+
+					position.y = curInformationObjects->m_rect.y - (*temp)->getRect().height;
+					(*temp)->setPosition(position.x, position.y);
+				}
+				else if (direct == Direction::DIR_LEFT)
+				{
+					Vec2 position = (*temp)->getPosition();
+
+					position.x = curInformationObjects->m_rect.x - bound.width;
+					(*temp)->setPosition(position.x, position.y);
+
+					Vec2 veclocity = (*temp)->getVeloc();
+					veclocity.x *= -1;
+					(*temp)->setVeloc(veclocity.x, veclocity.y);
+				}
+				else if (direct == Direction::DIR_RIGHT)
+				{
+					Vec2 position = (*temp)->getPosition();
+
+					position.x = curInformationObjects->m_rect.x + curInformationObjects->m_rect.width;
+					(*temp)->setPosition(position.x, position.y);
+
+					Vec2 veclocity = (*temp)->getVeloc();
+					veclocity.x *= -1;
+					(*temp)->setVeloc(veclocity.x, veclocity.y);
+				}
+			}
+		}
+
+		for (int i = 0; i < listItems.size(); i++)
+		{
+			Vec2 item = listItems[i]->getBox()->getPosition();
+			Rect itembound = listItems[i]->getBox()->getRect();
+
+			Direction direc = g_isCollide(Rect(position.x, position.y, bound.width, bound.height), Rect(item.x, item.y, itembound.width, itembound.height), (*temp)->getVeloc());
+			if (direc == Direction::DIR_TOP || direc == Direction::DIR_TOP_LEFT || direc == Direction::DIR_TOP_RIGHT)
+			{
+				position.y = item.y - bound.height;
+
+				(*temp)->setPosition(position.x, position.y);
+			}
+		}
+	}
 	
 
+	m_mario->update();
+	
+
+	/////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////
 	//Coder: Rye
@@ -113,5 +176,4 @@ void Game::exit()
 
 void Game::onKeyProc(KeyCode key, KeyState state)
 {
-	
 }

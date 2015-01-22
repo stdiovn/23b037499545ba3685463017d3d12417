@@ -3,7 +3,9 @@
 //////////////////////////////////////////////////////
 //Coder: Rye
 //Purpose: Load map (prototype)
-#include <list>
+#include <vector>
+#include "LuckyBox.h"
+#include "Enemy.h"
 
 using namespace stdio_fw;
 class Map
@@ -22,23 +24,38 @@ private:
 	int			m_vpx;
 	int			m_vpy;
 
-	std::list<InformationObject>	m_informationObjects;
+	std::vector<InformationObject>	m_informationObjects;
+	std::vector<LuckyBox*>			m_frameItem;
+	std::vector<Enemy*>				m_frameEnemy;
+
+	std::vector<Enemy*>				m_frameEnemyOnCamera;
+
 public:
 	Map(const char* path);
 	~Map();
 
-	void		changeMap(const char* path);
+
+	void			initMap();
+	void			update();
+
+
+	void			changeMap(const char* path);
 
 	ErrorCode		loadMap();
 	void			unloadMap();
 
-	uint		getWidth(){ return m_mapWidth; }
-	uint		getHeight(){ return m_mapHeight; }
+	uint			getWidth(){ return m_mapWidth; }
+	uint			getHeight(){ return m_mapHeight; }
 
-	std::list<InformationObject>	getInformationObjects(){ return m_informationObjects; }
 
-	void		setCamera(int vpx, int vpy);
+	std::vector<InformationObject>		getInformationObjectsOnCamera();
+	std::vector<LuckyBox*>				getItemsOnCamera();
+	std::vector<Enemy*>					getEnemysOnCamera();
 
-	void		drawMap(Graphics* g);
+
+	void			setCamera(int vpx, int vpy);
+
+
+	void			drawMap(Graphics* g);
 };
 //////////////////////////////////////////////////////

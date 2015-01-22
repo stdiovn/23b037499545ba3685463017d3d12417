@@ -84,4 +84,54 @@ enum Location
 
 Direction	g_isCollide(Rect st, Rect nd, Vec2 stVeloc, Vec2 ndVeloc = Vec2(0, 0));
 int			g_getNumber(char* s);
+
+bool		g_CheckAABB(Rect box1, Rect box2);
 ////////////////////////////////////////////////////////////
+/// Coder: Tai
+
+enum ItemSheet
+{
+	IS_MUSHROOM_BIGGER = 0,
+	IS_MUSHROOM_UP = 1,
+	IS_GUNFLOWER = 2,
+	IS_STAR = 6,
+	IS_COIN = 10,
+	IS_LUCKYBOX = 18,
+	IS_BREAKBRICK = 22
+};
+
+enum ItemsType
+{
+	IT_COIN = 0,
+	IT_MUSHROOM_BIGGER,
+	IT_MUSHROOM_UP,
+	IT_GUN,
+	IT_STAR,
+	IT_UP,
+	IT_BRICK
+};
+
+enum  TileSetSheet
+{
+	TS_LUCKYBOX = 0,
+	TS_BRICK = 4
+};
+
+enum EnemySheet
+{
+	ES_TURTLE = 0,
+	ES_TURTLE_FLY = 2,
+	ES_TURTLE_ROLL = 4,
+	ES_FLOWER = 6,
+	ES_MUSHROOM = 8,
+	ES_MUSHROOM_DIE = 10,
+};
+
+enum EnemysType
+{
+	ET_MUSHROOM = 0,
+	ET_TURTLE,
+	ET_TURTLE_FLY,
+	ET_FLOWER
+};
+

@@ -45,6 +45,7 @@ public:
 	virtual std::vector<Frame>*		getFrameList(){ return m_frameList; }
 	virtual Rect					getRect(){ return m_frameList->at(m_currentFrame).m_frameRect; }
 
+	virtual void		setCurrentFrame(int currentframe){ m_currentFrame = currentframe; }
 	virtual int			getCurrentFrame(){ return m_currentFrame; }
 	virtual void		setFlipping(FlippingFlag flip){ m_flipping = flip; }
 
@@ -59,5 +60,14 @@ public:
 
 	virtual int			getGroundPosition(){ return m_groundPosition; }
 	virtual void		setGroundPosition(int position){ m_groundPosition = position; }
+
+
+	virtual void		setActive(bool active){ m_isActive = active; }
+	virtual bool		getActive(){ return m_isActive; }
+
+
+	virtual DWORD		getElapseTime(){ m_elapseFrameTime = GetTickCount(); return m_elapseFrameTime - m_lastTime; }
+	virtual void		updateTime(){ m_lastTime = GetTickCount(); }
+
 };
 ////////////////////////////////////////////////////////////
