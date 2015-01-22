@@ -7,9 +7,11 @@ public:
 	Game();
 	virtual ~Game();
 
-	virtual ErrorCode	Init(int screenW, int screenH, const char* title);
-	virtual void		Update(float deltaTime);
+	virtual ErrorCode	init(int screenW, int screenH, const char* title);
+	virtual void		update(float deltaTime);
 
-	virtual void		Render(Graphics* g);
-	virtual void		Exit();
+	virtual void		render(Graphics* g);
+	virtual void		exit();
+
+	void onKeyProc(KeyCode key, KeyState state);
 };
