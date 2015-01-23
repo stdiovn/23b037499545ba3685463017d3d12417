@@ -28,7 +28,7 @@ void TurtleMoving::NextFrame(Enemy* enemy)
 void TurtleMoving::enter(Enemy* enemy)
 {
 	enemy->setCurrentFrame(EnemySheet::ES_TURTLE);
-	enemy->setVeloc(6, 10);
+	enemy->setVeloc(-6, 10);
 }
 
 void TurtleMoving::execute(Enemy* enemy)

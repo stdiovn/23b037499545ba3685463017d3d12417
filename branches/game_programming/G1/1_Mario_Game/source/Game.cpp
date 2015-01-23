@@ -2,7 +2,7 @@
 
 #include "Map.h"
 #include "ResourcesManager.h"
-
+#include "MarioOwnedState.h"
 #include "Game.h"
 
 Game::Game()
@@ -58,7 +58,7 @@ void Game::update(float deltaTime)
 	while(curInformationObjects != listObjects.end())
 	{
 		InformationObject x = *curInformationObjects;
-		if(x.m_id == 1)
+		if(x.m_id == ID_STAND_ON_MAP)
 		{
 			Rect marioBound = m_mario->getRect();
 			Vec2 marioPosition = m_mario->getWorldPosition();
@@ -73,11 +73,34 @@ void Game::update(float deltaTime)
 
 
 	////Coder: Tai
-
+	// mario collision with items 
+	// not yet, still bug
 	std::vector<LuckyBox*>	listItems = m_map->getItemsOnCamera();
 
+	for (std::vector<LuckyBox*>::iterator temp = listItems.begin(); temp != listItems.end(); temp++)
+	{
+		Vec2 itemPosition = (*temp)->getBox()->getPosition();
+		Rect itemBound = (*temp)->getBox()->getRect();
+
+		Rect marioBound = m_mario->getRect();
+		Vec2 marioPosition = m_mario->getWorldPosition();
+
+		Direction dir = g_isCollide(Rect(marioPosition.x, marioPosition.y, marioBound.width, marioBound.height), Rect(itemPosition.x, itemPosition.y, itemBound.width, itemBound.height), m_mario->getVeloc());
+		if (dir == Direction::DIR_BOTTOM || dir == Direction::DIR_BOTTOM_LEFT || dir == Direction::DIR_BOTTOM_RIGHT)
+		{
+			marioPosition.y = itemPosition.y + itemBound.height;
+			m_mario->setPosition(marioPosition.x, marioPosition.y);
+
+			(*temp)->setCollision(true);
+			//m_mario->getStateMachine()->changeState(Falling::getInstance());
+		}
+	}
+
+
+	// enemy collision with items, with objects on map, with mario
 	std::vector<Enemy*>	listEnemy = m_map->getEnemysOnCamera();
 	m_map->update();
+
 
 	for (std::vector<Enemy*>::iterator temp = listEnemy.begin(); temp != listEnemy.end(); temp++)
 	{
@@ -107,6 +130,8 @@ void Game::update(float deltaTime)
 					Vec2 veclocity = (*temp)->getVeloc();
 					veclocity.x *= -1;
 					(*temp)->setVeloc(veclocity.x, veclocity.y);
+
+					(*temp)->setFlipping(FLIP_NONE);
 				}
 				else if (direct == Direction::DIR_RIGHT)
 				{
@@ -118,10 +143,13 @@ void Game::update(float deltaTime)
 					Vec2 veclocity = (*temp)->getVeloc();
 					veclocity.x *= -1;
 					(*temp)->setVeloc(veclocity.x, veclocity.y);
+
+					(*temp)->setFlipping(FLIP_X);
 				}
 			}
 		}
 
+		// enemy collision with items
 		for (int i = 0; i < listItems.size(); i++)
 		{
 			Vec2 item = listItems[i]->getBox()->getPosition();
@@ -135,8 +163,19 @@ void Game::update(float deltaTime)
 				(*temp)->setPosition(position.x, position.y);
 			}
 		}
+
+		// enemy collision with mario
+		Vec2	marioPosition = m_mario->getPosition();
+		Rect	marioBound = m_mario->getRect();
+		Direction dir = g_isCollide(Rect(marioPosition.x, marioPosition.y, marioBound.width, marioBound.height), Rect(position.x, position.y, bound.width, bound.height), m_mario->getVeloc());
+		if (dir == Direction::DIR_TOP || dir == Direction::DIR_TOP_LEFT || dir == Direction::DIR_TOP_RIGHT)
+		{
+			(*temp)->setCollsion(true);
+		}
 	}
 	
+
+
 
 	m_mario->update();
 	
