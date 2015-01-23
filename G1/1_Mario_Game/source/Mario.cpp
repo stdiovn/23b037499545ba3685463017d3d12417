@@ -89,9 +89,13 @@ void Mario::update()
 
 void Mario::draw(Graphics* g)
 {
-	g->drawRegion(m_spriteSheet, 
-		Rect(m_position.x, m_position.y, m_frameList->at(m_currentFrame).m_frameRect.width, m_frameList->at(m_currentFrame).m_frameRect.height), 
-		m_frameList->at(m_currentFrame).m_frameRect,
+	Rect rectFlip = m_frameList->at(m_currentFrame).m_frameRect;
+	if (m_flipping == FlippingFlag::FLIP_X)
+		rectFlip.x = m_spriteSheet->getWidth() - m_frameList->at(m_currentFrame).m_frameRect.x - m_frameList->at(m_currentFrame).m_frameRect.width;
+
+	g->drawRegion(m_spriteSheet,
+		Rect(m_position.x, m_position.y, m_frameList->at(m_currentFrame).m_frameRect.width, m_frameList->at(m_currentFrame).m_frameRect.height),
+		rectFlip,
 		m_flipping);
 }
 

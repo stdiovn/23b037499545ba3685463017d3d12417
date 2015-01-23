@@ -48,9 +48,14 @@ void Enemy::draw(Graphics* g)
 		Vec3 vector(m_position.x, m_position.y, 1);
 		vector = vector *  matrix;
 
+		Rect rectFlip = m_frameList->at(m_currentFrame).m_frameRect;
+		
+		if (m_flipping == FlippingFlag::FLIP_X)
+			rectFlip.x = m_spriteSheet->getWidth() - m_frameList->at(m_currentFrame).m_frameRect.x - m_frameList->at(m_currentFrame).m_frameRect.width;
+
 		g->drawRegion(m_spriteSheet,
 			Rect(vector.x, vector.y, m_frameList->at(m_currentFrame).m_frameRect.width, m_frameList->at(m_currentFrame).m_frameRect.height),
-			m_frameList->at(m_currentFrame).m_frameRect,
+			rectFlip,
 			m_flipping);
 	}
 }

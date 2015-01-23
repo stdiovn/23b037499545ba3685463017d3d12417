@@ -109,7 +109,7 @@ void Running::execute(Mario* mario)
 		//If jump, change state to Jumping
 		if(GetAsyncKeyState(VK_LEFT))
 		{
-			mario->setFlipping(FlippingFlag::FLIP_Y);
+			mario->setFlipping(FlippingFlag::FLIP_X);
 
 			if(mario->getVeloc().x > (GetAsyncKeyState(VK_LCONTROL) ? -6 : -3))
 				mario->setVeloc(mario->getVeloc().x - mario->getAccel(), mario->getVeloc().y);
@@ -227,7 +227,7 @@ void Jumping::execute(Mario* mario)
 
 	if(GetAsyncKeyState(VK_LEFT))
 	{
-		mario->setFlipping(FlippingFlag::FLIP_Y);
+		mario->setFlipping(FlippingFlag::FLIP_X);
 
 		if(mario->getVeloc().x >(GetAsyncKeyState(VK_LCONTROL) ? -6 : -4))
 			mario->setVeloc(mario->getVeloc().x - mario->getAccel(), mario->getVeloc().y);
@@ -279,7 +279,7 @@ void Falling::execute(Mario* mario)
 {
 	if(GetAsyncKeyState(VK_LEFT))
 	{
-		mario->setFlipping(FlippingFlag::FLIP_Y);
+		mario->setFlipping(FlippingFlag::FLIP_X);
 
 		if(mario->getVeloc().x > (GetAsyncKeyState(VK_LCONTROL) ? -6 : -3))
 			mario->setVeloc(mario->getVeloc().x - mario->getAccel(), mario->getVeloc().y);

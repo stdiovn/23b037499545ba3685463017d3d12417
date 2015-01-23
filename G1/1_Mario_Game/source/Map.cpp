@@ -344,16 +344,24 @@ std::vector<Enemy*> Map::getEnemysOnCamera()
 {
 	Rect camera(-m_vpx, m_vpy, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	for (std::vector<Enemy*>::iterator temp = m_frameEnemyOnCamera.begin(); temp != m_frameEnemyOnCamera.end(); temp++)
-	{
-		if ((*temp)->getPosition().x + (*temp)->getRect().width < -m_vpx || 
-			(*temp)->getPosition().y > camera.y + camera.height)
-		{
-			Enemy* x = (*temp);
-			delete x;
+	std::vector<Enemy*>::iterator currentFrame = m_frameEnemyOnCamera.begin();
 
-			temp = m_frameEnemyOnCamera.erase(temp);
+	while (currentFrame != m_frameEnemyOnCamera.end())
+	{
+		if ((*currentFrame)->getPosition().x + (*currentFrame)->getRect().width < -m_vpx ||
+			(*currentFrame)->getPosition().y > camera.y + camera.height)
+		{
+			Enemy* x = (*currentFrame);
+			delete x;
+			currentFrame = m_frameEnemyOnCamera.erase(currentFrame);
+
+			if (currentFrame != m_frameEnemyOnCamera.begin())
+				currentFrame--;
+
+			if (m_frameEnemyOnCamera.size() == 0) break;
 		}
+		
+		currentFrame++;
 	}
 
 	for (std::vector<Enemy*>::iterator temp = m_frameEnemy.begin(); temp != m_frameEnemy.end(); temp++)
@@ -367,6 +375,10 @@ std::vector<Enemy*> Map::getEnemysOnCamera()
 			m_frameEnemyOnCamera.push_back(*temp);
 
 			temp = m_frameEnemy.erase(temp);
+
+			if (m_frameEnemy.size() == 0) break;
+			if (temp != m_frameEnemy.begin())
+				temp--;
 		}
 	}
 
