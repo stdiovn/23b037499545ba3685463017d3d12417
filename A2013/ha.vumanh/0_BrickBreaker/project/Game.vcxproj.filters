@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\source\Game.h" />
+    <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\BlockBar.h">
+      <Filter>MiniPart</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\Game.cpp" />
+    <ClCompile Include="..\source\stdafx.cpp" />
+    <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\BlockBar.cpp">
+      <Filter>MiniPart</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="MiniPart">
+      <UniqueIdentifier>{fb89a438-aae3-43da-bf70-24057982e627}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
