@@ -21,9 +21,6 @@ Box::Box(Image* spritesheet, std::vector<Frame>* frameList, ItemsType type, int 
 Box::~Box()
 {
 	SAFE_DEL(m_stateMachine);
-
-	delete IdleBox::getInstance();
-	delete LuckyBoxEffect::getInstance();
 }
 
 StateMachine<Box>* Box::getStateMachine()
@@ -51,11 +48,6 @@ void Box::draw(Graphics *g)
 			m_frameList->at(m_currentFrame).m_frameRect,
 			m_flipping);
 	}
-}
-
-void Box::setActive(bool active)
-{
-	m_isActive = active;
 }
 
 void Box::setCamera(int x, int y)

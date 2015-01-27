@@ -81,10 +81,10 @@ TurtleDead* TurtleDead::getInstance()
 void TurtleDead::enter(Enemy* enemy)
 {
 	enemy->setCurrentFrame(EnemySheet::ES_TURTLE);
-	//enemy->setFlipping(FLIP_Y);
-	enemy->setTimeCountDown(15);
+	enemy->setFlipping(FLIP_Y);
+	enemy->setTimeCountDown(25);
 	
-	enemy->setVeloc(0, 15);
+	enemy->setVeloc(0, -21);
 }
 
 void TurtleDead::execute(Enemy* enemy)
@@ -101,8 +101,10 @@ void TurtleDead::execute(Enemy* enemy)
 
 		Vec2 position = enemy->getPosition();
 		Vec2 veclocity = enemy->getVeloc();
-		veclocity.y -= 3;
-		position -= veclocity;
+		veclocity.y += 3;
+		position += veclocity;
+		enemy->setVeloc(veclocity.x, veclocity.y);
+
 
 		enemy->setPosition(position.x, position.y);
 
@@ -113,6 +115,7 @@ void TurtleDead::execute(Enemy* enemy)
 
 void TurtleDead::exit(Enemy* enemy)
 {
+	enemy->setAttack(false);
 }
 
 // Roll
@@ -132,8 +135,8 @@ TurtleRoll* TurtleRoll::getInstance()
 void TurtleRoll::enter(Enemy* enemy)
 {
 	enemy->setCurrentFrame(EnemySheet::ES_TURTLE_ROLL);
-	enemy->setTimeCountDown(10);
-
+	enemy->setTimeCountDown(20);
+	enemy->setVeloc(0, 0);
 	Vec2 position = enemy->getPosition();
 	position.y += 12;
 	enemy->setPosition(position.x, position.y);
@@ -204,11 +207,23 @@ void TurtleRollMoving::execute(Enemy* enemy)
 
 	if (enemy->getActive())
 	{
-		Vec2	position = enemy->getPosition() + enemy->getVeloc();
-		enemy->setPosition(position.x, position.y);
+		if (enemy->getCollision())
+		{
+			enemy->getStateMachine()->changeState(TurtleRoll::getInstance());
+		}
+		else
+		{
+			Vec2	position = enemy->getPosition() + enemy->getVeloc();
+			enemy->setPosition(position.x, position.y);
+		}
 	}
 }
 
 void TurtleRollMoving::exit(Enemy* enemy)
 {
+	enemy->setCollsion(false);
+
+	Vec2 position = enemy->getPosition();
+	position.y -= 12;
+	enemy->setPosition(position.x, position.y);
 }

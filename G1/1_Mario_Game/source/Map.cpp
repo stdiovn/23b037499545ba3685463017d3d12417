@@ -10,16 +10,54 @@ Map::Map(const char* path)
 
 Map::~Map()
 {
+	if (m_map)
+	{
+		for (int i = 0; i < m_mapHeight; i++)
+			delete m_map[i];
+		SAFE_DEL_ARR(m_map);
+	}
+
+	for (std::vector<LuckyBox*>::iterator temp = m_frameItem.begin(); temp != m_frameItem.end(); temp++)
+	{
+		LuckyBox* x = (*temp);
+		delete x;
+		temp = m_frameItem.erase(temp);
+
+		if (temp != m_frameItem.begin())
+			temp--;
+
+		if (m_frameItem.size() == 0) break;
+	}
+
+	for (std::vector<Enemy*>::iterator currentFrame = m_frameEnemyOnCamera.begin(); currentFrame != m_frameEnemyOnCamera.end(); currentFrame++)
+	{
+		Enemy* x = (*currentFrame);
+		delete x;
+		currentFrame = m_frameEnemyOnCamera.erase(currentFrame);
+
+		if (currentFrame != m_frameEnemyOnCamera.begin())
+			currentFrame--;
+
+		if (m_frameEnemyOnCamera.size() == 0) break;
+	}
+
+	for (std::vector<Enemy*>::iterator currentFrame = m_frameEnemy.begin(); currentFrame != m_frameEnemy.end(); currentFrame++)
+	{
+		Enemy* x = (*currentFrame);
+		delete x;
+		currentFrame = m_frameEnemy.erase(currentFrame);
+
+		if (currentFrame != m_frameEnemy.begin())
+			currentFrame--;
+
+		if (m_frameEnemy.size() == 0) break;
+	}
+	
 }
 
 void Map::unloadMap()
 {
-	if(m_map)
-	{
-		for(int i = 0; i < m_mapHeight; i++)
-			delete m_map[i];
-		SAFE_DEL_ARR(m_map);
-	}
+	m_tileSet->unloadImage();
 }
 
 #pragma region loadMap
@@ -254,6 +292,13 @@ void Map::initMap()
 			
 			m_frameItem.push_back(box);
 		}
+		else if (temp->m_id ==  ID_ITEM_GROWUP_ON_MAP || temp->m_id == ID_ITEM_GUN_ON_MAP)
+		{
+			LuckyBox* box = new LuckyBox(ItemsType::IT_MUSHROOM_BIGGER);
+			box->setPosition(temp->m_rect.x, temp->m_rect.y);
+
+			m_frameItem.push_back(box);
+		}
 		else if (temp->m_id == ID_BRICK_ON_MAP)
 		{
 			LuckyBox* box = new LuckyBox(ItemsType::IT_BRICK);
@@ -329,7 +374,7 @@ std::vector<LuckyBox*> Map::getItemsOnCamera()
 		Vec2 position = m_frameItem[i]->getBox()->getPosition();
 		Rect bound = m_frameItem[i]->getBox()->getRect();
 
-		if (g_CheckAABB(Rect(position.x, position.y, bound.width, bound.height), camera))
+		if (g_CheckAABB(Rect(position.x, position.y, bound.width, bound.height), camera) && m_frameItem[i]->getActive())
 		{
 			m_frameItem[i]->setActive(true);
 			m_frame.push_back(m_frameItem[i]);
@@ -349,7 +394,7 @@ std::vector<Enemy*> Map::getEnemysOnCamera()
 	while (currentFrame != m_frameEnemyOnCamera.end())
 	{
 		if ((*currentFrame)->getPosition().x + (*currentFrame)->getRect().width < -m_vpx ||
-			(*currentFrame)->getPosition().y > camera.y + camera.height)
+			(*currentFrame)->getPosition().y > camera.y + camera.height || !(*currentFrame)->getActive())
 		{
 			Enemy* x = (*currentFrame);
 			delete x;

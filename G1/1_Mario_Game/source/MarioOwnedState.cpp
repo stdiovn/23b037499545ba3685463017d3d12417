@@ -29,8 +29,12 @@ void Standing::enter(Mario* mario)
 	//////////////////////////////////////
 	//Position_y depend on current frame and ground
 	mario->setVeloc(0, 0);
+	
 	mario->setPosition(mario->getPosition().x, 
 		mario->getGroundPosition() - mario->getFrameList()->at(mario->getCurrentFrame()).m_frameRect.height);
+
+	//Coder: Tai
+	mario->setWorldPosition(mario->getWorldPosition().x, mario->getPosition().y);
 }
 
 void Standing::execute(Mario* mario)
@@ -169,7 +173,7 @@ void Sitting::enter(Mario* mario)
 	else
 		mario->setCurrentFrame(MarioSheet::SUPER_MARIO_SIT);
 
-	mario->setPosition(mario->getPosition().x, 
+	mario->setPosition(mario->getPosition().x,
 		mario->getGroundPosition() - mario->getFrameList()->at(mario->getCurrentFrame()).m_frameRect.height);
 }
 
@@ -183,7 +187,9 @@ void Sitting::execute(Mario* mario)
 
 void Sitting::exit(Mario* mario)
 {
-
+	////Coder: Tai
+	mario->setPosition(mario->getPosition().x,
+		mario->getGroundPosition() + mario->getFrameList()->at(mario->getCurrentFrame()).m_frameRect.height);
 }
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -210,6 +216,8 @@ void Jumping::enter(Mario* mario)
 	else
 		mario->setCurrentFrame(MarioSheet::SUPER_MARIO_JUMP);
 
+
+	mario->setLocation(Location::LOC_IN_AIR);
 	mario->setVeloc(mario->getVeloc().x, -17);
 }
 
@@ -272,11 +280,15 @@ Falling* Falling::getInstance()
 
 void Falling::enter(Mario* mario)
 {
-	
+	mario->setLocation(Location::LOC_IN_AIR);
 }
 
 void Falling::execute(Mario* mario)
 {
+	//Coder: Tai
+	mario->setVeloc(mario->getVeloc().x, mario->getVeloc().y + 1);
+
+	//Coder: Rye
 	if(GetAsyncKeyState(VK_LEFT))
 	{
 		mario->setFlipping(FlippingFlag::FLIP_X);
@@ -297,7 +309,11 @@ void Falling::execute(Mario* mario)
 	}
 
 
-	if(mario->getPosition().y >= mario->getGroundPosition() - mario->getFrameList()->at(mario->getCurrentFrame()).m_frameRect.height)
+	/*if(mario->getPosition().y >= mario->getGroundPosition() - mario->getFrameList()->at(mario->getCurrentFrame()).m_frameRect.height)
+		mario->getStateMachine()->changeState(Running::getInstance());*/
+
+	// Coder: Tai
+	if (mario->getLocation() == Location::LOC_ON_GROUND)
 		mario->getStateMachine()->changeState(Running::getInstance());
 }
 

@@ -4,6 +4,8 @@
 
 LuckyBox::LuckyBox(ItemsType type, int countCoin)
 {
+	m_type = type;
+
 	m_item = new ItemInBox(ResourcesManager::getInstance()->getResource(SpriteSheet::SHEET_ITEM),
 		ResourcesManager::getInstance()->getFrameList(SpriteSheet::SHEET_ITEM), type);
 
@@ -13,6 +15,8 @@ LuckyBox::LuckyBox(ItemsType type, int countCoin)
 
 LuckyBox::LuckyBox(ItemsType type)
 {
+	m_type = type;
+
 	m_item = new ItemInBox(ResourcesManager::getInstance()->getResource(SpriteSheet::SHEET_ITEM),
 		ResourcesManager::getInstance()->getFrameList(SpriteSheet::SHEET_ITEM), type);
 
@@ -22,7 +26,8 @@ LuckyBox::LuckyBox(ItemsType type)
 
 LuckyBox::~LuckyBox()
 {
-
+	delete m_box;
+	delete m_item;
 }
 
 void LuckyBox::update()
@@ -60,5 +65,11 @@ void LuckyBox::setCamera(int vpx, int vpy)
 {
 	m_box->setCamera(vpx, vpy);
 	m_item->setCamera(vpx, vpy);
+}
+
+void LuckyBox::changeItemsType(ItemsType type)
+{
+	m_type = type;
+	m_item->setItemsType(type);
 }
 

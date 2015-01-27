@@ -84,16 +84,15 @@ MushroomDeadByAttacked* MushroomDeadByAttacked::getInstance()
 void MushroomDeadByAttacked::enter(Enemy* enemy)
 {
 	enemy->setCurrentFrame(EnemySheet::ES_MUSHROOM);
-	//enemy->setFlipping(FLIP_Y);
-	enemy->setTimeCountDown(15);
+	enemy->setFlipping(FLIP_Y);
+	enemy->setTimeCountDown(25);
 	
-	enemy->setVeloc(0, 15);
+	enemy->setVeloc(0, -21);
 }
 
 void MushroomDeadByAttacked::execute(Enemy* enemy)
 {
 	if (enemy->getElapseTime() < 1000 / FPS * 4) return;
-
 	enemy->updateTime();
 
 	if (enemy->getActive())
@@ -103,9 +102,12 @@ void MushroomDeadByAttacked::execute(Enemy* enemy)
 		enemy->setTimeCountDown(m_timeCount);
 
 		Vec2 position = enemy->getPosition();
+		
 		Vec2 veclocity = enemy->getVeloc();
-		veclocity.y -= 3;
-		position -= veclocity;
+		veclocity.y += 3;
+		enemy->setVeloc(veclocity.x, veclocity.y);
+
+		position += veclocity;
 
 		enemy->setPosition(position.x, position.y);
 		
@@ -116,6 +118,7 @@ void MushroomDeadByAttacked::execute(Enemy* enemy)
 
 void MushroomDeadByAttacked::exit(Enemy* enemy)
 {
+	enemy->setActive(false);
 }
 
 

@@ -57,9 +57,6 @@ public:
 class LuckyBoxEffect : public State<Box>
 {
 	static LuckyBoxEffect*	m_instance;
-	
-	int						m_timeAnimation;
-	
 public:
 	LuckyBoxEffect(){}
 	virtual ~LuckyBoxEffect(){}
@@ -75,9 +72,6 @@ public:
 class Coin : public State<ItemInBox>
 {
 	static Coin*	m_instance;
-	int				m_timeAnimation;
-
-	Vec2			m_position;
 public:
 	Coin(){}
 	virtual ~Coin(){}
@@ -92,9 +86,6 @@ public:
 class MushRoomBigger : public State<ItemInBox>
 {
 	static MushRoomBigger*	m_instance;
-	int						m_timeAnimation;
-
-	Vec2					m_veclocity;
 public:
 	MushRoomBigger(){}
 	virtual ~MushRoomBigger(){}
@@ -107,3 +98,32 @@ public:
 
 };
 
+class MushRoomBiggerMoving : public State<ItemInBox>
+{
+	static MushRoomBiggerMoving*	m_instance;
+public:
+	MushRoomBiggerMoving(){}
+	virtual ~MushRoomBiggerMoving(){}
+
+	static MushRoomBiggerMoving*		getInstance();
+
+	virtual void		enter(ItemInBox* item);
+	virtual void		execute(ItemInBox* item);
+	virtual void		exit(ItemInBox* item);
+
+};
+
+class Gun : public State<ItemInBox>
+{
+	static Gun*	m_instance;
+public:
+	Gun(){}
+	virtual ~Gun(){}
+
+	static Gun*		getInstance();
+
+	virtual void		enter(ItemInBox* item);
+	virtual void		execute(ItemInBox* item);
+	virtual void		exit(ItemInBox* item);
+
+};

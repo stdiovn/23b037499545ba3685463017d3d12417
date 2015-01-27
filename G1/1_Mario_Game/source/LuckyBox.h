@@ -8,6 +8,8 @@ class LuckyBox
 {
 	Box*					m_box;
 	ItemInBox*				m_item;
+
+	ItemsType				m_type;
 public:
 	LuckyBox(ItemsType type, int countCoin);
 	LuckyBox(ItemsType type);
@@ -23,6 +25,9 @@ public:
 
 	bool					getActive(){ return m_box->getActive(); }
 	void					setActive(bool x){ m_box->setActive(x); }
+
+	void					changeItemsType(ItemsType type);
+	ItemsType				getType(){ return m_type; }
 
 	void					setCamera(int vpx, int vpy);
 	~LuckyBox();
