@@ -14,6 +14,8 @@ private:
 	bool					m_isCollision;
 	bool					m_finishAnimation;
 
+	int							m_timeAnimation;
+
 	StateMachine<Box>*		m_stateMachine;
 
 	int						m_vpx, m_vpy;
@@ -33,7 +35,9 @@ public:
 	bool					getCollision(){ return m_isCollision; }
 	void					setCollsion(bool x){ m_isCollision = x; }
 
-	void					setActive(bool active);
+	void					setTimeAnimation(int x){ m_timeAnimation = x; }
+	int						getTimeAnimation(){ return m_timeAnimation; }
+
 
 	bool					finishAnimation(){ return m_finishAnimation; };
 	void					setFinishAnimation(bool x){ m_finishAnimation = x; }

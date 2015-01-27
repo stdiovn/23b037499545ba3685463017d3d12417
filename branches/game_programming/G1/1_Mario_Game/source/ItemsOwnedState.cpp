@@ -84,16 +84,17 @@ LuckyBoxEffect* LuckyBoxEffect::getInstance()
 
 void LuckyBoxEffect::enter(Box* item)
 {
-	m_timeAnimation = 8;
+	item->setTimeAnimation(8);
 }
 
 void LuckyBoxEffect::execute(Box* item)
 {
-	if (m_timeAnimation > 0)
+	int time = item->getTimeAnimation();
+	if (time > 0)
 	{
 		Vec2 position = item->getPosition();
 
-		if (m_timeAnimation > 4)
+		if (time > 4)
 			position.y -= 2;
 		else
 			position.y += 2;
@@ -105,7 +106,7 @@ void LuckyBoxEffect::execute(Box* item)
 		item->getStateMachine()->changeState(IdleBox::getInstance());
 	}
 
-	m_timeAnimation--;
+	item->setTimeAnimation(--time);
 }
 
 void LuckyBoxEffect::exit(Box* item)
@@ -132,25 +133,25 @@ Coin* Coin::getInstance()
 void Coin::enter(ItemInBox* item)
 {
 	item->setCurrentFrame(ItemSheet::IS_COIN);
-	m_timeAnimation = 16;
-	m_position = item->getPosition();
+	item->setTimeAnimation(16);
 }
 
 void Coin::execute(ItemInBox* item)
 {
+	int time = item->getTimeAnimation();
+
 	if (item->getActive())
 	{
-		if (m_timeAnimation > 0)
+		if (time > 0)
 		{
 			Vec2 posotion = item->getPosition();
 			posotion.y -= 5;
 
 			item->setPosition(posotion.x, posotion.y);
-			m_timeAnimation--;
+			item->setTimeAnimation(--time);
 		}
 		else
 		{
-			item->setPosition(m_position.x, m_position.y);
 			item->getStateMachine()->GetCurrentState()->exit(item);
 		}
 	}
@@ -158,7 +159,6 @@ void Coin::execute(ItemInBox* item)
 
 void Coin::exit(ItemInBox* item)
 {
-	m_timeAnimation = 16;
 	item->setFinishAnimation(true);
 	item->setActive(false);
 }
@@ -179,32 +179,74 @@ MushRoomBigger* MushRoomBigger::getInstance()
 void MushRoomBigger::enter(ItemInBox* item)
 {
 	item->setCurrentFrame(ItemSheet::IS_MUSHROOM_BIGGER);
-	m_timeAnimation = 8;
-
-	m_veclocity.x = 4;
-	m_veclocity.y = 4;
+	item->setTimeAnimation(8);
 }
 
 void MushRoomBigger::execute(ItemInBox* item)
 {
 	if (item->getActive())
 	{
+		int time = item->getTimeAnimation();
+
 		Vec2 posotion = item->getPosition();
 
-		if (m_timeAnimation > 0)
+		if (time > 0)
 		{
 			posotion.y -= 4;
-			m_timeAnimation--;
+			item->setTimeAnimation(--time);
 		}
 		else
 		{
-
+			item->getStateMachine()->changeState(MushRoomBiggerMoving::getInstance());
 		}
 		item->setPosition(posotion.x, posotion.y);
 	}
 }
 
 void MushRoomBigger::exit(ItemInBox* item)
+{
+}
+
+/////
+MushRoomBiggerMoving* MushRoomBiggerMoving::m_instance = 0;
+
+MushRoomBiggerMoving* MushRoomBiggerMoving::getInstance()
+{
+	if (m_instance == NULL)
+	{
+		m_instance = new MushRoomBiggerMoving();
+	}
+
+	return m_instance;
+}
+
+void MushRoomBiggerMoving::enter(ItemInBox* item)
+{
+	item->setVeloc(4, 4);
+}
+
+void MushRoomBiggerMoving::execute(ItemInBox* item)
+{
+	if (item->getElapseTime() < 1000 / FPS * 1.5) return;
+	item->updateTime();
+
+	if (item->getActive())
+	{
+		Vec2 position = item->getPosition();
+		Vec2 velocity = item->getVeloc();
+		position += velocity;
+		
+		item->setPosition(position.x, position.y);
+		if (item->getCollision())
+		{
+			item->setActive(false);
+			item->setCollision(false);
+		}
+			
+	}
+}
+
+void MushRoomBiggerMoving::exit(ItemInBox* item)
 {
 }
 
@@ -238,3 +280,51 @@ void BreakBrick::exit(ItemInBox* item)
 {
 
 }
+
+/////////////
+Gun* Gun::m_instance = 0;
+
+Gun* Gun::getInstance()
+{
+	if (m_instance == NULL)
+	{
+		m_instance = new Gun();
+	}
+
+	return m_instance;
+}
+
+void Gun::enter(ItemInBox* item)
+{
+	item->setCurrentFrame(ItemSheet::IS_GUNFLOWER);
+	item->setTimeAnimation(8);
+}
+
+void Gun::execute(ItemInBox* item)
+{
+	if (item->getActive())
+	{
+		int time = item->getTimeAnimation();
+
+		Vec2 posotion = item->getPosition();
+
+		if (time > 0)
+		{
+			posotion.y -= 4;
+			item->setTimeAnimation(--time);
+
+			item->setPosition(posotion.x, posotion.y);
+		}
+
+		if (item->getCollision())
+		{
+			item->setActive(false);
+			item->setCollision(false);
+		}
+	}
+}
+
+void Gun::exit(ItemInBox* item)
+{
+}
+

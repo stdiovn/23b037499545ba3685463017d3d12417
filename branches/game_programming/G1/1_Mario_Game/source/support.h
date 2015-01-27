@@ -97,7 +97,10 @@ enum ItemSheet
 	IS_STAR = 6,
 	IS_COIN = 10,
 	IS_LUCKYBOX = 18,
-	IS_BREAKBRICK = 22
+	IS_BREAKBRICK = 22,
+	IS_BULLET = 25,
+	IS_BULLET_EXPLODE = 29,
+	IS_FLAG = 32
 };
 
 enum ItemsType
@@ -135,3 +138,8 @@ enum EnemysType
 	ET_FLOWER
 };
 
+enum ShootDirection
+{
+	SHOOT_DIR_LEFT,
+	SHOOT_DIR_RIGHT
+};

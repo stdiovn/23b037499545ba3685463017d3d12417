@@ -52,7 +52,10 @@ void Enemy::draw(Graphics* g)
 		
 		if (m_flipping == FlippingFlag::FLIP_X)
 			rectFlip.x = m_spriteSheet->getWidth() - m_frameList->at(m_currentFrame).m_frameRect.x - m_frameList->at(m_currentFrame).m_frameRect.width;
-
+		else if (m_flipping == FLIP_Y)
+		{
+			rectFlip.y = m_spriteSheet->getHeight() - m_frameList->at(m_currentFrame).m_frameRect.y - m_frameList->at(m_currentFrame).m_frameRect.height;
+		}
 		g->drawRegion(m_spriteSheet,
 			Rect(vector.x, vector.y, m_frameList->at(m_currentFrame).m_frameRect.width, m_frameList->at(m_currentFrame).m_frameRect.height),
 			rectFlip,

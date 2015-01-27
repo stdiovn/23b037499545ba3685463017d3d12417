@@ -6,7 +6,21 @@ ItemInBox::ItemInBox(Image* spritesheet, std::vector<Frame>* frameList, ItemsTyp
 {
 	m_type = type;
 	m_isActive = false;
+	m_isCollision = false;
 	m_stateMachine = new StateMachine<ItemInBox>(this);
+
+	setItemsType(type);
+}
+
+
+ItemInBox::~ItemInBox()
+{
+	SAFE_DEL(m_stateMachine);
+}
+
+void ItemInBox::setItemsType(ItemsType type)
+{
+	m_type = type;
 
 	switch (type)
 	{
@@ -20,6 +34,7 @@ ItemInBox::ItemInBox(Image* spritesheet, std::vector<Frame>* frameList, ItemsTyp
 		break;
 	case IT_GUN:
 		m_currentFrame = ItemSheet::IS_GUNFLOWER;
+		m_stateMachine->changeState(Gun::getInstance());
 		break;
 	case IT_STAR:
 		m_currentFrame = ItemSheet::IS_STAR;
@@ -33,13 +48,6 @@ ItemInBox::ItemInBox(Image* spritesheet, std::vector<Frame>* frameList, ItemsTyp
 		break;
 	}
 }
-
-
-ItemInBox::~ItemInBox()
-{
-	
-}
-
 
 void ItemInBox::update()
 {
