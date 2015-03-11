@@ -3,10 +3,24 @@
   <ItemGroup>
     <ClInclude Include="..\source\Game.h" />
     <ClInclude Include="..\source\stdafx.h" />
+    <ClInclude Include="..\source\Mario.h">
+      <Filter>SubClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Maps.h">
+      <Filter>SubClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\Game.cpp" />
     <ClCompile Include="..\source\stdafx.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\Maps.cpp">
+      <Filter>SubClass</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="SubClass">
+      <UniqueIdentifier>{b53fae87-cc6f-46fb-bb74-ac50e7499f94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

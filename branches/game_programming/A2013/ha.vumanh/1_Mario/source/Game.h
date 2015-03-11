@@ -1,9 +1,11 @@
 #pragma once
-
+#include "Maps.h"
 using namespace stdio_fw;
+
 class Game : public Application
 {
 public:
+	Maps* map_testing;
 	Game();
 	virtual ~Game();
 

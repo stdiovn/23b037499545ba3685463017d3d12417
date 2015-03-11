@@ -14,8 +14,9 @@ Game::~Game()
 
 ErrorCode Game::init(int screenW, int screenH, const char* title)
 {
-	ErrorCode errCode = Application::init(screenW, screenH, title);	
-
+	ErrorCode errCode = Application::init(screenW, screenH, title);
+	map_testing = new Maps("D:\\Game Library\\tileset.png");
+	map_testing->openMapTiles("D:\\Game Library\\Prototype.txt");
 	return errCode;
 }
 
