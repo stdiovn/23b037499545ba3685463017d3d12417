@@ -1,0 +1,18 @@
+[header]
+width=4
+height=4
+tilewidth=32
+tileheight=32
+orientation=orthogonal
+
+[tilesets]
+tileset=tileset.png,32,32,0,0
+
+[layer]
+type=Tile Layer 1
+data=
+1286,1287,1288,0,
+1350,1351,1352,0,
+0,1286,1287,1288,
+0,1350,1351,1352
+
