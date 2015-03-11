@@ -1,8 +1,13 @@
 #pragma once
 
 using namespace stdio_fw;
+class CTileMap;
+
+
 class Game : public Application
 {
+private:
+	CTileMap* m_tilemap;
 public:
 	Game();
 	virtual ~Game();
