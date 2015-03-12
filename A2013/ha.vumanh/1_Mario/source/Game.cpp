@@ -19,6 +19,7 @@ ErrorCode Game::init(int screenW, int screenH, const char* title)
 	//Game Maps
 	map = new Maps("tileset.png");
 	map->openMapTiles("Prototype.txt");
+	map->prefixTileHeight(screenH);
 
 	return errCode;
 }

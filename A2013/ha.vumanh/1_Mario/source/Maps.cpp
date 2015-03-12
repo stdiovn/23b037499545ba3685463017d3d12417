@@ -67,6 +67,11 @@ void Maps::getPositionTileDraw(int value)
 	positionDraw_Y = tileHeight * b;
 }
 
+void Maps::prefixTileHeight(int ScreenH)
+{
+	ingame_tileHeight = ingame_tileWidth = ScreenH / tileHeight;
+}
+
 void Maps::render(Graphics* g)
 {
 	int drawTileX, drawTileY;
