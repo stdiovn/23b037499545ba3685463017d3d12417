@@ -97,7 +97,7 @@ void Maps::reCopyData(int currentColumns)
 	for (int i = 0; i < tileRows; i++)
 	{
 		int j = 0;
-		for (int k = currentColumns; k < (currentColumns + columnsOnScene); k++)
+		for (int k = currentColumns; k <= (currentColumns + columnsOnScene); k++)
 		{
 			matrix_scene[i][j++] = matrix_data[i][k];
 		}
@@ -108,7 +108,7 @@ void Maps::goRight()
 {
 	if ((currentColumnsDraw + columnsOnScene) < 212)
 	{
-		if (prefixPosition < 32)
+		if (prefixPosition < ingame_tileWidth)
 			prefixPosition += 2;
 		else
 		{
@@ -123,13 +123,13 @@ void Maps::goLeft()
 {
 	if (currentColumnsDraw > 0)
 	{
-		if (prefixPosition >= 0 && prefixPosition < 32)
+		if (prefixPosition >= 0 && prefixPosition < ingame_tileWidth)
 			prefixPosition -= 2;
 		else
 		{
 			currentColumnsDraw--;
 			reCopyData(currentColumnsDraw);
-			prefixPosition = 30; // 32 - 2 follow on prefixPosition -= 2
+			prefixPosition = ingame_tileWidth - 2; // 2 follow on prefixPosition -= 2
 		}
 	}
 	else
