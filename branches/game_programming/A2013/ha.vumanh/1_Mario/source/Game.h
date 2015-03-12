@@ -5,7 +5,9 @@ using namespace stdio_fw;
 class Game : public Application
 {
 public:
-	Maps* map_testing;
+	//Object
+	Maps* map;
+
 	Game();
 	virtual ~Game();
 
