@@ -24,7 +24,7 @@ void Maps::createMatrix(int rows, int columns)
 
 void Maps::openMapTiles(const char* filepart)
 {
-	char temp[255];
+	char temp[255]; //save strash when read file
 	mapsInfo = fopen(filepart, "r");
 
 	//ignore line 1
@@ -61,7 +61,7 @@ void Maps::openMapTiles(const char* filepart)
 
 void Maps::getPositionTileDraw(int value)
 {
-	int a = value % 64;
+	int a = value % 64; // 64 is number of tile in one rows on tileset.
 	int b = value / 64;
 	positionDraw_X = tileWidth * a;
 	positionDraw_Y = tileHeight * b;
@@ -69,7 +69,7 @@ void Maps::getPositionTileDraw(int value)
 
 void Maps::prefixTileHeight(int ScreenH)
 {
-	ingame_tileWidth = ingame_tileHeight = ScreenH / 16; // 16 is number of tile on one columns 
+	ingame_tileWidth = ingame_tileHeight = ScreenH / 16; // 16 is number of tile in one columns follow the "tiled".
 }
 
 void Maps::render(Graphics* g)
@@ -91,5 +91,7 @@ void Maps::render(Graphics* g)
 }
 Maps::~Maps()
 {
-	
+	for (int i = tileRows; i >= 0; i--)
+		delete matrix[i];
+	delete matrix;
 }
