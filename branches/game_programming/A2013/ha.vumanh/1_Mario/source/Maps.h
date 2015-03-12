@@ -17,8 +17,9 @@ private:
 		ingame_tileHeight,
 		positionDraw_X,
 		positionDraw_Y,
-		numberOfColumnsFitWithScene,
-		currentColumnsDraw;
+		columnsOnScene,
+		currentColumnsDraw,
+		prefixPosition;
 public:
 	Maps();
 	Maps(const char*);
