@@ -21,6 +21,7 @@ public:
 	Maps(const char*);
 	void openMapTiles(const char*);
 	void createMatrix(int, int);
+	void prefixTileHeight(int);
 	void getPositionTileDraw(int);
 	void render(Graphics*);
 	~Maps();
