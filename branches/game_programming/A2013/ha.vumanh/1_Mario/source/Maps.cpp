@@ -30,8 +30,8 @@ void Maps::openMapTiles(const char* filepart)
 	//ignore line 1
 	fscanf(mapsInfo, "%s\n", &temp);
 
-	fscanf(mapsInfo, "width=%d\n" , &tileRows);
-	fscanf(mapsInfo, "height=%d\n", &tileColumns);
+	fscanf(mapsInfo, "width=%d\n" , &tileColumns);
+	fscanf(mapsInfo, "height=%d\n", &tileRows);
 	fscanf(mapsInfo, "tilewidth=%d\n", &ingame_tileWidth);
 	fscanf(mapsInfo, "tileheight=%d\n", &ingame_tileHeight);
 	
@@ -69,7 +69,7 @@ void Maps::getPositionTileDraw(int value)
 
 void Maps::prefixTileHeight(int ScreenH)
 {
-	ingame_tileHeight = ingame_tileWidth = ScreenH / tileHeight;
+	ingame_tileWidth = ingame_tileHeight = ScreenH / 16; // 16 is number of tile on one columns 
 }
 
 void Maps::render(Graphics* g)
@@ -77,14 +77,14 @@ void Maps::render(Graphics* g)
 	int drawTileX, drawTileY;
 	for (int i = 0; i < tileRows; i++)
 	{
-		drawTileY = tileHeight * i;
+		drawTileY = ingame_tileHeight * i;
 		for (int j = 0; j < tileColumns; j++)
 		{
-			drawTileX = tileWidth * j;
+			drawTileX = ingame_tileWidth * j;
 			if (matrix[i][j] > 0)
 			{
 				getPositionTileDraw(matrix[i][j] - 1);
-				g->drawRegion(tileSet, Rect(positionDraw_X, positionDraw_Y, tileWidth, tileHeight), Rect(drawTileX, drawTileY, ingame_tileWidth, ingame_tileHeight));
+				g->drawRegion(tileSet, Rect(drawTileX, drawTileY, ingame_tileWidth, ingame_tileHeight), Rect(positionDraw_X, positionDraw_Y, tileWidth, tileHeight));
 			}
 		}
 	}
