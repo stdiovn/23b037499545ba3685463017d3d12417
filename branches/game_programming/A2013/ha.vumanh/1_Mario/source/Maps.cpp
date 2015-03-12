@@ -69,12 +69,13 @@ void Maps::getPositionTileDraw(int value)
 
 void Maps::render(Graphics* g)
 {
+	int drawTileX, drawTileY;
 	for (int i = 0; i < tileRows; i++)
 	{
-		int drawTileY = tileHeight * i;
+		drawTileY = tileHeight * i;
 		for (int j = 0; j < tileColumns; j++)
 		{
-			int drawTileX = tileWidth * j;
+			drawTileX = tileWidth * j;
 			if (matrix[i][j] > 0)
 			{
 				getPositionTileDraw(matrix[i][j] - 1);
