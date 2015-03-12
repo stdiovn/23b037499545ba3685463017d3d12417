@@ -15,10 +15,10 @@ Maps::Maps(const char* tileSet_img)
 
 void Maps::createMatrix(int rows, int columns)
 {
-	matrix = new int*[tileRows];
+	matrix_data = new int*[tileRows];
 	for (int i = 0; i <= tileRows; i++)
 	{
-		matrix[i] = new int[tileColumns];
+		matrix_data[i] = new int[tileColumns];
 	}
 }
 
@@ -51,15 +51,15 @@ void Maps::openMapTiles(const char* filepart)
 	createMatrix(tileRows, tileColumns);
 	for (int i = 0; i < tileRows; i++)
 	{
-		fscanf(mapsInfo, "%d", &matrix[i][0]);
+		fscanf(mapsInfo, "%d", &matrix_data[i][0]);
 		for (int j = 1; j < tileColumns; j++)
-			fscanf(mapsInfo, ",%d", &matrix[i][j]);
+			fscanf(mapsInfo, ",%d", &matrix_data[i][j]);
 		fscanf(mapsInfo, ",\n", &temp);
 	}
 	fclose(mapsInfo);
 }
 
-void Maps::getPositionTileDraw(int value)
+void Maps::reModifiedPositionTileDraw(int value)
 {
 	int a = value % 64; // 64 is number of tile in one rows on tileset.
 	int b = value / 64;
@@ -67,9 +67,58 @@ void Maps::getPositionTileDraw(int value)
 	positionDraw_Y = tileHeight * b;
 }
 
-void Maps::prefixTileHeight(int ScreenH)
+void Maps::modifiedSth(int ScreenW,int ScreenH)
 {
+	currentColumnsDraw = 0;
 	ingame_tileWidth = ingame_tileHeight = ScreenH / 16; // 16 is number of tile in one columns follow the "tiled".
+	numberOfColumnsFitWithScene = ScreenW / ingame_tileWidth;
+	
+	matrix_scene = new int*[tileRows];
+	for (int i = 0; i <= tileRows; i++)
+	{
+		matrix_scene[i] = new int[numberOfColumnsFitWithScene];
+	}	
+
+	//copy data from matrix_data first time	
+	for (int i = 0; i < tileRows; i++)
+	{
+		int j = 0;
+		for (int k = 0; k <= numberOfColumnsFitWithScene; k++)
+		{
+			matrix_scene[i][j++] = matrix_data[i][k];
+		}
+	}
+}
+
+void Maps::reCopyData(int currentColumns)
+{
+	//copy data from matrix_data	
+	for (int i = 0; i < tileRows; i++)
+	{
+		int j = 0;
+		for (int k = currentColumns; k <= (currentColumns + numberOfColumnsFitWithScene); k++)
+		{
+			matrix_scene[i][j++] = matrix_data[i][k];
+		}
+	}
+}
+
+void Maps::goRight()
+{
+	if ((currentColumnsDraw + numberOfColumnsFitWithScene) < 212)
+	{
+		currentColumnsDraw++;
+		reCopyData(currentColumnsDraw);
+	}
+}
+
+void Maps::goLeft()
+{
+	if (currentColumnsDraw > 0)
+	{
+		currentColumnsDraw--;
+		reCopyData(currentColumnsDraw);
+	}
 }
 
 void Maps::render(Graphics* g)
@@ -78,12 +127,12 @@ void Maps::render(Graphics* g)
 	for (int i = 0; i < tileRows; i++)
 	{
 		drawTileY = ingame_tileHeight * i;
-		for (int j = 0; j < tileColumns; j++)
+		for (int j = 0; j < numberOfColumnsFitWithScene; j++)
 		{
 			drawTileX = ingame_tileWidth * j;
-			if (matrix[i][j] > 0)
+			if (matrix_scene[i][j] > 0)
 			{
-				getPositionTileDraw(matrix[i][j] - 1);
+				reModifiedPositionTileDraw(matrix_scene[i][j] - 1);
 				g->drawRegion(tileSet, Rect(drawTileX, drawTileY, ingame_tileWidth, ingame_tileHeight), Rect(positionDraw_X, positionDraw_Y, tileWidth, tileHeight));
 			}
 		}
@@ -92,6 +141,6 @@ void Maps::render(Graphics* g)
 Maps::~Maps()
 {
 	for (int i = tileRows; i >= 0; i--)
-		delete matrix[i];
-	delete matrix;
+		delete matrix_data[i];
+	delete matrix_data;
 }
