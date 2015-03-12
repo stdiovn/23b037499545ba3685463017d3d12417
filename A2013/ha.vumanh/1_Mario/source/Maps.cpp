@@ -6,10 +6,6 @@ Maps::Maps()
 {
 
 }
-Maps::~Maps()
-{
-
-}
 
 Maps::Maps(const char* tileSet_img)
 {
@@ -38,14 +34,14 @@ void Maps::openMapTiles(const char* filepart)
 	fscanf(mapsInfo, "height=%d\n", &tileColumns);
 	fscanf(mapsInfo, "tilewidth=%d\n", &ingame_tileWidth);
 	fscanf(mapsInfo, "tileheight=%d\n", &ingame_tileHeight);
-
-	//ignore some trash
+	
+	//ignore some trash character
 	fscanf(mapsInfo, "%s\n", &temp);
 	fscanf(mapsInfo, "%s\n", &temp);
 
-	fscanf(mapsInfo, "tileset=tileset.png,%d,%d,%d,%d\n", &tileWidth, &tileHeight, &beginTileWidth, &beginTileHeight);
+	fscanf(mapsInfo, "tileset=tileset.png,%d,%d,%d,%d\n", &tileWidth, &tileHeight, &positionDraw_X, &positionDraw_Y);
 
-	//ignore some trash
+	//ignore some trash character
 	fscanf(mapsInfo, "%s\n", &temp);
 	fscanf(mapsInfo, "%s\n", &temp);
 	fscanf(mapsInfo, "%s\n", &temp);
@@ -61,4 +57,33 @@ void Maps::openMapTiles(const char* filepart)
 		fscanf(mapsInfo, ",\n", &temp);
 	}
 	fclose(mapsInfo);
+}
+
+void Maps::getPositionTileDraw(int value)
+{
+	int a = value % 64;
+	int b = value / 64;
+	positionDraw_X = tileWidth * a;
+	positionDraw_Y = tileHeight * b;
+}
+
+void Maps::render(Graphics* g)
+{
+	for (int i = 0; i < tileRows; i++)
+	{
+		int drawTileY = tileHeight * i;
+		for (int j = 0; j < tileColumns; j++)
+		{
+			int drawTileX = tileWidth * j;
+			if (matrix[i][j] > 0)
+			{
+				getPositionTileDraw(matrix[i][j] - 1);
+				g->drawRegion(tileSet, Rect(positionDraw_X, positionDraw_Y, tileWidth, tileHeight), Rect(drawTileX, drawTileY, ingame_tileWidth, ingame_tileHeight));
+			}
+		}
+	}
+}
+Maps::~Maps()
+{
+	
 }
