@@ -129,6 +129,7 @@ void Maps::render(Graphics* g)
 		}
 	}
 }
+
 Maps::~Maps()
 {
 	for (int i = tileRows; i >= 0; i--)
