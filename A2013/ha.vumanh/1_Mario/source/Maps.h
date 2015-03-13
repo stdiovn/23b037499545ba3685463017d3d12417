@@ -19,7 +19,8 @@ private:
 		positionDraw_Y,
 		columnsOnScene,
 		currentColumnsDraw,
-		prefixPosition;
+		prefixPosition,
+		movementSpeed;
 public:
 	Maps();
 	Maps(const char*);
@@ -27,7 +28,6 @@ public:
 	void createMatrix(int, int);
 	void modifiedSth(int, int);
 	void reModifiedPositionTileDraw(int);
-	void reCopyData(int);
 	void goRight();
 	void goLeft();
 	void render(Graphics*);

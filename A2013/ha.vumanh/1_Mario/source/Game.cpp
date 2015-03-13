@@ -46,11 +46,7 @@ void Game::onKeyProc(KeyCode key, KeyState state)
 	printf("Key: %c - State: %d\n", key, state);
 
 	if (key == KeyCode::KEY_D)
-	{
 		map->goRight();
-	}
 	if (key == KeyCode::KEY_A)
-	{
-		map->goLeft();
-	}
+		map->goLeft();	
 }
