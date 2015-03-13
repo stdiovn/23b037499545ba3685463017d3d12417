@@ -71,50 +71,22 @@ void Maps::modifiedSth(int ScreenW,int ScreenH)
 {
 	currentColumnsDraw = 0;
 	prefixPosition = 0;
+	movementSpeed = 4;
 	ingame_tileWidth = ingame_tileHeight = ScreenH / 16; // 16 is number of tile in one columns follow the "tiled".
-	columnsOnScene = (ScreenW / ingame_tileWidth) + 1;
+	columnsOnScene = (ScreenW / ingame_tileWidth) + 2; // load 2 more columns foward
 	
-	matrix_scene = new int*[tileRows];
-	for (int i = 0; i <= tileRows; i++)
-	{
-		matrix_scene[i] = new int[columnsOnScene];
-	}	
-
-	//copy data from matrix_data first time	
-	for (int i = 0; i < tileRows; i++)
-	{
-		int j = 0;
-		for (int k = 0; k < columnsOnScene; k++)
-		{
-			matrix_scene[i][j++] = matrix_data[i][k];
-		}
-	}
-}
-
-void Maps::reCopyData(int currentColumns)
-{
-	//copy data from matrix_data	
-	for (int i = 0; i < tileRows; i++)
-	{
-		int j = 0;
-		for (int k = currentColumns; k <= (currentColumns + columnsOnScene); k++)
-		{
-			matrix_scene[i][j++] = matrix_data[i][k];
-		}
-	}
 }
 
 void Maps::goRight()
 {
-	if ((currentColumnsDraw + columnsOnScene) < 212)
+	if ((currentColumnsDraw + columnsOnScene) < tileColumns)
 	{
 		if (prefixPosition < ingame_tileWidth)
-			prefixPosition += 2;
+			prefixPosition += movementSpeed;
 		else
 		{
 			currentColumnsDraw++;
-			reCopyData(currentColumnsDraw);
-			prefixPosition = 0;
+			prefixPosition -= ingame_tileWidth;
 		}
 	}
 }
@@ -124,18 +96,17 @@ void Maps::goLeft()
 	if (currentColumnsDraw > 0)
 	{
 		if (prefixPosition >= 0 && prefixPosition < ingame_tileWidth)
-			prefixPosition -= 2;
+			prefixPosition -= movementSpeed;
 		else
 		{
 			currentColumnsDraw--;
-			reCopyData(currentColumnsDraw);
-			prefixPosition = ingame_tileWidth - 2; // 2 follow on prefixPosition -= 2
+			prefixPosition = ingame_tileWidth - movementSpeed; // follow on prefixPosition -= movementSpeed
 		}
 	}
 	else
 	{
 		if(prefixPosition > 0)
-			prefixPosition -= 2;
+			prefixPosition -= movementSpeed;
 	}
 }
 
@@ -145,14 +116,16 @@ void Maps::render(Graphics* g)
 	for (int i = 0; i < tileRows; i++)
 	{
 		drawTileY = ingame_tileHeight * i;
+		int k = currentColumnsDraw;
 		for (int j = 0; j < columnsOnScene; j++)
 		{
-			drawTileX = ingame_tileWidth * j;
-			if (matrix_scene[i][j] > 0)
+			drawTileX = ingame_tileWidth * j;		
+			if (matrix_data[i][k] > 0)
 			{
-				reModifiedPositionTileDraw(matrix_scene[i][j] - 1);
-				g->drawRegion(tileSet, Rect((drawTileX - prefixPosition), drawTileY, ingame_tileWidth, ingame_tileHeight), Rect(positionDraw_X, positionDraw_Y, tileWidth, tileHeight));
+				reModifiedPositionTileDraw(matrix_data[i][k] - 1);
+				g->drawRegion(tileSet, Rect((drawTileX - prefixPosition), drawTileY, ingame_tileWidth, ingame_tileHeight), Rect(positionDraw_X, positionDraw_Y, tileWidth, tileHeight));				
 			}
+			k++;
 		}
 	}
 }
@@ -161,4 +134,5 @@ Maps::~Maps()
 	for (int i = tileRows; i >= 0; i--)
 		delete matrix_data[i];
 	delete matrix_data;
+
 }
