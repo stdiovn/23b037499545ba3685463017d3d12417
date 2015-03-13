@@ -72,8 +72,12 @@ void Maps::modifiedSth(int ScreenW,int ScreenH)
 	currentColumnsDraw = 0;
 	prefixPosition = 0;
 	movementSpeed = 4;
-	ingame_tileWidth = ingame_tileHeight = ScreenH / 16; // 16 is number of tile in one columns follow the "tiled".
-	columnsOnScene = (ScreenW / ingame_tileWidth) + 2; // load 2 more columns foward
+
+	//prefix ingame tile size
+	ingame_tileWidth = ingame_tileHeight = ScreenH / tileRows;
+	
+	// Calculating number of tile fit with scene +  load 2 more columns foward
+	columnsOnScene = (ScreenW / ingame_tileWidth) + 2; 
 	
 }
 
